@@ -1,0 +1,2306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AndesHome Chile S.A. | Diagnóstico Organizacional EA1 & Plano 2D (GLA1104)</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="landing-2d.css">
+    <script src="andeshome-store.js"></script>
+</head>
+<body>
+
+    <!-- ==========================================================================
+         TOP NAVIGATION BAR
+         ========================================================================== -->
+    <header class="top-nav-2d">
+        <div class="brand-section">
+            <div class="brand-badge-icon">⬢</div>
+            <div class="brand-title-wrap">
+                <h1>ANDESHOME CHILE S.A.</h1>
+                <div class="brand-subtitle-wrap">GLA1104 | TALLER DE LOGÍSTICA | EVALUACIÓN EA1 (OCTUBRE 2026)</div>
+            </div>
+        </div>
+
+        <!-- MODO DUAL: CRISIS VS OPTIMIZADO -->
+        <div class="nav-center-controls">
+            <button id="mode-crisis-btn" class="view-mode-pill active crisis">
+                <span>🛑 AS-IS (CRISIS CYBERDAY)</span>
+            </button>
+            <button id="mode-opt-btn" class="view-mode-pill optimized">
+                <span>✨ TO-BE (OPTIMIZADO P1-P5)</span>
+            </button>
+        </div>
+
+        <div class="nav-btn-group">
+            <button class="btn-action solution-cta" onclick="showSolutionProposalTab()">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                <span>PROPUESTA DE SOLUCIÓN</span>
+                <span class="cta-pill-badge">EA2 / EA3</span>
+            </button>
+            <button class="btn-action primary" onclick="openKeynote2D(1)">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.3">
+                    <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                </svg>
+                <span>PRESENTACIÓN DIRIGIDA</span>
+            </button>
+            <a href="index.html" class="btn-action secondary">
+                <span>TORRE DE CONTROL</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                </svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- ==========================================================================
+         BARRA DE 3 FASES MAESTRAS DEL CASO (FASE 1: DIAGNÓSTICO -> FASE 2: PROPUESTA -> FASE 3: RESULTADOS)
+         ========================================================================== -->
+    <section class="guided-journey-bar" id="master-phases-bar">
+        <div class="journey-header-line">
+            <div class="journey-badge">
+                <span class="live-dot pulse"></span>
+                <span>Ruta Metodológica Duoc UC &amp; C-Suite: EA1 &rarr; EA2 &rarr; EA3</span>
+            </div>
+            <div class="journey-controls">
+                <span class="journey-counter" id="master-phase-counter">Fase 1 de 3: Diagnóstico Integral</span>
+                <button class="journey-btn" id="mp-btn-prev" onclick="prevMasterPhase()">&#8592; Fase Anterior</button>
+                <button class="journey-btn primary" id="mp-btn-next" onclick="nextMasterPhase()">Siguiente Fase &#8594;</button>
+            </div>
+        </div>
+
+        <div class="master-phases-grid">
+            <!-- FASE 1: DIAGNÓSTICO INTEGRAL (EA1) -->
+            <div class="master-phase-card phase-1 active" id="master-card-phase-1" onclick="setMasterPhase(1)">
+                <div class="mp-header">
+                    <span class="mp-number">FASE 01 &bull; EA1</span>
+                    <span class="mp-badge">Línea Base Crisis</span>
+                </div>
+                <div class="mp-title">Diagnóstico Integral</div>
+                <div class="mp-desc">Colapso CyberDay, 114 mismatches de slotting, 67,6 km/día de espagueti y $547M de pérdidas.</div>
+                <div class="mp-kpi-strip">
+                    OTIF: <strong>43,5%</strong> | Backlog: <strong>15.387</strong> | DtS: <strong>22,6h</strong>
+                </div>
+            </div>
+
+            <!-- FASE 2: PROPUESTA Y SOLUCIONES (EA2) -->
+            <div class="master-phase-card phase-2" id="master-card-phase-2" onclick="setMasterPhase(2)">
+                <div class="mp-header">
+                    <span class="mp-number">FASE 02 &bull; EA2</span>
+                    <span class="mp-badge">Portafolio Óptimo</span>
+                </div>
+                <div class="mp-title">Propuesta y Soluciones</div>
+                <div class="mp-desc">5 Proyectos priorizados AHP (P1-P5), arquitectura To-Be, CAPEX $766,8M &le; $850M y WBS 24 sem.</div>
+                <div class="mp-kpi-strip">
+                    CAPEX: <strong>$766,8M</strong> | Holgura: <strong>$83,2M</strong> | AHP: <strong>9,25/10</strong>
+                </div>
+            </div>
+
+            <!-- FASE 3: RESULTADOS Y BENEFICIOS (EA3) -->
+            <div class="master-phase-card phase-3" id="master-card-phase-3" onclick="setMasterPhase(3)">
+                <div class="mp-header">
+                    <span class="mp-number">FASE 03 &bull; EA3</span>
+                    <span class="mp-badge">Impacto &amp; Retorno</span>
+                </div>
+                <div class="mp-title">Resultados Obtenidos &amp; Beneficios</div>
+                <div class="mp-desc">OTIF 96,2%, Backlog 0, VAN $1.289M, Payback 10,7 meses, dignificación humana y cero accidentes SST.</div>
+                <div class="mp-kpi-strip">
+                    OTIF: <strong>96,2%</strong> | VAN: <strong>$1.289M</strong> | Payback: <strong>10,7m</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         TIRA DE KPIS CLAVE EN VIVO (LÍNEA BASE DEL CASO)
+         ========================================================================== -->
+    <div class="kpi-quick-strip">
+        <div class="kpi-mini-card">
+            <div class="kpi-meta-group">
+                <div class="lbl">Nivel de Servicio (OTIF)</div>
+                <div class="sub">Meta contractual: &ge; 96,0%</div>
+            </div>
+            <div id="kpi-otif-num" class="kpi-number red">43,5%</div>
+        </div>
+
+        <div class="kpi-mini-card">
+            <div class="kpi-meta-group">
+                <div class="lbl">Backlog CD Pudahuel</div>
+                <div class="sub">4,32 días de demanda (69 &rarr; 15.387 ped)</div>
+            </div>
+            <div id="kpi-backlog-num" class="kpi-number red">15.387</div>
+        </div>
+
+        <div class="kpi-mini-card">
+            <div class="kpi-meta-group">
+                <div class="lbl">Costo por Pedido Fallido</div>
+                <div class="sub">CLP $29.628 vs $8.532 cumplido (+247%)</div>
+            </div>
+            <div id="kpi-cost-num" class="kpi-number red">$29.628</div>
+        </div>
+
+        <div class="kpi-mini-card">
+            <div class="kpi-meta-group">
+                <div class="lbl">Caminata Improductiva</div>
+                <div class="sub">114 SKU desalineados (23,5 HH/día perdidas)</div>
+            </div>
+            <div id="kpi-walk-num" class="kpi-number red">67,6 km</div>
+        </div>
+    </div>
+
+    <!-- ==========================================================================
+         BARRA DE NAVEGACIÓN DIDÁCTICA POR FASES (EA1 -> EA2 -> EA3)
+         ========================================================================== -->
+    <nav class="diag-tabs-bar">
+        <div class="diag-phase-tag">Fase 1 (EA1):</div>
+        <button class="diag-tab-btn active" data-view="view-layout" data-phase="1">
+            <span>📐 1. Layout 2D &amp; Slotting</span>
+        </button>
+        <button class="diag-tab-btn" data-view="view-vsm" data-phase="1">
+            <span>🔀 2. VSM As-Is</span>
+        </button>
+        <button class="diag-tab-btn" data-view="view-apqc" data-phase="1">
+            <span>🎯 3. APQC</span>
+        </button>
+        <button class="diag-tab-btn" data-view="view-inbound" data-phase="1">
+            <span>🚚 4. Inbound &amp; ASN</span>
+        </button>
+        <button class="diag-tab-btn" data-view="view-ishikawa" data-phase="1">
+            <span>🐟 5. Causa Raíz</span>
+        </button>
+        <button class="diag-tab-btn" data-view="view-priorizacion" data-phase="1">
+            <span>📊 6. Priorización AHP</span>
+        </button>
+        <div class="diag-phase-tag" style="margin-left: 8px;">Fase 2 (EA2):</div>
+        <button class="diag-tab-btn highlight-sol-tab" data-view="view-propuesta" data-phase="2">
+            <span>🚀 7. Propuesta P1-P5 &amp; WBS</span>
+        </button>
+        <div class="diag-phase-tag" style="margin-left: 8px;">Fase 3 (EA3):</div>
+        <button class="diag-tab-btn highlight-results-tab" data-view="view-resultados" data-phase="3">
+            <span>🏆 8. Resultados Obtenidos &amp; Beneficios</span>
+        </button>
+    </nav>
+
+    <!-- ==========================================================================
+         VISTA 1: PLANO VECTORIAL 2D + INSPECTOR EN VIVO
+         ========================================================================== -->
+    <section id="view-layout" class="diag-view-content active">
+        <div class="blueprint-layout-section">
+            <!-- Tarjeta del Plano 2D SVG -->
+            <div class="blueprint-card">
+                <div class="blueprint-toolbar">
+                    <div class="filter-pills-row">
+                        <span style="font-size: 0.72rem; font-family: var(--font-mono); color: var(--text-dim);">FILTRAR ZONA:</span>
+                        <button class="zone-filter-btn active" data-filter="all">Todo el CD</button>
+                        <button class="zone-filter-btn" data-filter="ZONE-A">Zona A (35m)</button>
+                        <button class="zone-filter-btn" data-filter="ZONE-B">Zona B (72m)</button>
+                        <button class="zone-filter-btn" data-filter="ZONE-C">Zona C (118m)</button>
+                        <button class="zone-filter-btn" data-filter="ZONE-D">Zona D-Bulky (154m)</button>
+                        <button class="zone-filter-btn" data-filter="INBOUND">Inbound</button>
+                        <button class="zone-filter-btn" data-filter="OUTBOUND">Despacho</button>
+                    </div>
+
+                    <div class="legend-chips-row">
+                        <div class="chip-item"><span class="chip-color a"></span> Zona A (35m)</div>
+                        <div class="chip-item"><span class="chip-color b"></span> Zona B (72m)</div>
+                        <div class="chip-item"><span class="chip-color c"></span> Zona C (118m)</div>
+                        <div class="chip-item"><span class="chip-color d"></span> Zona D (154m)</div>
+                    </div>
+                </div>
+
+                <!-- TIRA DE FILTRO OMNICANAL -->
+                <div class="channel-filter-strip">
+                    <span class="channel-filter-lbl">FILTRO CANAL:</span>
+                    <button class="channel-filter-pill active" data-channel="ALL">TODOS (OMNICANAL)</button>
+                    <button class="channel-filter-pill" data-channel="ECOMMERCE">E-Commerce CyberDay (58%)</button>
+                    <button class="channel-filter-pill" data-channel="RETAIL_STORES">Tiendas Propias (27%)</button>
+                    <button class="channel-filter-pill" data-channel="MARKETPLACE">Marketplace 3P (15%)</button>
+                </div>
+
+                <!-- SELECTOR DIDÁCTICO DE TURNOS OPERATIVOS (FASE 1) -->
+                <div class="shift-selector-bar">
+                    <span class="shift-selector-lbl">TURNO OPERATIVO:</span>
+                    <button class="shift-btn active" id="btn-shift-morning" onclick="setOperationalShift('morning')">
+                        <span>☀️ Mañana (07-15h)</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.68rem; opacity: 0.8;">49,6 lin/HH</span>
+                    </button>
+                    <button class="shift-btn" id="btn-shift-afternoon" onclick="setOperationalShift('afternoon')">
+                        <span>⛅ Tarde (15-23h)</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.68rem; opacity: 0.8;">47,8 lin/HH</span>
+                    </button>
+                    <button class="shift-btn night" id="btn-shift-night" onclick="setOperationalShift('night')">
+                        <span>🌙 Noche (23-07h)</span>
+                        <span style="font-family: var(--font-mono); font-size: 0.68rem; color: #fca5a5;">42,8 lin/HH (-14%)</span>
+                    </button>
+                    <span id="shift-status-pill" style="font-size: 0.72rem; font-family: var(--font-mono); color: #38bdf8; margin-left: auto;">
+                        🟢 Turno Mañana: dotación completa, descansada y flujo regular
+                    </span>
+                </div>
+
+                <!-- SIMULADOR CAUSA-EFECTO DIDÁCTICO (LEAN & SLOTTING - FASE 1) -->
+                <div class="cause-effect-sim-box">
+                    <div class="ce-header">
+                        <div>
+                            <span style="font-size: 0.72rem; font-family: var(--font-mono); color: #f43f5e; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                                🕹️ SIMULADOR DIDÁCTICO CAUSA-EFECTO (LEAN &amp; SLOTTING)
+                            </span>
+                            <div style="font-size: 0.88rem; font-weight: 800; color: #fff; margin-top: 2px;">
+                                Desliza para ver cómo la desubicación de SKUs detona los 67,6 km de caminata diaria
+                            </div>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="preset-pill-btn over" onclick="setMismatchSliderValue(114)" style="padding: 3px 8px; font-size: 0.7rem;">
+                                🔴 Crisis Base (114 SKU)
+                            </button>
+                            <button class="preset-pill-btn opt" onclick="setMismatchSliderValue(0)" style="padding: 3px 8px; font-size: 0.7rem;">
+                                🟢 Óptimo P1 (0 SKU)
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="ce-slider-row">
+                        <span style="font-size: 0.75rem; font-family: var(--font-mono); color: #34d399; font-weight: 800;">0 (Óptimo P1)</span>
+                        <input type="range" id="mismatch-range-slider" class="ce-slider" min="0" max="114" value="114" oninput="onMismatchSliderChange(this.value)">
+                        <span style="font-size: 0.75rem; font-family: var(--font-mono); color: #f43f5e; font-weight: 800;">114 (Crisis Cyber)</span>
+                    </div>
+
+                    <div class="ce-metrics-strip">
+                        <div class="ce-metric-card">
+                            <div id="sim-mismatches-val" class="ce-m-val" style="color: #f43f5e;">114 SKU</div>
+                            <div class="ce-m-lbl">Mismatches Activos</div>
+                        </div>
+                        <div class="ce-metric-card">
+                            <div id="sim-km-val" class="ce-m-val" style="color: #fbbf24;">67,6 km</div>
+                            <div class="ce-m-lbl">Recorrido / Día</div>
+                        </div>
+                        <div class="ce-metric-card">
+                            <div id="sim-hh-val" class="ce-m-val" style="color: #f87171;">23,5 HH</div>
+                            <div class="ce-m-lbl">Caminata Inútil / Día</div>
+                        </div>
+                        <div class="ce-metric-card">
+                            <div id="sim-waste-cost-val" class="ce-m-val" style="color: #c084fc;">$54,8M CLP</div>
+                            <div class="ce-m-lbl">Desperdicio Anual HH</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BARRA DE BÚSQUEDA SKU & TOGGLES DE CAPAS -->
+                <div class="blueprint-search-row">
+                    <div class="sku-search-box-wrap">
+                        <div class="sku-search-input-wrap">
+                            <span class="sku-search-icon">🔍</span>
+                            <input type="text" id="sku-search-input" placeholder="Buscar SKU crítico (ej: SK-7001, SK-7002, Colchón, Cafetera)..." list="sku-datalist" autocomplete="off">
+                            <button class="btn-clear-search" id="btn-clear-sku" onclick="clearSkuSearch()" style="display: none;">&times;</button>
+                        </div>
+                        <datalist id="sku-datalist">
+                            <option value="SK-7001 — Smart TV OLED 65' (Zona A / Mismatch R-04)"></option>
+                            <option value="SK-7002 — Refrigerador Side by Side (Zona D / Andén 02)"></option>
+                            <option value="SK-7003 — Set Sábanas 400 Hilos (Zona B / R-02)"></option>
+                            <option value="SK-7004 — Cafetera Espresso Pro (Zona A / R-01)"></option>
+                            <option value="SK-7005 — Colchón King Ergonómico (Zona D / R-04 Mismatch)"></option>
+                            <option value="SK-7006 — Taladro Percutor Inalámbrico (Zona C / R-03)"></option>
+                        </datalist>
+                        <div id="sku-popup-card" class="sku-popup-card" style="display: none;"></div>
+                    </div>
+                    <div class="layer-toggles-row">
+                        <span class="layer-lbl">CAPAS:</span>
+                        <button class="layer-toggle-btn active" id="toggle-layer-paths" onclick="toggleLayer('paths')">Rutas</button>
+                        <button class="layer-toggle-btn active" id="toggle-layer-mismatch" onclick="toggleLayer('mismatch')">114 Mismatches</button>
+                        <button class="layer-toggle-btn active" id="toggle-layer-docks" onclick="toggleLayer('docks')">Andenes 1-24</button>
+                        <button class="layer-toggle-btn active" id="toggle-layer-crossdock" onclick="toggleLayer('crossdock')">Cross-dock</button>
+                    </div>
+                </div>
+
+                <!-- SVG DEL PLANO 2D -->
+                <div class="blueprint-svg-container">
+                    <svg id="warehouse-2d-svg" viewBox="0 0 980 580" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
+                                <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/>
+                            </pattern>
+                            <filter id="glowRed" x="-20%" y="-20%" width="140%" height="140%">
+                                <feGaussianBlur stdDeviation="3" result="blur" />
+                                <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                            </filter>
+                        </defs>
+
+                        <!-- BASE Y PLANO DEL ALMACÉN -->
+                        <rect x="0" y="0" width="980" height="580" fill="#070a12" />
+                        <rect x="0" y="0" width="980" height="580" fill="url(#gridPattern)" />
+                        <rect x="15" y="15" width="950" height="550" fill="none" stroke="#1e293b" stroke-width="2" rx="8" />
+
+                        <!-- CAPA DE RUTAS EN EL SUELO (RENDERIZADAS DEBAJO DE RACKS Y TEXTOS) -->
+                        <g id="svg-floor-paths">
+                            <!-- DIAGRAMA DE ESPAGUETI ROJO (67,6 KM/DÍA): RUTA CAÓTICA POR PASILLOS -->
+                            <path id="svg-path-spaghetti" class="svg-spaghetti-path" d="
+                                M 540 450 
+                                L 470 410 
+                                L 470 300 
+                                L 190 300 
+                                L 190 235 
+                                L 470 235 
+                                L 470 145 
+                                L 730 145 
+                                L 730 200 
+                                L 470 200 
+                                L 470 340 
+                                L 600 340 
+                                L 600 405 
+                                L 245 405 
+                                L 245 440 
+                                L 540 450
+                            " />
+
+                            <!-- FLUJO U-FLOW OPTIMIZADO VERDE (7,2 KM/DÍA) -->
+                            <path id="svg-path-optimized" class="svg-optimized-path" style="display: none;" d="
+                                M 220 70 
+                                L 220 100 
+                                L 110 100 
+                                L 110 215 
+                                L 220 215 
+                                L 220 405 
+                                L 245 440 
+                                L 540 455
+                            " />
+                        </g>
+
+                        <!-- INBOUND DOCKS (24 ANDENES) -->
+                        <g id="svg-inbound-group">
+                            <rect x="30" y="24" width="920" height="46" fill="#0b1324" stroke="#334155" stroke-width="1.5" rx="6" />
+                            <text x="42" y="41" fill="#f1f5f9" font-size="11.5" font-family="'JetBrains Mono', monospace" font-weight="800">INBOUND — 24 ANDENES DE DESCARGA (RECEPCIÓN CD PUDAHUEL)</text>
+                            <text x="630" y="41" fill="#38bdf8" font-size="10" font-family="'JetBrains Mono', monospace" font-weight="700">Dock-to-Stock Histórico: 22,6h | Espera: 65,2 min</text>
+                            
+                            <rect class="svg-dock" data-zone="INBOUND" x="40" y="47" width="66" height="18" fill="#1e293b" stroke="#38bdf8" stroke-width="1.2" rx="3"/>
+                            <text x="73" y="60" fill="#38bdf8" font-size="9" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">AND 01-02</text>
+
+                            <rect class="svg-dock" data-zone="INBOUND" x="115" y="47" width="66" height="18" fill="#1e293b" stroke="#38bdf8" stroke-width="1.2" rx="3"/>
+                            <text x="148" y="60" fill="#38bdf8" font-size="9" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">AND 03-04</text>
+
+                            <rect class="svg-dock" data-zone="INBOUND" x="190" y="47" width="66" height="18" fill="#1e293b" stroke="#38bdf8" stroke-width="1.2" rx="3"/>
+                            <text x="223" y="60" fill="#38bdf8" font-size="9" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">AND 05-06</text>
+
+                            <rect class="svg-dock" data-zone="INBOUND" x="265" y="47" width="66" height="18" fill="#1e293b" stroke="#38bdf8" stroke-width="1.2" rx="3"/>
+                            <text x="298" y="60" fill="#38bdf8" font-size="9" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">AND 07-08</text>
+
+                            <rect class="svg-dock" data-zone="INBOUND" x="340" y="47" width="66" height="18" fill="#1e293b" stroke="#38bdf8" stroke-width="1.2" rx="3"/>
+                            <text x="373" y="60" fill="#38bdf8" font-size="9" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">AND 09-10</text>
+
+                            <rect class="svg-dock" data-zone="INBOUND" x="415" y="47" width="66" height="18" fill="#1e293b" stroke="#38bdf8" stroke-width="1.2" rx="3"/>
+                            <text x="448" y="60" fill="#38bdf8" font-size="9" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">AND 11-12</text>
+
+                            <rect class="svg-aisle-block" data-zone="INBOUND" x="490" y="47" width="450" height="18" fill="rgba(56, 189, 248, 0.14)" stroke="#38bdf8" stroke-width="1.2" stroke-dasharray="4 2" rx="3"/>
+                            <text x="715" y="60" fill="#7dd3fc" font-size="9.5" text-anchor="middle" font-weight="800">ÁREA DE STAGING Y CONTROL DE CALIDAD (BUFFER INBOUND)</text>
+                        </g>
+
+                        <!-- ZONA A: PICK EXPRESS (35M) -->
+                        <g id="svg-zone-a-group">
+                            <rect x="30" y="80" width="430" height="152" fill="#08152c" stroke="#0284c7" stroke-width="1.5" rx="8" />
+                            <text x="44" y="100" fill="#38bdf8" font-size="13.5" font-weight="800">ZONA A — RÁPIDA ROTACIÓN (35 m a expedición)</text>
+                            <text x="44" y="116" fill="#cbd5e1" font-size="10.5" font-weight="600">84 SKU actuales | Meta: 105 SKU | 46,8 líneas/HH | Viaje: 22,7%</text>
+
+                            <g class="svg-aisle-block selected" data-zone="ZONE-A">
+                                <rect x="45" y="125" width="92" height="26" fill="#0369a1" stroke="#38bdf8" stroke-width="1" rx="4" />
+                                <text x="91" y="142" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="800">PASILLO A-01</text>
+                                <rect x="45" y="156" width="92" height="26" fill="#0369a1" stroke="#38bdf8" stroke-width="1" rx="4" />
+                                <text x="91" y="173" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="800">PASILLO A-02</text>
+                                <rect x="45" y="187" width="92" height="26" fill="#0369a1" stroke="#38bdf8" stroke-width="1" rx="4" />
+                                <text x="91" y="204" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="800">PASILLO A-03</text>
+                            </g>
+
+                            <g class="svg-aisle-block selected" data-zone="ZONE-A">
+                                <rect x="147" y="125" width="92" height="26" fill="#0284c7" stroke="#38bdf8" stroke-width="1" rx="4" />
+                                <text x="193" y="142" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="800">PASILLO A-04</text>
+                                <rect x="147" y="156" width="92" height="26" fill="#0284c7" stroke="#38bdf8" stroke-width="1" rx="4" />
+                                <text x="193" y="173" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="800">PASILLO A-05</text>
+                                <rect x="147" y="187" width="92" height="26" fill="#0284c7" stroke="#38bdf8" stroke-width="1" rx="4" />
+                                <text x="193" y="204" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="800">PASILLO A-06</text>
+                            </g>
+
+                            <rect x="250" y="125" width="198" height="88" fill="#0a192f" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="5 3" rx="6" />
+                            <rect x="260" y="133" width="178" height="22" fill="#0369a1" rx="4" />
+                            <text x="349" y="148" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="800">+21 SKU EN RE-SLOTTING (P1)</text>
+                            <text x="349" y="176" fill="#93c5fd" font-size="10" text-anchor="middle" font-weight="700">Capacidad meta: 105 SKU</text>
+                            <text x="349" y="196" fill="#cbd5e1" font-size="9.5" text-anchor="middle">Alta Rotación a 35m expedición</text>
+                        </g>
+
+                        <!-- ZONA B: MEDIA ROTACIÓN (72M) -->
+                        <g id="svg-zone-b-group">
+                            <rect x="30" y="242" width="430" height="156" fill="#0b1126" stroke="#6366f1" stroke-width="1.5" rx="8" />
+                            <text x="44" y="262" fill="#a5b4fc" font-size="13.5" font-weight="800">ZONA B — MEDIA ROTACIÓN (72 m a expedición)</text>
+                            <text x="44" y="278" fill="#cbd5e1" font-size="10.5" font-weight="600">125 SKU actuales | Óptimo: 120 SKU | 37,6 líneas/HH | Viaje: 31,7%</text>
+
+                            <g class="svg-aisle-block" data-zone="ZONE-B">
+                                <rect x="45" y="288" width="120" height="24" fill="#4338ca" stroke="#818cf8" stroke-width="1" rx="4"/>
+                                <text x="105" y="304" fill="#ffffff" font-size="10.5" text-anchor="middle" font-weight="700">PASILLO B-01/02</text>
+                                <rect x="45" y="318" width="120" height="24" fill="#4338ca" stroke="#818cf8" stroke-width="1" rx="4"/>
+                                <text x="105" y="334" fill="#ffffff" font-size="10.5" text-anchor="middle" font-weight="700">PASILLO B-03/04</text>
+                                <rect x="45" y="348" width="120" height="24" fill="#4338ca" stroke="#818cf8" stroke-width="1" rx="4"/>
+                                <text x="105" y="364" fill="#ffffff" font-size="10.5" text-anchor="middle" font-weight="700">PASILLO B-05/06</text>
+                            </g>
+
+                            <g class="svg-aisle-block" data-zone="ZONE-B">
+                                <rect x="175" y="288" width="120" height="24" fill="#3730a3" stroke="#818cf8" stroke-width="1" rx="4"/>
+                                <text x="235" y="304" fill="#ffffff" font-size="10.5" text-anchor="middle" font-weight="700">PASILLO B-07/08</text>
+                                <rect x="175" y="318" width="120" height="24" fill="#3730a3" stroke="#818cf8" stroke-width="1" rx="4"/>
+                                <text x="235" y="334" fill="#ffffff" font-size="10.5" text-anchor="middle" font-weight="700">PASILLO B-09/10</text>
+                                <rect x="175" y="348" width="120" height="24" fill="#3730a3" stroke="#818cf8" stroke-width="1" rx="4"/>
+                                <text x="235" y="364" fill="#ffffff" font-size="10.5" text-anchor="middle" font-weight="700">PASILLO B-11/12</text>
+                            </g>
+
+                            <rect x="305" y="288" width="145" height="84" fill="#131536" stroke="#818cf8" stroke-width="1.2" stroke-dasharray="4 2" rx="6"/>
+                            <text x="377" y="322" fill="#c7d2fe" font-size="10.5" text-anchor="middle" font-weight="800">BUFFER REABASTECIMIENTO</text>
+                            <text x="377" y="340" fill="#cbd5e1" font-size="9.5" text-anchor="middle">Pallets de Reposición RF</text>
+                            <text x="377" y="356" fill="#a5b4fc" font-size="9" text-anchor="middle" font-weight="600">Sincronización WMS</text>
+                        </g>
+
+                        <!-- ZONA C: LENTA ROTACIÓN (118M) -->
+                        <g id="svg-zone-c-group">
+                            <rect x="480" y="80" width="470" height="152" fill="#181308" stroke="#f59e0b" stroke-width="1.5" rx="8" />
+                            <text x="494" y="100" fill="#fbbf24" font-size="13.5" font-weight="800">ZONA C — LENTA ROTACIÓN (118 m a expedición)</text>
+                            <text x="494" y="116" fill="#cbd5e1" font-size="10.5" font-weight="600">154 SKU actuales | Ideal: 147 SKU | 27,8 líneas/HH | Viaje: 42,9%</text>
+
+                            <g class="svg-aisle-block" data-zone="ZONE-C">
+                                <rect x="495" y="125" width="96" height="26" fill="#92400e" stroke="#f59e0b" stroke-width="1" rx="4"/>
+                                <text x="543" y="142" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="700">PASILLO C-01</text>
+                                <rect x="495" y="156" width="96" height="26" fill="#92400e" stroke="#f59e0b" stroke-width="1" rx="4"/>
+                                <text x="543" y="173" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="700">PASILLO C-02</text>
+                                <rect x="495" y="187" width="96" height="26" fill="#92400e" stroke="#f59e0b" stroke-width="1" rx="4"/>
+                                <text x="543" y="204" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="700">PASILLO C-03</text>
+                            </g>
+
+                            <g class="svg-aisle-block" data-zone="ZONE-C">
+                                <rect x="600" y="125" width="96" height="26" fill="#92400e" stroke="#f59e0b" stroke-width="1" rx="4"/>
+                                <text x="648" y="142" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="700">PASILLO C-04</text>
+                                <rect x="600" y="156" width="96" height="26" fill="#92400e" stroke="#f59e0b" stroke-width="1" rx="4"/>
+                                <text x="648" y="173" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="700">PASILLO C-05</text>
+                                <rect x="600" y="187" width="96" height="26" fill="#92400e" stroke="#f59e0b" stroke-width="1" rx="4"/>
+                                <text x="648" y="204" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="700">PASILLO C-06</text>
+                            </g>
+
+                            <!-- TARJETAS DE ALERTA RADAR: 12 SKU CLASE A EXTRAVIADOS -->
+                            <g class="svg-mismatch-pin">
+                                <!-- Alerta SKU-0005 -->
+                                <rect x="708" y="125" width="232" height="42" fill="#180c14" stroke="#f43f5e" stroke-width="1.8" rx="6" />
+                                <circle cx="726" cy="146" r="10" fill="#f43f5e" filter="url(#glowRed)" />
+                                <text x="726" y="150" fill="#fff" font-size="11" text-anchor="middle" font-weight="900">!</text>
+                                <text x="744" y="140" fill="#fecdd3" font-size="11" font-weight="800">SKU-0005 (Cocina A) — Mismatch</text>
+                                <text x="744" y="155" fill="#f1f5f9" font-size="9.5" font-weight="600">Genera 9.977 m/día de caminata</text>
+
+                                <!-- Alerta 11 SKU Extraviados -->
+                                <rect x="708" y="173" width="232" height="42" fill="#180c14" stroke="#f43f5e" stroke-width="1.8" rx="6" />
+                                <circle cx="726" cy="194" r="10" fill="#f43f5e" filter="url(#glowRed)" />
+                                <text x="726" y="198" fill="#fff" font-size="11" text-anchor="middle" font-weight="900">!</text>
+                                <text x="744" y="188" fill="#fecdd3" font-size="11" font-weight="800">11 SKU CLASE A EXTRAVIADOS</text>
+                                <text x="744" y="203" fill="#f1f5f9" font-size="9.5" font-weight="600">Causan 28,4 km extras diarios</text>
+                            </g>
+                        </g>
+
+                        <!-- ZONA D: CARGA PESADA & BULKY (154M) - ALERTA SST -->
+                        <g id="svg-zone-d-group">
+                            <rect x="480" y="242" width="470" height="156" fill="#1c0c14" stroke="#f43f5e" stroke-width="1.5" rx="8" />
+                            <text x="494" y="262" fill="#fb7185" font-size="13.5" font-weight="800">ZONA D — BULKY & CARGA PESADA (154 m a expedición)</text>
+                            <text x="494" y="278" fill="#cbd5e1" font-size="10.5" font-weight="600">87 SKU | 17,3 líneas/HH | Viaje: 39,1% | ⚠️ 38 SKU &gt;25kg manuales | SST: 83,8/100k HH</text>
+
+                            <g class="svg-aisle-block" data-zone="ZONE-D">
+                                <rect x="495" y="288" width="135" height="26" fill="#9f1239" stroke="#f43f5e" stroke-width="1" rx="4"/>
+                                <text x="562" y="305" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="800">RACK BULKY D-01</text>
+                                <rect x="495" y="320" width="135" height="26" fill="#9f1239" stroke="#f43f5e" stroke-width="1" rx="4"/>
+                                <text x="562" y="337" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="800">RACK BULKY D-02</text>
+                                <rect x="495" y="352" width="135" height="26" fill="#9f1239" stroke="#f43f5e" stroke-width="1" rx="4"/>
+                                <text x="562" y="369" fill="#ffffff" font-size="11" text-anchor="middle" font-weight="800">RACK BULKY D-03</text>
+                            </g>
+
+                            <g class="svg-aisle-block" data-zone="ZONE-D">
+                                <rect x="645" y="288" width="292" height="92" fill="#180c14" stroke="#f43f5e" stroke-width="1.5" stroke-dasharray="5 3" rx="6"/>
+                                <rect x="655" y="296" width="272" height="22" fill="#be123c" rx="4" />
+                                <text x="791" y="311" fill="#ffffff" font-size="11.5" text-anchor="middle" font-weight="900">4 MESAS ELEVADORAS HIDRÁULICAS (P5)</text>
+                                <text x="791" y="338" fill="#f1f5f9" font-size="10" text-anchor="middle" font-weight="600">Erradicación de manejo manual &gt;25 kg</text>
+                                <text x="791" y="356" fill="#34d399" font-size="10" text-anchor="middle" font-weight="800">Cumplimiento norma Dirección del Trabajo</text>
+                            </g>
+                        </g>
+
+                        <!-- ZONA DE PACKING & OUTBOUND DOCKS -->
+                        <g id="svg-packing-outbound-group">
+                            <rect x="30" y="410" width="430" height="78" fill="#0b1324" stroke="#475569" stroke-width="1.5" rx="8" />
+                            <text x="42" y="428" fill="#f1f5f9" font-size="11.5" font-weight="800">ZONA DE PACKING & ETIQUETADO (COLA PEAK CYBER: 28,0 HORAS)</text>
+                            
+                            <rect x="45" y="438" width="42" height="36" fill="#1e293b" stroke="#64748b" stroke-width="1.2" rx="4" />
+                            <text x="66" y="460" fill="#94a3b8" font-size="9.5" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">PK-01</text>
+
+                            <rect x="95" y="438" width="42" height="36" fill="#1e293b" stroke="#64748b" stroke-width="1.2" rx="4" />
+                            <text x="116" y="460" fill="#94a3b8" font-size="9.5" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">PK-02</text>
+
+                            <rect x="145" y="438" width="42" height="36" fill="#1e293b" stroke="#64748b" stroke-width="1.2" rx="4" />
+                            <text x="166" y="460" fill="#94a3b8" font-size="9.5" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">PK-03</text>
+
+                            <rect x="195" y="438" width="42" height="36" fill="#1e293b" stroke="#64748b" stroke-width="1.2" rx="4" />
+                            <text x="216" y="460" fill="#94a3b8" font-size="9.5" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">PK-04</text>
+
+                            <rect x="245" y="438" width="42" height="36" fill="#1e293b" stroke="#64748b" stroke-width="1.2" rx="4" />
+                            <text x="266" y="460" fill="#94a3b8" font-size="9.5" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">PK-05</text>
+
+                            <rect x="295" y="438" width="42" height="36" fill="#1e293b" stroke="#64748b" stroke-width="1.2" rx="4" />
+                            <text x="316" y="460" fill="#94a3b8" font-size="9.5" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">PK-06</text>
+
+                            <rect x="345" y="438" width="42" height="36" fill="#1e293b" stroke="#64748b" stroke-width="1.2" rx="4" />
+                            <text x="366" y="460" fill="#94a3b8" font-size="9.5" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">PK-07</text>
+
+                            <rect x="395" y="438" width="55" height="36" fill="#1e293b" stroke="#64748b" stroke-width="1.2" rx="4" />
+                            <text x="422" y="460" fill="#94a3b8" font-size="9.5" text-anchor="middle" font-weight="700" font-family="'JetBrains Mono', monospace">PK-08</text>
+
+                            <rect class="svg-dock" data-zone="OUTBOUND" x="480" y="410" width="470" height="78" fill="#071b16" stroke="#10b981" stroke-width="1.5" rx="8" />
+                            <text x="494" y="428" fill="#34d399" font-size="12" font-weight="800">ANDENES DE DESPACHO & EXPEDICIÓN (CARRIERS ÚLTIMA MILLA)</text>
+                            <text x="494" y="443" fill="#cbd5e1" font-size="10" font-weight="600">Entregas Fallidas: 11,5% ($29.628 / falla) | 3.560 pedidos diarios</text>
+
+                            <rect class="svg-dock" data-zone="OUTBOUND" x="495" y="452" width="100" height="24" fill="#065f46" stroke="#10b981" stroke-width="1" rx="4" />
+                            <text x="545" y="468" fill="#fff" font-size="10.5" text-anchor="middle" font-weight="800">E-COM RM</text>
+
+                            <rect class="svg-dock" data-zone="OUTBOUND" x="605" y="452" width="105" height="24" fill="#065f46" stroke="#10b981" stroke-width="1" rx="4" />
+                            <text x="657" y="468" fill="#fff" font-size="10.5" text-anchor="middle" font-weight="800">CLICK &amp; COLLECT</text>
+
+                            <rect class="svg-dock" data-zone="OUTBOUND" x="720" y="452" width="115" height="24" fill="#065f46" stroke="#10b981" stroke-width="1" rx="4" />
+                            <text x="777" y="468" fill="#fff" font-size="10.5" text-anchor="middle" font-weight="800">REPOSICIÓN TIENDAS</text>
+
+                            <rect class="svg-dock" data-zone="OUTBOUND" x="845" y="452" width="95" height="24" fill="#065f46" stroke="#10b981" stroke-width="1" rx="4" />
+                            <text x="892" y="468" fill="#fff" font-size="10.5" text-anchor="middle" font-weight="800">BULKY DOMICILIO</text>
+                        </g>
+
+                        <text x="30" y="558" fill="#94a3b8" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="600">
+                            CD PUDAHUEL | 31.500 m² | 20.400 PALLETS | DISTANCIAS: A=35m, B=72m, C=118m, D=154m
+                        </text>
+                    </svg>
+                    <div id="svg-hover-card" class="svg-hover-card" style="display: none;"></div>
+                </div>
+            </div>
+
+            <!-- Panel Lateral: Inspector Cuantitativo en Tiempo Real -->
+            <aside class="inspector-panel-2d">
+                <div>
+                    <span class="inspector-header-tag">
+                        <span>📍 INSPECTOR DE ÁREA</span>
+                    </span>
+                    <h3 id="insp-title-2d" class="inspector-zone-name">Zona A — Rápida Rotación</h3>
+                    <div id="insp-badge-2d" style="font-size: 0.72rem; color: var(--accent-cyan); font-family: var(--font-mono); font-weight: 700; margin-bottom: 12px;">
+                        PASILLOS A01 A A06 | DISTANCIA: 35M
+                    </div>
+
+                    <div class="inspector-metric-grid">
+                        <div class="metric-tile">
+                            <div class="t-lbl">Capacidad SKU</div>
+                            <div id="insp-sku-2d" class="t-val">84 SKU actuales</div>
+                        </div>
+                        <div class="metric-tile">
+                            <div class="t-lbl">Visitas de Picking</div>
+                            <div id="insp-visits-2d" class="t-val">30,9% visitas</div>
+                        </div>
+                        <div class="metric-tile">
+                            <div class="t-lbl">Distancia a Andén</div>
+                            <div id="insp-dist-2d" class="t-val">35 metros</div>
+                        </div>
+                        <div class="metric-tile">
+                            <div class="t-lbl">Productividad</div>
+                            <div id="insp-prod-2d" class="t-val">46,8 lin/HH</div>
+                        </div>
+                    </div>
+
+                    <div id="insp-diag-box" class="diagnostic-box-2d alert">
+                        <strong>Diagnóstico Crítico:</strong> Saturación en CyberDay: Congestión masiva de operarios en pasillos A01-A03 por falta de capacidad y retrasos en picking con papel.
+                    </div>
+
+                    <!-- Caja de Narrativa Humana Real -->
+                    <div id="insp-human-box" class="human-story-box">
+                        <div class="human-header">
+                            <span class="human-badge-tag">👤 REALIDAD HUMANA</span>
+                            <span id="insp-human-role" class="human-role-tag">Operario de Picking</span>
+                        </div>
+                        <p id="insp-human-text" class="human-text-desc">
+                            En pasillos de 2,4m de ancho, hasta 6 operarios con transpaletas manuales y listas de papel arrugadas chocan intentando cruzar. El estrés por la hora de corte provoca discusiones, fatiga y errores en cascada.
+                        </p>
+                    </div>
+
+                    <div class="solution-preview-box">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                            <h5>Solución Recomendada</h5>
+                            <span style="font-size: 0.68rem; font-family: var(--font-mono); color: #34d399; font-weight: 800; background: rgba(16,185,129,0.15); padding: 2px 6px; border-radius: 4px;">PORTAFOLIO EA2/EA3</span>
+                        </div>
+                        <p id="insp-sol-text">Re-slotting P1: Ampliación a 105 SKU + WMS Voice Picking P2 (+18% productividad).</p>
+                    </div>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <button id="insp-action-btn" class="btn-inspect-action" onclick="document.getElementById('sandbox-2d').scrollIntoView({ behavior: 'smooth' })">
+                        Simular Impacto en el Portafolio &darr;
+                    </button>
+                    <button class="btn-inspect-action" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399;" onclick="showSolutionProposalTab()">
+                        🚀 Ver Propuesta de Solución Integral &rarr;
+                    </button>
+                </div>
+            </aside>
+        </div>
+
+        <!-- TARJETA ANALÍTICA PARETO ABC (DISTORSIÓN DE SLOTTING) -->
+        <div style="margin-top: 24px; background: #090e1c; border: 1px solid var(--border-blueprint); border-radius: 14px; padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+                <div>
+                    <span class="inspector-header-tag">CURVA PARETO 80/20 &bull; 1.050 SKUs ACTIVOS</span>
+                    <h4 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Distorsión de Almacenamiento vs Demanda Real</h4>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #f43f5e; background: rgba(244, 63, 94, 0.15); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(244, 63, 94, 0.3);">
+                    🚨 114 SKUs desubicados (67,6 km/día)
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
+                <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 10px; padding: 14px;">
+                    <div style="font-size: 0.75rem; color: #38bdf8; font-weight: 800; font-family: var(--font-mono);">ZONA A (35m)</div>
+                    <div style="font-size: 1.35rem; font-weight: 900; color: #fff; margin: 4px 0;">84 SKUs <span style="font-size: 0.8rem; color: #94a3b8;">(8%)</span></div>
+                    <div style="font-size: 0.8rem; color: #cbd5e1;"><strong>30,9%</strong> de visitas. Capacidad subdimensionada.</div>
+                </div>
+                <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 10px; padding: 14px;">
+                    <div style="font-size: 0.75rem; color: #34d399; font-weight: 800; font-family: var(--font-mono);">ZONA B (72m)</div>
+                    <div style="font-size: 1.35rem; font-weight: 900; color: #fff; margin: 4px 0;">252 SKUs <span style="font-size: 0.8rem; color: #94a3b8;">(24%)</span></div>
+                    <div style="font-size: 0.8rem; color: #cbd5e1;"><strong>38,2%</strong> de visitas. Rotación media-alta.</div>
+                </div>
+                <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 10px; padding: 14px;">
+                    <div style="font-size: 0.75rem; color: #fbbf24; font-weight: 800; font-family: var(--font-mono);">ZONA C (118m)</div>
+                    <div style="font-size: 1.35rem; font-weight: 900; color: #fff; margin: 4px 0;">430 SKUs <span style="font-size: 0.8rem; color: #94a3b8;">(41%)</span></div>
+                    <div style="font-size: 0.8rem; color: #cbd5e1;"><strong>19,8%</strong> visitas. 68 SKUs tipo A/B desalineados.</div>
+                </div>
+                <div style="background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.25); border-radius: 10px; padding: 14px;">
+                    <div style="font-size: 0.75rem; color: #f43f5e; font-weight: 800; font-family: var(--font-mono);">ZONA D-BULKY (154m)</div>
+                    <div style="font-size: 1.35rem; font-weight: 900; color: #fff; margin: 4px 0;">284 SKUs <span style="font-size: 0.8rem; color: #94a3b8;">(27%)</span></div>
+                    <div style="font-size: 0.8rem; color: #cbd5e1;"><strong>11,1%</strong> visitas. 46 SKUs livianos en racks de piso.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         VISTA 2: VALUE STREAM MAPPING (VSM AS-IS) Y SIPOC
+         ========================================================================== -->
+    <section id="view-vsm" class="diag-view-content">
+        <div class="vsm-container">
+            <div style="margin-bottom: 20px;">
+                <span class="inspector-header-tag">VALUE STREAM MAPPING (AS-IS) — CADENA DE VALOR</span>
+                <h3 style="font-size: 1.3rem; font-weight: 800; color: #fff;">Flujo de Valor End-to-End: Tiempos de Proceso vs Colas</h3>
+                <p style="color: var(--text-muted); font-size: 0.85rem;">
+                    Diagnóstico cuantitativo de tiempos por etapa en el CD Pudahuel. La cola de espera para packing explotó a 28,0 horas en CyberDay.
+                </p>
+            </div>
+
+            <!-- Pipeline de Nodos VSM -->
+            <div class="vsm-pipeline">
+                <div class="vsm-node">
+                    <div class="vsm-node-header">1. INBOUND</div>
+                    <div class="vsm-node-title">Arribo & Cita</div>
+                    <div class="vsm-time-badge">Proc: <strong>105,2 min</strong></div>
+                    <div class="vsm-queue-badge">Espera: 33,4 min</div>
+                </div>
+                <div class="vsm-arrow">&rarr;</div>
+
+                <div class="vsm-node">
+                    <div class="vsm-node-header">2. STAGING</div>
+                    <div class="vsm-node-title">Putaway a Rack</div>
+                    <div class="vsm-time-badge">Proc: <strong>95,4 min</strong></div>
+                    <div class="vsm-queue-badge">Lead Time: 22,5 días</div>
+                </div>
+                <div class="vsm-arrow">&rarr;</div>
+
+                <div class="vsm-node">
+                    <div class="vsm-node-header">3. PICKING</div>
+                    <div class="vsm-node-title">Olas de Pedidos</div>
+                    <div class="vsm-time-badge">E-com: <strong>5,6 h</strong> / Tiendas: <strong>7,9 h</strong></div>
+                    <div class="vsm-queue-badge" style="background: rgba(244, 63, 94, 0.25); border-color: var(--accent-crimson);">
+                        Cola Packing Cyber: <strong>28,0 h</strong>
+                    </div>
+                </div>
+                <div class="vsm-arrow">&rarr;</div>
+
+                <div class="vsm-node">
+                    <div class="vsm-node-header">4. PACKING</div>
+                    <div class="vsm-node-title">Embalaje & Label</div>
+                    <div class="vsm-time-badge">Proc: <strong>3,3 h</strong></div>
+                    <div class="vsm-queue-badge">Espera Despacho: 14,4 h</div>
+                </div>
+                <div class="vsm-arrow">&rarr;</div>
+
+                <div class="vsm-node">
+                    <div class="vsm-node-header">5. TRANSPORTE</div>
+                    <div class="vsm-node-title">Ruta Última Milla</div>
+                    <div class="vsm-time-badge">Tránsito: <strong>6,0 h</strong></div>
+                    <div class="vsm-queue-badge">11,5% fallidas</div>
+                </div>
+            </div>
+
+            <!-- Resumen de Ciclos Totales por Canal -->
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 24px;">
+                <div class="metric-tile" style="padding: 16px;">
+                    <div class="t-lbl">E-COMMERCE RM</div>
+                    <div class="t-val" style="color: var(--accent-cyan); font-size: 1.35rem;">35,6 h &rarr; 78,2 h</div>
+                    <div style="font-size: 0.82rem; color: #fca5a5; margin-top: 6px; font-weight: 600;">Promesa de 48h colapsada en Cyber</div>
+                </div>
+                <div class="metric-tile" style="padding: 16px;">
+                    <div class="t-lbl">CLICK & COLLECT</div>
+                    <div class="t-val" style="color: var(--accent-amber); font-size: 1.35rem;">20,4 h &rarr; 46,5 h</div>
+                    <div style="font-size: 0.82rem; color: #fca5a5; margin-top: 6px; font-weight: 600;">Promesa 24h incumplida (OTIF 11,5%)</div>
+                </div>
+                <div class="metric-tile" style="padding: 16px;">
+                    <div class="t-lbl">REPOSICIÓN TIENDAS</div>
+                    <div class="t-val" style="color: #fff; font-size: 1.35rem;">26,0 h</div>
+                    <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 6px; font-weight: 600;">Promesa: 30 h (Cumplimiento 81,9%)</div>
+                </div>
+                <div class="metric-tile" style="padding: 16px;">
+                    <div class="t-lbl">E-COMMERCE REGIONES</div>
+                    <div class="t-val" style="color: #fff; font-size: 1.35rem;">53,5 h</div>
+                    <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 6px; font-weight: 600;">Promesa: 72 a 120 horas</div>
+                </div>
+            </div>
+
+            <!-- ESCALERA DE TIEMPO LEAN VSM (VALOR AGREGADO VS DESPERDICIO) -->
+            <div class="vsm-ladder-container">
+                <div class="ladder-header">
+                    <h4>Escalera de Tiempos Lean VSM: Valor Agregado vs No Agregado</h4>
+                    <span class="ladder-total">Tiempo Total Ciclo Cyber: 78,2 h</span>
+                </div>
+                <div class="ladder-bars">
+                    <div class="ladder-row">
+                        <div class="ladder-label">Tiempo con Valor Agregado (VA — Picking, Packing, Carga efectiva): <strong>8,9 horas (11,4%)</strong></div>
+                        <div class="ladder-track">
+                            <div class="ladder-fill va" style="width: 11.4%;">VA: 8,9 h (11,4%)</div>
+                        </div>
+                    </div>
+                    <div class="ladder-row">
+                        <div class="ladder-label">Tiempo Sin Valor Agregado / Desperdicio (NVA — Colas, Espera andén, Bloqueos, Mismatches): <strong>69,3 horas (88,6%)</strong></div>
+                        <div class="ladder-track">
+                            <div class="ladder-fill nva" style="width: 88.6%;">NVA / Desperdicio: 69,3 h (88,6%)</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ladder-footnote">
+                    <strong>Diagnóstico Lean Manufacturing:</strong> El 88,6% del tiempo que un pedido transita por Pudahuel es <em>Muda</em> (espera en cola de packing de 28h, congestión de andenes y tiempos de búsqueda por desalineación de 114 SKUs). Con la implementación de P1 a P5, el NVA se contrae a &le; 18,2 h, recuperando el SLA de 48h.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         VISTA 3: PEDIDO PERFECTO APQC INTERACTIVO
+         ========================================================================== -->
+    <section id="view-apqc" class="diag-view-content">
+        <div class="apqc-table-wrapper">
+            <div style="margin-bottom: 20px;">
+                <span class="inspector-header-tag">ESTÁNDAR APQC — ANÁLISIS DE MUESTRA (3.000 ÓRDENES)</span>
+                <h3 style="font-size: 1.3rem; font-weight: 800; color: #fff;">
+                    Descomposición del Pedido Perfecto: A Tiempo &times; Completo &times; Sin Daño &times; Doc. Correcta
+                </h3>
+                <div style="font-family: var(--font-mono); font-size: 0.88rem; color: var(--accent-cyan); font-weight: 700; margin-top: 6px;">
+                    Fórmula Global: 82,3% &times; 95,1% &times; 99,2% &times; 99,6% = 77,4% Pedido Perfecto
+                </div>
+            </div>
+
+            <table class="apqc-table">
+                <thead>
+                    <tr>
+                        <th>Canal de Distribución</th>
+                        <th>Muestra</th>
+                        <th>A Tiempo (%)</th>
+                        <th>Completo (%)</th>
+                        <th>Sin Daño (%)</th>
+                        <th>Doc. Correcta (%)</th>
+                        <th>OTIF Global (%)</th>
+                        <th>Pedido Perfecto</th>
+                        <th>Costo Unitario</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="channel-pill bulky">Bulky Domicilio</span></td>
+                        <td>350</td>
+                        <td>91,8%</td>
+                        <td>94,8%</td>
+                        <td>99,6%</td>
+                        <td>99,6%</td>
+                        <td><strong style="color: var(--accent-emerald);">86,6%</strong></td>
+                        <td><strong>86,1%</strong></td>
+                        <td style="font-family: var(--font-mono); font-weight: 700;">$11.031 CLP</td>
+                    </tr>
+                    <tr>
+                        <td><span class="channel-pill cc">Click & Collect</span></td>
+                        <td>570</td>
+                        <td>78,4%</td>
+                        <td>95,3%</td>
+                        <td>99,1%</td>
+                        <td>99,3%</td>
+                        <td><strong style="color: var(--accent-crimson);">75,1%</strong></td>
+                        <td><strong>73,7%</strong></td>
+                        <td style="font-family: var(--font-mono); font-weight: 700;">$12.227 CLP</td>
+                    </tr>
+                    <tr>
+                        <td><span class="channel-pill ecom">E-commerce RM</span></td>
+                        <td>1.784</td>
+                        <td>88,6%</td>
+                        <td>95,5%</td>
+                        <td>99,2%</td>
+                        <td>99,6%</td>
+                        <td><strong style="color: var(--accent-amber);">85,1%</strong></td>
+                        <td><strong>84,0%</strong></td>
+                        <td style="font-family: var(--font-mono); font-weight: 700;">$11.419 CLP</td>
+                    </tr>
+                    <tr>
+                        <td><span class="channel-pill tiendas">Reposición Tiendas</span></td>
+                        <td>415</td>
+                        <td>81,9%</td>
+                        <td>94,2%</td>
+                        <td>99,3%</td>
+                        <td>99,6%</td>
+                        <td><strong style="color: var(--accent-amber);">77,8%</strong></td>
+                        <td><strong>77,6%</strong></td>
+                        <td style="font-family: var(--font-mono); font-weight: 700;">$16.647 CLP</td>
+                    </tr>
+                    <tr style="background: rgba(255, 255, 255, 0.04); font-weight: bold;">
+                        <td>OPERACIÓN NORMAL</td>
+                        <td>2.400</td>
+                        <td>90,9%</td>
+                        <td>96,3%</td>
+                        <td>99,2%</td>
+                        <td>99,5%</td>
+                        <td><strong style="color: var(--accent-emerald);">87,5%</strong></td>
+                        <td><strong>86,5%</strong></td>
+                        <td style="font-family: var(--font-mono); font-weight: 700;">$11.090 CLP</td>
+                    </tr>
+                    <tr style="background: rgba(244, 63, 94, 0.18); font-weight: bold;">
+                        <td><span class="channel-pill peak">PEAK CYBERDAY 2026</span></td>
+                        <td>600</td>
+                        <td style="color: var(--accent-crimson);">48,9%</td>
+                        <td style="color: var(--accent-amber);">87,5%</td>
+                        <td>99,1%</td>
+                        <td>99,3%</td>
+                        <td><strong style="color: var(--accent-crimson); font-size: 1.15rem;">43,5%</strong></td>
+                        <td><strong style="color: var(--accent-crimson); font-size: 1.15rem;">42,3%</strong></td>
+                        <td style="font-family: var(--font-mono); color: var(--accent-crimson); font-size: 1.15rem; font-weight: 800;">$21.107 CLP</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 14px; font-weight: 600;">
+                * Envíos fallidos durante el evento promediaron CLP $29.628 (+247% sobre el promedio normal de $8.532).
+            </div>
+
+            <!-- CALCULADORA DIDÁCTICA INTERACTIVA DEL PEDIDO PERFECTO APQC -->
+            <div class="apqc-calc-grid">
+                <div>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+                        <h4 style="font-size: 1.05rem; font-weight: 800; color: #fff; margin: 0;">
+                            🎮 Calculadora Dinámica del Pedido Perfecto (APQC)
+                        </h4>
+                        <div style="display: flex; gap: 8px;">
+                            <button class="preset-pill-btn over" onclick="setApqcPreset(62.1, 78.4, 91.2, 94.6)" style="font-size: 0.72rem; padding: 4px 10px;">
+                                🔴 CyberDay Real (41,9%)
+                            </button>
+                            <button class="preset-pill-btn opt" onclick="setApqcPreset(96.5, 98.2, 99.4, 99.8)" style="font-size: 0.72rem; padding: 4px 10px;">
+                                🟢 Meta Clase Mundial (94,0%)
+                            </button>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.78rem; color: #94a3b8; margin-bottom: 16px;">
+                        Mueve los 4 factores para experimentar didácticamente cómo la multiplicación en cadena castiga exponencialmente el resultado final.
+                    </p>
+
+                    <div class="apqc-slider-item">
+                        <div class="lbl-row">
+                            <span>1. Entrega a Tiempo (On-Time):</span>
+                            <span id="apqc-val-ontime" style="color: #38bdf8; font-family: var(--font-mono);">62,1%</span>
+                        </div>
+                        <input type="range" class="apqc-slider" id="apqc-slide-ontime" min="30" max="100" step="0.5" value="62.1" oninput="calculateLiveApqc()">
+                    </div>
+
+                    <div class="apqc-slider-item">
+                        <div class="lbl-row">
+                            <span>2. Pedido Completo (In-Full):</span>
+                            <span id="apqc-val-infull" style="color: #38bdf8; font-family: var(--font-mono);">78,4%</span>
+                        </div>
+                        <input type="range" class="apqc-slider" id="apqc-slide-infull" min="30" max="100" step="0.5" value="78.4" oninput="calculateLiveApqc()">
+                    </div>
+
+                    <div class="apqc-slider-item">
+                        <div class="lbl-row">
+                            <span>3. Libre de Daños (Damage-Free):</span>
+                            <span id="apqc-val-damage" style="color: #38bdf8; font-family: var(--font-mono);">91,2%</span>
+                        </div>
+                        <input type="range" class="apqc-slider" id="apqc-slide-damage" min="50" max="100" step="0.2" value="91.2" oninput="calculateLiveApqc()">
+                    </div>
+
+                    <div class="apqc-slider-item">
+                        <div class="lbl-row">
+                            <span>4. Factura / Documentación Exacta:</span>
+                            <span id="apqc-val-invoice" style="color: #38bdf8; font-family: var(--font-mono);">94,6%</span>
+                        </div>
+                        <input type="range" class="apqc-slider" id="apqc-slide-invoice" min="50" max="100" step="0.2" value="94.6" oninput="calculateLiveApqc()">
+                    </div>
+                </div>
+
+                <div class="apqc-live-result-box">
+                    <span style="font-size: 0.72rem; font-family: var(--font-mono); color: #94a3b8; font-weight: 800; text-transform: uppercase;">
+                        ÍNDICE APQC RESULTANTE
+                    </span>
+                    <div id="apqc-live-score" class="apqc-big-score" style="color: #f43f5e;">
+                        41,9%
+                    </div>
+                    <div id="apqc-live-verdict" style="font-size: 0.82rem; font-weight: 700; color: #fca5a5;">
+                        🚨 Quiebre Crítico: 58% de clientes insatisfechos
+                    </div>
+                    <div id="apqc-formula-breakdown" class="apqc-formula-pill">
+                        62,1% &times; 78,4% &times; 91,2% &times; 94,6%
+                    </div>
+                    <div style="font-size: 0.72rem; color: #94a3b8; margin-top: 10px; line-height: 1.4;">
+                        <strong>Principio Didáctico:</strong> Incluso con tres factores sobre el 90%, basta una sola variable deficiente (62%) para derrumbar la percepción de servicio a menos de la mitad.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         VISTA 4: INBOUND, ASN & DESEMPEÑO PROVEEDORES
+         ========================================================================== -->
+    <section id="view-inbound" class="diag-view-content">
+        <div class="vsm-container">
+            <div style="margin-bottom: 20px;">
+                <span class="inspector-header-tag">INBOUND & RECEPCIÓN — 24 ANDENES | 30 PROVEEDORES</span>
+                <h3 style="font-size: 1.3rem; font-weight: 800; color: #fff;">Impacto del Agendamiento (ASN & Citas de Andén)</h3>
+                <p style="color: var(--text-muted); font-size: 0.88rem;">
+                    La falta de adopción de citas digitales duplica el tiempo de descarga y acumula demurrage millonario.
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
+                <!-- Con Cita -->
+                <div style="background: rgba(16, 185, 129, 0.12); border: 1.5px solid rgba(16, 185, 129, 0.45); border-radius: 14px; padding: 22px;">
+                    <div style="font-size: 0.82rem; font-family: var(--font-mono); color: #34d399; font-weight: 800;">
+                        RECEPCIÓN CON ASN Y CITA (43,1% DEL TOTAL)
+                    </div>
+                    <div style="font-size: 2.3rem; font-weight: 900; font-family: var(--font-mono); color: #fff; margin: 8px 0;">
+                        3,16 horas
+                    </div>
+                    <div style="font-size: 0.92rem; color: #d1fae5; line-height: 1.6; font-weight: 600;">
+                        ✓ Espera en andén: solo 17,5 minutos.<br>
+                        ✓ Descarga fluida y putaway directo a rack.
+                    </div>
+                </div>
+
+                <!-- Sin Cita -->
+                <div style="background: rgba(244, 63, 94, 0.14); border: 1.5px solid rgba(244, 63, 94, 0.5); border-radius: 14px; padding: 22px;">
+                    <div style="font-size: 0.82rem; font-family: var(--font-mono); color: #fb7185; font-weight: 800;">
+                        RECEPCIÓN SIN ASN Y SIN CITA (12,8% DEL TOTAL)
+                    </div>
+                    <div style="font-size: 2.3rem; font-weight: 900; font-family: var(--font-mono); color: #fb7185; margin: 8px 0;">
+                        5,79 horas (+83,2%)
+                    </div>
+                    <div style="font-size: 0.92rem; color: #ffe4e6; line-height: 1.6; font-weight: 600;">
+                        🛑 Espera en andén: 65,2 minutos (+272%).<br>
+                        🛑 Demurrage acumulado: <strong style="color: #ffffff;">CLP $146.319.000</strong> en 19 recepciones.
+                    </div>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;">
+                <div class="metric-tile" style="padding: 16px;">
+                    <div class="t-lbl">PROVEEDOR 22 (CRÍTICO)</div>
+                    <div class="t-val" style="color: var(--accent-crimson); font-size: 1.35rem;">ASN 21,7%</div>
+                    <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 6px; font-weight: 600;">Dock-to-Stock: 21,8 horas</div>
+                </div>
+                <div class="metric-tile" style="padding: 16px;">
+                    <div class="t-lbl">PROVEEDOR 16 (CRÍTICO)</div>
+                    <div class="t-val" style="color: var(--accent-crimson); font-size: 1.35rem;">ASN 28,2%</div>
+                    <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 6px; font-weight: 600;">Dock-to-Stock: 21,8 horas</div>
+                </div>
+                <div class="metric-tile" style="padding: 16px;">
+                    <div class="t-lbl">PROVEEDOR 03 (BENCHMARK)</div>
+                    <div class="t-val" style="color: var(--accent-emerald); font-size: 1.35rem;">ASN 95,4%</div>
+                    <div style="font-size: 0.82rem; color: #cbd5e1; margin-top: 6px; font-weight: 600;">Dock-to-Stock: 3,2 horas</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         VISTA 5: CAUSA RAÍZ (ISHIKAWA 6M & 5 PORQUÉS)
+         ========================================================================== -->
+    <section id="view-ishikawa" class="diag-view-content">
+        <div style="margin-bottom: 20px;">
+            <span class="inspector-header-tag">METODOLOGÍA DE RESOLUCIÓN DE PROBLEMAS</span>
+            <h3 style="font-size: 1.3rem; font-weight: 800; color: #fff;">Diagrama de Causa-Efecto (6M) & Árbol de los 5 Porqués</h3>
+        </div>
+
+        <div class="ishikawa-grid">
+            <!-- Métodos -->
+            <div class="ishikawa-card">
+                <div class="m-header">⚙️ MÉTODOS Y PROCESOS</div>
+                <ul>
+                    <li>Olas fijas sin priorización omnicanal.</li>
+                    <li>Citas y ASN gestionadas manualmente por correo.</li>
+                    <li>Slotting desalineado (25,3% de los SKU fuera de zona).</li>
+                </ul>
+            </div>
+
+            <!-- Maquinaria -->
+            <div class="ishikawa-card">
+                <div class="m-header">🚜 MÁQUINAS Y SISTEMAS</div>
+                <ul>
+                    <li>WMS legado sin algoritmos de slotting dinámico.</li>
+                    <li>Cobertura parcial de RF (contingencia con papel).</li>
+                    <li>Mesas elevadoras tijera y transpaletas averiadas en D-Bulky.</li>
+                </ul>
+            </div>
+
+            <!-- Mano de Obra -->
+            <div class="ishikawa-card">
+                <div class="m-header">👷 MANO DE OBRA Y DOTE</div>
+                <ul>
+                    <li>8,4% ausentismo en turno noche.</li>
+                    <li>Personal temporal con brecha digital.</li>
+                    <li>Horas extra con fatiga y error de picking al 2,44%.</li>
+                </ul>
+            </div>
+
+            <!-- Materiales -->
+            <div class="ishikawa-card">
+                <div class="m-header">📦 MATERIALES Y EMBALAJE</div>
+                <ul>
+                    <li>64 SKU &gt;25 kg sin packaging homologado.</li>
+                    <li>Cajas no optimizadas (sobrecosto en flete y daño 36,1%).</li>
+                    <li>Falta de insumos en mesas de embalaje peak.</li>
+                </ul>
+            </div>
+
+            <!-- Medición -->
+            <div class="ishikawa-card">
+                <div class="m-header">📊 MEDICIÓN Y DATOS</div>
+                <ul>
+                    <li>SKU-0118 sin EAN-13 (+25% error picking).</li>
+                    <li>Discrepancias físicas de inventario &gt;15% (SKU-0023).</li>
+                    <li>Brecha de 29.526 pedidos entre reportes internos.</li>
+                </ul>
+            </div>
+
+            <!-- Medio Ambiente -->
+            <div class="ishikawa-card">
+                <div class="m-header">🏭 MEDIO AMBIENTE Y CD</div>
+                <ul>
+                    <li>Congestión física en pasillos A01 a A03.</li>
+                    <li>Staging saturado en recepción (bloqueo andenes).</li>
+                    <li>Tasa de accidentes de 83,8 / 100k HH en D-Bulky.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 5 Porqués -->
+        <div class="five-whys-box">
+            <h3>Árbol de los 5 Porqués: Colapso del OTIF en CyberDay 2026</h3>
+            <div class="why-step">
+                <strong>1. ¿Por qué cayó el OTIF a 80,9% (y 43,5% en CyberDay)?</strong><br>
+                Porque el 17,3% de los pedidos no se despachó completo ni a tiempo.
+            </div>
+            <div class="why-step">
+                <strong>2. ¿Por qué no se despacharon a tiempo?</strong><br>
+                Porque se acumuló un backlog récord de 15.387 pedidos (4,32 días de demanda).
+            </div>
+            <div class="why-step">
+                <strong>3. ¿Por qué colapsó la capacidad de despacho del CD?</strong><br>
+                Porque la productividad de picking cayó a 29,7 lin/h por congestión y colas de 28 horas en packing.
+            </div>
+            <div class="why-step">
+                <strong>4. ¿Por qué se congestionó el picking y aumentaron los recorridos?</strong><br>
+                Porque 114 SKU de alta rotación están mal ubicados en pasillos profundos (67,6 km de caminata diaria).
+            </div>
+            <div class="why-step" style="border-left-color: var(--accent-emerald);">
+                <strong style="color: var(--accent-emerald);">5. CAUSA RAÍZ: ¿Por qué los SKU están mal ubicados?</strong><br>
+                Porque AndesHome no posee un WMS moderno con re-slotting dinámico, portal de proveedores ni control maestro de datos.
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         VISTA 6: MATRIZ DE PRIORIZACIÓN DE PROBLEMAS
+         ========================================================================== -->
+    <section id="view-priorizacion" class="diag-view-content">
+        <div class="apqc-table-wrapper">
+            <div style="margin-bottom: 20px;">
+                <span class="inspector-header-tag">MATRIZ MULTICRITERIO DE PRIORIZACIÓN</span>
+                <h3 style="font-size: 1.3rem; font-weight: 800; color: #fff;">
+                    Problemas Críticos Identificados en el Diagnóstico (P-01 a P-06)
+                </h3>
+            </div>
+
+            <table class="apqc-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Problema Diagnosticado</th>
+                        <th>Impacto Financiero / Servicio</th>
+                        <th>Urgencia</th>
+                        <th>Controlabilidad</th>
+                        <th>Prioridad</th>
+                        <th>Iniciativa Asociada</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>P-01</strong></td>
+                        <td>Desalineación de Slotting y 67,6 km/día de caminata inútil</td>
+                        <td>Alto (CLP $585M en viajes)</td>
+                        <td>Alta</td>
+                        <td>Alta</td>
+                        <td><span class="channel-pill peak">CRÍTICA (1)</span></td>
+                        <td><strong>P1: Re-slotting ABC</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>P-02</strong></td>
+                        <td>WMS obsoleto, errores de picking (2,44%) y uso de papel</td>
+                        <td>Alto (CLP $929M en errores)</td>
+                        <td>Alta</td>
+                        <td>Media</td>
+                        <td><span class="channel-pill peak">CRÍTICA (2)</span></td>
+                        <td><strong>P2: WMS NextGen</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>P-03</strong></td>
+                        <td>Inbound desordenado sin citas (Dock-to-Stock 22,6h)</td>
+                        <td>Alto (CLP $146M en demurrage)</td>
+                        <td>Alta</td>
+                        <td>Alta</td>
+                        <td><span class="channel-pill cc">ALTA (3)</span></td>
+                        <td><strong>P3: Portal ASN & YMS</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>P-04</strong></td>
+                        <td>Rutas de última milla ineficientes y 11,5% fallidas</td>
+                        <td>Medio (CLP $16M directo fallas)</td>
+                        <td>Media</td>
+                        <td>Alta</td>
+                        <td><span class="channel-pill cc">ALTA (4)</span></td>
+                        <td><strong>P4: TMS Dinámico</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>P-05</strong></td>
+                        <td>Daños en transporte y embalaje no homologado</td>
+                        <td>Medio (CLP $18M en mermas)</td>
+                        <td>Media</td>
+                        <td>Alta</td>
+                        <td><span class="channel-pill ecom">MEDIA (5)</span></td>
+                        <td><strong>P5: Right-Sizing</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>P-06</strong></td>
+                        <td>Riesgo laboral SST por carga manual &gt;25 kg en D-Bulky</td>
+                        <td>Alto (Fiscalización DT y 53 días perdidos)</td>
+                        <td>Alta</td>
+                        <td>Alta</td>
+                        <td><span class="channel-pill peak">CRÍTICA (6)</span></td>
+                        <td><strong>P5: Mesas Elevadoras</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         VISTA 7: PROPUESTA DE SOLUCIÓN INTEGRAL (EA2 / EA3)
+         ========================================================================== -->
+    <section id="view-propuesta" class="diag-view-content">
+        <div class="solution-portal-2d">
+            <!-- Hero Card de la Propuesta -->
+            <div class="sol-hero-card">
+                <div class="sol-hero-badge">
+                    <span>🚀 PROPUESTA RECOMENDADA • EA2 / EA3</span>
+                </div>
+                <h3 class="sol-hero-title">Rediseño & Optimización Omnicanal CD Pudahuel</h3>
+                <p class="sol-hero-desc">
+                    Estrategia integral de transformación operacional, tecnológica y ergonómica aprobada para resolver el 100% de las causas raíz del colapso CyberDay. Combina 5 iniciativas sinérgicas respetando el techo presupuestario directivo de $850 MM CLP.
+                </p>
+
+                <!-- 4 Cifras Clave del Caso -->
+                <div class="sol-hero-stats">
+                    <div class="sol-stat-box">
+                        <div class="slbl">CAPEX TOTAL (P1-P5)</div>
+                        <div class="sval">$766,8M CLP</div>
+                        <div class="ssub">Incluye 8% reserva ($56,8M) &le; $850M</div>
+                    </div>
+                    <div class="sol-stat-box">
+                        <div class="slbl">VAN PROYECTO (3 AÑOS, 12%)</div>
+                        <div class="sval" style="color: #38bdf8;">$1.289M CLP</div>
+                        <div class="ssub">TIR: 98,4% | B/C: 2,68</div>
+                    </div>
+                    <div class="sol-stat-box">
+                        <div class="slbl">PAYBACK SIMPLE</div>
+                        <div class="sval" style="color: #34d399;">10,7 Meses</div>
+                        <div class="ssub">EBITDA Neto: $856M/año</div>
+                    </div>
+                    <div class="sol-stat-box">
+                        <div class="slbl">PLAZO WBS & IT FREEZE</div>
+                        <div class="sval" style="color: #fbbf24;">24 Semanas</div>
+                        <div class="ssub">Freeze: Sem 21 a 24 (Estabilizado)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cuadrícula de Iniciativas P1 a P5 -->
+            <div>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
+                    <div>
+                        <span class="inspector-header-tag">PORTAFOLIO SINÉRGICO SELECCIONADO</span>
+                        <h4 style="font-size: 1.2rem; font-weight: 800; color: #fff;">Las 5 Iniciativas de Transformación (P1 a P5)</h4>
+                    </div>
+                    <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #34d399; background: rgba(16, 185, 129, 0.15); padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">
+                        Puntaje Multicriterio AHP: 9,25 / 10 (ÓPTIMO)
+                    </div>
+                </div>
+
+                <div class="sol-projects-grid">
+                    <!-- P1 -->
+                    <div class="sol-project-card">
+                        <div>
+                            <div class="sol-card-header">
+                                <span class="sol-card-badge">P1 • QUICK WIN</span>
+                                <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #38bdf8; font-weight: 700;">Sem 1 &ndash; 10</span>
+                            </div>
+                            <h5 class="sol-card-title">Re-slotting ABC Dinámico + 5S + Conteos Cíclicos</h5>
+                            <p class="sol-card-desc">
+                                Reubicación física de 114 SKU desalineados hacia Zona A (Pick Express). Elimina 67,6 km diarios de caminata y reduce en 35% los errores de ubicación.
+                            </p>
+                            <div class="sol-card-metrics">
+                                <div class="m-item">CAPEX: <strong>$85M CLP</strong></div>
+                                <div class="m-item">Ahorro: <strong>$215M/año</strong></div>
+                                <div class="m-item">OPEX: <strong>$12M/año</strong></div>
+                                <div class="m-item">Impacto: <strong>+12,0% OTIF</strong></div>
+                            </div>
+                        </div>
+                        <div class="sol-card-human">
+                            <strong>Impacto Humano:</strong> Devuelve las piernas al operario: camina 64% menos en bodega y reduce drásticamente el dolor lumbar.
+                        </div>
+                    </div>
+
+                    <!-- P2 -->
+                    <div class="sol-project-card">
+                        <div>
+                            <div class="sol-card-header">
+                                <span class="sol-card-badge">P2 • CORE WMS</span>
+                                <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #38bdf8; font-weight: 700;">Sem 5 &ndash; 18</span>
+                            </div>
+                            <h5 class="sol-card-title">Upgrade WMS NextGen + Voice Picking / RF Zebra</h5>
+                            <p class="sol-card-desc">
+                                Sustitución de listas de papel por terminales RF y comandos de voz. Eleva productividad +18% (46,8 a 55,2 lin/HH) y contrae errores de 2,44% a &le;0,3%.
+                            </p>
+                            <div class="sol-card-metrics">
+                                <div class="m-item">CAPEX: <strong>$310M CLP</strong></div>
+                                <div class="m-item">Ahorro: <strong>$385M/año</strong></div>
+                                <div class="m-item">OPEX: <strong>$75M/año</strong></div>
+                                <div class="m-item">Impacto: <strong>+18,5% OTIF</strong></div>
+                            </div>
+                        </div>
+                        <div class="sol-card-human">
+                            <strong>Impacto Humano:</strong> Ojos y manos libres: trabajo sereno sin papeles arrugados ni discusiones por pedidos mal anotados.
+                        </div>
+                    </div>
+
+                    <!-- P3 -->
+                    <div class="sol-project-card">
+                        <div>
+                            <div class="sol-card-header">
+                                <span class="sol-card-badge">P3 • INBOUND & CITAS</span>
+                                <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #38bdf8; font-weight: 700;">Sem 5 &ndash; 14</span>
+                            </div>
+                            <h5 class="sol-card-title">Portal ASN Proveedores & YMS de Citas Digitales</h5>
+                            <p class="sol-card-desc">
+                                Agendamiento web obligatorio en ventanas de 2 horas. Reduce Dock-to-Stock de 22,6h a 4,5h y erradica los $146,3M en multas por sobreestadía (demurrage).
+                            </p>
+                            <div class="sol-card-metrics">
+                                <div class="m-item">CAPEX: <strong>$95M CLP</strong></div>
+                                <div class="m-item">Ahorro: <strong>$170M/año</strong></div>
+                                <div class="m-item">OPEX: <strong>$24M/año</strong></div>
+                                <div class="m-item">Impacto: <strong>+8,0% OTIF</strong></div>
+                            </div>
+                        </div>
+                        <div class="sol-card-human">
+                            <strong>Impacto Humano:</strong> Dignidad para el chofer transportista: descarga en 45 min sin esperas humillantes en la berma exterior.
+                        </div>
+                    </div>
+
+                    <!-- P4 -->
+                    <div class="sol-project-card">
+                        <div>
+                            <div class="sol-card-header">
+                                <span class="sol-card-badge">P4 • TMS & ÚLTIMA MILLA</span>
+                                <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #38bdf8; font-weight: 700;">Sem 11 &ndash; 18</span>
+                            </div>
+                            <h5 class="sol-card-title">TMS Ruteo Dinámico + POD Chofer Móvil</h5>
+                            <p class="sol-card-desc">
+                                Algoritmo de cubicaje dinámico volumétrico y app chofer con foto y firma digital. Reduce entregas fallidas de 11,5% a &le;2,8% ($29.628 / falla).
+                            </p>
+                            <div class="sol-card-metrics">
+                                <div class="m-item">CAPEX: <strong>$150M CLP</strong></div>
+                                <div class="m-item">Ahorro: <strong>$280M/año</strong></div>
+                                <div class="m-item">OPEX: <strong>$48M/año</strong></div>
+                                <div class="m-item">Impacto: <strong>+11,2% OTIF</strong></div>
+                            </div>
+                        </div>
+                        <div class="sol-card-human">
+                            <strong>Impacto Humano:</strong> Certeza y tranquilidad: los repartidores no se pierden en ruta y los clientes reciben su compra a tiempo y sin reclamos.
+                        </div>
+                    </div>
+
+                    <!-- P5 -->
+                    <div class="sol-project-card">
+                        <div>
+                            <div class="sol-card-header">
+                                <span class="sol-card-badge">P5 • ESG & SST</span>
+                                <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #38bdf8; font-weight: 700;">Sem 1 &ndash; 12</span>
+                            </div>
+                            <h5 class="sol-card-title">Right-Sizing Embalajes + Ergonomía D-Bulky</h5>
+                            <p class="sol-card-desc">
+                                4 mesas elevadoras hidráulicas y transpaletas eléctricas en D-Bulky + 6 cajas normalizadas. Cumplimiento 100% de la ley de carga laboral (&le;25 kg).
+                            </p>
+                            <div class="sol-card-metrics">
+                                <div class="m-item">CAPEX: <strong>$70M CLP</strong></div>
+                                <div class="m-item">Ahorro: <strong>$63M/año</strong></div>
+                                <div class="m-item">OPEX: <strong>$18M/año</strong></div>
+                                <div class="m-item">Impacto: <strong>+3,0% OTIF</strong></div>
+                            </div>
+                        </div>
+                        <div class="sol-card-human">
+                            <strong>Impacto Humano:</strong> Salud y seguridad para la vida del trabajador: fin de los levantamientos a pulso de hornos de 42 kg y cero licencias por lumbago.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Barra de Acciones y Vínculo con Torre de Control -->
+            <div class="sol-actions-row">
+                <div>
+                    <h5 style="font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 2px;">¿Deseas probar la sensibilidad financiera o ver el acta directiva formal?</h5>
+                    <p style="font-size: 0.78rem; color: #94a3b8;">La solución recomendada se encuentra plenamente sincronizada con la Torre de Control y el modelo de datos canónico.</p>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button class="btn-action primary" onclick="document.getElementById('sandbox-2d').scrollIntoView({ behavior: 'smooth' })">
+                        <span>Simular en Sandbox 2D &darr;</span>
+                    </button>
+                    <a href="index.html#tab-documento-solucion" class="btn-action secondary">
+                        <span>Ver Documento Oficial Completo &rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN COMÚN: SIMULADOR DIDÁCTICO DEL PORTAFOLIO EN VIVO (SANDBOX 2D)
+         ========================================================================== -->
+    <section id="sandbox-2d" class="sandbox-2d-section">
+        <div class="section-title-wrap">
+            <div>
+                <h2>Laboratorio de Decisión y Portafolio (P1 a P7)</h2>
+                <p>Comprueba cómo el portafolio recomendado responde a los problemas priorizados respetando el presupuesto directivo.</p>
+            </div>
+            <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">
+                TECHO DIRECTIVO: $850 MM CLP
+            </div>
+        </div>
+
+        <div class="sandbox-split-grid">
+            <!-- Lista de Proyectos Interactiva -->
+            <div class="projects-compact-list">
+                <!-- PRESETS INTELIGENTES DE PORTAFOLIO (FASE 2) -->
+                <div class="portfolio-presets-row">
+                    <span style="font-size: 0.72rem; font-family: var(--font-mono); color: var(--text-dim); font-weight: 700;">PRESETS:</span>
+                    <button class="preset-pill-btn opt" onclick="applyPortfolioPreset('optimal')">
+                        ⭐ Recomendado C-Suite (P1-P5 &bull; $766,8M)
+                    </button>
+                    <button class="preset-pill-btn qw" onclick="applyPortfolioPreset('quickwins')">
+                        ⚡ Quick Wins (P1+P5 &bull; $155M)
+                    </button>
+                    <button class="preset-pill-btn over" onclick="applyPortfolioPreset('overbudget')">
+                        ⚠️ Sobregiro (> $850M)
+                    </button>
+                </div>
+
+                <!-- P1 -->
+                <label class="project-item-2d checked">
+                    <div class="p-item-left">
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p1" checked>
+                        <div>
+                            <div class="p-item-name">P1: Re-slotting ABC + 5S + Conteos Cíclicos</div>
+                            <div class="p-item-sub">Reubica 114 SKU desalineados | Elimina 67,6 km/día de caminata</div>
+                        </div>
+                    </div>
+                    <div class="p-item-right">
+                        <div class="p-cost-badge">$85M CLP</div>
+                        <div class="p-impact-tag">+12,0% OTIF</div>
+                    </div>
+                </label>
+
+                <!-- P2 -->
+                <label class="project-item-2d checked">
+                    <div class="p-item-left">
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p2" checked>
+                        <div>
+                            <div class="p-item-name">P2: Upgrade WMS NextGen + Voice Picking / RF</div>
+                            <div class="p-item-sub">Elimina papel | Reduce error de 2,44% a &le;0,3% | +18% velocidad</div>
+                        </div>
+                    </div>
+                    <div class="p-item-right">
+                        <div class="p-cost-badge">$310M CLP</div>
+                        <div class="p-impact-tag">+18,5% OTIF</div>
+                    </div>
+                </label>
+
+                <!-- P3 -->
+                <label class="project-item-2d checked">
+                    <div class="p-item-left">
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p3" checked>
+                        <div>
+                            <div class="p-item-name">P3: Portal ASN & YMS de Citas Proveedores</div>
+                            <div class="p-item-sub">Citas de 2h | Reduce Dock-to-Stock de 22,6h a 4,5h | Cero demurrage</div>
+                        </div>
+                    </div>
+                    <div class="p-item-right">
+                        <div class="p-cost-badge">$95M CLP</div>
+                        <div class="p-impact-tag">+8,0% OTIF</div>
+                    </div>
+                </label>
+
+                <!-- P4 -->
+                <label class="project-item-2d checked">
+                    <div class="p-item-left">
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p4" checked>
+                        <div>
+                            <div class="p-item-name">P4: TMS Ruteo Dinámico + POD Chofer Móvil</div>
+                            <div class="p-item-sub">Algoritmo de cubicaje y app móvil chofer | Fallas &le;3,0%</div>
+                        </div>
+                    </div>
+                    <div class="p-item-right">
+                        <div class="p-cost-badge">$150M CLP</div>
+                        <div class="p-impact-tag">+11,2% OTIF</div>
+                    </div>
+                </label>
+
+                <!-- P5 -->
+                <label class="project-item-2d checked">
+                    <div class="p-item-left">
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p5" checked>
+                        <div>
+                            <div class="p-item-name">P5: Right-Sizing y Ergonomía D-Bulky</div>
+                            <div class="p-item-sub">4 mesas elevadoras hidráulicas | Elimina carga manual &gt;25kg (DT)</div>
+                        </div>
+                    </div>
+                    <div class="p-item-right">
+                        <div class="p-cost-badge">$70M CLP</div>
+                        <div class="p-impact-tag">+3,0% OTIF</div>
+                    </div>
+                </label>
+
+                <!-- P6 Descartado -->
+                <label class="project-item-2d discarded">
+                    <div class="p-item-left">
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p6">
+                        <div>
+                            <div class="p-item-name">P6: Flota Robots AMR / AGV (Descartado)</div>
+                            <div class="p-item-sub">⚠️ Prueba activarlo: Excede el presupuesto máximo de $850M</div>
+                        </div>
+                    </div>
+                    <div class="p-item-right">
+                        <div class="p-cost-badge" style="color: var(--accent-crimson);">$420M CLP</div>
+                        <div class="p-impact-tag" style="color: var(--text-dim);">Excede CAPEX</div>
+                    </div>
+                </label>
+
+                <!-- P7 Postergado -->
+                <label class="project-item-2d discarded">
+                    <div class="p-item-left">
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p7">
+                        <div>
+                            <div class="p-item-name">P7: Planta Solar CD (Postergado a Fase 2)</div>
+                            <div class="p-item-sub">Sostenibilidad diferida sin impacto directo en crisis Cyber</div>
+                        </div>
+                    </div>
+                    <div class="p-item-right">
+                        <div class="p-cost-badge" style="color: var(--accent-amber);">$180M CLP</div>
+                        <div class="p-impact-tag" style="color: var(--text-dim);">Fase 2</div>
+                    </div>
+                </label>
+            </div>
+
+            <!-- Tablero de Restricciones & Retorno -->
+            <div class="live-impact-2d">
+                <div>
+                    <h3 style="font-size: 1.05rem; font-weight: 800; color: #fff; margin-bottom: 16px;">
+                        Control Presupuestario y Retorno
+                    </h3>
+
+                    <!-- Barra CAPEX -->
+                    <div class="gauge-block">
+                        <div class="gauge-title-line">
+                            <span style="color: var(--text-muted);">CAPEX Total Requerido (con 8% reserva):</span>
+                            <span id="sand-capex-2d" style="font-family: var(--font-mono); color: #fff;">$767M CLP</span>
+                        </div>
+                        <div class="gauge-track-2d">
+                            <div id="sand-capex-bar-2d" class="gauge-fill-2d" style="width: 90%; background-color: #10b981;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-dim); margin-top: 4px;">
+                            <span>$0</span>
+                            <span>TECHO MÁXIMO DIRECTIVO: $850M CLP</span>
+                        </div>
+                    </div>
+
+                    <!-- Barra OTIF -->
+                    <div class="gauge-block">
+                        <div class="gauge-title-line">
+                            <span style="color: var(--text-muted);">Nivel de Servicio (OTIF Proyectado):</span>
+                            <span id="sand-otif-2d" style="font-family: var(--font-mono); color: var(--accent-emerald);">96,2%</span>
+                        </div>
+                        <div class="gauge-track-2d">
+                            <div id="sand-otif-bar-2d" class="gauge-fill-2d" style="width: 96.2%; background-color: #10b981;"></div>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-dim); margin-top: 4px;">
+                            <span>Base Crisis: 43,5%</span>
+                            <span>META COMERCIAL: &ge; 96,0%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Cifras Financieras -->
+                <div class="summary-financial-grid">
+                    <div class="fin-tile-2d">
+                        <div class="flbl">EBITDA Neto Anual</div>
+                        <div id="sand-ebitda-2d" class="fval" style="color: var(--accent-emerald);">$856M/año</div>
+                    </div>
+                    <div class="fin-tile-2d">
+                        <div class="flbl">VAN a 3 Años (12%)</div>
+                        <div id="sand-van-2d" class="fval" style="color: var(--accent-cyan);">$1.289M</div>
+                    </div>
+                    <div class="fin-tile-2d">
+                        <div class="flbl">Payback Simple</div>
+                        <div id="sand-payback-2d" class="fval" style="color: #fff;">10,7 meses</div>
+                    </div>
+                    <div class="fin-tile-2d">
+                        <div class="flbl">Plazo Total WBS</div>
+                        <div class="fval" style="color: #c7d2fe;">24 Semanas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CRONOGRAMA MAESTRO WBS GANTT INTERACTIVO (24 SEMANAS) -->
+        <div class="gantt-wbs-container">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+                <div>
+                    <h4>Cronograma Maestro WBS (24 Semanas de Ejecución)</h4>
+                    <p style="font-size: 0.8rem; color: #94a3b8; margin-top: 2px;">Haz clic en cada fase para ver qué zonas y cuadrillas se intervienen en el CD.</p>
+                </div>
+                <div style="font-family: var(--font-mono); font-size: 0.82rem; color: #f59e0b; background: rgba(245, 158, 11, 0.12); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(245, 158, 11, 0.3);">
+                    ⚠️ IT FREEZE: Semanas 21 a 24
+                </div>
+            </div>
+            <div class="gantt-phases-grid">
+                <div class="gantt-phase-bar wbs-interactive-step active" id="wbs-step-1" onclick="highlightWbsPhase(1)">
+                    <div>
+                        <div class="gp-name">Fase 1: Diagnóstico, Slotting &amp; 5S (P1)</div>
+                        <div class="gp-deliv">Re-slotting ABC preliminar, mapa térmico y calibración de andenes.</div>
+                    </div>
+                    <div class="gp-weeks">Semanas 1 &ndash; 4</div>
+                </div>
+                <div class="gantt-phase-bar wbs-interactive-step" id="wbs-step-2" onclick="highlightWbsPhase(2)">
+                    <div>
+                        <div class="gp-name">Fase 2: Implementación Core WMS &amp; ASN Portal (P2 + P3)</div>
+                        <div class="gp-deliv">Integración SAP RFC, terminales RF, portal web de proveedores con citas de 2h.</div>
+                    </div>
+                    <div class="gp-weeks">Semanas 5 &ndash; 12</div>
+                </div>
+                <div class="gantt-phase-bar wbs-interactive-step" id="wbs-step-3" onclick="highlightWbsPhase(3)">
+                    <div>
+                        <div class="gp-name">Fase 3: TMS Ruteo Dinámico &amp; Ergonomía D-Bulky (P4 + P5)</div>
+                        <div class="gp-deliv">App chofer POD, 4 mesas elevadoras hidráulicas y pilotaje en 2 comunas RM.</div>
+                    </div>
+                    <div class="gp-weeks">Semanas 13 &ndash; 18</div>
+                </div>
+                <div class="gantt-phase-bar freeze wbs-interactive-step" id="wbs-step-4" onclick="highlightWbsPhase(4)">
+                    <div>
+                        <div class="gp-name" style="color: #fbbf24;">Fase 4: Go-Live Total &amp; IT FREEZE de Seguridad (Sem 19-24)</div>
+                        <div class="gp-deliv">Pruebas de carga 120% CyberDay. Sem 21-24: Congelamiento de código y estabilización.</div>
+                    </div>
+                    <div class="gp-weeks" style="color: #f59e0b;">Semanas 19 &ndash; 24 (CRÍTICA)</div>
+                </div>
+            </div>
+            <div id="wbs-phase-detail-box" style="margin-top: 14px; background: rgba(16, 185, 129, 0.08); border-left: 3px solid #10b981; padding: 10px 14px; border-radius: 6px; font-size: 0.8rem; color: #cbd5e1;">
+                <strong>📍 Intervención en Planta (Semanas 1 a 4):</strong> Cuadrilla de depuración de datos maestros en pasillos Zona A y Zona C. No detiene la operación diaria.
+            </div>
+        </div>
+
+        <!-- EXPLORADOR VISUAL DE TECNOLOGÍAS TO-BE (FASE 2) -->
+        <div style="margin-top: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <div>
+                    <span class="inspector-header-tag">INGENIERÍA LOGÍSTICA &bull; 5 PALANCAS TECNOLÓGICAS</span>
+                    <h4 style="font-size: 1.15rem; font-weight: 800; color: #fff;">
+                        Explorador Didáctico de Tecnologías: Antes vs Estado To-Be
+                    </h4>
+                </div>
+            </div>
+            <p style="font-size: 0.82rem; color: #94a3b8; margin-bottom: 14px;">
+                Compara las tecnologías implementadas frente a las condiciones precarias de la crisis.
+            </p>
+
+            <div class="tech-cards-grid">
+                <div class="tech-expl-card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                        <span style="font-size: 1.6rem;">🎧</span>
+                        <span class="tech-tag">P2 &bull; WMS NextGen</span>
+                    </div>
+                    <h5 style="font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 4px;">Voice Picking Manos Libres</h5>
+                    <div style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.4;">
+                        <strong>Antes:</strong> Listas de papel arrugadas, digitación lenta (30 seg/línea).<br>
+                        <strong>To-Be:</strong> Auriculares industriales rugerizados y confirmación por voz (8 seg/línea, -99% errores).
+                    </div>
+                </div>
+
+                <div class="tech-expl-card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                        <span style="font-size: 1.6rem;">🦾</span>
+                        <span class="tech-tag">P5 &bull; Ergonomía</span>
+                    </div>
+                    <h5 style="font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 4px;">Mesas Hidráulicas Pantográficas</h5>
+                    <div style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.4;">
+                        <strong>Antes:</strong> Manipulación manual de 42 kg a pulso, riesgo severo de lumbago.<br>
+                        <strong>To-Be:</strong> 4 mesas con pedal hidráulico que ajustan la carga a la altura del tórax (cumplimiento Ley 20.949).
+                    </div>
+                </div>
+
+                <div class="tech-expl-card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                        <span style="font-size: 1.6rem;">📱</span>
+                        <span class="tech-tag">P3 &bull; Inbound</span>
+                    </div>
+                    <h5 style="font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 4px;">Portal ASN con Ventanas de 2h</h5>
+                    <div style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.4;">
+                        <strong>Antes:</strong> Camiones en fila esperando 65 min en portería sin cita.<br>
+                        <strong>To-Be:</strong> Transportistas reservan andén desde su celular; descarga garantizada en 45 min.
+                    </div>
+                </div>
+
+                <div class="tech-expl-card">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                        <span style="font-size: 1.6rem;">🗺️</span>
+                        <span class="tech-tag">P4 &bull; Última Milla</span>
+                    </div>
+                    <h5 style="font-size: 0.95rem; font-weight: 800; color: #fff; margin-bottom: 4px;">TMS Ruteo Dinámico &amp; POD</h5>
+                    <div style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.4;">
+                        <strong>Antes:</strong> Ruteo estático, paquetes mal cubicados, choferes extraviados.<br>
+                        <strong>To-Be:</strong> Algoritmo de cubicaje 3D y app con GPS y prueba de entrega digital (POD).
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         VISTA 8: RESULTADOS OBTENIDOS Y BENEFICIOS CONSOLIDADOS (FASE 3 / EA3)
+         ========================================================================== -->
+    <section id="view-resultados" class="diag-view-content">
+        <div class="results-view-2d">
+            <!-- Selector Didáctico de Estado: Transformación Before / After -->
+            <div class="transf-toggle-bar">
+                <span class="transf-title">🔄 Simulador de Estado CD Pudahuel:</span>
+                <button class="transf-btn" id="transf-btn-before" onclick="toggleTransformationView('before')">
+                    ❌ Estado Crisis (As-Is Mayo 2026)
+                </button>
+                <button class="transf-btn active" id="transf-btn-after" onclick="toggleTransformationView('after')">
+                    ✨ Estado Optimizado (To-Be Post P1-P5)
+                </button>
+                <span style="font-size: 0.72rem; color: #94a3b8; margin-left: auto;">
+                    Compara métricas operacionales, de personas y financieras con 1 clic.
+                </span>
+            </div>
+
+            <!-- Hero Ejecutivo de Resultados -->
+            <div class="results-hero-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 14px; margin-bottom: 20px;">
+                    <div>
+                        <div style="font-size: 0.76rem; font-family: var(--font-mono); color: #34d399; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">
+                            FASE 03 &bull; EA3: RESULTADOS OBTENIDOS, RETORNO &amp; ESG
+                        </div>
+                        <h2 style="font-size: 1.8rem; font-weight: 900; color: #ffffff; margin-top: 4px;">
+                            Impacto Transformador: De la Crisis a la Excelencia Operacional
+                        </h2>
+                        <p style="font-size: 0.88rem; color: #cbd5e1; max-width: 860px; margin-top: 6px; line-height: 1.5;">
+                            La implementación sinérgica del Portafolio P1-P5 revierte de forma definitiva el colapso del CyberDay Mayo 2026, blindando el CD Pudahuel contra quiebres de servicio, recuperando la rentabilidad y dignificando las condiciones de trabajo de los operarios.
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button class="btn-action primary" onclick="setMode2D('optimized')" style="background: #10b981; color: #022c22; font-weight: 800;">
+                            ✨ Ver Estado To-Be en el Plano 2D
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4 Pilares de Impacto Cuantificado -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px;">
+                    <div style="background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); padding: 16px; border-radius: 12px;">
+                        <div style="font-size: 0.72rem; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Nivel de Servicio (OTIF)</div>
+                        <div id="transf-kpi-otif" style="font-size: 2.1rem; font-weight: 900; font-family: var(--font-mono); color: #34d399; margin: 4px 0;">96,2%</div>
+                        <div id="transf-sub-otif" style="font-size: 0.75rem; color: #a7f3d0;">+52,7 pp vs Crisis (Base: 43,5%)</div>
+                    </div>
+
+                    <div style="background: rgba(56, 189, 248, 0.12); border: 1px solid rgba(56, 189, 248, 0.35); padding: 16px; border-radius: 12px;">
+                        <div style="font-size: 0.72rem; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Backlog de Pedidos</div>
+                        <div id="transf-kpi-backlog" style="font-size: 2.1rem; font-weight: 900; font-family: var(--font-mono); color: #38bdf8; margin: 4px 0;">0 Pedidos</div>
+                        <div id="transf-sub-backlog" style="font-size: 0.75rem; color: #bae6fd;">15.387 pedidos represados erradicados</div>
+                    </div>
+
+                    <div style="background: rgba(168, 85, 247, 0.12); border: 1px solid rgba(168, 85, 247, 0.35); padding: 16px; border-radius: 12px;">
+                        <div style="font-size: 0.72rem; color: #94a3b8; font-weight: 700; text-transform: uppercase;">VAN a 3 Años (12%)</div>
+                        <div id="transf-kpi-van" style="font-size: 2.1rem; font-weight: 900; font-family: var(--font-mono); color: #c084fc; margin: 4px 0;">$1.289M</div>
+                        <div id="transf-sub-van" style="font-size: 0.75rem; color: #e9d5ff;">Payback 10,7 meses &bull; TIR 98,4%</div>
+                    </div>
+
+                    <div style="background: rgba(245, 158, 11, 0.12); border: 1px solid rgba(245, 158, 11, 0.35); padding: 16px; border-radius: 12px;">
+                        <div style="font-size: 0.72rem; color: #94a3b8; font-weight: 700; text-transform: uppercase;">Fatiga &bull; Recorrido Diario</div>
+                        <div id="transf-kpi-km" style="font-size: 2.1rem; font-weight: 900; font-family: var(--font-mono); color: #fbbf24; margin: 4px 0;">14,2 km</div>
+                        <div id="transf-sub-km" style="font-size: 0.75rem; color: #fde68a;">-79% fatiga física (Base: 67,6 km)</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Matriz Comparativa Rigurosa Antes vs Después -->
+            <div>
+                <h3 style="font-size: 1.25rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">
+                    Matriz Comparativa Rigurosa: Línea Base As-Is vs Estado To-Be
+                </h3>
+                <p style="font-size: 0.84rem; color: #94a3b8; margin-bottom: 16px;">
+                    Contraste cuantitativo de todas las variables operacionales, financieras y de servicio del caso AndesHome.
+                </p>
+
+                <div class="results-comparison-grid">
+                    <!-- Columna ANTES (Crisis As-Is) -->
+                    <div class="comparison-column before">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid rgba(244,63,94,0.3); padding-bottom: 10px;">
+                            <span style="font-weight: 800; font-size: 0.95rem; color: #f43f5e;">🔴 LÍNEA BASE AS-IS (CRISIS CYBERDAY)</span>
+                            <span style="font-size: 0.72rem; font-family: var(--font-mono); color: #fca5a5; background: rgba(244,63,94,0.2); padding: 2px 8px; border-radius: 4px;">Mayo 2026</span>
+                        </div>
+
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Nivel de Servicio OTIF CyberDay</span>
+                            <span class="cm-val" style="color: #f43f5e;">43,5%</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">OTIF Mensual Consolidado</span>
+                            <span class="cm-val" style="color: #f43f5e;">80,9%</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">OTIF Click &amp; Collect (Retiro Tienda)</span>
+                            <span class="cm-val" style="color: #f43f5e;">11,5% (Colapso)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Pedidos en Backlog (Represados)</span>
+                            <span class="cm-val" style="color: #f43f5e;">15.387 pedidos (4,32 días)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Tiempo de Ciclo Inbound (Dock-to-Stock)</span>
+                            <span class="cm-val" style="color: #f43f5e;">22,6 horas</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Espera de Camiones en Portería</span>
+                            <span class="cm-val" style="color: #f43f5e;">65,2 minutos</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Multas por Demurrage (Sobreestadía)</span>
+                            <span class="cm-val" style="color: #f43f5e;">$146,3M CLP/año</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Mismatches Críticos de Slotting</span>
+                            <span class="cm-val" style="color: #f43f5e;">114 SKU (25,3% del catálogo)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Desplazamiento Diario en Picking</span>
+                            <span class="cm-val" style="color: #f43f5e;">67,6 km/día (23,5 HH perdidas)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Precisión de Inventario (IRA)</span>
+                            <span class="cm-val" style="color: #f43f5e;">97,74% ($388,9M descuadre)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Costo Unitario por Pedido Fallido</span>
+                            <span class="cm-val" style="color: #f43f5e;">$29.628 CLP (+247% sobrecosto)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Reclamos Formales SERNAC Mensuales</span>
+                            <span class="cm-val" style="color: #f43f5e;">1.240 reclamos</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Tasa Accidentabilidad SST (100k HH)</span>
+                            <span class="cm-val" style="color: #f43f5e;">83,8 (53 días perdidos/año)</span>
+                        </div>
+                    </div>
+
+                    <!-- Columna DESPUÉS (Resultados To-Be) -->
+                    <div class="comparison-column after">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; border-bottom: 1px solid rgba(16,185,129,0.3); padding-bottom: 10px;">
+                            <span style="font-weight: 800; font-size: 0.95rem; color: #10b981;">🟢 RESULTADOS OBTENIDOS (ESTADO TO-BE)</span>
+                            <span style="font-size: 0.72rem; font-family: var(--font-mono); color: #6ee7b7; background: rgba(16,185,129,0.2); padding: 2px 8px; border-radius: 4px;">Post-WBS 24 Semanas</span>
+                        </div>
+
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Nivel de Servicio OTIF CyberDay</span>
+                            <span class="cm-val" style="color: #10b981;">95,4% (+51,9 pp)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">OTIF Mensual Consolidado</span>
+                            <span class="cm-val" style="color: #10b981;">96,2% (Meta &ge; 96% Cumplida)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">OTIF Click &amp; Collect (Retiro Tienda)</span>
+                            <span class="cm-val" style="color: #10b981;">96,8% (Integración Omnicanal)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Pedidos en Backlog (Represados)</span>
+                            <span class="cm-val" style="color: #10b981;">0 pedidos (Flujo en 18h)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Tiempo de Ciclo Inbound (Dock-to-Stock)</span>
+                            <span class="cm-val" style="color: #10b981;">4,5 horas (-80,1%)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Espera de Camiones en Portería</span>
+                            <span class="cm-val" style="color: #10b981;">12,0 minutos (-81,6%)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Multas por Demurrage (Sobreestadía)</span>
+                            <span class="cm-val" style="color: #10b981;">$0 CLP/año (100% Citas ASN)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Mismatches Críticos de Slotting</span>
+                            <span class="cm-val" style="color: #10b981;">0 SKU (Re-slotting ABC Dinámico)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Desplazamiento Diario en Picking</span>
+                            <span class="cm-val" style="color: #10b981;">14,2 km/día (-79,0% de esfuerzo)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Precisión de Inventario (IRA)</span>
+                            <span class="cm-val" style="color: #10b981;">99,85% (Conteo Cíclico WMS)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Costo Unitario por Pedido Fallido</span>
+                            <span class="cm-val" style="color: #10b981;">$8.532 CLP (Falla cae a &le;2,8%)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Reclamos Formales SERNAC Mensuales</span>
+                            <span class="cm-val" style="color: #10b981;">14 reclamos (-98,9%)</span>
+                        </div>
+                        <div class="comparison-metric-row">
+                            <span class="cm-lbl">Tasa Accidentabilidad SST (100k HH)</span>
+                            <span class="cm-val" style="color: #10b981;">0 incidentes (4 Mesas Hidráulicas)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Análisis de Sensibilidad y Escenarios Directivos -->
+            <div>
+                <h3 style="font-size: 1.25rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">
+                    Análisis de Robustez Directiva: 3 Escenarios de Sensibilidad
+                </h3>
+                <p style="font-size: 0.84rem; color: #94a3b8; margin-bottom: 16px;">
+                    Evaluación financiera y de servicio del portafolio bajo distintas condiciones de adopción del cambio y demanda comercial.
+                </p>
+
+                <div class="scenario-cards-grid">
+                    <!-- Escenario Pesimista -->
+                    <div class="scenario-card">
+                        <div>
+                            <div style="font-size: 0.72rem; font-family: var(--font-mono); color: #f59e0b; font-weight: 800; text-transform: uppercase;">
+                                ESCENARIO CONSERVADOR
+                            </div>
+                            <h4 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin: 4px 0 10px 0;">
+                                Adopción Parcial (65%)
+                            </h4>
+                            <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4; margin-bottom: 14px;">
+                                Curva de adopción del WMS más lenta y resistencia moderada de transportistas externos al portal ASN.
+                            </p>
+                            <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.8rem;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: #94a3b8;">OTIF Proyectado:</span>
+                                    <strong style="color: #f59e0b; font-family: var(--font-mono);">91,5%</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: #94a3b8;">VAN (3 Años, 12%):</span>
+                                    <strong style="color: #fff; font-family: var(--font-mono);">$742M CLP</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: #94a3b8;">Payback:</span>
+                                    <strong style="color: #fff; font-family: var(--font-mono);">16,4 meses</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 14px; padding: 8px; background: rgba(245,158,11,0.08); border-radius: 6px; font-size: 0.73rem; color: #fcd34d;">
+                            ✓ Proyecto viable y con retorno positivo incluso en caso de fricción en la gestión del cambio.
+                        </div>
+                    </div>
+
+                    <!-- Escenario Base -->
+                    <div class="scenario-card base">
+                        <div>
+                            <div style="font-size: 0.72rem; font-family: var(--font-mono); color: #10b981; font-weight: 800; text-transform: uppercase;">
+                                PLAN MAESTRO CENTRAL (RECOMENDADO)
+                            </div>
+                            <h4 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin: 4px 0 10px 0;">
+                                Portafolio Óptimo P1-P5 (85%)
+                            </h4>
+                            <p style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.4; margin-bottom: 14px;">
+                                Ejecución disciplinada del cronograma de 24 semanas con IT Freeze en semanas 21 a 24 y plan ADKAR.
+                            </p>
+                            <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.8rem;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: #94a3b8;">OTIF Proyectado:</span>
+                                    <strong style="color: #34d399; font-family: var(--font-mono);">96,2% (Meta Superada)</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: #94a3b8;">VAN (3 Años, 12%):</span>
+                                    <strong style="color: #38bdf8; font-family: var(--font-mono);">$1.289M CLP</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: #94a3b8;">Payback:</span>
+                                    <strong style="color: #fff; font-family: var(--font-mono);">10,7 meses</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 14px; padding: 8px; background: rgba(16,185,129,0.12); border-radius: 6px; font-size: 0.73rem; color: #a7f3d0;">
+                            ⭐ Máxima rentabilidad y balance técnico. Cumple techo directivo con $83,2M de holgura.
+                        </div>
+                    </div>
+
+                    <!-- Escenario Optimista -->
+                    <div class="scenario-card">
+                        <div>
+                            <div style="font-size: 0.72rem; font-family: var(--font-mono); color: #38bdf8; font-weight: 800; text-transform: uppercase;">
+                                ESCENARIO DE EXCELENCIA
+                            </div>
+                            <h4 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin: 4px 0 10px 0;">
+                                Alta Adopción (95%) + Demanda +25%
+                            </h4>
+                            <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.4; margin-bottom: 14px;">
+                                Integración fluida con carriers 3PL, cross-docking ágil y aprovechamiento total del cubicaje TMS.
+                            </p>
+                            <div style="display: flex; flex-direction: column; gap: 6px; font-size: 0.8rem;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: #94a3b8;">OTIF Proyectado:</span>
+                                    <strong style="color: #38bdf8; font-family: var(--font-mono);">98,1%</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: #94a3b8;">VAN (3 Años, 12%):</span>
+                                    <strong style="color: #fff; font-family: var(--font-mono);">$1.645M CLP</strong>
+                                </div>
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span style="color: #94a3b8;">Payback:</span>
+                                    <strong style="color: #fff; font-family: var(--font-mono);">8,2 meses</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 14px; padding: 8px; background: rgba(56,189,248,0.08); border-radius: 6px; font-size: 0.73rem; color: #bae6fd;">
+                            🚀 Transforma el CD Pudahuel en benchmark logístico regional para retail omnicanal.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Beneficios Humanos, Clima Laboral y ESG -->
+            <div>
+                <h3 style="font-size: 1.25rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">
+                    Dignificación Laboral, Salud en el Trabajo y Sostenibilidad ESG
+                </h3>
+                <p style="font-size: 0.84rem; color: #94a3b8; margin-bottom: 16px;">
+                    El plan no solo optimiza indicadores contables: transforma la realidad de las personas en el centro de distribución.
+                </p>
+
+                <div class="human-esg-grid">
+                    <div class="human-esg-card">
+                        <div style="font-size: 1.5rem; margin-bottom: 8px;">🦾</div>
+                        <h4 style="font-size: 0.95rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">
+                            Erradicación de Sobreesfuerzo Crítico
+                        </h4>
+                        <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.5;">
+                            Se instalaron 4 mesas elevadoras hidráulicas en Zona D-Bulky y transpaletas eléctricas. Cero levantamiento manual sobre 25 kg a pulso, garantizando cumplimiento de la <strong>Ley 20.949</strong> y eliminando los 53 días perdidos anuales por licencias médicas músculo-esqueléticas.
+                        </p>
+                    </div>
+
+                    <div class="human-esg-card">
+                        <div style="font-size: 1.5rem; margin-bottom: 8px;">🎧</div>
+                        <h4 style="font-size: 0.95rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">
+                            Picking Manos Libres y Calidad de Vida
+                        </h4>
+                        <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.5;">
+                            La tecnología Voice Picking y terminales RF elimina las listas de papel arrugadas y la digitación manual. Los preparadores trabajan con postura erguida, menor estrés visual y finalizan su jornada sin horas extras forzosas.
+                        </p>
+                    </div>
+
+                    <div class="human-esg-card">
+                        <div style="font-size: 1.5rem; margin-bottom: 8px;">🚛</div>
+                        <h4 style="font-size: 0.95rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">
+                            Trato Digno a la Cadena de Transporte
+                        </h4>
+                        <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.5;">
+                            El Portal ASN y citas de andén eliminó las esperas humillantes de más de una hora a la intemperie en Pudahuel. Los choferes llegan a una ventana garantizada de 2 horas y descargan en 45 minutos, restableciendo la confianza con los proveedores.
+                        </p>
+                    </div>
+
+                    <div class="human-esg-card">
+                        <div style="font-size: 1.5rem; margin-bottom: 8px;">🌱</div>
+                        <h4 style="font-size: 0.95rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">
+                            Sostenibilidad Ambiental y Huella de Carbono
+                        </h4>
+                        <p style="font-size: 0.78rem; color: #94a3b8; line-height: 1.5;">
+                            El ruteo dinámico con cubicaje 3D en el TMS redujo 42.000 km anuales recorridos por camiones en la Región Metropolitana. Se ahorran 18,5 toneladas de CO2 equivalente al año, alineando a AndesHome con los estándares de reporte corporativo ESG.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Infografía Didáctica de Equivalencias Humanas y Sostenibilidad ESG -->
+            <div style="background: rgba(15, 23, 42, 0.75); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 14px; padding: 22px; margin-bottom: 24px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <div style="font-size: 0.74rem; font-family: var(--font-mono); color: #34d399; font-weight: 700; text-transform: uppercase;">
+                            IMPACTO HUMANO &amp; SOSTENIBILIDAD ESG EN LA VIDA REAL
+                        </div>
+                        <h3 style="font-size: 1.25rem; font-weight: 800; color: #ffffff; margin-top: 4px;">
+                            Equivalencias Didácticas: ¿Qué significan estos números en el mundo real?
+                        </h3>
+                    </div>
+                    <span style="font-size: 0.75rem; background: rgba(16, 185, 129, 0.15); color: #6ee7b7; padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">
+                        🌱 Triple Impacto: Económico, Operacional y Social
+                    </span>
+                </div>
+
+                <div class="esg-equivalents-grid">
+                    <div class="esg-eq-card">
+                        <div class="esg-eq-icon">🇨🇱</div>
+                        <div class="esg-eq-metric">19.500 km</div>
+                        <div class="esg-eq-label">Ahorro Anual de Recorrido a Pie</div>
+                        <div class="esg-eq-equiv">
+                            Equivale a recorrer <strong>4,5 veces todo Chile continental</strong> de Arica a Punta Arenas, ahorrado del desgaste físico de los operarios.
+                        </div>
+                    </div>
+
+                    <div class="esg-eq-card">
+                        <div class="esg-eq-icon">🌳</div>
+                        <div class="esg-eq-metric">18,5 Ton CO₂</div>
+                        <div class="esg-eq-label">Reducción de Emisiones Transporte</div>
+                        <div class="esg-eq-equiv">
+                            Equivale al carbono absorbido anualmente por <strong>840 árboles nativos</strong> en los bosques templados de Chile por ruteo óptimo de camiones.
+                        </div>
+                    </div>
+
+                    <div class="esg-eq-card">
+                        <div class="esg-eq-icon">🩺</div>
+                        <div class="esg-eq-metric">0 Licencias</div>
+                        <div class="esg-eq-label">Salud Ocupacional y Ergonomía</div>
+                        <div class="esg-eq-equiv">
+                            Eliminación total de licencias por lumbalgias y hernias discales gracias a mesas elevadoras hidráulicas y límite de estiba a 1,70 m.
+                        </div>
+                    </div>
+
+                    <div class="esg-eq-card">
+                        <div class="esg-eq-icon">👥</div>
+                        <div class="esg-eq-metric">250 Horas</div>
+                        <div class="esg-eq-label">Capacitación y Crecimiento Laboral</div>
+                        <div class="esg-eq-equiv">
+                            18 operarios promovidos a <strong>Superusuarios Logísticos</strong> bilingües en WMS y Voice Picking bajo el modelo ADKAR de gestión de cambio.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Acceso a Simulador Completo y Conclusiones -->
+            <div class="sol-actions-row">
+                <div>
+                    <h4 style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-bottom: 4px;">
+                        ¿Deseas profundizar en las simulaciones interactivas y descargar reportes?
+                    </h4>
+                    <p style="font-size: 0.8rem; color: #94a3b8; margin: 0;">
+                        Accede a la Suite de Control Operacional donde puedes calibrar en tiempo real proyectos, costos y parámetros logísticos.
+                    </p>
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn-action secondary" onclick="window.openKeynote2D(1)">
+                        🖥️ Iniciar Presentación Ejecutiva
+                    </button>
+                    <a href="index.html#results" class="btn-action primary" style="background: linear-gradient(135deg, #10b981, #059669); color: #ffffff; font-weight: 800; text-decoration: none;">
+                        📊 Abrir Suite de Control Completa &rarr;
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================================================
+         MODAL KEYNOTE 2D EJECUTIVO
+         ========================================================================== -->
+    <div id="keynote-2d-modal" class="keynote-modal-2d">
+        <div class="keynote-window">
+            <div class="keynote-header">
+                <div style="font-weight: 800; font-size: 0.95rem; color: #fff;">
+                    ANDESHOME CHILE | PRESENTACIÓN EJECUTIVA 2D
+                </div>
+                <button class="btn-action secondary" onclick="closeKeynote2D()" style="padding: 4px 10px;">Cerrar (Esc)</button>
+            </div>
+
+            <!-- Diapositiva 1 -->
+            <div id="kn2d-slide-1" class="keynote-slide-view active">
+                <div style="font-size: 0.75rem; color: var(--accent-cyan); font-family: var(--font-mono); font-weight: 700; margin-bottom: 6px;">
+                    01 / 05 — CRISIS OPERACIONAL EN CYBERDAY
+                </div>
+                <h2 style="font-size: 2rem; font-weight: 900; margin-bottom: 12px; color: #fff;">Colapso del CD Pudahuel</h2>
+                <p style="color: var(--text-muted); margin-bottom: 24px;">La saturación del 96,4% de capacidad en racks provocó un estrangulamiento masivo del flujo logístico.</p>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+                    <div style="background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.3); padding: 18px; border-radius: 12px;">
+                        <div style="font-size: 2.2rem; font-weight: 900; font-family: var(--font-mono); color: var(--accent-crimson);">43,5%</div>
+                        <div style="font-weight: 700; color: #fff;">OTIF CyberDay</div>
+                        <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 4px;">Click & Collect cayó al 11,5%.</div>
+                    </div>
+                    <div style="background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.3); padding: 18px; border-radius: 12px;">
+                        <div style="font-size: 2.2rem; font-weight: 900; font-family: var(--font-mono); color: var(--accent-crimson);">15.387</div>
+                        <div style="font-weight: 700; color: #fff;">Pedidos Backlog</div>
+                        <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 4px;">4,32 días de demanda pendiente.</div>
+                    </div>
+                    <div style="background: rgba(244, 63, 94, 0.1); border: 1px solid rgba(244, 63, 94, 0.3); padding: 18px; border-radius: 12px;">
+                        <div style="font-size: 2.2rem; font-weight: 900; font-family: var(--font-mono); color: var(--accent-crimson);">$29.628</div>
+                        <div style="font-weight: 700; color: #fff;">Costo por Pedido Fallido</div>
+                        <div style="font-size: 0.75rem; color: #94a3b8; margin-top: 4px;">+247% sobre costo de pedido cumplido.</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diapositiva 2 -->
+            <div id="kn2d-slide-2" class="keynote-slide-view">
+                <div style="font-size: 0.75rem; color: var(--accent-cyan); font-family: var(--font-mono); font-weight: 700; margin-bottom: 6px;">
+                    02 / 05 — CAUSAS RAÍZ EN EL PLANO DE PLANTA
+                </div>
+                <h2 style="font-size: 2rem; font-weight: 900; margin-bottom: 12px; color: #fff;">El Diagrama de Espagueti (67,6 km/día)</h2>
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); padding: 14px; border-radius: 10px;">
+                        <strong style="color: var(--accent-amber);">1. Slotting Mismatch (Zona C):</strong> 12 SKU de alta demanda ubicados a 118 metros obligan a los preparadores a cruzar todo el CD, generando 23,5 Horas-Hombre de caminata inútil diaria.
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); padding: 14px; border-radius: 10px;">
+                        <strong style="color: var(--accent-crimson);">2. Riesgo Crítico SST (Zona D-Bulky):</strong> 38 SKU &gt;25 kg levantados a pulso sin mesas hidráulicas (violación norma Dirección del Trabajo).
+                    </div>
+                    <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--border-subtle); padding: 14px; border-radius: 10px;">
+                        <strong style="color: var(--accent-cyan);">3. Inbound sin Citas (Dock-to-Stock 22,6h):</strong> Solo 43% de camiones con ASN y citas de andén, causando esperas de 65 minutos y $146,3M en demurrage.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diapositiva 3 -->
+            <div id="kn2d-slide-3" class="keynote-slide-view">
+                <div style="font-size: 0.75rem; color: var(--accent-cyan); font-family: var(--font-mono); font-weight: 700; margin-bottom: 6px;">
+                    03 / 05 — PORTAFOLIO DE SOLUCIÓN P1 A P5
+                </div>
+                <h2 style="font-size: 2rem; font-weight: 900; margin-bottom: 10px; color: #fff;">Inversión Responsable: CAPEX $766,8 MM CLP</h2>
+                <p style="color: var(--text-muted); margin-bottom: 16px;">Portafolio seleccionado bajo Matriz Multicriterio AHP. Protege el capital respetando el techo de $850M.</p>
+                <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px;">
+                    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); padding: 12px; border-radius: 10px; text-align: center;">
+                        <div style="color: var(--accent-cyan); font-weight: 800;">P1</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #fff; margin: 4px 0;">Re-Slotting</div>
+                        <div style="font-size: 0.72rem; color: var(--accent-emerald); font-family: var(--font-mono);">$85M</div>
+                    </div>
+                    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); padding: 12px; border-radius: 10px; text-align: center;">
+                        <div style="color: var(--accent-cyan); font-weight: 800;">P2</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #fff; margin: 4px 0;">WMS Voice</div>
+                        <div style="font-size: 0.72rem; color: var(--accent-emerald); font-family: var(--font-mono);">$310M</div>
+                    </div>
+                    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); padding: 12px; border-radius: 10px; text-align: center;">
+                        <div style="color: var(--accent-cyan); font-weight: 800;">P3</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #fff; margin: 4px 0;">Portal ASN</div>
+                        <div style="font-size: 0.72rem; color: var(--accent-emerald); font-family: var(--font-mono);">$95M</div>
+                    </div>
+                    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); padding: 12px; border-radius: 10px; text-align: center;">
+                        <div style="color: var(--accent-cyan); font-weight: 800;">P4</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #fff; margin: 4px 0;">TMS Ruteo</div>
+                        <div style="font-size: 0.72rem; color: var(--accent-emerald); font-family: var(--font-mono);">$150M</div>
+                    </div>
+                    <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-subtle); padding: 12px; border-radius: 10px; text-align: center;">
+                        <div style="color: var(--accent-cyan); font-weight: 800;">P5</div>
+                        <div style="font-weight: 800; font-size: 0.82rem; color: #fff; margin: 4px 0;">Ergonomía</div>
+                        <div style="font-size: 0.72rem; color: var(--accent-emerald); font-family: var(--font-mono);">$70M</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diapositiva 4 -->
+            <div id="kn2d-slide-4" class="keynote-slide-view">
+                <div style="font-size: 0.75rem; color: var(--accent-cyan); font-family: var(--font-mono); font-weight: 700; margin-bottom: 6px;">
+                    04 / 05 — RETORNO DE LA INVERSIÓN (C-SUITE)
+                </div>
+                <h2 style="font-size: 2rem; font-weight: 900; margin-bottom: 12px; color: #fff;">Business Case Financiero</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: center;">
+                    <div style="background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); padding: 22px; border-radius: 14px;">
+                        <div style="font-size: 0.8rem; color: var(--text-muted);">VALOR ACTUAL NETO (VAN 3 AÑOS, 12%)</div>
+                        <div style="font-size: 2.6rem; font-weight: 900; font-family: var(--font-mono); color: var(--accent-emerald);">$1.289M</div>
+                        <div style="font-size: 0.78rem; color: #94a3b8; margin-top: 4px;">Tasa Interna de Retorno (TIR): 98,4%.</div>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">EBITDA Neto Anual:</span>
+                            <strong style="color: var(--accent-emerald); font-family: var(--font-mono);">$856,1M CLP</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">Payback de la Inversión:</span>
+                            <strong style="color: var(--accent-cyan); font-family: var(--font-mono);">10,7 Meses</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 8px;">
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">Holgura vs Presupuesto:</span>
+                            <strong style="color: #fff; font-family: var(--font-mono);">$83,2M bajo el techo</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Diapositiva 5 -->
+            <div id="kn2d-slide-5" class="keynote-slide-view">
+                <div style="font-size: 0.75rem; color: var(--accent-cyan); font-family: var(--font-mono); font-weight: 700; margin-bottom: 6px;">
+                    05 / 05 — DECISIÓN Y ROADMAP TÁCTICO
+                </div>
+                <h2 style="font-size: 2rem; font-weight: 900; margin-bottom: 12px; color: #fff;">Plan Maestro de 24 Semanas</h2>
+                <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); padding: 18px; border-radius: 12px; margin-bottom: 20px;">
+                    <h4 style="color: var(--accent-cyan); font-size: 1rem; margin-bottom: 6px;">Decisiones Inmediatas Recomendadas:</h4>
+                    <p style="color: #cbd5e1; font-size: 0.88rem; line-height: 1.6;">
+                        1. <strong>Aprobar el presupuesto de $766,8 MM CLP</strong> para liberar desembolsos de licencias e ingeniería.<br>
+                        2. <strong>Iniciar la Fase 1 en Octubre 2026</strong> (Saneamiento del maestro de SKU y conteos cíclicos).<br>
+                        3. <strong>Respetar el Freeze de TI de Semana 10</strong>, completando el go-live 12 semanas antes del CyberDay 2027.
+                    </p>
+                </div>
+                <button class="btn-action primary" onclick="closeKeynote2D()" style="width: 100%; justify-content: center;">
+                    Cerrar y Volver al Diagnóstico Interactivo
+                </button>
+            </div>
+
+            <div class="keynote-footer">
+                <div id="kn2d-ind" style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--text-muted);">Diapositiva 1 de 5</div>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn-action secondary" onclick="changeKeynote2D(-1)">&larr; Anterior</button>
+                    <button class="btn-action primary" onclick="changeKeynote2D(1)">Siguiente &rarr;</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="andeshome-store.js"></script>
+    <script src="landing-2d.js"></script>
+</body>
+</html>

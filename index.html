@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AndesHome Chile S.A. | Control Tower & Dashboard de Diagnóstico (EA1/EA2/EA3)</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Chart.js for data visualization -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dark-theme">
+
+    <!-- Top Navigation Header -->
+    <header class="app-header">
+        <div class="brand-container">
+            <div class="brand-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            </div>
+            <div>
+                <h1 class="brand-title">ANDESHOME CHILE S.A.</h1>
+                <p class="brand-subtitle">Control Tower, Diagnóstico (EA1) & Propuesta de Solución (EA2/EA3)</p>
+            </div>
+        </div>
+
+        <div class="header-status">
+            <!-- CTA Button to 2D Blueprint Landing Page -->
+            <a href="landing.html" class="cta-deck-btn" style="background: linear-gradient(135deg, #0284c7, #2563eb); text-decoration: none;">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                <span>📐 PLANO 2D & PRESENTACIÓN</span>
+            </a>
+
+            <!-- CTA Button to C-Suite Presentation Deck -->
+            <button class="cta-deck-btn" onclick="openExecutiveDeck()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                <span>💼 MODO DIRECTORIO (C-SUITE PITCH)</span>
+            </button>
+
+            <!-- CTA Button to Solution Proposal -->
+            <button class="cta-proposal-btn" onclick="openSolutionProposal()" title="Abrir Propuesta de Solución y Plan de Implementación (EA2 / EA3)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                </svg>
+                <span>PROPUESTA DE SOLUCIÓN</span>
+                <span class="cta-proposal-badge">EA2 / EA3</span>
+            </button>
+
+            <div class="status-pill critical">
+                <span class="status-dot pulse"></span>
+                <span>ESTADO CD: ALERTA CRÍTICA (PEAK BACKLOG)</span>
+            </div>
+            <div class="date-badge">18 Semanas | Junio 2026</div>
+        </div>
+    </header>
+
+    <!-- Top Key Performance Metrics Strip -->
+    <section class="kpi-strip">
+        <div class="kpi-card danger">
+            <div class="kpi-header">
+                <span class="kpi-label">OTIF Mensual (Jun 2026)</span>
+                <span class="kpi-badge negative">-15.1 pp vs Meta</span>
+            </div>
+            <div class="kpi-value-container">
+                <span class="kpi-value">80,9%</span>
+                <span class="kpi-meta">Peak Cyber Real: <strong>43,5%</strong></span>
+            </div>
+            <div class="kpi-bar"><div class="kpi-fill danger" style="width: 80.9%;"></div></div>
+            <div class="kpi-target">Meta Objetivo: 96,0%</div>
+        </div>
+
+        <div class="kpi-card danger">
+            <div class="kpi-header">
+                <span class="kpi-label">Backlog Acumulado</span>
+                <span class="kpi-badge negative">+222x desde Enero</span>
+            </div>
+            <div class="kpi-value-container">
+                <span class="kpi-value">15.387</span>
+                <span class="kpi-unit">pedidos</span>
+            </div>
+            <div class="kpi-meta">Equivale a <strong>4,32 días</strong> de demanda continua</div>
+            <div class="kpi-target">Demanda Diaria Promedio: 3.560 ped/día</div>
+        </div>
+
+        <div class="kpi-card warning">
+            <div class="kpi-header">
+                <span class="kpi-label">Costo por Pedido</span>
+                <span class="kpi-badge negative">+34,7% incremento</span>
+            </div>
+            <div class="kpi-value-container">
+                <span class="kpi-value">$7.920</span>
+                <span class="kpi-unit">CLP</span>
+            </div>
+            <div class="kpi-meta">Pedido Fallido: <strong>$29.628 CLP</strong> (+247%)</div>
+            <div class="kpi-target">Meta Operativa: $5.675 CLP (-12%)</div>
+        </div>
+
+        <div class="kpi-card warning">
+            <div class="kpi-header">
+                <span class="kpi-label">Dock-to-Stock</span>
+                <span class="kpi-badge negative">+14,6 h sobre meta</span>
+            </div>
+            <div class="kpi-value-container">
+                <span class="kpi-value">22,6 h</span>
+                <span class="kpi-unit">prom. junio</span>
+            </div>
+            <div class="kpi-meta">Sin ASN/Cita: <strong>5,79 h</strong> proc. directo</div>
+            <div class="kpi-target">Meta Estándar: &le; 8,0 horas</div>
+        </div>
+
+        <div class="kpi-card danger">
+            <div class="kpi-header">
+                <span class="kpi-label">Slotting Mismatch</span>
+                <span class="kpi-badge negative">114 SKU Mal Ubicados</span>
+            </div>
+            <div class="kpi-value-container">
+                <span class="kpi-value">25,3%</span>
+                <span class="kpi-meta">de Visitas: <strong>30,9%</strong></span>
+            </div>
+            <div class="kpi-meta">Exceso Caminata: <strong>+67,6 km/día</strong></div>
+            <div class="kpi-target">Pérdida: 23,5 HH/día caminata inútil</div>
+        </div>
+    </section>
+
+    <!-- Master Phases Navigator Bar -->
+    <div class="index-phases-bar">
+        <div class="iphase-pill phase-1 active" onclick="switchIndexPhase(1)">
+            <span class="ip-num">FASE 1 • EA1</span>
+            <span class="ip-name">Diagnóstico Integral</span>
+        </div>
+        <div class="iphase-arrow">&rarr;</div>
+        <div class="iphase-pill phase-2" onclick="switchIndexPhase(2)">
+            <span class="ip-num">FASE 2 • EA2</span>
+            <span class="ip-name">Propuesta Técnica &amp; WBS</span>
+        </div>
+        <div class="iphase-arrow">&rarr;</div>
+        <div class="iphase-pill phase-3" onclick="switchIndexPhase(3)">
+            <span class="ip-num">FASE 3 • EA3</span>
+            <span class="ip-name">Resultados, VAN &amp; ESG</span>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <nav class="main-tabs">
+        <button class="tab-btn active" data-tab="tab-ejecutivo">📊 Resumen & KPIs</button>
+        <button class="tab-btn" data-tab="tab-vsm">🔀 VSM End-to-End</button>
+        <button class="tab-btn" data-tab="tab-slotting">🗺️ Slotting & Layout CD</button>
+        <button class="tab-btn" data-tab="tab-inbound">🚚 Inbound & Proveedores</button>
+        <button class="tab-btn" data-tab="tab-productividad">📦 Productividad & SST</button>
+        <button class="tab-btn" data-tab="tab-proyectos">💼 Portafolio Proyectos EA2/EA3</button>
+        <button class="tab-btn highlight-tab" data-tab="tab-documento-solucion">🚀 Propuesta de Solución (EA2 / EA3)</button>
+    </nav>
+
+    <!-- Tab Contents Container -->
+    <main class="content-area">
+
+        <!-- TAB 1: EXECUTIVE DASHBOARD & KPIS -->
+        <section id="tab-ejecutivo" class="tab-content active">
+            <!-- Fast Link Banner to Solution Proposal -->
+            <div class="proposal-banner">
+                <div class="banner-text">
+                    <strong>¿Deseas revisar la propuesta técnica y plan de implementación?</strong>
+                    <span>Portafolio Recomendado P1-P5 | CAPEX CLP 766,8 MM | VAN CLP 1.289 MM | Plazo 24 Semanas</span>
+                </div>
+                <button class="btn-primary" onclick="openSolutionProposal()">Ver Propuesta de Solución (EA2 / EA3) &rarr;</button>
+            </div>
+
+            <div class="grid-2col margin-top">
+                <div class="panel-card">
+                    <div class="card-header">
+                        <h3>Deterioro Histórico: OTIF vs Ocupación del CD (12 Meses)</h3>
+                        <span class="info-tag">Correlación Pearson r = -0,96</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="chartOtifOcupacion"></canvas>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="card-header">
+                        <h3>Escalamiento de Costo Logístico Unitario y Emisiones CO2e</h3>
+                        <span class="info-tag">Periodo Julio 2025 – Junio 2026</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="chartCostoCO2"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Deep-dive CyberDay Breakdown -->
+            <div class="panel-card margin-top">
+                <div class="card-header">
+                    <h3>Análisis Especial CyberDay (1-3 Junio 2026): Dinámica Diario de Backlog vs OTIF</h3>
+                    <div class="button-group">
+                        <button class="filter-btn active" onclick="filterCyberView('all')">Todos los Canales</button>
+                        <button class="filter-btn" onclick="filterCyberView('ecom')">E-commerce</button>
+                        <button class="filter-btn" onclick="filterCyberView('cc')">Click & Collect</button>
+                    </div>
+                </div>
+                <div class="grid-chart-details">
+                    <div class="chart-wrapper-large">
+                        <canvas id="chartCyberDay"></canvas>
+                    </div>
+                    <div class="cyber-insights">
+                        <h4>Impacto de CyberDay en Cifras</h4>
+                        <div class="insight-stat">
+                            <span class="stat-num text-danger">12.598</span>
+                            <span class="stat-lbl">Pedidos recibidos el día peak (03-Jun)</span>
+                        </div>
+                        <div class="insight-stat">
+                            <span class="stat-num text-danger">19.504</span>
+                            <span class="stat-lbl">Backlog máximo alcanzado al cierre del peak</span>
+                        </div>
+                        <div class="insight-stat">
+                            <span class="stat-num text-warning">28,0 h</span>
+                            <span class="stat-lbl">Tiempo promedio en cola de espera para packing</span>
+                        </div>
+                        <div class="insight-stat">
+                            <span class="stat-num text-danger">43,5%</span>
+                            <span class="stat-lbl">OTIF Real durante los 3 días de campaña</span>
+                        </div>
+                        <div class="alert-box danger-light">
+                            <strong>Diagnóstico Clave:</strong> El sobretiempo de horas extra (+31,8% en junio) no logró absorber la demanda debido a cuellos de botella en pasillos de picking y packing, reduciendo la productividad marginal.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- APQC Perfect Order Decomposition Table -->
+            <div class="panel-card margin-top">
+                <div class="card-header">
+                    <h3>Descomposición del Pedido Perfecto (Estándar APQC) por Canal</h3>
+                    <span class="info-tag">Muestra de 3.000 Órdenes Reales</span>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Canal de Venta</th>
+                                <th>Muestra (N)</th>
+                                <th>A Tiempo (%)</th>
+                                <th>Completo (%)</th>
+                                <th>Sin Daño (%)</th>
+                                <th>Doc. Correcta (%)</th>
+                                <th>OTIF (%)</th>
+                                <th>Pedido Perfecto (%)</th>
+                                <th>Costo Prom. CLP</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><span class="channel-pill ecom">E-commerce domicilio</span></td>
+                                <td>1.784</td>
+                                <td>88,6%</td>
+                                <td>95,5%</td>
+                                <td>99,2%</td>
+                                <td>99,6%</td>
+                                <td><strong class="text-warning">85,1%</strong></td>
+                                <td><strong>84,0%</strong></td>
+                                <td>$11.419</td>
+                            </tr>
+                            <tr>
+                                <td><span class="channel-pill cc">Click & Collect</span></td>
+                                <td>570</td>
+                                <td>78,4%</td>
+                                <td>95,3%</td>
+                                <td>99,1%</td>
+                                <td>99,3%</td>
+                                <td><strong class="text-danger">75,1%</strong></td>
+                                <td><strong class="text-danger">73,7%</strong></td>
+                                <td>$12.227</td>
+                            </tr>
+                            <tr>
+                                <td><span class="channel-pill tienda">Reposición Tiendas</span></td>
+                                <td>415</td>
+                                <td>81,9%</td>
+                                <td>94,2%</td>
+                                <td>99,3%</td>
+                                <td>99,8%</td>
+                                <td><strong class="text-danger">77,8%</strong></td>
+                                <td><strong>77,6%</strong></td>
+                                <td>$16.647</td>
+                            </tr>
+                            <tr>
+                                <td><span class="channel-pill bulky">Bulky Domicilio</span></td>
+                                <td>231</td>
+                                <td>91,8%</td>
+                                <td>94,8%</td>
+                                <td>99,6%</td>
+                                <td>99,6%</td>
+                                <td><strong class="text-success">86,6%</strong></td>
+                                <td><strong>86,1%</strong></td>
+                                <td>$11.031</td>
+                            </tr>
+                            <tr class="highlight-row">
+                                <td><strong>PROMEDIO OPERACIÓN NORMAL</strong></td>
+                                <td>2.286</td>
+                                <td>90,9%</td>
+                                <td>96,3%</td>
+                                <td>99,2%</td>
+                                <td>99,5%</td>
+                                <td><strong>87,5%</strong></td>
+                                <td><strong>86,5%</strong></td>
+                                <td><strong>$11.090</strong></td>
+                            </tr>
+                            <tr class="highlight-row danger">
+                                <td><strong>OPERACIÓN PEAK CYBERDAY</strong></td>
+                                <td>714</td>
+                                <td>48,9%</td>
+                                <td>87,5%</td>
+                                <td>99,1%</td>
+                                <td>99,0%</td>
+                                <td><strong class="text-danger">43,5%</strong></td>
+                                <td><strong class="text-danger">42,3%</strong></td>
+                                <td><strong class="text-danger">$21.107</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TAB 2: VSM & END-TO-END LEAD TIME -->
+        <section id="tab-vsm" class="tab-content">
+            <div class="panel-card">
+                <div class="card-header">
+                    <h3>Value Stream Mapping (VSM) — Tiempos de Proceso vs Tiempos de Espera en CD</h3>
+                    <span class="info-tag">Comparación Normal vs Peak Cyber</span>
+                </div>
+
+                <div class="vsm-pipeline">
+                    <div class="vsm-stage" onclick="selectVsmStage('inbound')">
+                        <div class="stage-number">01</div>
+                        <div class="stage-name">Inbound & Dock</div>
+                        <div class="stage-time">Proc: 105 min</div>
+                        <div class="stage-wait danger">Espera: 33,4 min</div>
+                    </div>
+                    <div class="vsm-arrow">&rarr;</div>
+                    <div class="vsm-stage" onclick="selectVsmStage('putaway')">
+                        <div class="stage-number">02</div>
+                        <div class="stage-name">Putaway a Racks</div>
+                        <div class="stage-time">Proc: 95 min</div>
+                        <div class="stage-wait warning">Lead Time: 22.5 días</div>
+                    </div>
+                    <div class="vsm-arrow">&rarr;</div>
+                    <div class="vsm-stage" onclick="selectVsmStage('picking')">
+                        <div class="stage-number">03</div>
+                        <div class="stage-name">Picking Olas</div>
+                        <div class="stage-time">Proc: 5,6 h</div>
+                        <div class="stage-wait danger">Re-travel: 42.9%</div>
+                    </div>
+                    <div class="vsm-arrow">&rarr;</div>
+                    <div class="vsm-stage" onclick="selectVsmStage('packing')">
+                        <div class="stage-number">04</div>
+                        <div class="stage-name">Packing & Label</div>
+                        <div class="stage-time">Proc: 3,3 h</div>
+                        <div class="stage-wait danger">Cola: 2,2h (Peak 28h)</div>
+                    </div>
+                    <div class="vsm-arrow">&rarr;</div>
+                    <div class="vsm-stage" onclick="selectVsmStage('despacho')">
+                        <div class="stage-number">05</div>
+                        <div class="stage-name">Despacho & Staging</div>
+                        <div class="stage-time">Proc: 7,1 h</div>
+                        <div class="stage-wait danger">Demora: 14,4 h</div>
+                    </div>
+                </div>
+
+                <div id="vsm-detail-box" class="vsm-detail-box">
+                    <h4 id="vsm-title">Selecciona una etapa en el diagrama VSM superior para inspeccionar sus cuellos de botella</h4>
+                    <p id="vsm-desc">El mapa de flujo muestra que las colas de espera en packing y la demora en despacho absorben el 68% del tiempo de permanencia del pedido dentro del CD Pudahuel.</p>
+                </div>
+            </div>
+
+            <div class="grid-2col margin-top">
+                <div class="panel-card">
+                    <div class="card-header">
+                        <h3>Descomposición del Ciclo de Pedido por Canal (Horas)</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="chartVsmCanales"></canvas>
+                    </div>
+                </div>
+                <div class="panel-card">
+                    <div class="card-header">
+                        <h3>Acumulación de Tiempos Muertos e Inactividad en Picking</h3>
+                    </div>
+                    <div class="vsm-metrics-list">
+                        <div class="metric-row">
+                            <span class="m-title">Minutos de Viaje/Caminata Inútil (4 Meses)</span>
+                            <span class="m-val text-danger">61.598 h (CLP 585,2 MM)</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="m-title">Minutos de Inactividad / Espera Equipo</span>
+                            <span class="m-val text-warning">15.316 h (CLP 145,5 MM)</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="m-title">Reprocesos por Errores de Picking</span>
+                            <span class="m-val text-danger">50.251 errores (CLP 929,6 MM)</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="m-title">Disponibilidad Mesas Elevadoras Bulky</span>
+                            <span class="m-val text-danger">71% (3 de 8 fuera de servicio)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TAB 3: SLOTTING & LAYOUT CD -->
+        <section id="tab-slotting" class="tab-content">
+            <div class="panel-card">
+                <div class="card-header">
+                    <h3>Evaluación de Slotting Mismatch por Zona Almacén CD Pudahuel</h3>
+                    <span class="info-tag">450 SKU Analizados | 114 SKU Desalineados (25,3%)</span>
+                </div>
+
+                <div class="slotting-grid-overview">
+                    <div class="zone-box zone-a">
+                        <div class="z-header">
+                            <span class="z-title">Zona A-Rápida</span>
+                            <span class="z-dist">Distancia: 35 m</span>
+                        </div>
+                        <div class="z-stats">
+                            <div>Capacidad: <strong>3.900 pallets</strong></div>
+                            <div>Uso Actual: <strong>3.720 (95,4%)</strong></div>
+                            <div>SKU Actuales: <strong>84 SKU</strong> (Ideal: 105 SKU)</div>
+                            <div class="text-danger">Congestión pasillos 3-5</div>
+                        </div>
+                    </div>
+
+                    <div class="zone-box zone-b">
+                        <div class="z-header">
+                            <span class="z-title">Zona B-Media</span>
+                            <span class="z-dist">Distancia: 72 m</span>
+                        </div>
+                        <div class="z-stats">
+                            <div>Capacidad: <strong>4.700 pallets</strong></div>
+                            <div>Uso Actual: <strong>4.380 (93,2%)</strong></div>
+                            <div>SKU Actuales: <strong>125 SKU</strong> (Ideal: 120 SKU)</div>
+                            <div class="text-warning">Reabastecimiento reactivo</div>
+                        </div>
+                    </div>
+
+                    <div class="zone-box zone-c">
+                        <div class="z-header">
+                            <span class="z-title">Zona C-Lenta</span>
+                            <span class="z-dist">Distancia: 118 m</span>
+                        </div>
+                        <div class="z-stats">
+                            <div>Capacidad: <strong>5.800 pallets</strong></div>
+                            <div>Uso Actual: <strong>5.260 (90,7%)</strong></div>
+                            <div>SKU Actuales: <strong>154 SKU</strong> (Ideal: 147 SKU)</div>
+                            <div class="text-danger">12 SKU A mal ubicados aquí</div>
+                        </div>
+                    </div>
+
+                    <div class="zone-box zone-d">
+                        <div class="z-header">
+                            <span class="z-title">Zona D-Bulky</span>
+                            <span class="z-dist">Distancia: 154 m</span>
+                        </div>
+                        <div class="z-stats">
+                            <div>Capacidad: <strong>2.500 pallets</strong></div>
+                            <div>Uso Actual: <strong>2.360 (94,4%)</strong></div>
+                            <div>SKU Actuales: <strong>87 SKU</strong> (Ideal: 78 SKU)</div>
+                            <div class="text-danger">10 SKU A mal ubicados / Riesgo MMC</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mismatch SKU Table -->
+            <div class="panel-card margin-top">
+                <div class="card-header">
+                    <h3>Top 10 SKU con Mayor Exceso de Recorrido por Mismatch de Slotting</h3>
+                    <span class="info-tag">Exceso Total Acumulado: 67.600 m/día</span>
+                </div>
+                <div class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>SKU Code</th>
+                                <th>Familia</th>
+                                <th>Clasif. ABC</th>
+                                <th>Zona Actual</th>
+                                <th>Zona Ideal</th>
+                                <th>Visitas Pick / día</th>
+                                <th>Dist. Actual (m)</th>
+                                <th>Dist. Ideal (m)</th>
+                                <th>Exceso Recorrido (m/día)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>SKU-0003</strong></td>
+                                <td>Ferretería</td>
+                                <td><span class="abc-badge a">A</span></td>
+                                <td><span class="zone-pill d">D-Bulky</span></td>
+                                <td><span class="zone-pill a">A-Rápida</span></td>
+                                <td>59,9</td>
+                                <td>154 m</td>
+                                <td>35 m</td>
+                                <td><strong class="text-danger">+14.256 m</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>SKU-0005</strong></td>
+                                <td>Cocina</td>
+                                <td><span class="abc-badge a">A</span></td>
+                                <td><span class="zone-pill c">C-Lenta</span></td>
+                                <td><span class="zone-pill a">A-Rápida</span></td>
+                                <td>60,1</td>
+                                <td>118 m</td>
+                                <td>35 m</td>
+                                <td><strong class="text-danger">+9.977 m</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>SKU-0006</strong></td>
+                                <td>Cocina</td>
+                                <td><span class="abc-badge a">A</span></td>
+                                <td><span class="zone-pill b">B-Media</span></td>
+                                <td><span class="zone-pill a">A-Rápida</span></td>
+                                <td>77,2</td>
+                                <td>72 m</td>
+                                <td>35 m</td>
+                                <td><strong class="text-danger">+5.713 m</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>SKU-0019</strong></td>
+                                <td>Ferretería</td>
+                                <td><span class="abc-badge a">A</span></td>
+                                <td><span class="zone-pill c">C-Lenta</span></td>
+                                <td><span class="zone-pill a">A-Rápida</span></td>
+                                <td>30,5</td>
+                                <td>118 m</td>
+                                <td>35 m</td>
+                                <td><strong class="text-warning">+5.063 m</strong></td>
+                            </tr>
+                            <tr>
+                                <td><strong>SKU-0086</strong></td>
+                                <td>Tecnología</td>
+                                <td><span class="abc-badge a">A</span></td>
+                                <td><span class="zone-pill d">D-Bulky</span></td>
+                                <td><span class="zone-pill a">A-Rápida</span></td>
+                                <td>14,0</td>
+                                <td>154 m</td>
+                                <td>35 m</td>
+                                <td><strong class="text-warning">+3.332 m</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TAB 4: INBOUND & PROVEEDORES -->
+        <section id="tab-inbound" class="tab-content">
+            <div class="grid-2col">
+                <div class="panel-card">
+                    <div class="card-header">
+                        <h3>Impacto de Cita y ASN en Tiempo Dock-to-Stock (Horas)</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="chartInboundAsn"></canvas>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="card-header">
+                        <h3>Composición del Tiempo de Recepción Inbound</h3>
+                    </div>
+                    <div class="inbound-pie-details">
+                        <div class="chart-wrapper-small">
+                            <canvas id="chartInboundStages"></canvas>
+                        </div>
+                        <div class="inbound-breakdown">
+                            <div class="b-item"><span class="color-dot c1"></span> Putaway: <strong>40,8% (95,4 min)</strong></div>
+                            <div class="b-item"><span class="color-dot c2"></span> Descarga: <strong>28,9% (67,7 min)</strong></div>
+                            <div class="b-item"><span class="color-dot c3"></span> Control QC: <strong>16,0% (37,6 min)</strong></div>
+                            <div class="b-item"><span class="color-dot c4"></span> Espera Andén: <strong>14,3% (33,4 min)</strong></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TAB 5: PRODUCTIVIDAD, PERSONAL, TURNOS & SST -->
+        <section id="tab-productividad" class="tab-content">
+            <!-- Gráficos de Productividad por Turnos y Competencias del Personal -->
+            <div class="grid-2col margin-bottom">
+                <div class="panel-card">
+                    <div class="card-header">
+                        <h3>Productividad por Turno y Zona del CD (Líneas / HH)</h3>
+                        <span class="info-tag">Turno Noche: -14% vs Mañana por Fatiga</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="chartProductividadTurnos"></canvas>
+                    </div>
+                </div>
+
+                <div class="panel-card">
+                    <div class="card-header">
+                        <h3>Matriz de Competencias: Personal Propio vs Temporal</h3>
+                        <span class="info-tag">Brecha WMS Temporal: Solo 39,0%</span>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="chartCompetencias"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Matriz de Incidentes SST -->
+            <div class="panel-card">
+                <div class="card-header">
+                    <h3>Matriz de Incidentes SST por Área del CD (120 Incidentes en 12 Meses)</h3>
+                    <span class="info-tag">Tasa D-Bulky: 83,8 incidentes / 100k HH</span>
+                </div>
+                <div class="sst-matrix">
+                    <div class="sst-card danger">
+                        <h4>D-Bulky</h4>
+                        <div class="sst-val">26 incidentes</div>
+                        <div class="sst-meta">16 días perdidos | 3 severidad Alta</div>
+                        <div class="sst-sub">Principal Causa: MMC >25 kg sin ayuda mecánica</div>
+                    </div>
+                    <div class="sst-card warning">
+                        <h4>B-Media</h4>
+                        <div class="sst-val">19 incidentes</div>
+                        <div class="sst-meta">16 días perdidos | Colisiones MHE</div>
+                        <div class="sst-sub">Causa: Congestión y pasillos estrechos</div>
+                    </div>
+                    <div class="sst-card warning">
+                        <h4>Packing</h4>
+                        <div class="sst-val">17 incidentes</div>
+                        <div class="sst-meta">14 días perdidos | Sobreesfuerzo</div>
+                        <div class="sst-sub">Causa: Altura mesas y falta right-sizing</div>
+                    </div>
+                    <div class="sst-card">
+                        <h4>Recepción</h4>
+                        <div class="sst-val">17 incidentes</div>
+                        <div class="sst-meta">2 días perdidos | Golpes</div>
+                        <div class="sst-sub">Causa: Staging desbordado</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Panel de Recursos Humanos, Gestión de Personal y Turnos (Eje 3 Fases) -->
+            <div class="panel-card margin-top">
+                <div class="card-header">
+                    <h3>Recursos Humanos: Gestión del Personal, Turnos y Modelo ADKAR en las 3 Fases</h3>
+                    <span class="info-tag">Dimensión Humana &amp; Organizacional</span>
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin-top: 14px;">
+                    <div style="background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.3); border-radius: 10px; padding: 16px;">
+                        <h4 style="color: #f43f5e; font-size: 0.92rem; margin-bottom: 8px;">🔴 FASE 1: Crisis de Personal y Turnos (As-Is)</h4>
+                        <ul style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.6; padding-left: 18px; margin: 0;">
+                            <li><strong>3 Turnos Operativos:</strong> Mañana (07:00-15:00), Tarde (15:00-23:00) y Noche (23:00-07:00).</li>
+                            <li><strong>Caída en Turno Noche:</strong> Productividad cae a 42,8 lin/HH en Zona A y 15,8 lin/HH en D-Bulky por fatiga y mala visibilidad.</li>
+                            <li><strong>Personal Temporal Desbordado:</strong> Dotación temporal de CyberDay con solo 39% de conocimiento de WMS, provocando errores en cascada.</li>
+                            <li><strong>Rotación y Desgaste Humano:</strong> 34% de rotación anual, 120 incidentes SST y 53 días perdidos por sobreesfuerzo manual >25 kg.</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 16px;">
+                        <h4 style="color: #38bdf8; font-size: 0.92rem; margin-bottom: 8px;">🔵 FASE 2: Propuesta, Capacitación &amp; ADKAR (To-Be)</h4>
+                        <ul style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.6; padding-left: 18px; margin: 0;">
+                            <li><strong>Formación de 18 Superusuarios:</strong> 2 líderes por turno y por área durante semanas 15 a 18 de la WBS.</li>
+                            <li><strong>250 Horas-Hombre de Capacitación:</strong> Voice Picking, terminales RF ergonómicos y portal web ASN.</li>
+                            <li><strong>Curva de Aprendizaje Acelerada:</strong> Voice Picking manos libres reduce la curva de inducción de 3 semanas a solo 4 días.</li>
+                            <li><strong>Balanceo de Cargas entre Turnos:</strong> Algoritmo WMS equilibra la asignación de picking entre turnos para erradicar el estrés nocturno.</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 16px;">
+                        <h4 style="color: #34d399; font-size: 0.92rem; margin-bottom: 8px;">🟢 FASE 3: Beneficios Laborales &amp; Clima (Resultados)</h4>
+                        <ul style="font-size: 0.78rem; color: #cbd5e1; line-height: 1.6; padding-left: 18px; margin: 0;">
+                            <li><strong>Rotación Cae del 34% al 6%:</strong> Desaparición del burnout, fin de las horas extras forzosas y previsibilidad de turnos.</li>
+                            <li><strong>Cero Accidentes Graves SST:</strong> 4 mesas hidráulicas en Zona D eliminan cargas >25 kg a pulso (cumplimiento Ley 20.949).</li>
+                            <li><strong>Incentivos por Calidad:</strong> Bonificación por despacho libre de fallas, reemplazando la lógica punitiva de crisis.</li>
+                            <li><strong>Dignificación de Choferes:</strong> Ventanas ASN de 2h garantizan trato digno sin esperas a la intemperie en Pudahuel.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TAB 6: PROYECTOS EA2 / EA3 -->
+        <section id="tab-proyectos" class="tab-content">
+            <div class="panel-card">
+                <div class="card-header">
+                    <h3>Simulador de Selección de Portafolio de Inversión (EA2 / EA3)</h3>
+                    <span class="info-tag">Restricción CAPEX Máximo: CLP 850.000.000 | Plazo: 36 Semanas</span>
+                </div>
+
+                <div class="capex-tracker">
+                    <div class="tracker-item">
+                        <span>CAPEX Presupuestado:</span>
+                        <strong id="total-capex" class="text-success">$0 CLP</strong>
+                    </div>
+                    <div class="tracker-item">
+                        <span>Límite Máximo:</span>
+                        <strong>$850.000.000 CLP</strong>
+                    </div>
+                    <div class="tracker-item">
+                        <span>Margen Disponible:</span>
+                        <strong id="margin-capex" class="text-success">$850.000.000 CLP</strong>
+                    </div>
+                    <div class="tracker-item">
+                        <span>Plazo Máximo:</span>
+                        <strong id="max-plazo">0 semanas (Máx 36)</strong>
+                    </div>
+                </div>
+
+                <div class="projects-list">
+                    <div class="project-card">
+                        <label class="project-checkbox">
+                            <input type="checkbox" id="p1" data-capex="85000000" data-opex="18000000" data-plazo="12" onchange="updatePortfolio()">
+                            <span class="checkmark"></span>
+                            <div class="p-details">
+                                <div class="p-title">P1: Re-slotting ABC + 5S + Conteo Cíclico</div>
+                                <div class="p-meta">Tipo: Proceso | CAPEX: $85.000.000 | Plazo: 12 sem | Riesgo: Bajo</div>
+                                <div class="p-impact">Impacto: +15% productividad picking, -12% recorrido caminata, +0,8 pp exactitud.</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="project-card">
+                        <label class="project-checkbox">
+                            <input type="checkbox" id="p2" data-capex="310000000" data-opex="72000000" data-plazo="24" onchange="updatePortfolio()">
+                            <span class="checkmark"></span>
+                            <div class="p-details">
+                                <div class="p-title">P2: Upgrade WMS + RF / Voice Picking</div>
+                                <div class="p-meta">Tipo: Tecnología | CAPEX: $310.000.000 | Plazo: 24 sem | Riesgo: Medio</div>
+                                <div class="p-impact">Impacto: +18% productividad, +1,6 pp precisión, +2,5 pp exactitud inventario.</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="project-card">
+                        <label class="project-checkbox">
+                            <input type="checkbox" id="p3" data-capex="95000000" data-opex="24000000" data-plazo="14" onchange="updatePortfolio()">
+                            <span class="checkmark"></span>
+                            <div class="p-details">
+                                <div class="p-title">P3: Portal ASN + Agenda Andenes / YMS Ligero</div>
+                                <div class="p-meta">Tipo: Tecnología/Proceso | CAPEX: $95.000.000 | Plazo: 14 sem | Riesgo: Bajo</div>
+                                <div class="p-impact">Impacto: -30% dock-to-stock, -40% tiempo espera, +15 pp cumplimiento citas.</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="project-card">
+                        <label class="project-checkbox">
+                            <input type="checkbox" id="p4" data-capex="150000000" data-opex="48000000" data-plazo="18" onchange="updatePortfolio()">
+                            <span class="checkmark"></span>
+                            <div class="p-details">
+                                <div class="p-title">P4: TMS con Optimización Dinámica + POD Digital</div>
+                                <div class="p-meta">Tipo: Tecnología | CAPEX: $150.000.000 | Plazo: 18 sem | Riesgo: Medio</div>
+                                <div class="p-impact">Impacto: -9% km recorridos, +8 pp utilización flota, -2 pp entregas fallidas.</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="project-card">
+                        <label class="project-checkbox">
+                            <input type="checkbox" id="p5" data-capex="70000000" data-opex="15000000" data-plazo="10" onchange="updatePortfolio()">
+                            <span class="checkmark"></span>
+                            <div class="p-details">
+                                <div class="p-title">P5: Right-sizing Embalaje + Control de Calidad</div>
+                                <div class="p-meta">Tipo: Calidad/Sostenibilidad | CAPEX: $70.000.000 | Plazo: 10 sem | Riesgo: Bajo</div>
+                                <div class="p-impact">Impacto: -35% daños, -18% material embalaje, -10% volumen expedido.</div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- TAB 7: DEDICATED SOLUTION PROPOSAL VIEW (EA2 / EA3) -->
+        <section id="tab-documento-solucion" class="tab-content">
+            <div class="panel-card highlight-card solution-portal">
+                
+                <!-- Hero Header -->
+                <div class="solution-hero">
+                    <div class="hero-text">
+                        <div class="hero-badge">PROPUESTA DE SOLUCIÓN INTEGRAL • EA2 / EA3</div>
+                        <h2 class="hero-title">Rediseño & Optimización Omnicanal CD Pudahuel</h2>
+                        <p class="hero-subtitle">Transformación Operacional, Tecnológica y Financiera de AndesHome Chile S.A. (24 Semanas)</p>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="landing.html" class="btn-secondary-hero">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                            <span>Plano 2D Interactivo</span>
+                        </a>
+                        <a href="Propuesta_Solucion_AndesHome.md" target="_blank" class="btn-primary-hero">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                            <span>Abrir Documento .md</span>
+                        </a>
+                        <button class="btn-secondary-hero" onclick="window.print()">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>
+                            <span>Imprimir / Exportar</span>
+                        </button>
+                    </div>
+
+                    <div class="hero-metrics-strip">
+                        <div class="hm-card">
+                            <div class="hm-lbl">CAPEX TOTAL (P1-P5)</div>
+                            <div class="hm-val">$766.800.000 CLP</div>
+                            <div class="hm-sub">Reserva 8% contingencia ($56,8M)</div>
+                        </div>
+                        <div class="hm-card">
+                            <div class="hm-lbl">VAN PROYECTO (3 AÑOS, 12%)</div>
+                            <div class="hm-val" style="color: #38bdf8;">$1.289.400.543 CLP</div>
+                            <div class="hm-sub">TIR: 98,4% | B/C: 2,68</div>
+                        </div>
+                        <div class="hm-card">
+                            <div class="hm-lbl">PAYBACK SIMPLE</div>
+                            <div class="hm-val" style="color: #34d399;">10,7 Meses</div>
+                            <div class="hm-sub">EBITDA Neto: $856M/año</div>
+                        </div>
+                        <div class="hm-card">
+                            <div class="hm-lbl">PLAZO TOTAL WBS</div>
+                            <div class="hm-val" style="color: #fbbf24;">24 Semanas</div>
+                            <div class="hm-sub">IT Freeze: Semanas 21 a 24</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Solution Proposal Inner Navigation Subtabs -->
+                <div class="sol-subtabs">
+                    <button class="sol-tab-btn active" onclick="switchSolSubtab('sol-roi')">📊 Resumen Financiero & ROI</button>
+                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-ahp')">⚖️ Evaluación Multicriterio AHP</button>
+                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-portafolio')">🧩 Portafolio P1-P5</button>
+                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-arquitectura')">🏗️ Arquitectura & VSM Futuro</button>
+                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-wbs')">📅 Cronograma WBS (24 sem)</button>
+                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-raci')">👥 Gobernanza RACI & Riesgos</button>
+                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-markdown')">📄 Visor Markdown Completo</button>
+                </div>
+
+                <!-- SUBSECTION 1: FINANCIAL ROI & CALCULATOR -->
+                <div id="sol-roi" class="sol-subcontent active">
+                    <div class="financial-strip">
+                        <div class="fin-card">
+                            <span class="fin-lbl">CAPEX Total Proyecto</span>
+                            <span class="fin-val text-success" id="calc-capex-display">$766.800.000 CLP</span>
+                            <span class="fin-sub">Reserva 8% incluida ($56,8M)</span>
+                        </div>
+                        <div class="fin-card">
+                            <span class="fin-lbl">EBITDA Incremental / Año</span>
+                            <span class="fin-val text-success" id="calc-ebitda-display">$856.097.000 CLP</span>
+                            <span class="fin-sub">Ahorro Bruto: $1.033M / OPEX: $177M</span>
+                        </div>
+                        <div class="fin-card">
+                            <span class="fin-lbl">Valor Actual Neto (VAN 3 Años)</span>
+                            <span class="fin-val text-success" id="calc-van-display">$1.289.400.543 CLP</span>
+                            <span class="fin-sub" id="calc-rate-sub">Tasa Descuento: 12%</span>
+                        </div>
+                        <div class="fin-card">
+                            <span class="fin-lbl">Payback Simple & TIR</span>
+                            <span class="fin-val text-success" id="calc-payback-display">10,7 Meses</span>
+                            <span class="fin-sub" id="calc-tir-sub">TIR: 98,4% | B/C: 2,68</span>
+                        </div>
+                    </div>
+
+                    <!-- Preset Scenario Switchers -->
+                    <div class="preset-scenario-bar margin-top">
+                        <span class="preset-label">Escenarios de Negocio Directorio:</span>
+                        <button class="btn-preset active" onclick="applyPresetScenario('base')">🟢 Caso Base (Target 100%)</button>
+                        <button class="btn-preset" onclick="applyPresetScenario('pesimista')">🟡 Caso Pesimista (-25% Captura)</button>
+                        <button class="btn-preset" onclick="applyPresetScenario('optimista')">🚀 Caso Optimista (+15% Sinergia)</button>
+                    </div>
+
+                    <!-- Interactive ROI Sensitivity Calculator -->
+                    <div class="panel-card margin-top card-inner">
+                        <div class="card-header">
+                            <h3>🧮 Simulación de Sensibilidad Financiera (Calculadora Interactiva)</h3>
+                            <span class="info-tag">Ajuste parámetros en tiempo real</span>
+                        </div>
+                        <div class="calculator-grid">
+                            <div class="calc-controls">
+                                <div class="control-group">
+                                    <label>Tasa de Descuento ($r$): <strong id="val-rate">12%</strong></label>
+                                    <input type="range" id="slider-rate" min="8" max="18" step="1" value="12" oninput="recalculateROI()">
+                                </div>
+                                <div class="control-group">
+                                    <label>Reserva Contingencia CAPEX: <strong id="val-contingency">8%</strong></label>
+                                    <input type="range" id="slider-contingency" min="0" max="15" step="1" value="8" oninput="recalculateROI()">
+                                </div>
+                                <div class="control-group">
+                                    <label>Captura de Ahorros Operacionales: <strong id="val-savings">100%</strong></label>
+                                    <input type="range" id="slider-savings" min="70" max="120" step="5" value="100" oninput="recalculateROI()">
+                                </div>
+                            </div>
+                            <div class="calc-chart-container">
+                                <canvas id="chartFinancialProposal"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBSECTION: AHP MULTICRITERIA EVALUATION -->
+                <div id="sol-ahp" class="sol-subcontent">
+                    <div class="panel-card card-inner margin-top">
+                        <div class="card-header">
+                            <h3>⚖️ Matriz de Evaluación Multicriterio de Decisión (AHP / Scoring)</h3>
+                            <span class="info-tag">Evaluación Ponderada de Portafolios Recomendados vs. Alternativas</span>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Criterio de Evaluación</th>
+                                        <th>Peso (%)</th>
+                                        <th>Opción A: Solo Quick Wins (P1+P5)</th>
+                                        <th>Opción B: Portafolio Recomendado (P1-P5)</th>
+                                        <th>Opción C: Automatización AMR (P1-P6)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Retorno Financiero (VAN / TIR / Payback)</strong></td>
+                                        <td>30%</td>
+                                        <td>6.5 / 10</td>
+                                        <td><strong class="text-success">9.5 / 10</strong></td>
+                                        <td>4.0 / 10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Alineación con Causas Raíz (EA1)</strong></td>
+                                        <td>25%</td>
+                                        <td>5.0 / 10</td>
+                                        <td><strong class="text-success">9.8 / 10</strong></td>
+                                        <td>8.5 / 10</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Factibilidad Técnica & Restricción CAPEX</strong></td>
+                                        <td>20%</td>
+                                        <td>9.8 / 10</td>
+                                        <td><strong class="text-success">9.0 / 10 (&le; $850M)</strong></td>
+                                        <td>1.0 / 10 (Excede CAPEX)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Plazo de Ejecución (&le; 36 Semanas)</strong></td>
+                                        <td>15%</td>
+                                        <td>10.0 / 10 (10 sem)</td>
+                                        <td><strong class="text-success">9.2 / 10 (24 sem)</strong></td>
+                                        <td>4.0 / 10 (42 sem)</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Sustentabilidad Ergonómica & ESG</strong></td>
+                                        <td>10%</td>
+                                        <td>8.0 / 10</td>
+                                        <td><strong class="text-success">9.0 / 10</strong></td>
+                                        <td>7.5 / 10</td>
+                                    </tr>
+                                    <tr class="highlight-row">
+                                        <td><strong>PUNTAJE PONDERADO FINAL</strong></td>
+                                        <td><strong>100%</strong></td>
+                                        <td><strong>7.26 / 10</strong></td>
+                                        <td><strong class="text-success" style="font-size: 16px;">9.25 / 10 (SELECCIONADO)</strong></td>
+                                        <td><strong>5.33 / 10 (DESCARTADO)</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBSECTION 2: PORTFOLIO P1-P5 DETAILED CARDS -->
+                <div id="sol-portafolio" class="sol-subcontent">
+                    <div class="card-header margin-top">
+                        <h3>Desglose del Portafolio Seleccionado (P1 - P5)</h3>
+                        <span class="info-tag">CAPEX Total Directo: $710M + $56,8M Contingencia</span>
+                    </div>
+
+                    <div class="portfolio-grid">
+                        <div class="portfolio-item-card active">
+                            <div class="item-badge">P1 • Proceso & Calidad</div>
+                            <h4>Re-slotting ABC Dinámico + 5S + Conteo Cíclico</h4>
+                            <p class="item-desc">Re-zonificación física del CD basada en velocidad de picado. Soluciona 25,3% de SKU desalineados.</p>
+                            <div class="item-stats">
+                                <div><strong>CAPEX:</strong> $85.000.000 CLP</div>
+                                <div><strong>OPEX:</strong> $12.000.000 CLP/año</div>
+                                <div><strong>Ahorro:</strong> $224.000.000 CLP/año</div>
+                                <div><strong>Plazo:</strong> 10 Semanas</div>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item-card active">
+                            <div class="item-badge">P2 • Tecnología Core</div>
+                            <h4>Upgrade WMS NextGen + Radiofrecuencia (RF) & Voice Picking</h4>
+                            <p class="item-desc">Sustitución de sistema legado por WMS de última generación y terminales RF Zebra. Eliminación de papel.</p>
+                            <div class="item-stats">
+                                <div><strong>CAPEX:</strong> $310.000.000 CLP</div>
+                                <div><strong>OPEX:</strong> $75.000.000 CLP/año</div>
+                                <div><strong>Ahorro:</strong> $412.000.000 CLP/año</div>
+                                <div><strong>Plazo:</strong> 18 Semanas</div>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item-card active">
+                            <div class="item-badge">P3 • Tecnología / Inbound</div>
+                            <h4>Portal ASN Proveedores + Agendamiento Digital YMS</h4>
+                            <p class="item-desc">Portal web para carga obligatoria de ASN y reserva de ventanas de andén de 2 horas. Elimina demoras e inasistencias.</p>
+                            <div class="item-stats">
+                                <div><strong>CAPEX:</strong> $95.000.000 CLP</div>
+                                <div><strong>OPEX:</strong> $24.000.000 CLP/año</div>
+                                <div><strong>Ahorro:</strong> $146.300.000 CLP/año</div>
+                                <div><strong>Plazo:</strong> 14 Semanas</div>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item-card active">
+                            <div class="item-badge">P4 • Transporte & Última Milla</div>
+                            <h4>TMS Ruteo Dinámico + Mobile POD Driver App</h4>
+                            <p class="item-desc">Algoritmo de optimización de rutas por peso/volumen y confirmación digital de entrega con foto/firma.</p>
+                            <div class="item-stats">
+                                <div><strong>CAPEX:</strong> $150.000.000 CLP</div>
+                                <div><strong>OPEX:</strong> $48.000.000 CLP/año</div>
+                                <div><strong>Ahorro:</strong> $185.000.000 CLP/año</div>
+                                <div><strong>Plazo:</strong> 16 Semanas</div>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item-card active">
+                            <div class="item-badge">P5 • Calidad / ESG / SST</div>
+                            <h4>Right-sizing Embalajes + Ergonomía D-Bulky</h4>
+                            <p class="item-desc">6 tamaños estándar de caja, mesas ergonómicas y ayudas mecánicas para manipulación de productos >25 kg.</p>
+                            <div class="item-stats">
+                                <div><strong>CAPEX:</strong> $70.000.000 CLP</div>
+                                <div><strong>OPEX:</strong> $18.000.000 CLP/año</div>
+                                <div><strong>Ahorro:</strong> $65.797.000 CLP/año</div>
+                                <div><strong>Plazo:</strong> 12 Semanas</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBSECTION 3: TO-BE ARCHITECTURE & VSM SIMULATOR -->
+                <div id="sol-arquitectura" class="sol-subcontent">
+                    <div class="panel-card card-inner">
+                        <div class="card-header">
+                            <h3>🏗️ Arquitectura de Integración de Sistemas To-Be</h3>
+                            <span class="info-tag">Ecosistema Conectado mediante API REST & JSON Interfaces</span>
+                        </div>
+                        <div class="architecture-diagram">
+                            <div class="arch-node erp">
+                                <div class="node-title">ERP Corporativo (SAP)</div>
+                                <div class="node-sub">Maestro SKU, Ventas, Finanzas</div>
+                            </div>
+                            <div class="arch-arrows">⇄ API REST ⇄</div>
+                            <div class="arch-hub">
+                                <div class="arch-node wms">
+                                    <div class="node-title">WMS NextGen</div>
+                                    <div class="node-sub">Slotting, Inventarios & Voice/RF</div>
+                                </div>
+                                <div class="arch-node yms">
+                                    <div class="node-title">Portal ASN / YMS</div>
+                                    <div class="node-sub">Citas Proveedor & Andenes</div>
+                                </div>
+                                <div class="arch-node tms">
+                                    <div class="node-title">TMS Dinámico</div>
+                                    <div class="node-sub">Ruteo & POD Móvil</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Side-by-Side As-Is vs To-Be KPI Impact -->
+                    <div class="panel-card margin-top card-inner">
+                        <div class="card-header">
+                            <h3>🔀 Impacto Comparativo VSM: Estado Actual (EA1) vs Futuro (EA2/EA3)</h3>
+                        </div>
+                        <div class="table-container">
+                            <table class="data-table">
+                                <thead>
+                                    <tr>
+                                        <th>Indicador Operacional (KPI)</th>
+                                        <th>Estado Actual (EA1 - Jun 2026)</th>
+                                        <th>Estado Futuro Propuesto (EA2/EA3)</th>
+                                        <th>Mejora % / Impacto Esperado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Dock-to-Stock Inbound</strong></td>
+                                        <td><span class="badge danger">22.6 Horas</span></td>
+                                        <td><span class="badge success">4.5 Horas</span></td>
+                                        <td><strong class="text-success">-80.1% Tiempo Ciclado</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Productividad Picking</strong></td>
+                                        <td><span class="badge danger">46.8 Líneas / HH</span></td>
+                                        <td><span class="badge success">55.2 Líneas / HH</span></td>
+                                        <td><strong class="text-success">+17.9% Rendimiento</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Exactitud de Inventario (IRA)</strong></td>
+                                        <td><span class="badge danger">93.8%</span></td>
+                                        <td><span class="badge success">99.5%</span></td>
+                                        <td><strong class="text-success">+5.7 pp (Nivel Clase Mundial)</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Slotting Mismatch SKU</strong></td>
+                                        <td><span class="badge danger">25.3% (114 SKU)</span></td>
+                                        <td><span class="badge success">0.0% (Re-slotting ABC)</span></td>
+                                        <td><strong class="text-success">-67.6 km/día Recorridos</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Entregas Fallidas Transporte</strong></td>
+                                        <td><span class="badge danger">11.5% Peak Cyber</span></td>
+                                        <td><span class="badge success">&le; 3.0%</span></td>
+                                        <td><strong class="text-success">-73.9% Re-intentos</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Costo Unitario por Pedido</strong></td>
+                                        <td><span class="badge danger">CLP 7.920</span></td>
+                                        <td><span class="badge success">CLP 5.420</span></td>
+                                        <td><strong class="text-success">-31.6% Ahorro Directo</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBSECTION 4: WBS 24 WEEKS TIMELINE -->
+                <div id="sol-wbs" class="sol-subcontent">
+                    <div class="card-header margin-top">
+                        <h3>Hoja de Ruta de Implementación en 24 Semanas (Master WBS)</h3>
+                        <span class="info-tag">Finaliza 12 Semanas antes del Peak Cyber 2027</span>
+                    </div>
+
+                    <div class="wbs-interactive-container">
+                        <div class="wbs-step-card p1" onclick="showWbsDetail(1)">
+                            <div class="step-num">FASE 1</div>
+                            <div class="step-title">Preparación & Limpieza Datos</div>
+                            <div class="step-time">Semanas 1 - 4</div>
+                            <p>Depuración maestro SKU (EAN, cubicaje, peso), pesaje automático y Gate 1 de aprobación.</p>
+                        </div>
+                        <div class="wbs-step-card p2" onclick="showWbsDetail(2)">
+                            <div class="step-num">FASE 2</div>
+                            <div class="step-title">Re-slotting & Ergonomía D-Bulky</div>
+                            <div class="step-time">Semanas 5 - 10</div>
+                            <p>Ejecución P1 re-slotting físico pasillos A-Rápida y reparación mesas elevadoras D-Bulky. ⚠️ Freeze TI Sem 10.</p>
+                        </div>
+                        <div class="wbs-step-card p3" onclick="showWbsDetail(3)">
+                            <div class="step-num">FASE 3</div>
+                            <div class="step-title">Integración Tecnológica Staging</div>
+                            <div class="step-time">Semanas 11 - 18</div>
+                            <p>Despliegue P3 Portal ASN, P4 TMS y P2 WMS NextGen en ambiente staging con pruebas de estrés.</p>
+                        </div>
+                        <div class="wbs-step-card p4" onclick="showWbsDetail(4)">
+                            <div class="step-num">FASE 4</div>
+                            <div class="step-title">Pilotos Operacionales por Zona</div>
+                            <div class="step-time">Semanas 19 - 22</div>
+                            <p>Piloto A-Rápida con Voice/RF + Piloto Carrier LogiExpress en TMS. Validación de beneficios.</p>
+                        </div>
+                        <div class="wbs-step-card p5" onclick="showWbsDetail(5)">
+                            <div class="step-num">FASE 5</div>
+                            <div class="step-title">Cutover General & Go-Live</div>
+                            <div class="step-time">Semanas 23 - 24</div>
+                            <p>Cutover general sin detener el CD, certificación de superusuarios y transferencia a Operaciones.</p>
+                        </div>
+                    </div>
+
+                    <div id="wbs-detail-box" class="wbs-detail-panel margin-top">
+                        <h4 id="wbs-detail-title">Haga clic en una fase para inspeccionar los entregables y riesgos asociados</h4>
+                        <p id="wbs-detail-desc">El plan de 24 semanas garantiza una transición fluida sin interrumpir las operaciones diarias del CD Pudahuel.</p>
+                    </div>
+                </div>
+
+                <!-- SUBSECTION 5: RACI MATRIX & RISK MITIGATION -->
+                <div id="sol-raci" class="sol-subcontent">
+                    <div class="card-header margin-top">
+                        <h3>Matriz de Gobernanza RACI del Proyecto</h3>
+                        <span class="info-tag">Definición Clara de Roles y Atribuciones</span>
+                    </div>
+
+                    <div class="table-container">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Entregable / Hito del Proyecto</th>
+                                    <th>Sponsor Exec</th>
+                                    <th>PMO / SC Mgr</th>
+                                    <th>Jefe CD</th>
+                                    <th>Jefe TI</th>
+                                    <th>Jefa Inbound</th>
+                                    <th>Jefa Transporte</th>
+                                    <th>Prevencionista</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Aprobación Presupuesto CAPEX ($766,8M)</td>
+                                    <td><strong class="raci-tag a">A</strong></td>
+                                    <td><span class="raci-tag r">R</span></td>
+                                    <td><span class="raci-tag c">C</span></td>
+                                    <td><span class="raci-tag c">C</span></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                    <td><span class="raci-tag c">C</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Depuración Maestro SKU & Re-slotting (P1)</td>
+                                    <td><span class="raci-tag a">A</span></td>
+                                    <td><strong class="raci-tag r">R</strong></td>
+                                    <td><span class="raci-tag c">C</span></td>
+                                    <td><span class="raci-tag c">C</span></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Integración ERP-WMS-TMS (P2/P4)</td>
+                                    <td><span class="raci-tag a">A</span></td>
+                                    <td><span class="raci-tag c">C</span></td>
+                                    <td><span class="raci-tag c">C</span></td>
+                                    <td><strong class="raci-tag r">R</strong></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Portal ASN & Agendamiento Proveedores (P3)</td>
+                                    <td><span class="raci-tag a">A</span></td>
+                                    <td><span class="raci-tag c">C</span></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                    <td><span class="raci-tag c">C</span></td>
+                                    <td><strong class="raci-tag r">R</strong></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Rediseño Ergónomico D-Bulky & Packing (P5)</td>
+                                    <td><span class="raci-tag a">A</span></td>
+                                    <td><span class="raci-tag c">C</span></td>
+                                    <td><span class="raci-tag r">R</span></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                    <td><span class="raci-tag i">I</span></td>
+                                    <td><strong class="raci-tag a">A / R</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Risk Management Panel -->
+                    <div class="panel-card margin-top card-inner">
+                        <div class="card-header">
+                            <h3>⚠️ Matriz de Gestión de Riesgos y Planes Mitigantes</h3>
+                        </div>
+                        <div class="risk-grid">
+                            <div class="risk-card">
+                                <div class="risk-header">
+                                    <span class="badge danger">Impacto Alto</span>
+                                    <strong>Retraso en Integraciones TI (ERP-WMS)</strong>
+                                </div>
+                                <p>Riesgo de incompatibilidad de API o congelamiento de sistemas.</p>
+                                <div class="risk-solution"><strong>Mitigación:</strong> Staging paralelo y Freeze de TI corporativo en Semana 10.</div>
+                            </div>
+                            <div class="risk-card">
+                                <div class="risk-header">
+                                    <span class="badge warning">Impacto Medio</span>
+                                    <strong>Resistencia al Uso de RF en Turno Noche</strong>
+                                </div>
+                                <p>Operadores temporales prefieren planillas de papel impresas.</p>
+                                <div class="risk-solution"><strong>Mitigación:</strong> Programa de Superusuarios por turno y bono de adopción por precisión.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBSECTION 6: MARKDOWN FULL READER -->
+                <div id="sol-markdown" class="sol-subcontent">
+                    <div class="panel-card card-inner">
+                        <div class="card-header">
+                            <div>
+                                <h3>📄 Documento Oficial de la Propuesta (Texto Íntegro de Decisión)</h3>
+                                <p style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">GLA1104 Taller de Logística | Destinado al Directorio Ejecutivo de AndesHome Chile S.A.</p>
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <a href="Propuesta_Solucion_AndesHome.md" download class="btn-secondary">⬇️ Descargar .md</a>
+                                <button class="btn-primary" onclick="window.print()">🖨️ Imprimir Acta</button>
+                            </div>
+                        </div>
+                        <div class="executive-doc-reader">
+                            <div class="doc-alert-box important">
+                                <strong>RECOMENDACIÓN PARA EL DIRECTORIO EJECUTIVO:</strong><br>
+                                Se recomienda la <strong>aprobación inmediata</strong> del Portafolio Combinado de Inversión (<strong>P1 + P2 + P3 + P4 + P5</strong>) por un <strong>CAPEX Total de CLP 766.800.000</strong> (incluyendo 8% de reserva de contingencia). La solución erradica las causas raíz del colapso operativo de Jun 2026, genera un <strong>VAN de CLP 1.289.400.543</strong>, una <strong>TIR del 98,4%</strong> y recupera la inversión en <strong>10,7 meses</strong>, estabilizando la operación <strong>12 semanas antes del Peak Cyber 2027</strong>.
+                            </div>
+
+                            <h2>1. Resumen Ejecutivo y Marco de Decisión Estratégica</h2>
+                            <h3>1.1. Contexto de Urgencia Operativa</h3>
+                            <p>El Diagnóstico Operativo (EA1) evidenció un deterioro crítico en el Centro de Distribución Pudahuel (31.500 m²):</p>
+                            <ul>
+                                <li><strong>Caída del OTIF Global:</strong> Del 92,3% (Jul 2025) al 80,9% (Jun 2026), alcanzando un mínimo del <strong>43,5% en Peak Cyber</strong> (11,5% en Click & Collect).</li>
+                                <li><strong>Backlog Acumulado:</strong> 15.387 pedidos pendientes al 30 de Junio de 2026 (equivalente a 4,32 días de demanda continua desatendida).</li>
+                                <li><strong>Sobrecosto Operativo:</strong> El costo por pedido despachado subió a <strong>CLP 7.920</strong> (+34,7%), mientras que cada pedido fallido cuesta <strong>CLP 29.628</strong> (+247% vs. cumplido).</li>
+                                <li><strong>Multas y Demurrage:</strong> Multas por incumplimiento comercial (CLP 184,5M) y cobros por sobreestadía de camiones inbound (CLP 146,3M en 4 meses).</li>
+                            </ul>
+
+                            <h3>1.2. Portafolio Seleccionado vs. Alternativas Descartadas</h3>
+                            <div class="table-container margin-top">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Iniciativa</th>
+                                            <th>Descripción</th>
+                                            <th>CAPEX</th>
+                                            <th>OPEX / Año</th>
+                                            <th>Estado</th>
+                                            <th>Justificación Técnica</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>P1: Re-slotting ABC + 5S</strong></td>
+                                            <td>Reubicación física 114 SKU desalineados.</td>
+                                            <td>$85M</td>
+                                            <td>$12M</td>
+                                            <td><span class="badge success">SELECCIONADO</span></td>
+                                            <td>Elimina 67,6 km/día de caminata inútil (Quick Win).</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>P2: WMS NextGen + Voice/RF</strong></td>
+                                            <td>Eliminación de papel y picking guiado por voz.</td>
+                                            <td>$310M</td>
+                                            <td>$75M</td>
+                                            <td><span class="badge success">SELECCIONADO</span></td>
+                                            <td>Eleva productividad +18% (46,8 a 55,2 lin/h).</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>P3: Portal ASN & YMS</strong></td>
+                                            <td>Agendamiento digital ventanas 2h.</td>
+                                            <td>$95M</td>
+                                            <td>$24M</td>
+                                            <td><span class="badge success">SELECCIONADO</span></td>
+                                            <td>Reduce Dock-to-Stock de 22,6 h a 4,5 h. Cero demurrage.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>P4: TMS Ruteo Dinámico</strong></td>
+                                            <td>Algoritmo volumen/peso y app chofer POD.</td>
+                                            <td>$150M</td>
+                                            <td>$48M</td>
+                                            <td><span class="badge success">SELECCIONADO</span></td>
+                                            <td>Reduce entregas fallidas de 11,5% a &le;3% en ruta.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>P5: Ergonomía D-Bulky</strong></td>
+                                            <td>4 mesas hidráulicas + 6 cajas normalizadas.</td>
+                                            <td>$70M</td>
+                                            <td>$18M</td>
+                                            <td><span class="badge success">SELECCIONADO</span></td>
+                                            <td>Erradica 38 SKU manuales &gt;25kg (Cumplimiento ley DT).</td>
+                                        </tr>
+                                        <tr style="opacity: 0.6;">
+                                            <td><strong>P6: Flota Robots AMR</strong></td>
+                                            <td>Robots autónomos de estantería.</td>
+                                            <td>$420M</td>
+                                            <td>$65M</td>
+                                            <td><span class="badge danger">DESCARTADO</span></td>
+                                            <td>Excede el techo directivo ($1.130M total &gt; $850M).</td>
+                                        </tr>
+                                        <tr style="opacity: 0.6;">
+                                            <td><strong>P7: Planta Solar CD</strong></td>
+                                            <td>Paneles solares autoconsumo.</td>
+                                            <td>$180M</td>
+                                            <td>$8M</td>
+                                            <td><span class="badge warning">POSTERGADO</span></td>
+                                            <td>Sin impacto directo en crisis Cyber; diferido a Fase 2.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h2>2. Evaluación Multicriterio de Decisión (AHP / Scoring)</h2>
+                            <p>El Portafolio P1-P5 obtuvo un puntaje ponderado de <strong>9,25 / 10</strong> frente al 7,26 de Quick Wins y 5,33 de AMR:</p>
+                            <div class="doc-alert-box note">
+                                <strong>Conclusión Multicriterio:</strong> El Portafolio P1-P5 es la única combinación que resuelve el 100% de las causas raíz respetando estrictamente el presupuesto máximo de CAPEX ($850M) y la ventana de 24 semanas.
+                            </div>
+
+                            <h2>3. Análisis Económico-Financiero y Escenarios</h2>
+                            <ul>
+                                <li><strong>Subtotal CAPEX Directo:</strong> CLP 710.000.000</li>
+                                <li><strong>Reserva de Contingencia (8%):</strong> CLP 56.800.000</li>
+                                <li><strong>CAPEX TOTAL REQUERIDO:</strong> <strong>CLP 766.800.000</strong></li>
+                                <li><strong>OPEX Anual Incremental:</strong> CLP 177.000.000 / año</li>
+                                <li><strong>Ahorro Operacional Bruto Anual:</strong> <strong>CLP 1.033.097.000 / año</strong></li>
+                                <li><strong>EBITDA Neto Incremental Anual:</strong> <strong>CLP 856.097.000 / año</strong></li>
+                            </ul>
+
+                            <div class="doc-alert-box tip">
+                                <strong>Resiliencia Financiera:</strong> Incluso en el escenario más adverso (-25% captura por retardo de adopción nocturna), el proyecto mantiene un <strong>VAN positivo de CLP 619M</strong> y paga la inversión en 16,4 meses.
+                            </div>
+
+                            <h2>4. Plan de Implementación WBS (24 Semanas) & IT Freeze</h2>
+                            <ul>
+                                <li><strong>Fase 1 (Sem 1-4):</strong> Depuración maestro SKU, mapa térmico y 5S.</li>
+                                <li><strong>Fase 2 (Sem 5-10):</strong> Re-slotting físico ABC y mesas D-Bulky.</li>
+                                <li><strong>Fase 3 (Sem 11-18):</strong> Integración tecnológica WMS NextGen, Portal ASN y TMS.</li>
+                                <li><strong>Fase 4 (Sem 19-24):</strong> Go-Live total omnicanal. <strong>Semanas 21 a 24: Freeze absoluto de TI</strong> para estabilizar antes del CyberDay.</li>
+                            </ul>
+
+                            <h2>5. Acta Formal de Aprobación</h2>
+                            <div class="doc-signatures-grid">
+                                <div class="doc-signature-item">
+                                    <div class="sig-role">GERENTE GENERAL</div>
+                                    <div class="sig-company">AndesHome Chile S.A.</div>
+                                </div>
+                                <div class="doc-signature-item">
+                                    <div class="sig-role">GERENTA DE SUPPLY CHAIN</div>
+                                    <div class="sig-company">AndesHome Chile S.A.</div>
+                                </div>
+                                <div class="doc-signature-item">
+                                    <div class="sig-role">GERENTE DE FINANZAS</div>
+                                    <div class="sig-company">AndesHome Chile S.A.</div>
+                                </div>
+                                <div class="doc-signature-item">
+                                    <div class="sig-role">JEFE DE TECNOLOGÍA (TI)</div>
+                                    <div class="sig-company">AndesHome Chile S.A.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- C-SUITE EXECUTIVE PRESENTATION MODAL -->
+    <div id="modal-csuite-deck" class="deck-modal">
+        <div class="deck-content">
+            <div class="deck-header">
+                <div class="deck-title-group">
+                    <span class="deck-badge">DIRECTORIO & C-SUITE PITCH DECK</span>
+                    <h3>Presentación Ejecutiva de Propuesta de Solución — AndesHome Chile S.A.</h3>
+                </div>
+                <button class="deck-close-btn" onclick="closeExecutiveDeck()">&times;</button>
+            </div>
+
+            <div class="deck-body">
+                <!-- Slide 1: Urgencia Operativa -->
+                <div class="deck-slide active" id="slide-1">
+                    <div class="slide-num">SLIDE 1 DE 5 • URGENCIA OPERATIVA & DIAGNÓSTICO (EA1)</div>
+                    <h2>1. El Desafío Operativo de CD Pudahuel (Junio 2026)</h2>
+                    <div class="slide-grid">
+                        <div class="slide-box danger">
+                            <h4>Deterioro de Servicio (OTIF)</h4>
+                            <p class="slide-big-num">80,9%</p>
+                            <p>Caída desde 92,3% en Jul 2025. En Peak Cyber colapsó al <strong>43,5%</strong> (11,5% Click & Collect).</p>
+                        </div>
+                        <div class="slide-box danger">
+                            <h4>Backlog Acumulado</h4>
+                            <p class="slide-big-num">15.387</p>
+                            <p>Pedidos pendientes (4,32 días de demanda). Sobrecosto por pedido fallido: <strong>CLP $29.628</strong>.</p>
+                        </div>
+                        <div class="slide-box danger">
+                            <h4>Demurrage Inbound & Multas</h4>
+                            <p class="slide-big-num">$330,8M</p>
+                            <p>CLP 146,3M en sobreestadía de camiones + CLP 184,5M en multas comerciales por retrasos.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 2: Portafolio Recomendado -->
+                <div class="deck-slide" id="slide-2">
+                    <div class="slide-num">SLIDE 2 DE 5 • PORTAFOLIO SELECCIONADO (P1 - P5)</div>
+                    <h2>2. Solución Integrada: 5 Iniciativas Sinérgicas</h2>
+                    <div class="slide-grid-5">
+                        <div class="slide-mini-card">
+                            <strong>P1 • Re-slotting ABC</strong>
+                            <p>Reubicación física 114 SKU. Ahorra 67,6 km/día caminata.</p>
+                            <span>CAPEX: $85M</span>
+                        </div>
+                        <div class="slide-mini-card">
+                            <strong>P2 • WMS NextGen + Voice</strong>
+                            <p>Elimina papel. Eleva picking +18% (55,2 lin/h).</p>
+                            <span>CAPEX: $310M</span>
+                        </div>
+                        <div class="slide-mini-card">
+                            <strong>P3 • Portal ASN & YMS</strong>
+                            <p>Citas 2h. Reduce Dock-to-Stock de 22,6h a 4,5h.</p>
+                            <span>CAPEX: $95M</span>
+                        </div>
+                        <div class="slide-mini-card">
+                            <strong>P4 • TMS Ruteo & POD</strong>
+                            <p>Algoritmo dinámico. Reduce fallidas a &le;3%.</p>
+                            <span>CAPEX: $150M</span>
+                        </div>
+                        <div class="slide-mini-card">
+                            <strong>P5 • Ergonomía & Packaging</strong>
+                            <p>Right-sizing 6 cajas. Cumple 100% norma DT.</p>
+                            <span>CAPEX: $70M</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Business Case Financiero -->
+                <div class="deck-slide" id="slide-3">
+                    <div class="slide-num">SLIDE 3 DE 5 • VIABILIDAD FINANCIERA</div>
+                    <h2>3. Evaluación Económica y Retorno de Inversión</h2>
+                    <div class="slide-metrics-row">
+                        <div class="deck-metric">
+                            <span class="m-label">CAPEX TOTAL (con 8% reserva)</span>
+                            <span class="m-val text-success">$766.800.000 CLP</span>
+                            <span class="m-sub">Techo Presupuesto: $850.000.000 (Holgura $83,2M)</span>
+                        </div>
+                        <div class="deck-metric">
+                            <span class="m-label">EBITDA INCREMENTAL NETO / AÑO</span>
+                            <span class="m-val text-success">$856.097.000 CLP</span>
+                            <span class="m-sub">Ahorros Brutos: $1.033M / OPEX SaaS: $177M</span>
+                        </div>
+                        <div class="deck-metric">
+                            <span class="m-label">VALOR ACTUAL NETO (VAN 3 AÑOS, 12%)</span>
+                            <span class="m-val text-success">$1.289.400.543 CLP</span>
+                            <span class="m-sub">TIR: 98,4% | Payback: 10,7 Meses</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Slide 4: Roadmap 24 Semanas -->
+                <div class="deck-slide" id="slide-4">
+                    <div class="slide-num">SLIDE 4 DE 5 • CRONOGRAMA DE IMPLEMENTACIÓN</div>
+                    <h2>4. Hoja de Ruta Master en 24 Semanas (Sin Detención del CD)</h2>
+                    <ul class="slide-timeline-list">
+                        <li><strong>Sem 1-4 (Fase 1):</strong> Preparación & Limpieza Maestro SKU (Gate 1 Aprobación).</li>
+                        <li><strong>Sem 5-10 (Fase 2):</strong> Quick Wins, Re-slotting ABC & Mesas D-Bulky. (⚠️ Freeze TI Sem 10).</li>
+                        <li><strong>Sem 11-18 (Fase 3):</strong> Despliegue e Integración ERP-WMS-TMS-ASN en Staging.</li>
+                        <li><strong>Sem 19-22 (Fase 4):</strong> Pilotos Operacionales A-Rápida Voice/RF + Flota LogiExpress.</li>
+                        <li><strong>Sem 23-24 (Fase 5):</strong> Cutover General en Vivo, Certificación 18 Superusuarios & Go-Live.</li>
+                    </ul>
+                </div>
+
+                <!-- Slide 5: Recomendación Final de Aprobación -->
+                <div class="deck-slide" id="slide-5">
+                    <div class="slide-num">SLIDE 5 DE 5 • RECOMENDACIÓN FINAL</div>
+                    <h2>5. Decisión Requerida por el Directorio</h2>
+                    <div class="slide-decision-box">
+                        <h3>Aprobación del Presupuesto CAPEX de CLP $766.800.000</h3>
+                        <p>Se solicita autorizar la liberación de fondos para dar inicio a la Fase 1 en la Semana 1, garantizando la estabilización total del CD 12 semanas antes del Peak Cyber 2027.</p>
+                        <div class="decision-sigs">
+                            <span>✍️ Gerencia General</span>
+                            <span>✍️ Gerencia Supply Chain</span>
+                            <span>✍️ Gerencia Finanzas</span>
+                            <span>✍️ Jefatura TI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="deck-footer">
+                <button class="btn-deck-nav" onclick="navDeck(-1)">&larr; Anterior</button>
+                <span id="deck-slide-indicator">Slide 1 de 5</span>
+                <button class="btn-deck-nav primary" onclick="navDeck(1)">Siguiente &rarr;</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="app-footer">
+        <p>AndesHome Chile S.A. — Caso Desafío Semestral GLA1104 | Escuela de Administración y Negocios DUOC UC</p>
+    </footer>
+
+    <script src="andeshome-store.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
