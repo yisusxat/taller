@@ -1725,33 +1725,47 @@ function renderRackElevation() {
         specLevelsTxt.innerText = `${lvls - 1}`;
     }
 
-    const floorY = 415;
-    const lvlH = Math.floor(340 / lvls);
+    const floorY = 410;
+    const lvlH = Math.floor(335 / lvls);
     const rackWidth = ppb === 2 ? 260 : 310;
-    const leftX = 55;
+    const leftX = 35;
     const rightX = leftX + rackWidth;
+
+    const extW = ppb === 2 ? '2,88 m' : '3,48 m';
+    const beamW = ppb === 2 ? '2,70 m' : '3,30 m';
+    const totH = (lvls * 2.1).toFixed(1) + ' m';
+    const totCapKg = (lvls * (ppb === 2 ? 2000 : 3000)).toLocaleString('es-CL') + ' kg';
+    const lvlCapKg = ppb === 2 ? '2.000 kg' : '3.000 kg';
+    const totVolM3 = ((ppb === 2 ? 2.88 : 3.48) * 1.10 * (lvls * 2.1)).toFixed(2) + ' m³';
+    const palOverhang = '50 mm frontal / 50 mm posterior';
+    const lateralClear = ppb === 2 ? '100 mm entre pallets' : '75 mm entre pallets';
 
     let svgHtml = `
         <!-- Suelo con Franja de Advertencia Operacional -->
-        <rect x="15" y="${floorY}" width="390" height="25" fill="#1e293b" rx="2"/>
-        <line x1="15" y1="${floorY}" x2="405" y2="${floorY}" stroke="#e2e8f0" stroke-width="2"/>
-        <line x1="25" y1="${floorY+6}" x2="395" y2="${floorY+6}" stroke="#fbbf24" stroke-width="3" stroke-dasharray="10 8"/>
+        <rect x="10" y="${floorY}" width="490" height="25" fill="#1e293b" rx="2"/>
+        <line x1="10" y1="${floorY}" x2="500" y2="${floorY}" stroke="#e2e8f0" stroke-width="2"/>
+        <line x1="20" y1="${floorY+6}" x2="490" y2="${floorY+6}" stroke="#fbbf24" stroke-width="3" stroke-dasharray="10 8"/>
 
         <!-- Cota Total de Altura (Izquierda) -->
-        <line x1="30" y1="${floorY}" x2="30" y2="${floorY - lvls * lvlH}" stroke="#94a3b8" stroke-width="1.2"/>
-        <line x1="24" y1="${floorY}" x2="36" y2="${floorY}" stroke="#94a3b8" stroke-width="1.2"/>
-        <line x1="24" y1="${floorY - lvls * lvlH}" x2="36" y2="${floorY - lvls * lvlH}" stroke="#94a3b8" stroke-width="1.2"/>
-        <text x="22" y="${floorY - (lvls * lvlH)/2}" fill="#38bdf8" font-size="10" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle" transform="rotate(-90 22 ${floorY - (lvls * lvlH)/2})">
-            ${(lvls * 2.1).toFixed(1)} m
+        <line x1="22" y1="${floorY}" x2="22" y2="${floorY - lvls * lvlH}" stroke="#94a3b8" stroke-width="1.2"/>
+        <line x1="16" y1="${floorY}" x2="28" y2="${floorY}" stroke="#94a3b8" stroke-width="1.2"/>
+        <line x1="16" y1="${floorY - lvls * lvlH}" x2="28" y2="${floorY - lvls * lvlH}" stroke="#94a3b8" stroke-width="1.2"/>
+        <text x="14" y="${floorY - (lvls * lvlH)/2}" fill="#38bdf8" font-size="10" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle" transform="rotate(-90 14 ${floorY - (lvls * lvlH)/2})">
+            ${totH} (5 pisos x 2,1m)
         </text>
 
-        <!-- Bastidor Izquierdo (Puntal de Acero Perfilado) -->
+        <!-- Bastidor Izquierdo (Puntal de Acero Perfilado 90x70mm) -->
         <rect x="${leftX}" y="${floorY - lvls * lvlH - 12}" width="16" height="${lvls * lvlH + 12}" fill="#0284c7" stroke="#0369a1" stroke-width="1.5" rx="2"/>
+        <!-- Placa Base Sísmica Izquierda -->
+        <rect x="${leftX - 4}" y="${floorY - 2}" width="24" height="4" fill="#e2e8f0" rx="1"/>
+
         <!-- Bastidor Derecho -->
         <rect x="${rightX - 16}" y="${floorY - lvls * lvlH - 12}" width="16" height="${lvls * lvlH + 12}" fill="#0284c7" stroke="#0369a1" stroke-width="1.5" rx="2"/>
+        <!-- Placa Base Sísmica Derecha -->
+        <rect x="${rightX - 20}" y="${floorY - 2}" width="24" height="4" fill="#e2e8f0" rx="1"/>
     `;
 
-    // Celosías y arriostramientos diagonales
+    // Celosías y arriostramientos diagonales de puntal
     for (let i = 0; i < lvls; i++) {
         const yTop = floorY - (i + 1) * lvlH;
         const yBot = floorY - i * lvlH;
@@ -1766,7 +1780,6 @@ function renderRackElevation() {
 
     for (let l = 0; l < lvls; l++) {
         const beamY = floorY - (l + 1) * lvlH;
-        const loadY = beamY + 8; // base del pallet
 
         // Par de Vigas Naranjas
         svgHtml += `
@@ -1792,7 +1805,6 @@ function renderRackElevation() {
 
             // Carga estibada (Cajas / Bultos)
             if (isAsIs) {
-                // Crisis: Cajas desordenadas, sin estandarizar, alerta en altura
                 const boxColor = (l >= 3 && p === 0) ? '#f43f5e' : (l % 2 === 0 ? '#d97706' : '#ca8a04');
                 svgHtml += `
                     <rect x="${px + 2}" y="${py}" width="${palW - 4}" height="${boxH}" fill="${boxColor}" stroke="#92400e" stroke-width="1" rx="2" opacity="0.9"/>
@@ -1800,7 +1812,6 @@ function renderRackElevation() {
                     ${l >= 3 ? `<text x="${px + palW/2}" y="${py + boxH/2 + 3}" fill="#ffffff" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">⚠️</text>` : ''}
                 `;
             } else {
-                // To-Be: Estiba estandarizada, film stretch, etiqueta barcode verde
                 svgHtml += `
                     <rect x="${px + 2}" y="${py}" width="${palW - 4}" height="${boxH}" fill="#eab308" stroke="#ca8a04" stroke-width="1" rx="2"/>
                     <!-- Film stretch transparente -->
@@ -1812,11 +1823,11 @@ function renderRackElevation() {
             }
         }
 
-        // Cota y etiqueta de altura del nivel (Derecha)
-        const lvlHNum = ((l + 1) * 2.1).toFixed(1);
-        const lvlName = l === 0 ? 'Piso 0: Mano / Picking (0,0 m)' : `Piso ${l}: Reserva Aérea (+${lvlHNum} m)`;
+        // Cota y etiqueta de altura del nivel (Derecha, con espacio suficiente sin truncar)
+        const lvlHNum = (l * 2.1).toFixed(1);
+        const lvlName = l === 0 ? 'Piso 0: Picking (0,0 m)' : `Piso ${l}: Reserva (+${lvlHNum} m)`;
         svgHtml += `
-            <text x="${rightX + 8}" y="${beamY + 5}" fill="${l === 0 ? '#38bdf8' : '#94a3b8'}" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="${l === 0 ? '800' : '600'}">
+            <text x="${rightX + 12}" y="${beamY + 5}" fill="${l === 0 ? '#38bdf8' : '#94a3b8'}" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="${l === 0 ? '800' : '600'}">
                 ${lvlName}
             </text>
         `;
@@ -1827,12 +1838,103 @@ function renderRackElevation() {
         <line x1="${leftX}" y1="${floorY + 16}" x2="${rightX}" y2="${floorY + 16}" stroke="#94a3b8" stroke-width="1.2"/>
         <line x1="${leftX}" y1="${floorY + 12}" x2="${leftX}" y2="${floorY + 20}" stroke="#94a3b8" stroke-width="1.2"/>
         <line x1="${rightX}" y1="${floorY + 12}" x2="${rightX}" y2="${floorY + 20}" stroke="#94a3b8" stroke-width="1.2"/>
-        <text x="${leftX + rackWidth/2}" y="${floorY + 28}" fill="#fbbf24" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">
-            Luz de Viga: ${ppb === 2 ? '2,70 m' : '3,30 m'} (${ppb} Pallets / Nivel)
+        <text x="${leftX + rackWidth/2}" y="${floorY + 28}" fill="#fbbf24" font-size="9.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">
+            Luz de Viga: ${beamW} (${ppb} Pallets / Nivel)
+        </text>
+        <text x="${leftX + rackWidth/2}" y="${floorY + 41}" fill="#94a3b8" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="600" text-anchor="middle">
+            Ancho Ext: ${extW} &bull; Fondo: 1,10 m (Pallet: 1,20 m)
         </text>
     `;
 
     svg.innerHTML = svgHtml;
+
+    // Renderizar Ficha Técnica Dinámica Completa de Medidas
+    const specsBox = document.getElementById('rack-elevation-specs-box');
+    if (specsBox) {
+        specsBox.innerHTML = `
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+                <span style="font-size: 0.82rem; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 6px;">
+                    <span>📐</span> Ficha Técnica de Medidas Exactas del Módulo
+                </span>
+                <span style="font-size: 0.72rem; font-family: var(--font-mono); color: #34d399; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 3px 8px; border-radius: 4px; font-weight: 700;">
+                    ${lvls} Pisos &bull; ${lvls * ppb} Pallets &bull; ${totVolM3}
+                </span>
+            </div>
+
+            <!-- Mini Pills de Medidas Principales -->
+            <div class="rack-meas-pills-grid">
+                <div class="rack-meas-pill">
+                    <span class="rack-meas-pill-lbl">Alto Total (H)</span>
+                    <span class="rack-meas-pill-val" style="color: #38bdf8;">${totH}</span>
+                </div>
+                <div class="rack-meas-pill">
+                    <span class="rack-meas-pill-lbl">Ancho Exterior</span>
+                    <span class="rack-meas-pill-val" style="color: #ffffff;">${extW}</span>
+                </div>
+                <div class="rack-meas-pill">
+                    <span class="rack-meas-pill-lbl">Luz de Viga</span>
+                    <span class="rack-meas-pill-val" style="color: #fbbf24;">${beamW}</span>
+                </div>
+                <div class="rack-meas-pill">
+                    <span class="rack-meas-pill-lbl">Fondo Estructural</span>
+                    <span class="rack-meas-pill-val" style="color: #ffffff;">1,10 m</span>
+                </div>
+                <div class="rack-meas-pill">
+                    <span class="rack-meas-pill-lbl">Fondo c/ Pallet</span>
+                    <span class="rack-meas-pill-val" style="color: #34d399;">1,20 m</span>
+                </div>
+                <div class="rack-meas-pill">
+                    <span class="rack-meas-pill-lbl">Carga Máxima</span>
+                    <span class="rack-meas-pill-val" style="color: #f43f5e;">${totCapKg}</span>
+                </div>
+            </div>
+
+            <!-- Tabla de Cotas y Medidas de Componentes -->
+            <table class="rack-dim-table">
+                <thead>
+                    <tr>
+                        <th>Componente</th>
+                        <th>Medida Nominal</th>
+                        <th>Detalle de Ingeniería y Función Operativa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Luz Libre de Viga</strong></td>
+                        <td><strong style="color: #fbbf24;">${beamW} (${ppb === 2 ? '2.700' : '3.300'} mm)</strong></td>
+                        <td>Aloja ${ppb} pallets de 1,00 m con ${lateralClear} de holgura lateral.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Puntales / Bastidores</strong></td>
+                        <td><strong>Sección 90 &times; 70 mm (e=2,5 mm)</strong></td>
+                        <td>Acero estructural sismo-resistente NCh2369. Placas base 160&times;140 mm ancladas con pernos M16.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Paso entre Niveles</strong></td>
+                        <td><strong>2,10 m (2.100 mm)</strong></td>
+                        <td>1,65 m carga estibada + 180 mm huelgo de izaje horquilla + 140 mm peralte de viga naranja.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Apoyo y Voladizo</strong></td>
+                        <td><strong>1,10 m bastidor &bull; ${palOverhang}</strong></td>
+                        <td>El pallet de 1,20 m asienta de lleno sobre ambas vigas; el voladizo de 50 mm impide descalces y caídas.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Capacidad Portante</strong></td>
+                        <td><strong style="color: #38bdf8;">${lvlCapKg} / Nivel (${totCapKg} módulo)</strong></td>
+                        <td>Soporta 1.000 kg por pallet con factor de seguridad estructural &ge; 1,5.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="margin-top: 10px; font-size: 0.74rem; color: #cbd5e1; line-height: 1.5; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
+                <strong style="color: #38bdf8;">👷 Dinámica Operativa de Niveles:</strong>
+                &bull; <strong style="color: #34d399;">Piso 0 (0,0 m):</strong> Picking manual a pie sin grúa.
+                &bull; <strong style="color: #38bdf8;">Pisos 1 a ${lvls - 1} (+2,1 m a +${((lvls-1)*2.1).toFixed(1)} m):</strong> Reserva aérea con film stretch bajada por grúa reach.
+                &bull; <strong style="color: #fbbf24;">Ley 20.949:</strong> Ningún bulto pesado (+15 kg) en niveles altos.
+            </div>
+        `;
+    }
 }
 
 /* 4. Renderizado de la Matriz Comparativa por Zonas */

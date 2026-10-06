@@ -3383,3 +3383,67 @@ body {
     font-weight: 800;
 }
 
+/* Especificaciones Dinámicas de Medidas de la Estantería */
+.rack-elevation-specs-container {
+    margin-top: 12px;
+    background: rgba(15, 23, 42, 0.85);
+    border-radius: 10px;
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    padding: 16px;
+}
+
+.rack-meas-pills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.rack-meas-pill {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: 6px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.rack-meas-pill-lbl {
+    font-size: 0.65rem;
+    font-family: var(--font-mono, monospace);
+    color: #94a3b8;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.rack-meas-pill-val {
+    font-size: 1.05rem;
+    font-family: var(--font-mono, monospace);
+    font-weight: 800;
+    color: #ffffff;
+    margin-top: 2px;
+}
+
+.rack-dim-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.76rem;
+    margin-top: 8px;
+}
+
+.rack-dim-table th {
+    background: rgba(15, 23, 42, 0.95);
+    color: #94a3b8;
+    padding: 6px 8px;
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: left;
+}
+
+.rack-dim-table td {
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+}
+
