@@ -2486,3 +2486,308 @@ body {
     line-height: 1.4;
     margin-top: 4px;
 }
+
+/* ==========================================================================
+   14. MASTER RESPONSIVE SUITE (SMARTPHONES, TABLETS & DISPOSITIVOS TÁCTILES)
+   ========================================================================== */
+
+/* Breakpoint 1: Laptops compactos y Tablets grandes (<= 1100px) */
+@media (max-width: 1100px) {
+    .blueprint-layout-section {
+        grid-template-columns: 1fr;
+    }
+    .inspector-panel-2d {
+        width: 100%;
+    }
+    .blueprint-card {
+        width: 100%;
+    }
+    .kpi-quick-strip {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .sandbox-split-grid {
+        grid-template-columns: 1fr;
+    }
+    .master-phases-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Breakpoint 2: Tablets y móviles apaisados (<= 880px) */
+@media (max-width: 880px) {
+    .top-nav-2d {
+        position: static;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 12px 16px;
+    }
+    .brand-section {
+        justify-content: flex-start;
+    }
+    .brand-title-wrap h1 {
+        font-size: 1.05rem;
+    }
+    .brand-subtitle-wrap {
+        font-size: 0.72rem;
+    }
+    .nav-center-controls {
+        width: 100%;
+        justify-content: center;
+    }
+    .view-mode-pill {
+        flex: 1;
+        justify-content: center;
+        font-size: 0.74rem;
+        padding: 8px 10px;
+    }
+    .nav-btn-group {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .nav-btn-group .btn-action {
+        flex: 1;
+        justify-content: center;
+        font-size: 0.78rem;
+        padding: 8px 12px;
+    }
+    
+    .master-phases-banner {
+        padding: 0 16px;
+    }
+    .master-phases-banner-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .master-phases-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .diag-tabs-bar {
+        padding: 0 16px 8px;
+        gap: 8px;
+    }
+    .diag-tab-btn {
+        padding: 8px 12px;
+        font-size: 0.78rem;
+    }
+
+    .diag-view-content {
+        padding: 14px 16px 36px;
+    }
+
+    .apqc-calc-grid {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+    .apqc-live-result-box {
+        padding: 16px;
+    }
+    .apqc-big-score {
+        font-size: 2.4rem;
+    }
+
+    .results-comparison-grid {
+        grid-template-columns: 1fr;
+    }
+    .scenario-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .sol-hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Modal Keynote 2D */
+    .keynote-window {
+        width: 95vw;
+        max-width: 95vw;
+        max-height: 92vh;
+        padding: 18px 16px;
+    }
+}
+
+/* Breakpoint 3: Smartphones y pantallas estrechas (<= 640px) */
+@media (max-width: 640px) {
+    .kpi-quick-strip {
+        grid-template-columns: 1fr;
+        padding: 10px 14px 0;
+        gap: 10px;
+    }
+    .kpi-mini-card {
+        padding: 12px 16px;
+    }
+    .kpi-number {
+        font-size: 1.8rem;
+    }
+
+    .diag-tabs-bar {
+        padding: 0 12px 8px;
+    }
+    .diag-view-content {
+        padding: 12px 12px 30px;
+    }
+
+    /* Blueprint card y SVG en móvil */
+    .blueprint-card {
+        padding: 12px;
+        border-radius: 12px;
+    }
+    .blueprint-toolbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .filter-pills-row, .legend-chips-row {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    .blueprint-svg-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        padding: 6px;
+    }
+    #warehouse-2d-svg {
+        min-width: 520px; /* Garantiza legibilidad y tacto ergonómico en smartphones */
+    }
+
+    /* Inspector panel en móvil */
+    .inspector-panel-2d {
+        padding: 16px 14px;
+        border-radius: 12px;
+    }
+    .inspector-zone-name {
+        font-size: 1.1rem;
+    }
+    .inspector-metric-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+    .metric-tile {
+        padding: 10px;
+    }
+    .metric-tile .t-val {
+        font-size: 1rem;
+    }
+
+    /* Simulador Causa-Efecto */
+    .cause-effect-sim-box {
+        padding: 12px 14px;
+    }
+    .ce-slider-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .ce-metrics-strip {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+    .ce-metric-card {
+        padding: 8px 10px;
+    }
+    .ce-m-val {
+        font-size: 1rem;
+    }
+
+    /* Selector de Turnos */
+    .shift-selector-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+    }
+    .shift-btn {
+        justify-content: center;
+        padding: 6px 10px;
+    }
+
+    /* Portafolio y Presets */
+    .portfolio-presets-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .preset-pill-btn {
+        text-align: center;
+        width: 100%;
+    }
+    .sol-hero-stats {
+        grid-template-columns: 1fr;
+    }
+
+    /* Transformación Before / After */
+    .transf-toggle-bar {
+        width: 100%;
+        flex-direction: column;
+        border-radius: 14px;
+        padding: 10px 12px;
+        gap: 8px;
+    }
+    .transf-btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+    }
+    .results-hero-card {
+        padding: 16px 14px;
+        border-radius: 12px;
+    }
+
+    /* Infografías y Equivalencias ESG */
+    .esg-equivalents-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    .human-esg-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    .tech-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Modal Keynote 2D */
+    .keynote-window {
+        width: 98vw;
+        max-width: 98vw;
+        max-height: 95vh;
+        padding: 14px 10px;
+        border-radius: 12px;
+    }
+    .keynote-slide-view {
+        padding: 18px 14px;
+    }
+    .keynote-slide-view h2 {
+        font-size: 1.25rem !important;
+    }
+    .keynote-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .keynote-footer .btn-action {
+        width: 100%;
+        justify-content: center;
+        min-height: 42px;
+    }
+}
+
+/* Breakpoint 4: Teléfonos muy pequeños (<= 380px) */
+@media (max-width: 380px) {
+    .brand-section {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+    .brand-title-wrap h1 {
+        font-size: 0.95rem;
+    }
+    .inspector-metric-grid {
+        grid-template-columns: 1fr;
+    }
+    .ce-metrics-strip {
+        grid-template-columns: 1fr;
+    }
+}
+
