@@ -1398,6 +1398,7 @@ const RACK_ZONES_CONFIG = {
         aisles: ['A01', 'A02', 'A03', 'A04', 'A05', 'A06'],
         area: 5200,
         dist: 35,
+        base_racks: 390,
         cap_pos: 3900,
         asis_pos: 3720,
         tobe_pos: 3120,
@@ -1414,6 +1415,7 @@ const RACK_ZONES_CONFIG = {
         aisles: ['B01', 'B02', 'B03', 'B04', 'B05', 'B06', 'B07', 'B08', 'B09', 'B10', 'B11', 'B12'],
         area: 6100,
         dist: 72,
+        base_racks: 470,
         cap_pos: 4700,
         asis_pos: 4380,
         tobe_pos: 3850,
@@ -1430,6 +1432,7 @@ const RACK_ZONES_CONFIG = {
         aisles: ['C01', 'C02', 'C03', 'C04', 'C05', 'C06'],
         area: 7200,
         dist: 118,
+        base_racks: 580,
         cap_pos: 5800,
         asis_pos: 5260,
         tobe_pos: 4450,
@@ -1446,6 +1449,7 @@ const RACK_ZONES_CONFIG = {
         aisles: ['D01', 'D02', 'D03'],
         area: 4900,
         dist: 154,
+        base_racks: 250,
         cap_pos: 2500,
         asis_pos: 2360,
         tobe_pos: 2060,
@@ -1485,10 +1489,13 @@ function initRackCalculator() {
 
 /* 1. Cálculo de Métricas y KPIs de Racks */
 function calculateRackMetrics() {
+    const baseInstalledRacks = 1690; // Módulos físicos instalados en la huella de la nave (27 pasillos)
     const modCap = rackCalcState.levels * rackCalcState.palletsPerBeam;
     const beamLen = rackCalcState.palletsPerBeam === 2 ? 2.70 : 3.30;
-    const totalInstalledPos = 16900;
-    const installedRacks = Math.round(totalInstalledPos / modCap);
+    
+    // Capacidad Total de Posiciones que genera la nave a esa altura
+    // (A más pisos de altura: 6 pisos = 20.280 pos > 5 pisos = 16.900 pos > 4 pisos = 13.520 pos > 3 pisos = 10.140 pos)
+    const totalPlantPositions = baseInstalledRacks * modCap;
 
     let occupiedPositions = 0;
     let occupiedRacks = 0;
@@ -1498,14 +1505,14 @@ function calculateRackMetrics() {
     if (rackCalcState.scenario === 'asis') {
         occupiedPositions = 15720;
         occupiedRacks = Math.ceil(occupiedPositions / modCap);
-        utilizationPct = ((occupiedPositions / totalInstalledPos) * 100).toFixed(1);
-        bufferRacks = installedRacks - occupiedRacks;
+        utilizationPct = ((occupiedPositions / totalPlantPositions) * 100).toFixed(1);
+        bufferRacks = baseInstalledRacks - occupiedRacks;
     } else {
         const factor = rackCalcState.targetOccupancy / 85.0;
         occupiedPositions = Math.round(13480 * factor);
         occupiedRacks = Math.ceil(occupiedPositions / modCap);
-        utilizationPct = ((occupiedPositions / totalInstalledPos) * 100).toFixed(1);
-        bufferRacks = installedRacks - occupiedRacks;
+        utilizationPct = ((occupiedPositions / totalPlantPositions) * 100).toFixed(1);
+        bufferRacks = baseInstalledRacks - occupiedRacks;
     }
 
     const linearMeters = Math.round(occupiedRacks * beamLen);
@@ -1524,14 +1531,27 @@ function calculateRackMetrics() {
         kpiNeeded.style.color = rackCalcState.scenario === 'asis' ? '#f43f5e' : '#38bdf8';
     }
     if (kpiNeededSub) {
-        kpiNeededSub.innerText = rackCalcState.scenario === 'asis'
-            ? `${occupiedPositions.toLocaleString('es-CL')} pallets ocupados (93% del almacén saturado)`
-            : `${occupiedPositions.toLocaleString('es-CL')} pallets equilibrados con Re-Slotting P1`;
+        kpiNeededSub.innerText = `${occupiedPositions.toLocaleString('es-CL')} pallets guardados (${occupiedRacks} de ${baseInstalledRacks} estanterías)`;
     }
 
     const kpiInstalled = document.getElementById('kpi-racks-installed');
+    const kpiInstalledSub = document.getElementById('kpi-racks-installed-sub');
     if (kpiInstalled) {
-        kpiInstalled.innerText = `${installedRacks.toLocaleString('es-CL')} Estanterías`;
+        kpiInstalled.innerText = `${totalPlantPositions.toLocaleString('es-CL')} Posiciones`;
+    }
+    if (kpiInstalledSub) {
+        if (rackCalcState.levels === 5 && rackCalcState.palletsPerBeam === 2) {
+            kpiInstalledSub.innerText = `1.690 estanterías base (10,5 m oficial Pudahuel)`;
+        } else if (rackCalcState.levels === 6) {
+            const extra = totalPlantPositions - 16900;
+            kpiInstalledSub.innerText = `1.690 estanterías base (¡+${extra.toLocaleString('es-CL')} pos ganadas en altura!)`;
+        } else if (rackCalcState.levels === 4) {
+            kpiInstalledSub.innerText = `1.690 estanterías base (-3.380 pos vs estándar oficial)`;
+        } else if (rackCalcState.levels === 3) {
+            kpiInstalledSub.innerText = `1.690 estanterías base (insuficiente para 13.480 pallets)`;
+        } else {
+            kpiInstalledSub.innerText = `1.690 estanterías base instaladas en nave`;
+        }
     }
 
     const kpiUtil = document.getElementById('kpi-racks-util');
@@ -1541,10 +1561,12 @@ function calculateRackMetrics() {
         kpiUtil.style.color = parseFloat(utilizationPct) >= 90 ? '#f43f5e' : parseFloat(utilizationPct) > 85 ? '#fbbf24' : '#34d399';
     }
     if (kpiUtilSub) {
-        const freePct = (100 - parseFloat(utilizationPct)).toFixed(1).replace('.', ',');
-        kpiUtilSub.innerText = rackCalcState.scenario === 'asis'
-            ? `Solo ${bufferRacks.toLocaleString('es-CL')} racks libres (Crítico: pasillos trancados)`
-            : `Holgura de ${bufferRacks.toLocaleString('es-CL')} racks libres (${freePct}% de colchón amortiguador)`;
+        if (bufferRacks >= 0) {
+            const freePct = (100 - parseFloat(utilizationPct)).toFixed(1).replace('.', ',');
+            kpiUtilSub.innerText = `Holgura de ${bufferRacks.toLocaleString('es-CL')} racks libres (${freePct}% de colchón)`;
+        } else {
+            kpiUtilSub.innerText = `Déficit de ${Math.abs(bufferRacks)} estanterías (sobrepasa la nave)`;
+        }
     }
 
     const kpiMeters = document.getElementById('kpi-racks-meters');
@@ -1833,16 +1855,17 @@ function renderRackMatrixTable() {
 
     zones.forEach(zKey => {
         const z = RACK_ZONES_CONFIG[zKey];
-        const racksInstalled = Math.round(z.cap_pos / modCap);
+        const baseRacks = z.base_racks;
+        const zoneCapPos = baseRacks * modCap;
         const reqPallets = isAsIs ? z.asis_pos : Math.round(z.tobe_pos * factor);
         const racksOccupied = Math.ceil(reqPallets / modCap);
-        const util = ((reqPallets / z.cap_pos) * 100).toFixed(1);
+        const util = ((reqPallets / zoneCapPos) * 100).toFixed(1);
 
-        totalCap += z.cap_pos;
+        totalCap += zoneCapPos;
         totalArea += z.area;
         totalPallets += reqPallets;
         totalRacksOccupied += racksOccupied;
-        totalRacksInstalled += racksInstalled;
+        totalRacksInstalled += baseRacks;
 
         const utilBadgeClass = parseFloat(util) >= 92 ? 'status-critical' : parseFloat(util) > 85 ? 'status-warning' : 'status-optimal';
         const diagText = isAsIs ? z.diag_asis : z.diag_tobe;
@@ -1862,7 +1885,7 @@ function renderRackMatrixTable() {
                 <td>${skuTransition}</td>
                 <td><strong style="color: #ffffff;">${reqPallets.toLocaleString('es-CL')}</strong> pos</td>
                 <td><strong style="color: ${isAsIs ? '#f43f5e' : '#38bdf8'}">${racksOccupied.toLocaleString('es-CL')}</strong> racks</td>
-                <td>${racksInstalled.toLocaleString('es-CL')} racks</td>
+                <td><strong style="color: #ffffff;">${baseRacks.toLocaleString('es-CL')} racks</strong> <span style="font-size: 0.72rem; color: #38bdf8;">(${zoneCapPos.toLocaleString('es-CL')} pos)</span></td>
                 <td>
                     <span class="sku-util-badge ${utilBadgeClass}">
                         ${util.replace('.', ',')}%
@@ -1877,6 +1900,21 @@ function renderRackMatrixTable() {
 
     const totalUtil = ((totalPallets / totalCap) * 100).toFixed(1);
     const totalBadgeClass = parseFloat(totalUtil) >= 90 ? 'status-critical' : parseFloat(totalUtil) > 85 ? 'status-warning' : 'status-optimal';
+    const freeRacks = totalRacksInstalled - totalRacksOccupied;
+    const freePct = (100 - parseFloat(totalUtil)).toFixed(1).replace('.', ',');
+
+    let totalDiag = '';
+    if (isAsIs) {
+        totalDiag = `🚨 Crisis CyberDay: ${totalUtil.replace('.', ',')}% saturación global (${totalPallets.toLocaleString('es-CL')} pallets). Grúas y carros bloqueados, demoras críticas.`;
+    } else {
+        if (rackCalcState.levels === 6) {
+            totalDiag = `✨ Con 6 pisos ganas +3.380 posiciones aéreas (total ${totalCap.toLocaleString('es-CL')} pos). Ocupas solo ${totalRacksOccupied.toLocaleString('es-CL')} racks en suelo (${totalUtil.replace('.', ',')}% ocupación), con ${freeRacks.toLocaleString('es-CL')} racks de holgura (${freePct}% libre).`;
+        } else if (rackCalcState.levels === 5) {
+            totalDiag = `✨ Almacén Equilibrado (10,5 m Oficial Pudahuel): ${totalUtil.replace('.', ',')}% ocupación. ${freeRacks.toLocaleString('es-CL')} estanterías libres en nave (${freePct}% colchón) para absorber picos.`;
+        } else {
+            totalDiag = `⚠️ Configuración a ${rackCalcState.levels} Pisos: Capacidad instalada de ${totalCap.toLocaleString('es-CL')} pos (${totalUtil.replace('.', ',')}% de ocupación).`;
+        }
+    }
 
     html += `
         <tr style="background: rgba(56, 189, 248, 0.08); font-weight: 800; border-top: 2px solid rgba(56, 189, 248, 0.3);">
@@ -1886,14 +1924,14 @@ function renderRackMatrixTable() {
             <td>450 SKUs</td>
             <td style="color: #38bdf8;">${totalPallets.toLocaleString('es-CL')} pos</td>
             <td style="color: ${isAsIs ? '#f43f5e' : '#38bdf8'}; font-size: 0.92rem;">${totalRacksOccupied.toLocaleString('es-CL')} racks</td>
-            <td style="color: #ffffff;">${totalRacksInstalled.toLocaleString('es-CL')} racks</td>
+            <td style="color: #ffffff;">${totalRacksInstalled.toLocaleString('es-CL')} racks <span style="font-size: 0.72rem; color: #38bdf8;">(${totalCap.toLocaleString('es-CL')} pos)</span></td>
             <td>
                 <span class="sku-util-badge ${totalBadgeClass}">
                     ${totalUtil.replace('.', ',')}%
                 </span>
             </td>
             <td style="font-size: 0.78rem; color: ${isAsIs ? '#fda4af' : '#a7f3d0'};">
-                ${isAsIs ? '🚨 Crisis CyberDay: 93,0% saturación global (15.720 pallets). Grúas y carros bloqueados, demoras críticas.' : '✨ Almacén Equilibrado: 79,8% de ocupación. 342 estanterías libres (20,2% de colchón) para absorber picos sin estrés.'}
+                ${totalDiag}
             </td>
         </tr>
     `;
