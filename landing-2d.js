@@ -123,6 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
     initSvgHoverCards();
     initKeyboardShortcuts();
     initDidacticTools();
+
+    // Inicialización del Calculador de Racks y Layout 2D (SKU Master)
+    if (typeof initRackCalculator === 'function') {
+        initRackCalculator();
+    }
 });
 
 /* ==========================================================================
@@ -165,6 +170,20 @@ function initDiagnosticTabs() {
             }
         });
     });
+
+    // Soporte para navegación directa por Hash (#view-racks-calc, etc.)
+    const handleUrlHash = () => {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) {
+            const matchingBtn = document.querySelector(`.diag-tab-btn[data-view="${hash}"]`);
+            if (matchingBtn) {
+                matchingBtn.click();
+            }
+        }
+    };
+
+    handleUrlHash();
+    window.addEventListener('hashchange', handleUrlHash);
 }
 
 /* ==========================================================================
@@ -1351,3 +1370,767 @@ window.toggleTransformationView = function(state) {
         if (typeof setMode2D === 'function') setMode2D('optimized');
     }
 };
+
+/* ==========================================================================
+   10. CALCULADORA DE RACKS & LAYOUT 2D (SKU MASTER OFICIAL 450 SKUS)
+   ========================================================================== */
+
+const rackCalcState = {
+    scenario: 'tobe',         // 'asis' | 'tobe'
+    levels: 5,                // 3, 4, 5, 6 niveles
+    palletsPerBeam: 2,        // 2 o 3 pallets por viga
+    targetOccupancy: 85,      // 70% a 95%
+    filterMismatch: 'all',    // 'all' | 'mismatches' | 'rescued'
+    filterZone: 'all',        // 'all' | 'A-Rápida' | 'B-Media' | 'C-Lenta' | 'D-Bulky'
+    filterAbc: 'all',         // 'all' | 'A' | 'B' | 'C'
+    filterFam: 'all',         // 'all' | Familia
+    searchQuery: '',
+    page: 1,
+    pageSize: 15,
+    selectedAisle: null
+};
+
+// Datos base de zonas de planta AndesHome Pudahuel
+const RACK_ZONES_CONFIG = {
+    'A-Rápida': {
+        name: 'Zona A-Rápida',
+        func: 'Picking Express (Alta Rotación)',
+        aisles: ['A01', 'A02', 'A03', 'A04', 'A05', 'A06'],
+        area: 5200,
+        dist: 35,
+        cap_pos: 3900,
+        asis_pos: 3720,
+        tobe_pos: 3120,
+        asis_skus: 84,
+        tobe_skus: 105,
+        color_asis: '#ef4444',
+        color_tobe: '#10b981',
+        diag_asis: 'Saturación Crítica 95,4% • Congestión pasillos A03-A05 por falta de buffer',
+        diag_tobe: 'Holgura Óptima 80,0% • Flujo continuo sin cuellos de botella (-58% congestión)'
+    },
+    'B-Media': {
+        name: 'Zona B-Media',
+        func: 'Picking Estándar (Media Rotación)',
+        aisles: ['B01', 'B02', 'B03', 'B04', 'B05', 'B06', 'B07', 'B08', 'B09', 'B10', 'B11', 'B12'],
+        area: 6100,
+        dist: 72,
+        cap_pos: 4700,
+        asis_pos: 4380,
+        tobe_pos: 3850,
+        asis_skus: 125,
+        tobe_skus: 120,
+        color_asis: '#f59e0b',
+        color_tobe: '#06b6d4',
+        diag_asis: 'Ocupación 93,2% • Reabastecimiento reactivo y quiebres intermitentes',
+        diag_tobe: 'Ocupación Balanceada 81,9% • Wave picking programado y buffer ágil'
+    },
+    'C-Lenta': {
+        name: 'Zona C-Lenta',
+        func: 'Almacenamiento Lenta Rotación',
+        aisles: ['C01', 'C02', 'C03', 'C04', 'C05', 'C06'],
+        area: 7200,
+        dist: 118,
+        cap_pos: 5800,
+        asis_pos: 5260,
+        tobe_pos: 4450,
+        asis_skus: 154,
+        tobe_skus: 147,
+        color_asis: '#eab308',
+        color_tobe: '#10b981',
+        diag_asis: 'Ocupación 90,7% • 12 SKUs Clase A atrapados al fondo generando fatiga física',
+        diag_tobe: 'Ocupación 76,7% • SKUs lentos consolidados liberando 1.350 pos de holgura'
+    },
+    'D-Bulky': {
+        name: 'Zona D-Bulky',
+        func: 'Cargas Pesadas y Voluminosas',
+        aisles: ['D01', 'D02', 'D03'],
+        area: 4900,
+        dist: 154,
+        cap_pos: 2500,
+        asis_pos: 2360,
+        tobe_pos: 2060,
+        asis_skus: 87,
+        tobe_skus: 78,
+        color_asis: '#ef4444',
+        color_tobe: '#34d399',
+        diag_asis: 'Ocupación 94,4% • Riesgo de sobrecarga en altura (>15 kg en niveles superiores)',
+        diag_tobe: 'Ocupación 82,4% • Estiba regulada en Suelo/N1 según Ley 20.949 (MMC)'
+    }
+};
+
+/* Inicializador Global del Calculador de Racks */
+function initRackCalculator() {
+    if (typeof ANDES_SKU_MASTER === 'undefined' || typeof ANDES_LAYOUT_CAPACITY === 'undefined') {
+        console.warn('Advertencia: Base de datos maestra SKU no detectada.');
+        return;
+    }
+
+    calculateRackMetrics();
+    renderRackFloorplan();
+    renderRackElevation();
+    renderRackMatrixTable();
+    renderSkuMasterTable();
+
+    // Re-renderizar si la pestaña de racks se vuelve visible
+    const racksTabBtn = document.getElementById('tab-btn-racks');
+    if (racksTabBtn) {
+        racksTabBtn.addEventListener('click', () => {
+            setTimeout(() => {
+                renderRackFloorplan();
+                renderRackElevation();
+            }, 50);
+        });
+    }
+}
+
+/* 1. Cálculo de Métricas y KPIs de Racks */
+function calculateRackMetrics() {
+    const modCap = rackCalcState.levels * rackCalcState.palletsPerBeam;
+    const beamLen = rackCalcState.palletsPerBeam === 2 ? 2.70 : 3.30;
+    const totalInstalledPos = 16900;
+    const installedRacks = Math.round(totalInstalledPos / modCap);
+
+    let occupiedPositions = 0;
+    let occupiedRacks = 0;
+    let utilizationPct = 0;
+    let bufferRacks = 0;
+
+    if (rackCalcState.scenario === 'asis') {
+        occupiedPositions = 15720;
+        occupiedRacks = Math.ceil(occupiedPositions / modCap);
+        utilizationPct = ((occupiedPositions / totalInstalledPos) * 100).toFixed(1);
+        bufferRacks = installedRacks - occupiedRacks;
+    } else {
+        const factor = rackCalcState.targetOccupancy / 85.0;
+        occupiedPositions = Math.round(13480 * factor);
+        occupiedRacks = Math.ceil(occupiedPositions / modCap);
+        utilizationPct = ((occupiedPositions / totalInstalledPos) * 100).toFixed(1);
+        bufferRacks = installedRacks - occupiedRacks;
+    }
+
+    const linearMeters = Math.round(occupiedRacks * beamLen);
+
+    // Actualizar Insignia de Fórmula
+    const badge = document.getElementById('rack-formula-badge');
+    if (badge) {
+        badge.innerHTML = `Capacidad por Módulo: <strong>${modCap} Posiciones Pallet</strong> (${rackCalcState.levels} niveles &times; ${rackCalcState.palletsPerBeam} pallets/viga)`;
+    }
+
+    // Actualizar KPIs de la barra
+    const kpiNeeded = document.getElementById('kpi-racks-needed');
+    const kpiNeededSub = document.getElementById('kpi-racks-needed-sub');
+    if (kpiNeeded) {
+        kpiNeeded.innerText = `${occupiedRacks.toLocaleString('es-CL')} Racks`;
+        kpiNeeded.style.color = rackCalcState.scenario === 'asis' ? '#f43f5e' : '#38bdf8';
+    }
+    if (kpiNeededSub) {
+        kpiNeededSub.innerText = `${occupiedPositions.toLocaleString('es-CL')} posiciones pallet calculadas`;
+    }
+
+    const kpiInstalled = document.getElementById('kpi-racks-installed');
+    if (kpiInstalled) {
+        kpiInstalled.innerText = `${installedRacks.toLocaleString('es-CL')} Racks`;
+    }
+
+    const kpiUtil = document.getElementById('kpi-racks-util');
+    const kpiUtilSub = document.getElementById('kpi-racks-util-sub');
+    if (kpiUtil) {
+        kpiUtil.innerText = `${utilizationPct.replace('.', ',')}%`;
+        kpiUtil.style.color = parseFloat(utilizationPct) >= 90 ? '#f43f5e' : parseFloat(utilizationPct) > 85 ? '#fbbf24' : '#34d399';
+    }
+    if (kpiUtilSub) {
+        const freePct = (100 - parseFloat(utilizationPct)).toFixed(1).replace('.', ',');
+        kpiUtilSub.innerText = `Holgura de ${bufferRacks.toLocaleString('es-CL')} racks libres (${freePct}%)`;
+    }
+
+    const kpiMeters = document.getElementById('kpi-racks-meters');
+    if (kpiMeters) {
+        kpiMeters.innerText = `${linearMeters.toLocaleString('es-CL')} m`;
+    }
+}
+
+/* 2. Renderizado del Plano Cenital SVG (Pasillos A01-D03) */
+function renderRackFloorplan() {
+    const isAsIs = rackCalcState.scenario === 'asis';
+    const tag = document.getElementById('rack-scene-tag');
+    if (tag) {
+        if (isAsIs) {
+            tag.innerText = 'LÍNEA BASE AS-IS (CRISIS)';
+            tag.style.background = 'rgba(244, 63, 94, 0.2)';
+            tag.style.color = '#f43f5e';
+        } else {
+            tag.innerText = 'PROPUESTA TO-BE (OPTIMIZADA)';
+            tag.style.background = 'rgba(16, 185, 129, 0.2)';
+            tag.style.color = '#34d399';
+        }
+    }
+
+    // Render ZONA A (6 Pasillos A01-A06)
+    const gA = document.getElementById('svg-aisles-a');
+    if (gA) {
+        const aisles = RACK_ZONES_CONFIG['A-Rápida'].aisles;
+        const color = isAsIs ? '#ef4444' : '#06b6d4';
+        const fill = isAsIs ? 'rgba(239, 68, 68, 0.35)' : 'rgba(6, 182, 212, 0.25)';
+        let html = '';
+        aisles.forEach((a, i) => {
+            const x = 33 + i * 28;
+            html += `
+                <g class="svg-rack-aisle-block" onclick="selectFloorplanZone('A-Rápida', '${a}')" style="cursor: pointer;">
+                    <title>${a} - Zona A-Rápida | Capacidad: 650 pos | Saturación: ${isAsIs ? '95,4%' : '80,0%'}</title>
+                    <rect x="${x}" y="125" width="22" height="210" fill="${fill}" stroke="${color}" stroke-width="1.2" rx="3"/>
+                    <line x1="${x}" y1="170" x2="${x+22}" y2="170" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="215" x2="${x+22}" y2="215" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="260" x2="${x+22}" y2="260" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="305" x2="${x+22}" y2="305" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <text x="${x+11}" y="142" fill="#ffffff" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">${a}</text>
+                    <text x="${x+11}" y="325" fill="${color}" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${isAsIs ? '95%' : '80%'}</text>
+                </g>
+            `;
+        });
+        gA.innerHTML = html;
+    }
+
+    // Render ZONA B (12 Pasillos B01-B12)
+    const gB = document.getElementById('svg-aisles-b');
+    if (gB) {
+        const aisles = RACK_ZONES_CONFIG['B-Media'].aisles;
+        const color = isAsIs ? '#f59e0b' : '#10b981';
+        const fill = isAsIs ? 'rgba(245, 158, 11, 0.3)' : 'rgba(16, 185, 129, 0.22)';
+        let html = '';
+        aisles.forEach((b, i) => {
+            const x = 228 + i * 25;
+            html += `
+                <g class="svg-rack-aisle-block" onclick="selectFloorplanZone('B-Media', '${b}')" style="cursor: pointer;">
+                    <title>${b} - Zona B-Media | Capacidad: 390 pos | Saturación: ${isAsIs ? '93,2%' : '81,9%'}</title>
+                    <rect x="${x}" y="125" width="20" height="210" fill="${fill}" stroke="${color}" stroke-width="1.2" rx="3"/>
+                    <line x1="${x}" y1="170" x2="${x+20}" y2="170" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="215" x2="${x+20}" y2="215" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="260" x2="${x+20}" y2="260" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <text x="${x+10}" y="142" fill="#ffffff" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">${b}</text>
+                    <text x="${x+10}" y="325" fill="${color}" font-size="7" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${isAsIs ? '93%' : '82%'}</text>
+                </g>
+            `;
+        });
+        gB.innerHTML = html;
+    }
+
+    // Render ZONA C (6 Pasillos C01-C06)
+    const gC = document.getElementById('svg-aisles-c');
+    if (gC) {
+        const aisles = RACK_ZONES_CONFIG['C-Lenta'].aisles;
+        const color = isAsIs ? '#eab308' : '#34d399';
+        const fill = isAsIs ? 'rgba(234, 179, 8, 0.28)' : 'rgba(52, 211, 153, 0.22)';
+        let html = '';
+        aisles.forEach((c, i) => {
+            const x = 553 + i * 25.5;
+            html += `
+                <g class="svg-rack-aisle-block" onclick="selectFloorplanZone('C-Lenta', '${c}')" style="cursor: pointer;">
+                    <title>${c} - Zona C-Lenta | Capacidad: 960 pos | Saturación: ${isAsIs ? '90,7%' : '76,7%'}</title>
+                    <rect x="${x}" y="125" width="20" height="210" fill="${fill}" stroke="${color}" stroke-width="1.2" rx="3"/>
+                    <line x1="${x}" y1="170" x2="${x+20}" y2="170" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="215" x2="${x+20}" y2="215" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="260" x2="${x+20}" y2="260" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <text x="${x+10}" y="142" fill="#ffffff" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">${c}</text>
+                    <text x="${x+10}" y="325" fill="${color}" font-size="7" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${isAsIs ? '91%' : '77%'}</text>
+                </g>
+            `;
+        });
+        gC.innerHTML = html;
+    }
+
+    // Render ZONA D (3 Pasillos D01-D03)
+    const gD = document.getElementById('svg-aisles-d');
+    if (gD) {
+        const aisles = RACK_ZONES_CONFIG['D-Bulky'].aisles;
+        const color = isAsIs ? '#ef4444' : '#38bdf8';
+        const fill = isAsIs ? 'rgba(239, 68, 68, 0.35)' : 'rgba(56, 189, 248, 0.22)';
+        let html = '';
+        aisles.forEach((d, i) => {
+            const x = 728 + i * 31;
+            html += `
+                <g class="svg-rack-aisle-block" onclick="selectFloorplanZone('D-Bulky', '${d}')" style="cursor: pointer;">
+                    <title>${d} - Zona D-Bulky | Capacidad: 830 pos | Saturación: ${isAsIs ? '94,4%' : '82,4%'}</title>
+                    <rect x="${x}" y="125" width="26" height="210" fill="${fill}" stroke="${color}" stroke-width="1.2" rx="3"/>
+                    <line x1="${x}" y1="175" x2="${x+26}" y2="175" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="225" x2="${x+26}" y2="225" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="275" x2="${x+26}" y2="275" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <text x="${x+13}" y="142" fill="#ffffff" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">${d}</text>
+                    <text x="${x+13}" y="325" fill="${color}" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${isAsIs ? '94%' : '82%'}</text>
+                </g>
+            `;
+        });
+        gD.innerHTML = html;
+    }
+}
+
+/* Selección interactiva de pasillo en el plano cenital */
+function selectFloorplanZone(zoneKey, aisleCode) {
+    rackCalcState.selectedAisle = aisleCode;
+    rackCalcState.filterZone = zoneKey;
+    rackCalcState.page = 1;
+
+    const selectEl = document.getElementById('sku-filter-zone');
+    if (selectEl) selectEl.value = zoneKey;
+
+    const labelEl = document.getElementById('floorplan-active-selection');
+    if (labelEl) {
+        labelEl.innerText = `Filtrado: Pasillo ${aisleCode} (${RACK_ZONES_CONFIG[zoneKey].name})`;
+    }
+
+    renderSkuMasterTable();
+}
+
+/* 3. Renderizado del Alzado Frontal del Módulo de Rack (Elevación 2D) */
+function renderRackElevation() {
+    const svg = document.getElementById('rack-elevation-svg');
+    if (!svg) return;
+
+    const lvls = rackCalcState.levels;
+    const ppb = rackCalcState.palletsPerBeam;
+    const isAsIs = rackCalcState.scenario === 'asis';
+
+    // Ficha y especificaciones
+    const specBadge = document.getElementById('rack-spec-badge');
+    if (specBadge) {
+        specBadge.innerText = `${lvls} Niveles • ${lvls * ppb} Pallets/Módulo`;
+    }
+    const specLevelsTxt = document.getElementById('spec-levels-txt');
+    if (specLevelsTxt) {
+        specLevelsTxt.innerText = `${lvls - 1}`;
+    }
+
+    const floorY = 415;
+    const lvlH = Math.floor(340 / lvls);
+    const rackWidth = ppb === 2 ? 260 : 310;
+    const leftX = 55;
+    const rightX = leftX + rackWidth;
+
+    let svgHtml = `
+        <!-- Suelo con Franja de Advertencia Operacional -->
+        <rect x="15" y="${floorY}" width="390" height="25" fill="#1e293b" rx="2"/>
+        <line x1="15" y1="${floorY}" x2="405" y2="${floorY}" stroke="#e2e8f0" stroke-width="2"/>
+        <line x1="25" y1="${floorY+6}" x2="395" y2="${floorY+6}" stroke="#fbbf24" stroke-width="3" stroke-dasharray="10 8"/>
+
+        <!-- Cota Total de Altura (Izquierda) -->
+        <line x1="30" y1="${floorY}" x2="30" y2="${floorY - lvls * lvlH}" stroke="#94a3b8" stroke-width="1.2"/>
+        <line x1="24" y1="${floorY}" x2="36" y2="${floorY}" stroke="#94a3b8" stroke-width="1.2"/>
+        <line x1="24" y1="${floorY - lvls * lvlH}" x2="36" y2="${floorY - lvls * lvlH}" stroke="#94a3b8" stroke-width="1.2"/>
+        <text x="22" y="${floorY - (lvls * lvlH)/2}" fill="#38bdf8" font-size="10" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle" transform="rotate(-90 22 ${floorY - (lvls * lvlH)/2})">
+            ${(lvls * 2.1).toFixed(1)} m
+        </text>
+
+        <!-- Bastidor Izquierdo (Puntal de Acero Perfilado) -->
+        <rect x="${leftX}" y="${floorY - lvls * lvlH - 12}" width="16" height="${lvls * lvlH + 12}" fill="#0284c7" stroke="#0369a1" stroke-width="1.5" rx="2"/>
+        <!-- Bastidor Derecho -->
+        <rect x="${rightX - 16}" y="${floorY - lvls * lvlH - 12}" width="16" height="${lvls * lvlH + 12}" fill="#0284c7" stroke="#0369a1" stroke-width="1.5" rx="2"/>
+    `;
+
+    // Celosías y arriostramientos diagonales
+    for (let i = 0; i < lvls; i++) {
+        const yTop = floorY - (i + 1) * lvlH;
+        const yBot = floorY - i * lvlH;
+        svgHtml += `
+            <line x1="${leftX + 8}" y1="${yTop}" x2="${rightX - 8}" y2="${yBot}" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.2"/>
+            <line x1="${leftX + 8}" y1="${yBot}" x2="${rightX - 8}" y2="${yTop}" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.2"/>
+        `;
+    }
+
+    // Vigas horizontales de carga y estiba de pallets
+    const palW = Math.floor((rackWidth - 40) / ppb);
+
+    for (let l = 0; l < lvls; l++) {
+        const beamY = floorY - (l + 1) * lvlH;
+        const loadY = beamY + 8; // base del pallet
+
+        // Par de Vigas Naranjas
+        svgHtml += `
+            <rect x="${leftX - 4}" y="${beamY}" width="${rackWidth + 8}" height="8" fill="#f97316" stroke="#c2410c" stroke-width="1.2" rx="1"/>
+            <!-- Pasadores de seguridad -->
+            <circle cx="${leftX + 2}" cy="${beamY + 4}" r="2" fill="#ffffff"/>
+            <circle cx="${rightX - 2}" cy="${beamY + 4}" r="2" fill="#ffffff"/>
+        `;
+
+        // Pallets en este nivel
+        for (let p = 0; p < ppb; p++) {
+            const px = leftX + 18 + p * (palW + 6);
+            const boxH = Math.min(lvlH - 18, 44);
+            const py = beamY - boxH - 6;
+
+            // Pallet base (Madera industrial 1,20x1,00m)
+            svgHtml += `
+                <rect x="${px}" y="${beamY - 6}" width="${palW}" height="6" fill="#b45309" stroke="#78350f" stroke-width="0.8" rx="1"/>
+                <rect x="${px + 2}" y="${beamY - 4}" width="${Math.floor(palW/4)}" height="4" fill="#78350f"/>
+                <rect x="${px + Math.floor(palW*0.4)}" y="${beamY - 4}" width="${Math.floor(palW/4)}" height="4" fill="#78350f"/>
+                <rect x="${px + Math.floor(palW*0.75)}" y="${beamY - 4}" width="${Math.floor(palW/4)}" height="4" fill="#78350f"/>
+            `;
+
+            // Carga estibada (Cajas / Bultos)
+            if (isAsIs) {
+                // Crisis: Cajas desordenadas, sin estandarizar, alerta en altura
+                const boxColor = (l >= 3 && p === 0) ? '#f43f5e' : (l % 2 === 0 ? '#d97706' : '#ca8a04');
+                svgHtml += `
+                    <rect x="${px + 2}" y="${py}" width="${palW - 4}" height="${boxH}" fill="${boxColor}" stroke="#92400e" stroke-width="1" rx="2" opacity="0.9"/>
+                    <line x1="${px + 4}" y1="${py + boxH/2}" x2="${px + palW - 6}" y2="${py + boxH/2}" stroke="#78350f" stroke-width="0.8"/>
+                    ${l >= 3 ? `<text x="${px + palW/2}" y="${py + boxH/2 + 3}" fill="#ffffff" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">⚠️</text>` : ''}
+                `;
+            } else {
+                // To-Be: Estiba estandarizada, film stretch, etiqueta barcode verde
+                svgHtml += `
+                    <rect x="${px + 2}" y="${py}" width="${palW - 4}" height="${boxH}" fill="#eab308" stroke="#ca8a04" stroke-width="1" rx="2"/>
+                    <!-- Film stretch transparente -->
+                    <rect x="${px + 1}" y="${py - 1}" width="${palW - 2}" height="${boxH + 2}" fill="rgba(147, 197, 253, 0.22)" stroke="rgba(56, 189, 248, 0.5)" stroke-width="0.8" rx="2"/>
+                    <!-- Etiqueta de Picking RFID/QR -->
+                    <rect x="${px + palW - 14}" y="${py + boxH - 12}" width="10" height="8" fill="#ffffff" rx="1"/>
+                    <rect x="${px + palW - 12}" y="${py + boxH - 10}" width="6" height="4" fill="#10b981"/>
+                `;
+            }
+        }
+
+        // Cota y etiqueta de altura del nivel (Derecha)
+        const lvlHNum = ((l + 1) * 2.1).toFixed(1);
+        const lvlName = l === 0 ? 'N0: Picking Manual (0,0 m)' : `N${l}: Reserva Reach (+${lvlHNum} m)`;
+        svgHtml += `
+            <text x="${rightX + 8}" y="${beamY + 5}" fill="${l === 0 ? '#38bdf8' : '#94a3b8'}" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="${l === 0 ? '800' : '600'}">
+                ${lvlName}
+            </text>
+        `;
+    }
+
+    // Cota horizontal inferior de viga
+    svgHtml += `
+        <line x1="${leftX}" y1="${floorY + 16}" x2="${rightX}" y2="${floorY + 16}" stroke="#94a3b8" stroke-width="1.2"/>
+        <line x1="${leftX}" y1="${floorY + 12}" x2="${leftX}" y2="${floorY + 20}" stroke="#94a3b8" stroke-width="1.2"/>
+        <line x1="${rightX}" y1="${floorY + 12}" x2="${rightX}" y2="${floorY + 20}" stroke="#94a3b8" stroke-width="1.2"/>
+        <text x="${leftX + rackWidth/2}" y="${floorY + 28}" fill="#fbbf24" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">
+            Luz de Viga: ${ppb === 2 ? '2,70 m' : '3,30 m'} (${ppb} Pallets / Nivel)
+        </text>
+    `;
+
+    svg.innerHTML = svgHtml;
+}
+
+/* 4. Renderizado de la Matriz Comparativa por Zonas */
+function renderRackMatrixTable() {
+    const tbody = document.getElementById('rack-matrix-tbody');
+    if (!tbody) return;
+
+    const modCap = rackCalcState.levels * rackCalcState.palletsPerBeam;
+    const isAsIs = rackCalcState.scenario === 'asis';
+    const factor = rackCalcState.targetOccupancy / 85.0;
+
+    const zones = ['A-Rápida', 'B-Media', 'C-Lenta', 'D-Bulky'];
+    let totalCap = 0;
+    let totalArea = 0;
+    let totalPallets = 0;
+    let totalRacksOccupied = 0;
+    let totalRacksInstalled = 0;
+
+    let html = '';
+
+    zones.forEach(zKey => {
+        const z = RACK_ZONES_CONFIG[zKey];
+        const racksInstalled = Math.round(z.cap_pos / modCap);
+        const reqPallets = isAsIs ? z.asis_pos : Math.round(z.tobe_pos * factor);
+        const racksOccupied = Math.ceil(reqPallets / modCap);
+        const util = ((reqPallets / z.cap_pos) * 100).toFixed(1);
+
+        totalCap += z.cap_pos;
+        totalArea += z.area;
+        totalPallets += reqPallets;
+        totalRacksOccupied += racksOccupied;
+        totalRacksInstalled += racksInstalled;
+
+        const utilBadgeClass = parseFloat(util) >= 92 ? 'status-critical' : parseFloat(util) > 85 ? 'status-warning' : 'status-optimal';
+        const diagText = isAsIs ? z.diag_asis : z.diag_tobe;
+        const skuTransition = `${z.asis_skus} &rarr; <strong style="color: ${isAsIs ? '#94a3b8' : '#34d399'}">${z.tobe_skus}</strong>`;
+
+        html += `
+            <tr>
+                <td>
+                    <span style="font-weight: 800; color: ${isAsIs ? z.color_asis : z.color_tobe}; display: flex; align-items: center; gap: 6px;">
+                        <span style="width: 8px; height: 8px; border-radius: 50%; background: ${isAsIs ? z.color_asis : z.color_tobe};"></span>
+                        ${z.name}
+                    </span>
+                </td>
+                <td>${z.func} (${z.aisles[0]}-${z.aisles[z.aisles.length - 1]})</td>
+                <td>${z.area.toLocaleString('es-CL')} m²</td>
+                <td>${z.dist} m</td>
+                <td>${skuTransition}</td>
+                <td><strong style="color: #ffffff;">${reqPallets.toLocaleString('es-CL')}</strong> pos</td>
+                <td><strong style="color: ${isAsIs ? '#f43f5e' : '#38bdf8'}">${racksOccupied.toLocaleString('es-CL')}</strong> racks</td>
+                <td>${racksInstalled.toLocaleString('es-CL')} racks</td>
+                <td>
+                    <span class="sku-util-badge ${utilBadgeClass}">
+                        ${util.replace('.', ',')}%
+                    </span>
+                </td>
+                <td style="font-size: 0.76rem; color: ${isAsIs ? '#fda4af' : '#cbd5e1'};">
+                    ${diagText}
+                </td>
+            </tr>
+        `;
+    });
+
+    const totalUtil = ((totalPallets / totalCap) * 100).toFixed(1);
+    const totalBadgeClass = parseFloat(totalUtil) >= 90 ? 'status-critical' : parseFloat(totalUtil) > 85 ? 'status-warning' : 'status-optimal';
+
+    html += `
+        <tr style="background: rgba(56, 189, 248, 0.08); font-weight: 800; border-top: 2px solid rgba(56, 189, 248, 0.3);">
+            <td colspan="2" style="color: #ffffff;">TOTAL CENTRO DE DISTRIBUCIÓN</td>
+            <td>${totalArea.toLocaleString('es-CL')} m²</td>
+            <td>—</td>
+            <td>450 SKUs</td>
+            <td style="color: #38bdf8;">${totalPallets.toLocaleString('es-CL')} pos</td>
+            <td style="color: ${isAsIs ? '#f43f5e' : '#38bdf8'}; font-size: 0.92rem;">${totalRacksOccupied.toLocaleString('es-CL')} racks</td>
+            <td style="color: #ffffff;">${totalRacksInstalled.toLocaleString('es-CL')} racks</td>
+            <td>
+                <span class="sku-util-badge ${totalBadgeClass}">
+                    ${totalUtil.replace('.', ',')}%
+                </span>
+            </td>
+            <td style="font-size: 0.78rem; color: ${isAsIs ? '#fda4af' : '#a7f3d0'};">
+                ${isAsIs ? 'Crisis CyberDay: 93,0% saturación global, 114 mismatches y colapso operacional' : 'To-Be Balanceado: Holgura de 342 racks libres (20,2%) y cero cuellos de botella'}
+            </td>
+        </tr>
+    `;
+
+    tbody.innerHTML = html;
+}
+
+/* 5. Renderizado del Explorador y Tabla Maestra de SKUs (450 SKUs) */
+function renderSkuMasterTable() {
+    const tbody = document.getElementById('sku-master-tbody');
+    if (!tbody || typeof ANDES_SKU_MASTER === 'undefined') return;
+
+    const modCap = rackCalcState.levels * rackCalcState.palletsPerBeam;
+
+    // Filtrado de la Base de Datos
+    let filtered = ANDES_SKU_MASTER.filter(s => {
+        // Filtro por mismatch predeterminado
+        if (rackCalcState.filterMismatch === 'mismatches' && !s.mis) return false;
+        if (rackCalcState.filterMismatch === 'rescued' && !(s.z_act === 'C-Lenta' && s.z_ide === 'A-Rápida')) return false;
+
+        // Filtro por Zona
+        if (rackCalcState.filterZone !== 'all') {
+            const currentZone = rackCalcState.scenario === 'asis' ? s.z_act : s.z_ide;
+            if (currentZone !== rackCalcState.filterZone) return false;
+        }
+
+        // Filtro por ABC
+        if (rackCalcState.filterAbc !== 'all' && s.abc !== rackCalcState.filterAbc) return false;
+
+        // Filtro por Familia
+        if (rackCalcState.filterFam !== 'all' && s.fam !== rackCalcState.filterFam) return false;
+
+        // Búsqueda de texto
+        if (rackCalcState.searchQuery.trim() !== '') {
+            const q = rackCalcState.searchQuery.toLowerCase();
+            const matchId = s.id.toLowerCase().includes(q);
+            const matchFam = s.fam.toLowerCase().includes(q);
+            if (!matchId && !matchFam) return false;
+        }
+
+        return true;
+    });
+
+    // Contadores
+    const countEl = document.getElementById('sku-filtered-count');
+    const palEl = document.getElementById('sku-pallets-count');
+    const totalPals = filtered.reduce((acc, cur) => acc + cur.pal, 0);
+
+    if (countEl) countEl.innerText = filtered.length.toLocaleString('es-CL');
+    if (palEl) palEl.innerText = totalPals.toLocaleString('es-CL');
+
+    // Paginación
+    const totalPages = Math.ceil(filtered.length / rackCalcState.pageSize) || 1;
+    if (rackCalcState.page > totalPages) rackCalcState.page = totalPages;
+    if (rackCalcState.page < 1) rackCalcState.page = 1;
+
+    const startIndex = (rackCalcState.page - 1) * rackCalcState.pageSize;
+    const pageItems = filtered.slice(startIndex, startIndex + rackCalcState.pageSize);
+
+    // Renderizar Filas
+    let html = '';
+    if (pageItems.length === 0) {
+        html = `<tr><td colspan="11" style="text-align: center; padding: 24px; color: #94a3b8;">No se encontraron SKUs que coincidan con los filtros aplicados.</td></tr>`;
+    } else {
+        pageItems.forEach(s => {
+            const rackEq = (s.pal / modCap).toFixed(2);
+            const abcClass = s.abc === 'A' ? 'sku-abc-a' : s.abc === 'B' ? 'sku-abc-b' : 'sku-abc-c';
+            
+            // Acción recomendada por Re-Slotting
+            let actionHtml = '';
+            if (s.mis) {
+                if (s.z_act === 'C-Lenta' && s.z_ide === 'A-Rápida') {
+                    actionHtml = `<span style="color: #38bdf8; font-weight: 700;">🚀 Reubicar a Zona A (-83 m / +25% vel.)</span>`;
+                } else if (s.z_act === 'B-Media' && s.z_ide === 'A-Rápida') {
+                    actionHtml = `<span style="color: #38bdf8; font-weight: 700;">⚡ Mover a Zona A (-37 m)</span>`;
+                } else if (s.z_ide === 'D-Bulky') {
+                    actionHtml = `<span style="color: #f87171; font-weight: 700;">🏗️ Trasladar a Zona D (Bulky/MMC)</span>`;
+                } else if (s.z_act === 'A-Rápida') {
+                    actionHtml = `<span style="color: #fbbf24; font-weight: 700;">🔄 Liberar Zona A a ${s.z_ide}</span>`;
+                } else {
+                    actionHtml = `<span style="color: #a7f3d0; font-weight: 700;">📦 Re-Slotting a ${s.z_ide}</span>`;
+                }
+            } else {
+                actionHtml = `<span style="color: #94a3b8;">✅ Ubicación Óptima (${s.z_act})</span>`;
+            }
+
+            const zoneCell = s.mis 
+                ? `<span class="sku-badge-mismatch">${s.z_act} &rarr; ${s.z_ide}</span>`
+                : `<span style="color: #cbd5e1;">${s.z_act}</span>`;
+
+            html += `
+                <tr>
+                    <td><strong style="color: #ffffff; font-family: var(--font-mono);">${s.id}</strong></td>
+                    <td>${s.fam}</td>
+                    <td><span class="sku-abc-badge ${abcClass}">Clase ${s.abc}</span></td>
+                    <td style="font-family: var(--font-mono); font-size: 0.74rem;">${s.l}&times;${s.w}&times;${s.h} cm</td>
+                    <td style="font-family: var(--font-mono); font-size: 0.74rem;">${s.kg} kg</td>
+                    <td style="font-family: var(--font-mono);">${s.stock.toLocaleString('es-CL')}</td>
+                    <td style="font-family: var(--font-mono);">${s.u_pal} u</td>
+                    <td><strong style="color: #38bdf8; font-family: var(--font-mono);">${s.pal.toLocaleString('es-CL')}</strong> pal</td>
+                    <td style="font-family: var(--font-mono); color: #fbbf24;">${rackEq}</td>
+                    <td>${zoneCell}</td>
+                    <td>${actionHtml}</td>
+                </tr>
+            `;
+        });
+    }
+
+    tbody.innerHTML = html;
+
+    // Actualizar Paginador
+    const pageInfo = document.getElementById('sku-page-info');
+    if (pageInfo) {
+        pageInfo.innerText = `Página ${rackCalcState.page} de ${totalPages} (${rackCalcState.pageSize} por página • Total: ${filtered.length})`;
+    }
+    const prevBtn = document.getElementById('sku-prev-btn');
+    const nextBtn = document.getElementById('sku-next-btn');
+    if (prevBtn) prevBtn.disabled = (rackCalcState.page <= 1);
+    if (nextBtn) nextBtn.disabled = (rackCalcState.page >= totalPages);
+}
+
+/* 6. Handlers de Eventos y Controles Interoceánicos */
+function setRackScenario(scene) {
+    rackCalcState.scenario = scene;
+
+    const btnAsis = document.getElementById('rack-scene-asis');
+    const btnTobe = document.getElementById('rack-scene-tobe');
+
+    if (scene === 'asis') {
+        if (btnAsis) btnAsis.classList.add('active');
+        if (btnTobe) btnTobe.classList.remove('active');
+    } else {
+        if (btnTobe) btnTobe.classList.add('active');
+        if (btnAsis) btnAsis.classList.remove('active');
+    }
+
+    calculateRackMetrics();
+    renderRackFloorplan();
+    renderRackElevation();
+    renderRackMatrixTable();
+    renderSkuMasterTable();
+}
+
+function setRackLevels(lvls) {
+    rackCalcState.levels = lvls;
+    [3, 4, 5, 6].forEach(n => {
+        const btn = document.getElementById(`rack-lvl-${n}`);
+        if (btn) {
+            if (n === lvls) btn.classList.add('active');
+            else btn.classList.remove('active');
+        }
+    });
+
+    calculateRackMetrics();
+    renderRackElevation();
+    renderRackMatrixTable();
+    renderSkuMasterTable();
+}
+
+function setRackPalletsPerBeam(ppb) {
+    rackCalcState.palletsPerBeam = ppb;
+    [2, 3].forEach(n => {
+        const btn = document.getElementById(`rack-ppb-${n}`);
+        if (btn) {
+            if (n === ppb) btn.classList.add('active');
+            else btn.classList.remove('active');
+        }
+    });
+
+    calculateRackMetrics();
+    renderRackElevation();
+    renderRackMatrixTable();
+    renderSkuMasterTable();
+}
+
+function onRackTargetOccupancyChange(val) {
+    rackCalcState.targetOccupancy = parseInt(val, 10);
+    const disp = document.getElementById('rack-occupancy-display');
+    if (disp) disp.innerText = `${val}%`;
+
+    if (rackCalcState.scenario === 'tobe') {
+        calculateRackMetrics();
+        renderRackMatrixTable();
+    }
+}
+
+function setSkuMismatchFilter(type) {
+    rackCalcState.filterMismatch = type;
+    rackCalcState.page = 1;
+
+    const bAll = document.getElementById('filter-sku-all');
+    const bMis = document.getElementById('filter-sku-mismatches');
+    const bRes = document.getElementById('filter-sku-zone-a-rescued');
+
+    if (bAll) bAll.classList.toggle('active', type === 'all');
+    if (bMis) bMis.classList.toggle('active', type === 'mismatches');
+    if (bRes) bRes.classList.toggle('active', type === 'rescued');
+
+    renderSkuMasterTable();
+}
+
+function onSkuSearchInput(val) {
+    rackCalcState.searchQuery = val;
+    rackCalcState.page = 1;
+    renderSkuMasterTable();
+}
+
+function onSkuZoneFilterChange(val) {
+    rackCalcState.filterZone = val;
+    rackCalcState.page = 1;
+    renderSkuMasterTable();
+}
+
+function onSkuAbcFilterChange(val) {
+    rackCalcState.filterAbc = val;
+    rackCalcState.page = 1;
+    renderSkuMasterTable();
+}
+
+function onSkuFamFilterChange(val) {
+    rackCalcState.filterFam = val;
+    rackCalcState.page = 1;
+    renderSkuMasterTable();
+}
+
+function changeSkuPage(delta) {
+    rackCalcState.page += delta;
+    renderSkuMasterTable();
+}
+
+/* Exposición a entorno Global / Window para eventos Inline HTML */
+window.setRackScenario = setRackScenario;
+window.setRackLevels = setRackLevels;
+window.setRackPalletsPerBeam = setRackPalletsPerBeam;
+window.onRackTargetOccupancyChange = onRackTargetOccupancyChange;
+window.setSkuMismatchFilter = setSkuMismatchFilter;
+window.onSkuSearchInput = onSkuSearchInput;
+window.onSkuZoneFilterChange = onSkuZoneFilterChange;
+window.onSkuAbcFilterChange = onSkuAbcFilterChange;
+window.onSkuFamFilterChange = onSkuFamFilterChange;
+window.changeSkuPage = changeSkuPage;
+window.selectFloorplanZone = selectFloorplanZone;
+window.initRackCalculator = initRackCalculator;
+

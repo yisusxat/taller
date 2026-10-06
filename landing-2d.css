@@ -2488,7 +2488,368 @@ body {
 }
 
 /* ==========================================================================
-   14. MASTER RESPONSIVE SUITE (SMARTPHONES, TABLETS & DISPOSITIVOS TÁCTILES)
+   14. LAYOUT 2D & CALCULADORA DE RACKS (TABLA MAESTRA SKU)
+   ========================================================================== */
+.rack-calc-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.rack-hero-card {
+    background: linear-gradient(135deg, rgba(13, 21, 39, 0.95), rgba(56, 189, 248, 0.1));
+    border: 1px solid rgba(56, 189, 248, 0.35);
+    border-radius: 16px;
+    padding: 24px 28px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+}
+
+.rack-controls-bar {
+    background: #090e1c;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 18px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.rack-ctrl-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.rack-ctrl-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.rack-ctrl-label {
+    font-size: 0.76rem;
+    font-family: var(--font-mono);
+    color: #94a3b8;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rack-pills-wrap {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(15, 23, 42, 0.8);
+    padding: 4px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.rack-pill-btn {
+    background: transparent;
+    border: 1px solid transparent;
+    color: #cbd5e1;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 5px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.rack-pill-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.rack-pill-btn.active {
+    background: rgba(56, 189, 248, 0.22);
+    border-color: #38bdf8;
+    color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.rack-pill-btn.active.asis {
+    background: rgba(244, 63, 94, 0.22);
+    border-color: #f43f5e;
+    color: #fda4af;
+    box-shadow: 0 0 10px rgba(244, 63, 94, 0.3);
+}
+
+.rack-pill-btn.active.tobe {
+    background: rgba(16, 185, 129, 0.22);
+    border-color: #10b981;
+    color: #6ee7b7;
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+/* Tira de KPIs de Racks */
+.rack-kpi-strip {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 14px;
+}
+
+.rack-kpi-tile {
+    background: #0d1527;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: var(--transition-smooth);
+}
+
+.rack-kpi-tile:hover {
+    border-color: rgba(56, 189, 248, 0.4);
+    transform: translateY(-2px);
+}
+
+.rack-kpi-tile.highlight {
+    border-color: rgba(56, 189, 248, 0.45);
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), #0d1527);
+}
+
+.rack-kpi-lbl {
+    font-size: 0.72rem;
+    font-weight: 800;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.rack-kpi-val {
+    font-size: 2.1rem;
+    font-weight: 900;
+    font-family: var(--font-mono);
+    color: #ffffff;
+    margin: 6px 0 2px;
+}
+
+.rack-kpi-sub {
+    font-size: 0.74rem;
+    color: #cbd5e1;
+}
+
+/* Cuadrícula Split: Floorplan 2D + Elevación Frontal */
+.rack-visual-split-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 18px;
+}
+
+.rack-card-box {
+    background: #090e1c;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 18px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.rack-card-box-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.rack-box-title {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rack-svg-wrap {
+    width: 100%;
+    background: #040711;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    padding: 8px;
+}
+
+/* Elevación de Rack SVG */
+#rack-elevation-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+#rack-floorplan-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Matriz Comparativa de Zonas */
+.rack-matrix-card {
+    background: #090e1c;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.rack-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 12px;
+}
+
+.rack-matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.8rem;
+    text-align: left;
+    min-width: 720px;
+}
+
+.rack-matrix-table th {
+    background: rgba(15, 23, 42, 0.95);
+    color: #94a3b8;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.5px;
+    padding: 10px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.rack-matrix-table td {
+    padding: 12px 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    color: #cbd5e1;
+}
+
+.rack-matrix-table tr:hover td {
+    background: rgba(56, 189, 248, 0.04);
+}
+
+.rack-matrix-table tr.total-row td {
+    background: rgba(15, 23, 42, 0.8);
+    font-weight: 800;
+    color: #ffffff;
+    border-top: 2px solid rgba(56, 189, 248, 0.3);
+}
+
+/* Explorador de Tabla Maestra de SKUs */
+.sku-master-card {
+    background: #090e1c;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    padding: 20px;
+}
+
+.sku-toolbar-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+}
+
+.sku-search-input {
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 0.82rem;
+    padding: 8px 14px;
+    border-radius: 8px;
+    outline: none;
+    min-width: 260px;
+    transition: var(--transition-smooth);
+}
+
+.sku-search-input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
+}
+
+.sku-select {
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: #ffffff;
+    font-size: 0.78rem;
+    padding: 8px 12px;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+}
+
+.sku-select:focus {
+    border-color: #38bdf8;
+}
+
+.sku-badge-mismatch {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+}
+
+.sku-badge-mismatch.yes {
+    background: rgba(244, 63, 94, 0.18);
+    border: 1px solid rgba(244, 63, 94, 0.4);
+    color: #fca5a5;
+}
+
+.sku-badge-mismatch.no {
+    background: rgba(16, 185, 129, 0.15);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #6ee7b7;
+}
+
+.sku-paginator {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.sku-page-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #cbd5e1;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.sku-page-btn:hover:not(:disabled) {
+    background: rgba(56, 189, 248, 0.15);
+    border-color: #38bdf8;
+    color: #38bdf8;
+}
+
+.sku-page-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   15. MASTER RESPONSIVE SUITE (SMARTPHONES, TABLETS & DISPOSITIVOS TÁCTILES)
    ========================================================================== */
 
 /* Breakpoint 1: Laptops compactos y Tablets grandes (<= 1100px) */
@@ -2599,6 +2960,9 @@ body {
     }
     .sol-hero-stats {
         grid-template-columns: repeat(2, 1fr);
+    }
+    .rack-visual-split-grid {
+        grid-template-columns: 1fr;
     }
 
     /* Modal Keynote 2D */
@@ -2746,6 +3110,34 @@ body {
     }
     .tech-cards-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Controles de Racks en móvil */
+    .rack-ctrl-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    .rack-ctrl-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 6px;
+    }
+    .rack-pills-wrap {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .rack-kpi-strip {
+        grid-template-columns: 1fr;
+    }
+    .sku-toolbar-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .sku-search-input {
+        width: 100%;
+        min-width: unset;
     }
 
     /* Modal Keynote 2D */
