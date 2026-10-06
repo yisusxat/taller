@@ -1405,8 +1405,8 @@ const RACK_ZONES_CONFIG = {
         tobe_skus: 105,
         color_asis: '#ef4444',
         color_tobe: '#10b981',
-        diag_asis: 'Saturación Crítica 95,4% • Congestión pasillos A03-A05 por falta de buffer',
-        diag_tobe: 'Holgura Óptima 80,0% • Flujo continuo sin cuellos de botella (-58% congestión)'
+        diag_asis: '❌ Colapso al 95,4%: Pasillos A03-A05 bloqueados por carros; operarios esperando turno para poder pasar.',
+        diag_tobe: '✅ Flujo ágil al 80,0%: 105 productos estrella al lado del despacho (a 35 m); pedidos armados en minutos.'
     },
     'B-Media': {
         name: 'Zona B-Media',
@@ -1421,8 +1421,8 @@ const RACK_ZONES_CONFIG = {
         tobe_skus: 120,
         color_asis: '#f59e0b',
         color_tobe: '#06b6d4',
-        diag_asis: 'Ocupación 93,2% • Reabastecimiento reactivo y quiebres intermitentes',
-        diag_tobe: 'Ocupación Balanceada 81,9% • Wave picking programado y buffer ágil'
+        diag_asis: '⚠️ Tensión al 93,2%: Reabastecimiento tarde y constante freno de pedidos por falta de stock a mano.',
+        diag_tobe: '✅ Ritmo estable al 81,9%: Reposición programada en olas (Wave Picking) con 850 espacios de holgura.'
     },
     'C-Lenta': {
         name: 'Zona C-Lenta',
@@ -1437,8 +1437,8 @@ const RACK_ZONES_CONFIG = {
         tobe_skus: 147,
         color_asis: '#eab308',
         color_tobe: '#10b981',
-        diag_asis: 'Ocupación 90,7% • 12 SKUs Clase A atrapados al fondo generando fatiga física',
-        diag_tobe: 'Ocupación 76,7% • SKUs lentos consolidados liberando 1.350 pos de holgura'
+        diag_asis: '❌ Ineficiencia al 90,7%: 12 productos súper vendidos estaban atrapados al fondo (118 m), agotando a los pickers.',
+        diag_tobe: '✅ Alivio al 76,7%: Los 12 productos clave fueron rescatados a Zona A; la zona C queda para stock de baja rotación.'
     },
     'D-Bulky': {
         name: 'Zona D-Bulky',
@@ -1453,8 +1453,8 @@ const RACK_ZONES_CONFIG = {
         tobe_skus: 78,
         color_asis: '#ef4444',
         color_tobe: '#34d399',
-        diag_asis: 'Ocupación 94,4% • Riesgo de sobrecarga en altura (>15 kg en niveles superiores)',
-        diag_tobe: 'Ocupación 82,4% • Estiba regulada en Suelo/N1 según Ley 20.949 (MMC)'
+        diag_asis: '🚨 Peligro al 94,4%: Muebles y línea blanca pesada en altura; alto riesgo de caídas y sobreesfuerzo físico.',
+        diag_tobe: '✅ Seguridad total al 82,4%: Todo producto pesado (>15 kg) estibado a nivel de suelo/nivel 1 cumpliendo Ley 20.949.'
     }
 };
 
@@ -1513,23 +1513,25 @@ function calculateRackMetrics() {
     // Actualizar Insignia de Fórmula
     const badge = document.getElementById('rack-formula-badge');
     if (badge) {
-        badge.innerHTML = `Capacidad por Módulo: <strong>${modCap} Posiciones Pallet</strong> (${rackCalcState.levels} niveles &times; ${rackCalcState.palletsPerBeam} pallets/viga)`;
+        badge.innerHTML = `Capacidad por Estantería: <strong>${modCap} Posiciones Pallet</strong> (${rackCalcState.levels} pisos &times; ${rackCalcState.palletsPerBeam} pallets por piso)`;
     }
 
     // Actualizar KPIs de la barra
     const kpiNeeded = document.getElementById('kpi-racks-needed');
     const kpiNeededSub = document.getElementById('kpi-racks-needed-sub');
     if (kpiNeeded) {
-        kpiNeeded.innerText = `${occupiedRacks.toLocaleString('es-CL')} Racks`;
+        kpiNeeded.innerText = `${occupiedRacks.toLocaleString('es-CL')} Estanterías`;
         kpiNeeded.style.color = rackCalcState.scenario === 'asis' ? '#f43f5e' : '#38bdf8';
     }
     if (kpiNeededSub) {
-        kpiNeededSub.innerText = `${occupiedPositions.toLocaleString('es-CL')} posiciones pallet calculadas`;
+        kpiNeededSub.innerText = rackCalcState.scenario === 'asis'
+            ? `${occupiedPositions.toLocaleString('es-CL')} pallets ocupados (93% del almacén saturado)`
+            : `${occupiedPositions.toLocaleString('es-CL')} pallets equilibrados con Re-Slotting P1`;
     }
 
     const kpiInstalled = document.getElementById('kpi-racks-installed');
     if (kpiInstalled) {
-        kpiInstalled.innerText = `${installedRacks.toLocaleString('es-CL')} Racks`;
+        kpiInstalled.innerText = `${installedRacks.toLocaleString('es-CL')} Estanterías`;
     }
 
     const kpiUtil = document.getElementById('kpi-racks-util');
@@ -1540,7 +1542,9 @@ function calculateRackMetrics() {
     }
     if (kpiUtilSub) {
         const freePct = (100 - parseFloat(utilizationPct)).toFixed(1).replace('.', ',');
-        kpiUtilSub.innerText = `Holgura de ${bufferRacks.toLocaleString('es-CL')} racks libres (${freePct}%)`;
+        kpiUtilSub.innerText = rackCalcState.scenario === 'asis'
+            ? `Solo ${bufferRacks.toLocaleString('es-CL')} racks libres (Crítico: pasillos trancados)`
+            : `Holgura de ${bufferRacks.toLocaleString('es-CL')} racks libres (${freePct}% de colchón amortiguador)`;
     }
 
     const kpiMeters = document.getElementById('kpi-racks-meters');
@@ -1692,7 +1696,7 @@ function renderRackElevation() {
     // Ficha y especificaciones
     const specBadge = document.getElementById('rack-spec-badge');
     if (specBadge) {
-        specBadge.innerText = `${lvls} Niveles • ${lvls * ppb} Pallets/Módulo`;
+        specBadge.innerText = `${lvls} Pisos • ${lvls * ppb} Pallets por Estantería`;
     }
     const specLevelsTxt = document.getElementById('spec-levels-txt');
     if (specLevelsTxt) {
@@ -1788,7 +1792,7 @@ function renderRackElevation() {
 
         // Cota y etiqueta de altura del nivel (Derecha)
         const lvlHNum = ((l + 1) * 2.1).toFixed(1);
-        const lvlName = l === 0 ? 'N0: Picking Manual (0,0 m)' : `N${l}: Reserva Reach (+${lvlHNum} m)`;
+        const lvlName = l === 0 ? 'Piso 0: Mano / Picking (0,0 m)' : `Piso ${l}: Reserva Aérea (+${lvlHNum} m)`;
         svgHtml += `
             <text x="${rightX + 8}" y="${beamY + 5}" fill="${l === 0 ? '#38bdf8' : '#94a3b8'}" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="${l === 0 ? '800' : '600'}">
                 ${lvlName}
@@ -1889,7 +1893,7 @@ function renderRackMatrixTable() {
                 </span>
             </td>
             <td style="font-size: 0.78rem; color: ${isAsIs ? '#fda4af' : '#a7f3d0'};">
-                ${isAsIs ? 'Crisis CyberDay: 93,0% saturación global, 114 mismatches y colapso operacional' : 'To-Be Balanceado: Holgura de 342 racks libres (20,2%) y cero cuellos de botella'}
+                ${isAsIs ? '🚨 Crisis CyberDay: 93,0% saturación global (15.720 pallets). Grúas y carros bloqueados, demoras críticas.' : '✨ Almacén Equilibrado: 79,8% de ocupación. 342 estanterías libres (20,2% de colchón) para absorber picos sin estrés.'}
             </td>
         </tr>
     `;
@@ -1962,18 +1966,18 @@ function renderSkuMasterTable() {
             let actionHtml = '';
             if (s.mis) {
                 if (s.z_act === 'C-Lenta' && s.z_ide === 'A-Rápida') {
-                    actionHtml = `<span style="color: #38bdf8; font-weight: 700;">🚀 Reubicar a Zona A (-83 m / +25% vel.)</span>`;
+                    actionHtml = `<span style="color: #38bdf8; font-weight: 700;">🚀 Mover a Zona A (Ahorra 83 m hacia despacho)</span>`;
                 } else if (s.z_act === 'B-Media' && s.z_ide === 'A-Rápida') {
-                    actionHtml = `<span style="color: #38bdf8; font-weight: 700;">⚡ Mover a Zona A (-37 m)</span>`;
+                    actionHtml = `<span style="color: #38bdf8; font-weight: 700;">⚡ Mover a Zona A (Ahorra 37 m hacia despacho)</span>`;
                 } else if (s.z_ide === 'D-Bulky') {
-                    actionHtml = `<span style="color: #f87171; font-weight: 700;">🏗️ Trasladar a Zona D (Bulky/MMC)</span>`;
+                    actionHtml = `<span style="color: #f87171; font-weight: 700;">🏗️ Bajar a Suelo/Nivel 1 (Ergonomía Ley 20.949)</span>`;
                 } else if (s.z_act === 'A-Rápida') {
-                    actionHtml = `<span style="color: #fbbf24; font-weight: 700;">🔄 Liberar Zona A a ${s.z_ide}</span>`;
+                    actionHtml = `<span style="color: #fbbf24; font-weight: 700;">🔄 Trasladar a ${s.z_ide} (Descongestiona Zona A)</span>`;
                 } else {
-                    actionHtml = `<span style="color: #a7f3d0; font-weight: 700;">📦 Re-Slotting a ${s.z_ide}</span>`;
+                    actionHtml = `<span style="color: #a7f3d0; font-weight: 700;">📦 Reubicar en ${s.z_ide} (Lugar Ideal)</span>`;
                 }
             } else {
-                actionHtml = `<span style="color: #94a3b8;">✅ Ubicación Óptima (${s.z_act})</span>`;
+                actionHtml = `<span style="color: #94a3b8;">✅ Ubicación Correcta (Óptima en ${s.z_act})</span>`;
             }
 
             const zoneCell = s.mis 

@@ -2504,6 +2504,44 @@ body {
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
 }
 
+/* Guía Pedagógica Humanizada para Comprensión Inmediata */
+.rack-guide-banner {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 14px;
+    background: rgba(15, 23, 42, 0.7);
+    border: 1px solid rgba(56, 189, 248, 0.25);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 20px;
+}
+
+.rack-guide-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.rack-guide-card-title {
+    font-size: 0.86rem;
+    font-weight: 800;
+    color: #38bdf8;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.rack-guide-card-p {
+    font-size: 0.79rem;
+    color: #cbd5e1;
+    line-height: 1.5;
+    margin: 0;
+}
+
 .rack-controls-bar {
     background: #090e1c;
     border: 1px solid rgba(255, 255, 255, 0.12);

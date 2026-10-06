@@ -1728,13 +1728,43 @@
                             Layout 2D &amp; Dimensionamiento Dinámico de Racks
                         </h2>
                         <p style="font-size: 0.88rem; color: #cbd5e1; max-width: 900px; margin-top: 6px; line-height: 1.5;">
-                            Cálculo de posiciones pallet y módulos de rack requeridos a partir de los <strong>450 SKUs de la Tabla Maestra oficial</strong> (<code style="color: #38bdf8;">SKU_Master</code>) y la capacidad operativa del CD Pudahuel (<code style="color: #38bdf8;">Layout_Capacidad</code>). Compara el colapso por saturación en la Línea Base As-Is versus el balanceo óptimo de la Propuesta de Mejora To-Be (Re-Slotting P1 &amp; Ergonomía P5).
+                            Calcula cuántas estanterías y posiciones pallet necesita el CD Pudahuel para operar sin atascos. Descubre cómo pasar del colapso del CyberDay (pasillos atascados al 93% de ocupación) a un almacén ágil, seguro y ordenado al 80% gracias a la reubicación inteligente de productos (Re-Slotting P1 &amp; P5).
                         </p>
                     </div>
                     <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
                         <span style="font-size: 0.72rem; font-family: var(--font-mono); background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: #7dd3fc; padding: 6px 12px; border-radius: 8px; font-weight: 700;">
-                            📏 Pallet Estándar: 1,20 x 1,00 m | Altura &le; 1,70 m
+                            📏 Pallet Industrial Estándar: 1,20 x 1,00 m | Carga máx &le; 1,70 m
                         </span>
+                    </div>
+                </div>
+
+                <!-- Guía Pedagógica Humanizada para Comprensión Inmediata -->
+                <div class="rack-guide-banner">
+                    <div class="rack-guide-card">
+                        <div class="rack-guide-card-title">
+                            <span>🏢 1. Posición Pallet vs. Módulo de Rack</span>
+                        </div>
+                        <p class="rack-guide-card-p">
+                            Una <strong>Posición Pallet</strong> es el casillero unitario donde cabe exactamente 1 pallet de mercadería. El CD tiene <strong>16.900 posiciones totales</strong>. Un <strong>Módulo de Rack</strong> es la estantería completa de varios pisos. Con 5 pisos y 2 pallets por piso (10 posiciones), esas 16.900 posiciones se ordenan en <strong>1.690 estanterías</strong>. Si haces estanterías más altas y anchas (ej. 18 posiciones), requieres menos estructuras: <strong>939 estanterías</strong>.
+                        </p>
+                    </div>
+
+                    <div class="rack-guide-card">
+                        <div class="rack-guide-card-title">
+                            <span>⚖️ 2. ¿Por qué el 85% es la Regla de Oro?</span>
+                        </div>
+                        <p class="rack-guide-card-p">
+                            Igual que en una autopista o un estacionamiento: cuando supera el 90% de ocupación, se genera un taco y nadie puede avanzar. En la <strong>Crisis As-Is (93,0%)</strong>, los operarios perdían horas moviendo pallets para poder sacar otros. Al bajar al <strong>79,8% en la Propuesta To-Be</strong>, el almacén tiene <strong>342 estanterías libres</strong> de holgura para amortiguar picos de demanda sin retrasos.
+                        </p>
+                    </div>
+
+                    <div class="rack-guide-card">
+                        <div class="rack-guide-card-title">
+                            <span>🔄 3. El Secreto del Re-Slotting (114 Productos)</span>
+                        </div>
+                        <p class="rack-guide-card-p">
+                            Durante la crisis, 114 productos estaban mal ubicados (ej. muebles pesados en pisos altos o los 12 productos más vendidos escondidos al fondo a 118 m). Con la propuesta, <strong>los productos más vendidos se trasladan al lado del despacho (a solo 35 m)</strong>, ahorrando 53,4 km de caminatas diarias a los trabajadores.
+                        </p>
                     </div>
                 </div>
 
@@ -1743,34 +1773,34 @@
                     <div class="rack-ctrl-row">
                         <!-- Selector de Escenario Operacional -->
                         <div class="rack-ctrl-group">
-                            <span class="rack-ctrl-label">Escenario del CD:</span>
+                            <span class="rack-ctrl-label">Estado de Operación:</span>
                             <div class="rack-pills-wrap">
                                 <button class="rack-pill-btn asis" id="rack-scene-asis" onclick="setRackScenario('asis')">
-                                    🛑 Línea Base As-Is (Crisis CyberDay)
+                                    🛑 Antes: Línea Base As-Is (Crisis CyberDay)
                                 </button>
                                 <button class="rack-pill-btn tobe active" id="rack-scene-tobe" onclick="setRackScenario('tobe')">
-                                    ✨ Propuesta To-Be (Re-Slotting P1 &amp; P5)
+                                    ✨ Después: Propuesta To-Be (Re-Slotting P1 &amp; P5)
                                 </button>
                             </div>
                         </div>
 
                         <!-- Configuración de Niveles de Altura del Rack -->
                         <div class="rack-ctrl-group">
-                            <span class="rack-ctrl-label">Niveles de Rack (Altura):</span>
+                            <span class="rack-ctrl-label">Pisos de Altura:</span>
                             <div class="rack-pills-wrap">
-                                <button class="rack-pill-btn" id="rack-lvl-3" onclick="setRackLevels(3)">3 Niv</button>
-                                <button class="rack-pill-btn" id="rack-lvl-4" onclick="setRackLevels(4)">4 Niv</button>
-                                <button class="rack-pill-btn active" id="rack-lvl-5" onclick="setRackLevels(5)">5 Niv (10,5m)</button>
-                                <button class="rack-pill-btn" id="rack-lvl-6" onclick="setRackLevels(6)">6 Niv (12m)</button>
+                                <button class="rack-pill-btn" id="rack-lvl-3" onclick="setRackLevels(3)">3 Pisos (6,5m)</button>
+                                <button class="rack-pill-btn" id="rack-lvl-4" onclick="setRackLevels(4)">4 Pisos (8,5m)</button>
+                                <button class="rack-pill-btn active" id="rack-lvl-5" onclick="setRackLevels(5)">5 Pisos (10,5m ⭐ Oficial)</button>
+                                <button class="rack-pill-btn" id="rack-lvl-6" onclick="setRackLevels(6)">6 Pisos (12m)</button>
                             </div>
                         </div>
 
                         <!-- Pallets por Nivel de Viga -->
                         <div class="rack-ctrl-group">
-                            <span class="rack-ctrl-label">Pallets por Viga:</span>
+                            <span class="rack-ctrl-label">Pallets por Piso:</span>
                             <div class="rack-pills-wrap">
-                                <button class="rack-pill-btn active" id="rack-ppb-2" onclick="setRackPalletsPerBeam(2)">2 Pallets (2,70m)</button>
-                                <button class="rack-pill-btn" id="rack-ppb-3" onclick="setRackPalletsPerBeam(3)">3 Pallets (3,30m)</button>
+                                <button class="rack-pill-btn active" id="rack-ppb-2" onclick="setRackPalletsPerBeam(2)">2 Pallets (2,70m Viga)</button>
+                                <button class="rack-pill-btn" id="rack-ppb-3" onclick="setRackPalletsPerBeam(3)">3 Pallets (3,30m Larga)</button>
                             </div>
                         </div>
                     </div>
@@ -1778,13 +1808,13 @@
                     <!-- Fila 2: Factor de Ocupación Objetivo y Resumen de Fórmula -->
                     <div class="rack-ctrl-row" style="border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 12px;">
                         <div style="display: flex; align-items: center; gap: 14px; flex: 1; min-width: 280px; flex-wrap: wrap;">
-                            <span class="rack-ctrl-label" style="white-space: nowrap;">Ocupación Meta Buffer:</span>
+                            <span class="rack-ctrl-label" style="white-space: nowrap;">Ocupación Meta de Seguridad:</span>
                             <input type="range" id="rack-occupancy-slider" min="70" max="95" value="85" step="1" oninput="onRackTargetOccupancyChange(this.value)" style="flex: 1; min-width: 120px; accent-color: #38bdf8;">
                             <span id="rack-occupancy-display" style="font-family: var(--font-mono); font-weight: 800; color: #38bdf8; font-size: 0.9rem; min-width: 48px;">85%</span>
-                            <span style="font-size: 0.72rem; color: #94a3b8;">(Benchmark WMS: 85% para evitar congestión en pasillos)</span>
+                            <span style="font-size: 0.72rem; color: #94a3b8;">(Recomendación logística: 85% para que las grúas circulen con holgura sin bloquearse)</span>
                         </div>
                         <div id="rack-formula-badge" style="font-family: var(--font-mono); font-size: 0.76rem; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.25); color: #7dd3fc; padding: 4px 10px; border-radius: 6px;">
-                            Capacidad por Módulo: <strong>10 Posiciones Pallet</strong> (5 niveles &times; 2 pallets/viga)
+                            Capacidad por Estantería: <strong>10 Posiciones Pallet</strong> (5 pisos &times; 2 pallets por piso)
                         </div>
                     </div>
                 </div>
@@ -1792,27 +1822,27 @@
                 <!-- Tira de KPIs de Racks en Vivo -->
                 <div class="rack-kpi-strip" style="margin-top: 16px;">
                     <div class="rack-kpi-tile highlight">
-                        <div class="rack-kpi-lbl">Módulos de Rack a Ocupar</div>
+                        <div class="rack-kpi-lbl">Estanterías Físicas en Uso</div>
                         <div class="rack-kpi-val" id="kpi-racks-needed" style="color: #38bdf8;">1.348 Racks</div>
                         <div class="rack-kpi-sub" id="kpi-racks-needed-sub">13.480 posiciones pallet calculadas</div>
                     </div>
 
                     <div class="rack-kpi-tile">
-                        <div class="rack-kpi-lbl">Capacidad Instalada de Planta</div>
+                        <div class="rack-kpi-lbl">Estanterías Totales en Planta</div>
                         <div class="rack-kpi-val" id="kpi-racks-installed" style="color: #ffffff;">1.690 Racks</div>
-                        <div class="rack-kpi-sub">16.900 posiciones en 4 zonas de planta</div>
+                        <div class="rack-kpi-sub">16.900 posiciones en las 4 zonas del CD</div>
                     </div>
 
                     <div class="rack-kpi-tile">
-                        <div class="rack-kpi-lbl">Tasa de Ocupación Global</div>
+                        <div class="rack-kpi-lbl">Nivel de Saturación Global</div>
                         <div class="rack-kpi-val" id="kpi-racks-util" style="color: #34d399;">79,8%</div>
                         <div class="rack-kpi-sub" id="kpi-racks-util-sub">Holgura de 342 racks libres (20,2%)</div>
                     </div>
 
                     <div class="rack-kpi-tile">
-                        <div class="rack-kpi-lbl">Metros Lineales de Estantería</div>
+                        <div class="rack-kpi-lbl">Distancia Total de Estanterías</div>
                         <div class="rack-kpi-val" id="kpi-racks-meters" style="color: #fbbf24;">3.640 m</div>
-                        <div class="rack-kpi-sub">27 pasillos activos con baterías dobles</div>
+                        <div class="rack-kpi-sub">27 pasillos con tránsito seguro y señalizado</div>
                     </div>
                 </div>
             </div>
@@ -1903,13 +1933,13 @@
                     </div>
 
                     <!-- Leyenda del mapa de calor de racks -->
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 0.72rem; color: #94a3b8; flex-wrap: wrap; gap: 8px;">
-                        <div style="display: flex; gap: 12px; align-items: center;">
-                            <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #10b981;"></span> &le; 80% (Holgura Óptima)</span>
-                            <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #f59e0b;"></span> 81 - 90% (Precaución)</span>
-                            <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #ef4444;"></span> &ge; 91% (Saturado / Bloqueo)</span>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 0.74rem; color: #cbd5e1; flex-wrap: wrap; gap: 8px;">
+                        <div style="display: flex; gap: 14px; align-items: center;">
+                            <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #10b981;"></span> <strong>&le; 80% Flujo Libre:</strong> Pasillos despejados y ágiles</span>
+                            <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #f59e0b;"></span> <strong>81-90% Precaución:</strong> Tránsito denso</span>
+                            <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #ef4444;"></span> <strong>&ge; 91% Colapso:</strong> Grúas y carros atascados</span>
                         </div>
-                        <span id="floorplan-active-selection" style="font-family: var(--font-mono); color: #38bdf8;">Visualizando: Todas las Zonas</span>
+                        <span id="floorplan-active-selection" style="font-family: var(--font-mono); color: #38bdf8; font-weight: 700;">Pasillo seleccionado: Todos (Haz clic en un pasillo para ver sus SKUs)</span>
                     </div>
                 </div>
 
@@ -1917,10 +1947,10 @@
                 <div class="rack-card-box">
                     <div class="rack-card-box-header">
                         <div class="rack-box-title">
-                            <span>🏗️ Alzado Frontal del Módulo de Rack (Elevación 2D)</span>
+                            <span>🏗️ Alzado Frontal: ¿Cómo funciona una estantería por dentro?</span>
                         </div>
-                        <div id="rack-spec-badge" style="font-size: 0.7rem; font-family: var(--font-mono); background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 2px 8px; border-radius: 4px;">
-                            5 Niveles &bull; 10 Pallets/Módulo
+                        <div id="rack-spec-badge" style="font-size: 0.72rem; font-family: var(--font-mono); background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 2px 8px; border-radius: 4px; font-weight: 700;">
+                            5 Pisos &bull; 10 Pallets por Estantería
                         </div>
                     </div>
 
@@ -1930,11 +1960,11 @@
                         </svg>
                     </div>
 
-                    <div style="margin-top: 10px; padding: 10px; background: rgba(15, 23, 42, 0.7); border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.74rem; color: #cbd5e1; line-height: 1.45;">
-                        <strong style="color: #38bdf8;">Ficha Técnica del Módulo:</strong><br>
-                        &bull; <strong>Nivel 0 (Suelo):</strong> Picking directo manual / transpaleta eléctrica.<br>
-                        &bull; <strong>Niveles 1 a <span id="spec-levels-txt">4</span>:</strong> Reserva en altura atendida por Grúa Reach (hasta 12 m).<br>
-                        &bull; <strong>Vigas de carga:</strong> Perfil C reforzado, capacidad de 3.000 kg por par de vigas.
+                    <div style="margin-top: 10px; padding: 12px; background: rgba(15, 23, 42, 0.75); border-radius: 8px; border: 1px solid rgba(56, 189, 248, 0.2); font-size: 0.78rem; color: #cbd5e1; line-height: 1.55;">
+                        <strong style="color: #38bdf8; font-size: 0.82rem;">👷 ¿Cómo se trabaja en cada nivel en el día a día?</strong><br>
+                        &bull; <strong style="color: #34d399;">Nivel 0 (En el suelo, 0,0 m):</strong> <em>"Zona de mano rápida"</em>. El trabajador camina y saca las unidades a mano sin escaleras ni riesgo de caídas.<br>
+                        &bull; <strong style="color: #38bdf8;">Niveles 1 a <span id="spec-levels-txt">4</span> (En altura):</strong> <em>"Zona de reserva aérea"</em>. Pallets completos con embalaje seguro que la grúa horquilla baja solo cuando el piso se agota.<br>
+                        &bull; <strong style="color: #fbbf24;">Seguridad Ergonómica (Ley 20.949):</strong> En la propuesta To-Be, ningún producto pesado (+15 kg) se guarda arriba, cuidando la espalda del equipo.
                     </div>
                 </div>
             </div>
@@ -1943,15 +1973,15 @@
             <div class="rack-matrix-card">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 10px;">
                     <div>
-                        <h4 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin: 0;">
-                            Matriz de Dimensionamiento y Balanceo de Racks por Zona
+                        <h4 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin: 0;">
+                            Matriz por Zonas: Del Caos Operacional al Almacén Equilibrado
                         </h4>
-                        <p style="font-size: 0.78rem; color: #94a3b8; margin: 2px 0 0;">
-                            Contraste directo entre la Línea Base de Crisis y la Propuesta To-Be según <code style="color: #38bdf8;">Layout_Capacidad</code> y <code style="color: #38bdf8;">SKU_Master</code>.
+                        <p style="font-size: 0.8rem; color: #cbd5e1; margin: 3px 0 0;">
+                            Compara zona por zona cómo la saturación extrema del CyberDay provocaba demoras y cómo la Propuesta To-Be restablece el orden.
                         </p>
                     </div>
-                    <span style="font-size: 0.74rem; font-family: var(--font-mono); color: #34d399; background: rgba(16, 185, 129, 0.15); padding: 4px 10px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3);">
-                        ✨ 0 Congestiones en To-Be (&le; 85% Utilización)
+                    <span style="font-size: 0.74rem; font-family: var(--font-mono); color: #34d399; background: rgba(16, 185, 129, 0.15); padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3); font-weight: 700;">
+                        ✨ 0 Cuellos de Botella en To-Be (&le; 85% de Ocupación)
                     </span>
                 </div>
 
@@ -1960,15 +1990,15 @@
                         <thead>
                             <tr>
                                 <th>Zona</th>
-                                <th>Función &amp; Pasillos</th>
-                                <th>Área</th>
+                                <th>Función y Pasillos</th>
+                                <th>Superficie</th>
                                 <th>Distancia</th>
-                                <th>SKUs (As-Is &rarr; To-Be)</th>
-                                <th>Pallets Requeridos</th>
-                                <th>Racks Ocupados</th>
-                                <th>Racks Instalados</th>
-                                <th>Utilización</th>
-                                <th>Diagnóstico Operacional</th>
+                                <th>Productos (Antes &rarr; Después)</th>
+                                <th>Pallets a Guardar</th>
+                                <th>Estanterías en Uso</th>
+                                <th>Estanterías Totales</th>
+                                <th>% Ocupación</th>
+                                <th>¿Qué ocurre en la realidad operativa?</th>
                             </tr>
                         </thead>
                         <tbody id="rack-matrix-tbody">
@@ -1983,24 +2013,24 @@
                 <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; flex-wrap: wrap; gap: 12px;">
                     <div>
                         <div style="font-size: 0.72rem; font-family: var(--font-mono); color: #38bdf8; font-weight: 700; text-transform: uppercase;">
-                            MAESTRO OFICIAL DE ARTÍCULOS &bull; 450 SKUs ACTIVOS
+                            CATÁLOGO OFICIAL COMPLETO &bull; 450 PRODUCTOS ANALIZADOS
                         </div>
                         <h4 style="font-size: 1.15rem; font-weight: 800; color: #ffffff; margin-top: 2px;">
-                            Explorador de Asignación de Racks por SKU
+                            Explorador de Productos: ¿Dónde debe ir cada artículo?
                         </h4>
-                        <p style="font-size: 0.78rem; color: #94a3b8; margin: 0;">
-                            Inspecciona dimensiones, factor de estiba, cálculo de pallets y reubicación por Re-Slotting P1.
+                        <p style="font-size: 0.8rem; color: #cbd5e1; margin: 0; line-height: 1.45;">
+                            En el estado de crisis, 114 productos estaban guardados en el lugar equivocado, obligando a los trabajadores a caminar de más. Conoce aquí la reubicación de cada uno.
                         </p>
                     </div>
                     <div style="display: flex; gap: 8px; flex-wrap: wrap;">
                         <button class="rack-pill-btn active" id="filter-sku-all" onclick="setSkuMismatchFilter('all')">
-                            Todos los 450 SKUs
+                            Todos los 450 Productos
                         </button>
                         <button class="rack-pill-btn asis" id="filter-sku-mismatches" onclick="setSkuMismatchFilter('mismatches')">
-                            🚨 114 SKUs con Mismatch Slotting
+                            🚨 114 Productos Mal Ubicados (Mismatches)
                         </button>
                         <button class="rack-pill-btn tobe" id="filter-sku-zone-a-rescued" onclick="setSkuMismatchFilter('rescued')">
-                            ✨ 12 SKUs Clase A rescatados de Zona C
+                            ✨ 12 Productos Estrella Rescatados a Zona A
                         </button>
                     </div>
                 </div>
