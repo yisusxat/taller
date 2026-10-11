@@ -1579,6 +1579,18 @@ function calculateRackMetrics() {
 
     const linearMeters = Math.round(occupiedRacks * beamLen);
 
+    // Etiquetas del plano cenital: altura y volumen segun los pisos seleccionados
+    const rackH = rackCalcState.levels * 2.1;
+    const fmtM3 = v => Math.round(v).toLocaleString('es-CL');
+    const zoneSvg = { a: ['A (35m)', 'Pick Express', 5200, 390], b: ['B (72m)', 'Picking Estándar', 6100, 470], c: ['C (118m)', 'Lenta', 7200, 580], d: ['D', 'Bulky', 4900, 250] };
+    Object.keys(zoneSvg).forEach(k => {
+        const [nm, fn, area, racks] = zoneSvg[k];
+        const t = document.getElementById('svg-zone-' + k + '-title');
+        const sb = document.getElementById('svg-zone-' + k + '-sub');
+        if (t) t.textContent = 'ZONA ' + nm + ' \u2022 ' + fmtM3(area * rackH) + ' m\u00b3';
+        if (sb) sb.textContent = fn + ' \u2022 ' + area.toLocaleString('es-CL') + ' m\u00b2 \u2022 ' + racks + ' Racks (h=' + rackH.toFixed(1).replace('.', ',') + 'm)';
+    });
+
     // Actualizar Insignia de Fórmula
     const badge = document.getElementById('rack-formula-badge');
     if (badge) {
@@ -1964,7 +1976,7 @@ function renderRackElevation() {
                     <tr>
                         <td><strong>Luz Libre de Viga</strong></td>
                         <td><strong style="color: #fbbf24;">${beamW} (${ppb === 2 ? '2.700' : '3.300'} mm)</strong></td>
-                        <td>Aloja ${ppb} pallets de 1,00 m con ${lateralClear} de holgura lateral.</td>
+                        <td>Aloja ${ppb} pallets de ${ppb === 2 ? '1,20' : '1,00'} m de frente con ${lateralClear} de holgura lateral.</td>
                     </tr>
                     <tr>
                         <td><strong>Puntales / Bastidores</strong></td>
@@ -1974,7 +1986,7 @@ function renderRackElevation() {
                     <tr>
                         <td><strong>Paso entre Niveles</strong></td>
                         <td><strong>2,10 m (2.100 mm)</strong></td>
-                        <td>1,65 m carga estibada + 180 mm huelgo de izaje horquilla + 140 mm peralte de viga naranja.</td>
+                        <td>1,70 m carga máx. con pallet + 260 mm huelgo de izaje horquilla + 140 mm peralte de viga naranja = 2,10 m.</td>
                     </tr>
                     <tr>
                         <td><strong>Apoyo y Voladizo</strong></td>
