@@ -325,8 +325,8 @@ function updateTopKPIs(mode) {
     } else {
         if (otifEl) { otifEl.innerText = '96,2%'; otifEl.className = 'kpi-number green'; }
         if (backlogEl) { backlogEl.innerText = '0'; backlogEl.className = 'kpi-number green'; }
-        if (costEl) { costEl.innerText = '$5.675'; costEl.className = 'kpi-number green'; }
-        if (walkEl) { walkEl.innerText = '7,2 km'; walkEl.className = 'kpi-number green'; }
+        if (costEl) { costEl.innerText = '$8.532'; costEl.className = 'kpi-number green'; }
+        if (walkEl) { walkEl.innerText = '14,2 km'; walkEl.className = 'kpi-number green'; }
     }
 }
 
@@ -1058,7 +1058,7 @@ function renderKeynoteSlide2D() {
 
 function initDidacticTools() {
     // Inicializar sliders didácticos si existen en DOM
-    if (document.getElementById('apqc-slider-ot')) {
+    if (document.getElementById('apqc-slide-ontime') || document.getElementById('apqc-slider-ot')) {
         window.calculateLiveApqc();
     }
     if (document.getElementById('mismatch-range-slider')) {
@@ -1068,10 +1068,10 @@ function initDidacticTools() {
 
 /* --- FASE 1: Selector Didáctico de Turnos Operacionales --- */
 window.setOperationalShift = function(shift) {
-    const morningBtn = document.getElementById('shift-btn-morning');
-    const afternoonBtn = document.getElementById('shift-btn-afternoon');
-    const nightBtn = document.getElementById('shift-btn-night');
-    const descEl = document.getElementById('shift-status-desc');
+    const morningBtn = document.getElementById('btn-shift-morning') || document.getElementById('shift-btn-morning');
+    const afternoonBtn = document.getElementById('btn-shift-afternoon') || document.getElementById('shift-btn-afternoon');
+    const nightBtn = document.getElementById('btn-shift-night') || document.getElementById('shift-btn-night');
+    const descEl = document.getElementById('shift-status-pill') || document.getElementById('shift-status-desc');
     const svgEl = document.getElementById('warehouse-2d-svg');
 
     [morningBtn, afternoonBtn, nightBtn].forEach(b => { if (b) b.classList.remove('active'); });
@@ -1086,15 +1086,15 @@ window.setOperationalShift = function(shift) {
 
     if (shift === 'morning') {
         if (morningBtn) morningBtn.classList.add('active');
-        if (descEl) descEl.innerHTML = '<strong>🌅 Turno Mañana (07:00 - 15:00):</strong> Alta demanda de recepción en Inbound (120 camiones/semana). Pick Express en Zona A a máxima velocidad (46,8 lín/HH). Dotación al 100% (personal propio).';
+        if (descEl) descEl.innerHTML = '🟢 <strong>Turno Mañana (07-15h):</strong> Alta demanda Inbound (120 cam/sem). Pick Express Zona A (49,6 lín/HH). Dotación 100% y flujo regular.';
         if (typeof select2DZone === 'function') select2DZone('INBOUND');
     } else if (shift === 'afternoon') {
         if (afternoonBtn) afternoonBtn.classList.add('active');
-        if (descEl) descEl.innerHTML = '<strong>☀️ Turno Tarde (15:00 - 23:00):</strong> Ola principal de picking masivo en Zonas A y B. Preparación y consolidación de despachos para carriers. Personal mixto (propio + 42 temporales).';
+        if (descEl) descEl.innerHTML = '🟡 <strong>Turno Tarde (15-23h):</strong> Ola principal de picking masivo Zonas A-B (47,8 lín/HH). Consolidación y despacho a carriers. Dotación mixta.';
         if (typeof select2DZone === 'function') select2DZone('ZONE-A');
     } else if (shift === 'night') {
         if (nightBtn) nightBtn.classList.add('active');
-        if (descEl) descEl.innerHTML = '<strong>🌙 Turno Noche (23:00 - 07:00):</strong> Putaway en altura y reposición pesada en Zona C y D. Fatiga física crítica: 14 km caminados por operario hacia Zona C por slotting mismatch y mayor riesgo de incidentes SST.';
+        if (descEl) descEl.innerHTML = '🔴 <strong>Turno Noche (23-07h):</strong> Putaway en altura y reposición pesada Zonas C-D (42,8 lín/HH, -14%). Fatiga física y 14 km caminados.';
         if (typeof select2DZone === 'function') select2DZone('ZONE-C');
     }
 };
@@ -1102,25 +1102,25 @@ window.setOperationalShift = function(shift) {
 /* --- FASE 1: Simulador Causa-Efecto de Desbalance de Pasillos --- */
 window.onMismatchSliderChange = function(val) {
     const intVal = parseInt(val, 10);
-    const countEl = document.getElementById('mismatch-slider-count');
-    const kmEl = document.getElementById('ce-metric-km');
-    const hhEl = document.getElementById('ce-metric-hh');
-    const costEl = document.getElementById('ce-metric-cost');
+    const countEl = document.getElementById('sim-mismatches-val') || document.getElementById('mismatch-slider-count');
+    const kmEl = document.getElementById('sim-km-val') || document.getElementById('ce-metric-km');
+    const hhEl = document.getElementById('sim-hh-val') || document.getElementById('ce-metric-hh');
+    const costEl = document.getElementById('sim-waste-cost-val') || document.getElementById('ce-metric-cost');
 
-    if (countEl) countEl.innerText = intVal;
+    if (countEl) countEl.innerText = intVal + ' SKU';
 
     // Proporción de 0 a 114
     const ratio = Math.max(0, Math.min(1, intVal / 114));
 
     // Base To-Be: 14.2 km / 4.9 HH / $0M costo sobreestadía/extra
     // Crisis As-Is: 67.6 km / 23.5 HH / $54.8M
-    const km = (14.2 + ratio * (67.6 - 14.2)).toFixed(1);
-    const hh = (4.9 + ratio * (23.5 - 4.9)).toFixed(1);
-    const cost = Math.round(ratio * 54.8);
+    const km = (14.2 + ratio * (67.6 - 14.2)).toFixed(1).replace('.', ',');
+    const hh = (4.9 + ratio * (23.5 - 4.9)).toFixed(1).replace('.', ',');
+    const cost = (ratio * 54.8).toFixed(1).replace('.', ',');
 
     if (kmEl) kmEl.innerText = km + ' km';
     if (hhEl) hhEl.innerText = hh + ' HH';
-    if (costEl) costEl.innerText = '$' + cost + 'M';
+    if (costEl) costEl.innerText = '$' + cost + 'M CLP';
 
     // Dinamizar el plano SVG si existe el espagueti
     const spaghetti = document.getElementById('svg-path-spaghetti');
@@ -1140,34 +1140,62 @@ window.setMismatchSliderValue = function(val) {
 
 /* --- FASE 1: Calculadora Didáctica Interactiva del Pedido Perfecto (APQC) --- */
 window.calculateLiveApqc = function() {
-    const sOt = document.getElementById('apqc-slider-ot');
-    const sIf = document.getElementById('apqc-slider-if');
-    const sDf = document.getElementById('apqc-slider-df');
-    const sIa = document.getElementById('apqc-slider-ia');
+    const sOt = document.getElementById('apqc-slide-ontime') || document.getElementById('apqc-slider-ot');
+    const sIf = document.getElementById('apqc-slide-infull') || document.getElementById('apqc-slider-if');
+    const sDf = document.getElementById('apqc-slide-damage') || document.getElementById('apqc-slider-df');
+    const sIa = document.getElementById('apqc-slide-invoice') || document.getElementById('apqc-slider-ia');
 
-    const vOt = sOt ? parseFloat(sOt.value) : 63.8;
+    const vOt = sOt ? parseFloat(sOt.value) : 62.1;
     const vIf = sIf ? parseFloat(sIf.value) : 78.4;
     const vDf = sDf ? parseFloat(sDf.value) : 91.2;
-    const vIa = sIa ? parseFloat(sIa.value) : 91.8;
+    const vIa = sIa ? parseFloat(sIa.value) : 94.6;
 
-    const elOt = document.getElementById('apqc-val-ot');
-    const elIf = document.getElementById('apqc-val-if');
-    const elDf = document.getElementById('apqc-val-df');
-    const elIa = document.getElementById('apqc-val-ia');
+    const elOt = document.getElementById('apqc-val-ontime') || document.getElementById('apqc-val-ot');
+    const elIf = document.getElementById('apqc-val-infull') || document.getElementById('apqc-val-if');
+    const elDf = document.getElementById('apqc-val-damage') || document.getElementById('apqc-val-df');
+    const elIa = document.getElementById('apqc-val-invoice') || document.getElementById('apqc-val-ia');
 
-    if (elOt) elOt.innerText = vOt.toFixed(1) + '%';
-    if (elIf) elIf.innerText = vIf.toFixed(1) + '%';
-    if (elDf) elDf.innerText = vDf.toFixed(1) + '%';
-    if (elIa) elIa.innerText = vIa.toFixed(1) + '%';
+    if (elOt) elOt.innerText = vOt.toFixed(1).replace('.', ',') + '%';
+    if (elIf) elIf.innerText = vIf.toFixed(1).replace('.', ',') + '%';
+    if (elDf) elDf.innerText = vDf.toFixed(1).replace('.', ',') + '%';
+    if (elIa) elIa.innerText = vIa.toFixed(1).replace('.', ',') + '%';
 
     // Pedido Perfecto APQC = (OT/100 * IF/100 * DF/100 * IA/100) * 100
     const perfectScore = (vOt / 100) * (vIf / 100) * (vDf / 100) * (vIa / 100) * 100;
 
     const scoreEl = document.getElementById('apqc-live-score');
+    const verdictEl = document.getElementById('apqc-live-verdict');
+    const formulaEl = document.getElementById('apqc-formula-breakdown');
     const badgeEl = document.getElementById('apqc-score-badge');
     const textEl = document.getElementById('apqc-interpret-text');
 
-    if (scoreEl) scoreEl.innerText = perfectScore.toFixed(1) + '%';
+    if (scoreEl) {
+        scoreEl.innerText = perfectScore.toFixed(1).replace('.', ',') + '%';
+        if (perfectScore < 60) {
+            scoreEl.style.color = '#f43f5e';
+        } else if (perfectScore < 85) {
+            scoreEl.style.color = '#fbbf24';
+        } else {
+            scoreEl.style.color = '#34d399';
+        }
+    }
+
+    if (formulaEl) {
+        formulaEl.innerHTML = `${vOt.toFixed(1).replace('.', ',')}% &times; ${vIf.toFixed(1).replace('.', ',')}% &times; ${vDf.toFixed(1).replace('.', ',')}% &times; ${vIa.toFixed(1).replace('.', ',')}%`;
+    }
+
+    if (verdictEl) {
+        if (perfectScore < 60) {
+            verdictEl.innerText = '⚠️ Quiebre Crítico: más del 50% de pedidos con fricción (Nivel CyberDay)';
+            verdictEl.style.color = '#fca5a5';
+        } else if (perfectScore < 85) {
+            verdictEl.innerText = '🟡 Rendimiento Medio / Operación Regular';
+            verdictEl.style.color = '#fde68a';
+        } else {
+            verdictEl.innerText = '🟢 Nivel Clase Mundial / Excelencia APQC (≥ 90%)';
+            verdictEl.style.color = '#86efac';
+        }
+    }
 
     if (badgeEl && textEl) {
         if (perfectScore < 60) {
@@ -1193,10 +1221,10 @@ window.calculateLiveApqc = function() {
 };
 
 window.setApqcPreset = function(ot, inFull, df, ia) {
-    const sOt = document.getElementById('apqc-slider-ot');
-    const sIf = document.getElementById('apqc-slider-if');
-    const sDf = document.getElementById('apqc-slider-df');
-    const sIa = document.getElementById('apqc-slider-ia');
+    const sOt = document.getElementById('apqc-slide-ontime') || document.getElementById('apqc-slider-ot');
+    const sIf = document.getElementById('apqc-slide-infull') || document.getElementById('apqc-slider-if');
+    const sDf = document.getElementById('apqc-slide-damage') || document.getElementById('apqc-slider-df');
+    const sIa = document.getElementById('apqc-slide-invoice') || document.getElementById('apqc-slider-ia');
 
     if (sOt) sOt.value = ot;
     if (sIf) sIf.value = inFull;
