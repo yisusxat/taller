@@ -1585,10 +1585,10 @@ function calculateRackMetrics() {
     const rackH = heightMap[rackCalcState.levels] || (rackCalcState.levels * 2.0);
     const fmtM3 = v => Math.round(v).toLocaleString('es-CL');
     const zoneSvg = { 
-        a: ['A (35m)', '46,67 × 111,43 m', 5200, 390], 
-        b: ['B (72m)', '54,74 × 111,43 m', 6100, 470], 
-        c: ['C (118m)', '64,62 × 111,43 m', 7200, 580], 
-        d: ['D (Bulky)', '43,97 × 111,43 m', 4900, 250] 
+        a: ['A (35m)', '46,7 × 111,4 m', 5200, 390], 
+        b: ['B (72m)', '54,7 × 111,4 m', 6100, 470], 
+        c: ['C (118m)', '64,6 × 111,4 m', 7200, 580], 
+        d: ['D (Bulky)', '44,0 × 111,4 m', 4900, 250] 
     };
     Object.keys(zoneSvg).forEach(k => {
         const [nm, dims, area, racks] = zoneSvg[k];
