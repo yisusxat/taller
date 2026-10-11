@@ -1409,8 +1409,8 @@
     <section id="sandbox-2d" class="sandbox-2d-section">
         <div class="section-title-wrap">
             <div>
-                <h2>Laboratorio de Decisión y Portafolio (P1 a P7)</h2>
-                <p>Comprueba cómo el portafolio recomendado responde a los problemas priorizados respetando el presupuesto directivo.</p>
+                <h2 id="portafolio-title-2d">Laboratorio de Decisión y Portafolio (P1 a P8)</h2>
+                <p>Comprueba cómo el portafolio recomendado y las alternativas de almacenamiento (Layout 2D & Racks Dinámicos) responden a los problemas priorizados respetando el presupuesto directivo.</p>
             </div>
             <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan);">
                 TECHO DIRECTIVO: $850 MM CLP
@@ -1421,23 +1421,26 @@
             <!-- Lista de Proyectos Interactiva -->
             <div class="projects-compact-list">
                 <!-- PRESETS INTELIGENTES DE PORTAFOLIO (FASE 2) -->
-                <div class="portfolio-presets-row">
+                <div class="portfolio-presets-row" style="flex-wrap: wrap; gap: 6px;">
                     <span style="font-size: 0.72rem; font-family: var(--font-mono); color: var(--text-dim); font-weight: 700;">PRESETS:</span>
-                    <button class="preset-pill-btn opt" onclick="applyPortfolioPreset('optimal')">
+                    <button class="preset-pill-btn opt" id="preset-pill-optimal" onclick="applyPortfolioPreset('optimal')">
                         ⭐ Recomendado C-Suite (P1-P5 &bull; $766,8M)
                     </button>
-                    <button class="preset-pill-btn qw" onclick="applyPortfolioPreset('quickwins')">
+                    <button class="preset-pill-btn qw" id="preset-pill-quickwins" onclick="applyPortfolioPreset('quickwins')">
                         ⚡ Quick Wins (P1+P5 &bull; $155M)
                     </button>
-                    <button class="preset-pill-btn over" onclick="applyPortfolioPreset('overbudget')">
+                    <button class="preset-pill-btn over" id="preset-pill-overbudget" onclick="applyPortfolioPreset('overbudget')">
                         ⚠️ Sobregiro (> $850M)
+                    </button>
+                    <button class="preset-pill-btn" id="preset-pill-racks" onclick="applyPortfolioPreset('racks')" style="border-color: #38bdf8; color: #38bdf8; background: rgba(56, 189, 248, 0.08);">
+                        📐 + Racks 6P Layout 2D (P1-P5 + P8)
                     </button>
                 </div>
 
                 <!-- P1 -->
                 <label class="project-item-2d checked">
                     <div class="p-item-left">
-                        <input type="checkbox" class="p-item-checkbox" data-proj="p1" checked>
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p1" id="chk-p1" checked>
                         <div>
                             <div class="p-item-name">P1: Re-slotting ABC + 5S + Conteos Cíclicos</div>
                             <div class="p-item-sub">Reubica 114 SKU desalineados | Elimina 67,6 km/día de caminata</div>
@@ -1452,7 +1455,7 @@
                 <!-- P2 -->
                 <label class="project-item-2d checked">
                     <div class="p-item-left">
-                        <input type="checkbox" class="p-item-checkbox" data-proj="p2" checked>
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p2" id="chk-p2" checked>
                         <div>
                             <div class="p-item-name">P2: Upgrade WMS NextGen + Voice Picking / RF</div>
                             <div class="p-item-sub">Elimina papel | Reduce error de 2,44% a &le;0,3% | +18% velocidad</div>
@@ -1467,7 +1470,7 @@
                 <!-- P3 -->
                 <label class="project-item-2d checked">
                     <div class="p-item-left">
-                        <input type="checkbox" class="p-item-checkbox" data-proj="p3" checked>
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p3" id="chk-p3" checked>
                         <div>
                             <div class="p-item-name">P3: Portal ASN & YMS de Citas Proveedores</div>
                             <div class="p-item-sub">Citas de 2h | Reduce Dock-to-Stock de 22,6h a 4,5h | Cero demurrage</div>
@@ -1482,7 +1485,7 @@
                 <!-- P4 -->
                 <label class="project-item-2d checked">
                     <div class="p-item-left">
-                        <input type="checkbox" class="p-item-checkbox" data-proj="p4" checked>
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p4" id="chk-p4" checked>
                         <div>
                             <div class="p-item-name">P4: TMS Ruteo Dinámico + POD Chofer Móvil</div>
                             <div class="p-item-sub">Algoritmo de cubicaje y app móvil chofer | Fallas &le;3,0%</div>
@@ -1497,7 +1500,7 @@
                 <!-- P5 -->
                 <label class="project-item-2d checked">
                     <div class="p-item-left">
-                        <input type="checkbox" class="p-item-checkbox" data-proj="p5" checked>
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p5" id="chk-p5" checked>
                         <div>
                             <div class="p-item-name">P5: Right-Sizing y Ergonomía D-Bulky</div>
                             <div class="p-item-sub">4 mesas elevadoras hidráulicas | Elimina carga manual &gt;25kg (DT)</div>
@@ -1512,7 +1515,7 @@
                 <!-- P6 Descartado -->
                 <label class="project-item-2d discarded">
                     <div class="p-item-left">
-                        <input type="checkbox" class="p-item-checkbox" data-proj="p6">
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p6" id="chk-p6">
                         <div>
                             <div class="p-item-name">P6: Flota Robots AMR / AGV (Descartado)</div>
                             <div class="p-item-sub">⚠️ Prueba activarlo: Excede el presupuesto máximo de $850M</div>
@@ -1527,7 +1530,7 @@
                 <!-- P7 Postergado -->
                 <label class="project-item-2d discarded">
                     <div class="p-item-left">
-                        <input type="checkbox" class="p-item-checkbox" data-proj="p7">
+                        <input type="checkbox" class="p-item-checkbox" data-proj="p7" id="chk-p7">
                         <div>
                             <div class="p-item-name">P7: Planta Solar CD (Postergado a Fase 2)</div>
                             <div class="p-item-sub">Sostenibilidad diferida sin impacto directo en crisis Cyber</div>
@@ -1538,6 +1541,78 @@
                         <div class="p-impact-tag" style="color: var(--text-dim);">Fase 2</div>
                     </div>
                 </label>
+
+                <!-- P8: Mejora de Almacenamiento & Rediseño de Racks Dinámicos (Layout 2D) -->
+                <div class="project-item-2d-container" style="display: flex; flex-direction: column; gap: 8px;">
+                    <label class="project-item-2d" id="card-proj-p8" style="border-left: 3px solid #38bdf8;">
+                        <div class="p-item-left">
+                            <input type="checkbox" class="p-item-checkbox" data-proj="p8" id="chk-p8">
+                            <div>
+                                <div class="p-item-name" style="color: #38bdf8; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                                    <span>📐 P8: Mejora de Almacenamiento &amp; Racks Dinámicos (Layout 2D)</span>
+                                    <span style="font-size: 0.68rem; background: rgba(56, 189, 248, 0.18); color: #38bdf8; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.4); font-weight: 800;">6 PISOS &times; 3 PALLETS</span>
+                                </div>
+                                <div class="p-item-sub">
+                                    30.420 pos (+13.520 ganadas en altura) &bull; 749 racks en uso &bull; Saturación 44,3% (941 racks libres / 55,7% colchón) &bull; 2.472 m en 27 pasillos &bull; NCh2369 &bull; Ley 20.949
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-item-right">
+                            <div class="p-cost-badge" style="color: #38bdf8;">$110M CLP</div>
+                            <div class="p-impact-tag" style="color: #34d399;">+5,5% OTIF</div>
+                        </div>
+                    </label>
+
+                    <!-- Ficha Técnica y Detalle del Módulo según Layout 2D -->
+                    <div id="p8-tech-drawer" style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 14px; margin-top: -2px; font-size: 0.82rem;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(56, 189, 248, 0.2); padding-bottom: 8px; margin-bottom: 10px;">
+                            <span style="font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 6px;">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+                                Ficha Técnica de Medidas de Referencia del Módulo (Layout 2D)
+                            </span>
+                            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #fbbf24;">6 Pisos &bull; 18 Pallets &bull; 48,23 m³</span>
+                        </div>
+
+                        <!-- Grid de Métricas Clave -->
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 12px;">
+                            <div style="background: rgba(30, 41, 59, 0.7); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                                <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase;">Alto Total (H)</div>
+                                <div style="font-size: 1.05rem; font-weight: 800; color: #38bdf8; font-family: var(--font-mono);">12,6 m</div>
+                            </div>
+                            <div style="background: rgba(30, 41, 59, 0.7); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                                <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase;">Ancho Exterior</div>
+                                <div style="font-size: 1.05rem; font-weight: 800; color: #fff; font-family: var(--font-mono);">3,48 m</div>
+                            </div>
+                            <div style="background: rgba(30, 41, 59, 0.7); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                                <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase;">Luz de Viga</div>
+                                <div style="font-size: 1.05rem; font-weight: 800; color: #fbbf24; font-family: var(--font-mono);">3,30 m</div>
+                            </div>
+                            <div style="background: rgba(30, 41, 59, 0.7); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                                <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase;">Fondo Bastidor</div>
+                                <div style="font-size: 1.05rem; font-weight: 800; color: #fff; font-family: var(--font-mono);">1,10 m <span style="font-size: 0.7rem; color: #34d399;">(c/p: 1,20m)</span></div>
+                            </div>
+                            <div style="background: rgba(30, 41, 59, 0.7); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
+                                <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase;">Carga Máxima</div>
+                                <div style="font-size: 1.05rem; font-weight: 800; color: #f43f5e; font-family: var(--font-mono);">18.000 kg</div>
+                            </div>
+                        </div>
+
+                        <!-- Resumen de Capacidad del Centro de Distribución -->
+                        <div style="background: rgba(2, 132, 199, 0.1); border-left: 3px solid #0284c7; padding: 10px 12px; border-radius: 0 6px 6px 0;">
+                            <div style="font-weight: 800; color: #e0f2fe; margin-bottom: 4px; display: flex; justify-content: space-between;">
+                                <span>Impacto en Capacidad Global CD Pudahuel:</span>
+                                <span style="color: #38bdf8; font-family: var(--font-mono);">30.420 Posiciones (+80%)</span>
+                            </div>
+                            <div style="color: #cbd5e1; font-size: 0.78rem; line-height: 1.45;">
+                                &bull; <strong>Huella en suelo:</strong> Solo <strong>749 estanterías en uso</strong> (para 13.480 pallets guardados) de 1.690 racks base.<br/>
+                                &bull; <strong>Saturación Global:</strong> Desciende a <strong>44,3%</strong> (frente a la meta de seguridad del 85%), generando <strong>941 racks libres (55,7% de colchón)</strong>.<br/>
+                                &bull; <strong>Distancia lineal total:</strong> <strong>2.472 m</strong> distribuidos en 27 pasillos (A: 6, B: 12, C: 6, D: 3 pasillos con tránsito seguro y señalizado).<br/>
+                                &bull; <strong>Ingeniería &amp; Normativa:</strong> Acero estructural NCh2369 sismo-resistente (bastidores 90&times;70 mm, e=2,5 mm, pernos M16) y Ley 20.949 (Piso 0 picking manual a pie; Pisos 1 a 5 reserva aérea bajada por grúa reach).<br/>
+                                &bull; <strong>Zonificación To-Be:</strong> Zona A (390 racks &bull; 54.600 m³), Zona B (470 racks &bull; 64.050 m³), Zona C (580 racks &bull; 75.600 m³), Zona D (250 racks &bull; 51.450 m³).
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Tablero de Restricciones & Retorno -->

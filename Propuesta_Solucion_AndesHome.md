@@ -25,9 +25,9 @@ El Diagnóstico Operativo (EA1) evidenció un deterioro crítico en el Centro de
 * **Multas y Demurrage:** Multas por incumplimiento comercial (CLP 184,5M) y cobros por sobreestadía de camiones inbound (CLP 146,3M en 4 meses).
 
 ### 1.2. Portafolio Seleccionado vs. Alternativas Descartadas
-De un universo de 7 iniciativas evaluadas (P1 a P7), se seleccionó el **Portafolio Integrado P1-P5**, fundamentado en la optimización de procesos, tecnología core y transporte:
+De un universo de 8 iniciativas evaluadas (P1 a P8), se seleccionó el **Portafolio Integrado P1-P5**, fundamentado en la optimización de procesos, tecnología core y transporte, evaluando P8 como alternativa de expansión modular de capacidad:
 
-| Iniciativa Evaluada | Descripción Breve | CAPEX (CLP) | OPEX / Año (CLP) | Decisión Estratégica | Justificación Téxnica |
+| Iniciativa Evaluada | Descripción Breve | CAPEX (CLP) | OPEX / Año (CLP) | Decisión Estratégica | Justificación Técnica |
 | :--- | :--- | :---: | :---: | :---: | :--- |
 | **P1: Re-slotting ABC + 5S + Conteos** | Reubicación física 114 SKU desalineados. | $85.000.000 | $12.000.000 | **SELECCIONADO** | Elimina 67,6 km/día de caminata inútil (Quick Win). |
 | **P2: Upgrade WMS NextGen + Voice/RF** | Eliminación de papel y picking por voz. | $310.000.000 | $75.000.000 | **SELECCIONADO** | Eleva productividad +18% (46,8 a 55,2 lin/h). |
@@ -36,6 +36,7 @@ De un universo de 7 iniciativas evaluadas (P1 a P7), se seleccionó el **Portafo
 | **P5: Right-sizing & Ergonomía D-Bulky** | 6 cajas óptimas + mesas elevadoras. | $70.000.000 | $18.000.000 | **SELECCIONADO** | Elimina 38 SKU manuales >25kg (Cumplimiento DT). |
 | **P6: Flota AMR / Cobots AGV** | Robots autónomos para picking. | $420.000.000 | $65.000.000 | **DESCARTADO** | Excede el techo de CAPEX ($1.130M total > $850M). |
 | **P7: Planta Solar Fotovoltaica CD** | Paneles solares autoconsumo. | $180.000.000 | $8.000.000 | **POSTERGADO** | Menor retorno operativo directo; diferido a Fase 2. |
+| **P8: Mejora Almacenamiento & Racks 2D** | Verticalización 6P &times; 3 pallets (30.420 pos). | $110.000.000 | $14.000.000 | **COMPLEMENTARIO / ALTERNATIVO** | Expande +80% capacidad en altura (13.520 pos ganadas), baja saturación al 44,3% (941 racks libres) y huella de 749 racks en uso para 13.480 pallets. Norma NCh2369 y Ley 20.949. |
 
 ---
 

@@ -787,6 +787,42 @@
                             </div>
                         </label>
                     </div>
+
+                    <div class="project-card" style="opacity: 0.75; border-left: 3px dashed var(--danger, #ef4444);">
+                        <label class="project-checkbox">
+                            <input type="checkbox" id="p6" data-capex="420000000" data-opex="65000000" data-plazo="42" onchange="updatePortfolio()">
+                            <span class="checkmark"></span>
+                            <div class="p-details">
+                                <div class="p-title">P6: Flota Robots AMR / AGV (Descartado)</div>
+                                <div class="p-meta">Tipo: Automatización | CAPEX: $420.000.000 | Plazo: 42 sem | Riesgo: Alto</div>
+                                <div class="p-impact">Descartado: Excede techo presupuestario directivo de $850M CLP.</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="project-card" style="opacity: 0.75; border-left: 3px dashed var(--warning, #f59e0b);">
+                        <label class="project-checkbox">
+                            <input type="checkbox" id="p7" data-capex="180000000" data-opex="8000000" data-plazo="20" onchange="updatePortfolio()">
+                            <span class="checkmark"></span>
+                            <div class="p-details">
+                                <div class="p-title">P7: Planta Solar Fotovoltaica CD (Postergado)</div>
+                                <div class="p-meta">Tipo: Energía Renovable | CAPEX: $180.000.000 | Plazo: 20 sem | Riesgo: Medio</div>
+                                <div class="p-impact">Postergado a Fase 2: Menor impacto directo en crisis de servicio Cyber.</div>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="project-card" style="border-left: 3px solid #0284c7; background: rgba(2, 132, 199, 0.04);">
+                        <label class="project-checkbox">
+                            <input type="checkbox" id="p8" data-capex="110000000" data-opex="14000000" data-plazo="12" onchange="updatePortfolio()">
+                            <span class="checkmark"></span>
+                            <div class="p-details">
+                                <div class="p-title" style="color: #0284c7;">📐 P8: Mejora de Almacenamiento & Racks Dinámicos (Layout 2D)</div>
+                                <div class="p-meta">Tipo: Infraestructura / Capacidad | CAPEX: $110.000.000 | Plazo: 12 sem | Riesgo: Bajo</div>
+                                <div class="p-impact">Impacto: 6 pisos &times; 3 pallets (30.420 pos planta, +13.520 ganadas), saturación 44,3% (941 racks libres / 55,7% colchón), huella de 749 estanterías en uso para 13.480 pallets, 2.472 m lineales, sismo-resistente NCh2369 y Ley 20.949.</div>
+                            </div>
+                        </label>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1045,6 +1081,18 @@
                                 <div><strong>CAPEX:</strong> $70.000.000 CLP</div>
                                 <div><strong>OPEX:</strong> $18.000.000 CLP/año</div>
                                 <div><strong>Ahorro:</strong> $65.797.000 CLP/año</div>
+                                <div><strong>Plazo:</strong> 12 Semanas</div>
+                            </div>
+                        </div>
+
+                        <div class="portfolio-item-card active" style="border-top: 3px solid #0284c7;">
+                            <div class="item-badge" style="background: rgba(2, 132, 199, 0.2); color: #0284c7;">P8 • Infraestructura & Layout 2D</div>
+                            <h4>Mejora de Almacenamiento & Racks Dinámicos (6P &times; 3 Pallets)</h4>
+                            <p class="item-desc">Reconfiguración vertical a 6 pisos (12,6m) &times; viga 3,30m. Capacidad a 30.420 posiciones (+13.520 ganadas), huella de 749 racks en uso, saturación baja al 44,3% (941 racks libres / 55,7% colchón), 2.472 m en 27 pasillos. Sismo-resistente NCh2369 y Ley 20.949.</p>
+                            <div class="item-stats">
+                                <div><strong>CAPEX:</strong> $110.000.000 CLP</div>
+                                <div><strong>OPEX:</strong> $14.000.000 CLP/año</div>
+                                <div><strong>Ahorro:</strong> $135.000.000 CLP/año</div>
                                 <div><strong>Plazo:</strong> 12 Semanas</div>
                             </div>
                         </div>

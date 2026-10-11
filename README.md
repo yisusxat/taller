@@ -33,8 +33,9 @@ flowchart LR
   - **P3**: Portal ASN para proveedores y agendamiento de andén YMS ($95,0M CLP).
   - **P4**: TMS de Ruteo Dinámico con cubicaje 3D y app chofer móvil ($150,0M CLP).
   - **P5**: Ergonomía SST con 4 mesas hidráulicas y right-sizing ($70,0M CLP).
-  - *Reserva de Contingencia (8%)*: $56,8M CLP. Holgura presupuestaria de **$83,2M CLP** respecto al techo de **$850,0M CLP**.
-- **Sandbox Financiero con Presets Inteligentes**: Evaluación en vivo de combinaciones de proyectos (*C-Suite Óptimo*, *Quick Wins* y alerta de *Sobregiro*).
+  - **P8 (Alternativa / Expansión)**: Mejora de Almacenamiento & Racks Dinámicos según Layout 2D (6 Pisos &times; 3 Pallets, expansión a 30.420 posiciones [+13.520 ganadas], saturación reducida a 44,3% con 941 racks libres [55,7% de colchón], huella en suelo de 749 estanterías en uso para 13.480 pallets guardados, 2.472 m en 27 pasillos, sismo-resistente NCh2369 y Ley 20.949).
+  - *Reserva de Contingencia (8%)*: $56,8M CLP. Holgura presupuestaria de **$83,2M CLP** respecto al techo de **$850,0M CLP** para el portafolio base P1-P5.
+- **Sandbox Financiero con Presets Inteligentes**: Evaluación en vivo de combinaciones de proyectos (*C-Suite Óptimo*, *Quick Wins*, *Sobregiro* y *+ Racks 6P Layout 2D*).
 - **WBS Interactivo de 24 Semanas**: Cronograma desglosado con vinculación directa al plano SVG e indicación crítica del período de **IT FREEZE** (Semanas 21 a 24).
 - **Explorador Tecnológico To-Be**: Fichas técnicas interactivas para cada innovación propuesta.
 

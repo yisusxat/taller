@@ -823,7 +823,8 @@ const projectData2D = {
     'p4': { name: 'P4: TMS Ruteo Dinámico', capex: 150000000, opex: 48000000, savings: 280000000, otifGain: 11.2 },
     'p5': { name: 'P5: Ergonomía D-Bulky', capex: 70000000, opex: 18000000, savings: 63097000, otifGain: 3.0 },
     'p6': { name: 'P6: Flota Robots AMR', capex: 420000000, opex: 65000000, savings: 180000000, otifGain: 4.0 },
-    'p7': { name: 'P7: Planta Solar CD', capex: 180000000, opex: 8000000, savings: 55000000, otifGain: 0.5 }
+    'p7': { name: 'P7: Planta Solar CD', capex: 180000000, opex: 8000000, savings: 55000000, otifGain: 0.5 },
+    'p8': { name: 'P8: Mejora Almacenamiento & Racks Dinámicos', capex: 110000000, opex: 14000000, savings: 135000000, otifGain: 5.5 }
 };
 
 function initSandboxSimulator() {
@@ -1207,45 +1208,78 @@ window.setApqcPreset = function(ot, inFull, df, ia) {
 
 /* --- FASE 2: Presets Rápidos para el Sandbox Financiero --- */
 window.applyPortfolioPreset = function(preset) {
-    const p1 = document.getElementById('chk-p1');
-    const p2 = document.getElementById('chk-p2');
-    const p3 = document.getElementById('chk-p3');
-    const p4 = document.getElementById('chk-p4');
-    const p5 = document.getElementById('chk-p5');
-    const p6 = document.getElementById('chk-p6');
+    const getEl = (key) => document.getElementById(`chk-${key}`) || document.querySelector(`[data-proj="${key}"]`);
+    const p1 = getEl('p1');
+    const p2 = getEl('p2');
+    const p3 = getEl('p3');
+    const p4 = getEl('p4');
+    const p5 = getEl('p5');
+    const p6 = getEl('p6');
+    const p7 = getEl('p7');
+    const p8 = getEl('p8');
 
     const btnOpt = document.getElementById('preset-pill-optimal');
     const btnQw = document.getElementById('preset-pill-quickwins');
     const btnOb = document.getElementById('preset-pill-overbudget');
+    const btnRk = document.getElementById('preset-pill-racks');
 
-    [btnOpt, btnQw, btnOb].forEach(b => { if (b) b.classList.remove('active'); });
+    [btnOpt, btnQw, btnOb, btnRk].forEach(b => { if (b) b.classList.remove('active'); });
+
+    const setChecked = (el, val) => {
+        if (!el) return;
+        el.checked = val;
+        const parent = el.closest('.project-item-2d');
+        if (parent) {
+            if (val) parent.classList.add('checked');
+            else parent.classList.remove('checked');
+        }
+    };
 
     if (preset === 'optimal') {
         if (btnOpt) btnOpt.classList.add('active');
-        if (p1) p1.checked = true;
-        if (p2) p2.checked = true;
-        if (p3) p3.checked = true;
-        if (p4) p4.checked = true;
-        if (p5) p5.checked = true;
-        if (p6) p6.checked = false;
+        setChecked(p1, true);
+        setChecked(p2, true);
+        setChecked(p3, true);
+        setChecked(p4, true);
+        setChecked(p5, true);
+        setChecked(p6, false);
+        setChecked(p7, false);
+        setChecked(p8, false);
     } else if (preset === 'quickwins') {
         if (btnQw) btnQw.classList.add('active');
-        if (p1) p1.checked = true;
-        if (p2) p2.checked = false;
-        if (p3) p3.checked = false;
-        if (p4) p4.checked = false;
-        if (p5) p5.checked = true;
-        if (p6) p6.checked = false;
+        setChecked(p1, true);
+        setChecked(p2, false);
+        setChecked(p3, false);
+        setChecked(p4, false);
+        setChecked(p5, true);
+        setChecked(p6, false);
+        setChecked(p7, false);
+        setChecked(p8, false);
     } else if (preset === 'overbudget') {
         if (btnOb) btnOb.classList.add('active');
-        if (p1) p1.checked = true;
-        if (p2) p2.checked = true;
-        if (p3) p3.checked = true;
-        if (p4) p4.checked = true;
-        if (p5) p5.checked = true;
-        if (p6) p6.checked = true;
+        setChecked(p1, true);
+        setChecked(p2, true);
+        setChecked(p3, true);
+        setChecked(p4, true);
+        setChecked(p5, true);
+        setChecked(p6, true);
+        setChecked(p7, false);
+        setChecked(p8, false);
+    } else if (preset === 'racks') {
+        if (btnRk) btnRk.classList.add('active');
+        setChecked(p1, true);
+        setChecked(p2, true);
+        setChecked(p3, true);
+        setChecked(p4, true);
+        setChecked(p5, true);
+        setChecked(p6, false);
+        setChecked(p7, false);
+        setChecked(p8, true);
     }
 
+    if (typeof recalculate2DSandbox === 'function') {
+        recalculate2DSandbox();
+    }
     if (typeof calculateCustomPortfolio === 'function') {
         calculateCustomPortfolio();
     }

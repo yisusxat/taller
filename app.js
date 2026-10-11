@@ -398,13 +398,13 @@ function selectVsmStage(stage) {
     }
 }
 
-// Interactive Portfolio Tracker (P1-P7)
+// Interactive Portfolio Tracker (P1-P8)
 function updatePortfolio() {
     let totalCapex = 0;
     let maxPlazo = 0;
     const maxCapex = 850000000;
 
-    for (let i = 1; i <= 7; i++) {
+    for (let i = 1; i <= 8; i++) {
         const chk = document.getElementById(`p${i}`);
         if (chk && chk.checked) {
             totalCapex += parseInt(chk.getAttribute('data-capex'));

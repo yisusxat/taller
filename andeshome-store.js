@@ -452,6 +452,39 @@ const AndesHomeStore = (() => {
             type: 'postponed',
             desc: 'Paneles solares en techo del CD. POSTERGADO a Fase 2: no resuelve la crisis operativa de CyberDay.',
             humanBenefit: 'Sostenibilidad diferida sin impacto en el servicio inmediato.'
+        },
+        p8: {
+            id: 'p8',
+            name: 'P8: Mejora de Almacenamiento & Racks Dinámicos (Layout 2D)',
+            tag: 'Racks 6P x 3 Pallets',
+            capex: 110000000,
+            opex: 14000000,
+            otifGain: 5.5,
+            errorReductionPct: 25,
+            wbsWeeks: 12,
+            paybackMonths: 9.8,
+            type: 'alternative',
+            desc: 'Reconfiguración a 6 pisos × 3 pallets (viga 3,30m). Expande a 30.420 posiciones (+13.520 ganadas), reduce saturación al 44,3% (941 racks libres), huella de 749 estanterías en uso.',
+            humanBenefit: 'Alivia la saturación del CD: pasillos despejados, holgura de 941 racks y cero grúas bloqueadas.',
+            pisos: 6,
+            palletsPorPiso: 3,
+            capacidadRack: 18,
+            volumenModuloM3: 48.23,
+            posicionesPlanta: 30420,
+            posicionesGanadas: 13520,
+            estanteriasUso: 749,
+            palletsGuardados: 13480,
+            saturacionGlobal: 44.3,
+            racksLibres: 941,
+            colchonSeguridad: 55.7,
+            distanciaLinealM: 2472,
+            pasillos: 27,
+            luzVigaM: 3.30,
+            anchoExtM: 3.48,
+            fondoM: 1.10,
+            altoM: 12.6,
+            cargaMaximaKg: 18000,
+            norma: 'NCh2369 / Ley 20.949'
         }
     };
 
@@ -481,6 +514,7 @@ const AndesHomeStore = (() => {
         if (activeProjectKeys.includes('p3')) grossAnnualSavings += 146300000; // Demurrage
         if (activeProjectKeys.includes('p4')) grossAnnualSavings += 184500000; // Entregas fallidas y fletes
         if (activeProjectKeys.includes('p5')) grossAnnualSavings += 69297000;  // Daños y licencias SST
+        if (activeProjectKeys.includes('p8')) grossAnnualSavings += 135000000; // Capacidad ganada y cero cuellos de botella por saturación
 
         const netAnnualEbitda = Math.max(0, grossAnnualSavings - annualOpex);
 
