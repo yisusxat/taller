@@ -1676,7 +1676,7 @@ function renderRackFloorplan() {
         }
     }
 
-    // Render ZONA A (6 Pasillos A01-A06) en caja X: 25 a 230 (ancho 205, interior 35 a 220)
+    // Render ZONA A (6 Pasillos A01-A06) en caja X: 25 a 237 (ancho 212, interior 35 a 227)
     const gA = document.getElementById('svg-aisles-a');
     if (gA) {
         const aisles = RACK_ZONES_CONFIG['A-Rápida'].aisles;
@@ -1684,48 +1684,49 @@ function renderRackFloorplan() {
         const fill = isAsIs ? 'rgba(239, 68, 68, 0.35)' : 'rgba(6, 182, 212, 0.22)';
         let html = '';
         aisles.forEach((a, i) => {
-            const x = 36 + i * 32;
+            const x = 36 + i * 33;
             html += `
                 <g class="svg-rack-aisle-block" onclick="selectFloorplanZone('A-Rápida', '${a}')" style="cursor: pointer;">
                     <title>${a} - Zona A-Rápida | Capacidad: 650 pos | Saturación: ${isAsIs ? '95,4%' : '80,0%'}</title>
-                    <rect x="${x}" y="145" width="26" height="268" fill="${fill}" stroke="${color}" stroke-width="1.3" rx="4"/>
-                    <line x1="${x}" y1="200" x2="${x+26}" y2="200" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="255" x2="${x+26}" y2="255" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="310" x2="${x+26}" y2="310" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="365" x2="${x+26}" y2="365" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <text x="${x+13}" y="165" fill="#ffffff" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${a}</text>
-                    <text x="${x+13}" y="395" fill="${color}" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">${isAsIs ? '95%' : '80%'}</text>
+                    <rect x="${x}" y="152" width="27" height="286" fill="${fill}" stroke="${color}" stroke-width="1.3" rx="4"/>
+                    <line x1="${x}" y1="205" x2="${x+27}" y2="205" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="260" x2="${x+27}" y2="260" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="315" x2="${x+27}" y2="315" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="370" x2="${x+27}" y2="370" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <text x="${x+13.5}" y="172" fill="#ffffff" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${a}</text>
+                    <text x="${x+13.5}" y="424" fill="${color}" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">${isAsIs ? '95%' : '80%'}</text>
                 </g>
             `;
         });
         gA.innerHTML = html;
     }
 
-    // Render ZONA B (12 Pasillos B01-B12) en caja X: 240 a 615 (ancho 375, interior 252 a 602)
+    // Render ZONA B (12 Pasillos B01-B12) en caja X: 249 a 639 (ancho 390, interior 260 a 628)
     const gB = document.getElementById('svg-aisles-b');
     if (gB) {
         const aisles = RACK_ZONES_CONFIG['B-Media'].aisles;
         const color = isAsIs ? '#f59e0b' : '#10b981';
-        const fill = isAsIs ? 'rgba(245, 158, 11, 0.3)' : 'rgba(16, 185, 129, 0.2)';
+        const fill = isAsIs ? 'rgba(239, 158, 11, 0.3)' : 'rgba(16, 185, 129, 0.2)';
         let html = '';
         aisles.forEach((b, i) => {
-            const x = 250 + i * 30;
+            const x = 260 + i * 31;
             html += `
                 <g class="svg-rack-aisle-block" onclick="selectFloorplanZone('B-Media', '${b}')" style="cursor: pointer;">
                     <title>${b} - Zona B-Media | Capacidad: 390 pos | Saturación: ${isAsIs ? '93,2%' : '81,9%'}</title>
-                    <rect x="${x}" y="145" width="24" height="268" fill="${fill}" stroke="${color}" stroke-width="1.3" rx="4"/>
-                    <line x1="${x}" y1="200" x2="${x+24}" y2="200" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="255" x2="${x+24}" y2="255" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="310" x2="${x+24}" y2="310" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <text x="${x+12}" y="165" fill="#ffffff" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${b}</text>
-                    <text x="${x+12}" y="395" fill="${color}" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">${isAsIs ? '93%' : '82%'}</text>
+                    <rect x="${x}" y="152" width="25" height="286" fill="${fill}" stroke="${color}" stroke-width="1.3" rx="4"/>
+                    <line x1="${x}" y1="205" x2="${x+25}" y2="205" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="260" x2="${x+25}" y2="260" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="315" x2="${x+25}" y2="315" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="370" x2="${x+25}" y2="370" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <text x="${x+12.5}" y="172" fill="#ffffff" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${b}</text>
+                    <text x="${x+12.5}" y="424" fill="${color}" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">${isAsIs ? '93%' : '82%'}</text>
                 </g>
             `;
         });
         gB.innerHTML = html;
     }
 
-    // Render ZONA C (6 Pasillos C01-C06) en caja X: 625 a 860 (ancho 235, interior 637 a 847)
+    // Render ZONA C (6 Pasillos C01-C06) en caja X: 651 a 886 (ancho 235, interior 663 a 873)
     const gC = document.getElementById('svg-aisles-c');
     if (gC) {
         const aisles = RACK_ZONES_CONFIG['C-Lenta'].aisles;
@@ -1733,23 +1734,24 @@ function renderRackFloorplan() {
         const fill = isAsIs ? 'rgba(234, 179, 8, 0.28)' : 'rgba(52, 211, 153, 0.2)';
         let html = '';
         aisles.forEach((c, i) => {
-            const x = 638 + i * 36;
+            const x = 664 + i * 36;
             html += `
                 <g class="svg-rack-aisle-block" onclick="selectFloorplanZone('C-Lenta', '${c}')" style="cursor: pointer;">
                     <title>${c} - Zona C-Lenta | Capacidad: 960 pos | Saturación: ${isAsIs ? '90,7%' : '76,7%'}</title>
-                    <rect x="${x}" y="145" width="28" height="268" fill="${fill}" stroke="${color}" stroke-width="1.3" rx="4"/>
-                    <line x1="${x}" y1="200" x2="${x+28}" y2="200" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="255" x2="${x+28}" y2="255" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="310" x2="${x+28}" y2="310" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <text x="${x+14}" y="165" fill="#ffffff" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${c}</text>
-                    <text x="${x+14}" y="395" fill="${color}" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">${isAsIs ? '91%' : '77%'}</text>
+                    <rect x="${x}" y="152" width="29" height="286" fill="${fill}" stroke="${color}" stroke-width="1.3" rx="4"/>
+                    <line x1="${x}" y1="205" x2="${x+29}" y2="205" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="260" x2="${x+29}" y2="260" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="315" x2="${x+29}" y2="315" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="370" x2="${x+29}" y2="370" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <text x="${x+14.5}" y="172" fill="#ffffff" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${c}</text>
+                    <text x="${x+14.5}" y="424" fill="${color}" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">${isAsIs ? '91%' : '77%'}</text>
                 </g>
             `;
         });
         gC.innerHTML = html;
     }
 
-    // Render ZONA D (3 Pasillos D01-D03) en caja X: 870 a 1025 (ancho 155, interior 880 a 1015)
+    // Render ZONA D (3 Pasillos D01-D03) en caja X: 898 a 1075 (ancho 177, interior 912 a 1060)
     const gD = document.getElementById('svg-aisles-d');
     if (gD) {
         const aisles = RACK_ZONES_CONFIG['D-Bulky'].aisles;
@@ -1757,16 +1759,16 @@ function renderRackFloorplan() {
         const fill = isAsIs ? 'rgba(239, 68, 68, 0.35)' : 'rgba(56, 189, 248, 0.2)';
         let html = '';
         aisles.forEach((d, i) => {
-            const x = 884 + i * 46;
+            const x = 912 + i * 52;
             html += `
                 <g class="svg-rack-aisle-block" onclick="selectFloorplanZone('D-Bulky', '${d}')" style="cursor: pointer;">
                     <title>${d} - Zona D-Bulky | Capacidad: 830 pos | Saturación: ${isAsIs ? '94,4%' : '82,4%'}</title>
-                    <rect x="${x}" y="145" width="36" height="268" fill="${fill}" stroke="${color}" stroke-width="1.3" rx="4"/>
-                    <line x1="${x}" y1="210" x2="${x+36}" y2="210" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="275" x2="${x+36}" y2="275" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="340" x2="${x+36}" y2="340" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <text x="${x+18}" y="165" fill="#ffffff" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${d}</text>
-                    <text x="${x+18}" y="395" fill="${color}" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">${isAsIs ? '94%' : '82%'}</text>
+                    <rect x="${x}" y="152" width="42" height="286" fill="${fill}" stroke="${color}" stroke-width="1.3" rx="4"/>
+                    <line x1="${x}" y1="215" x2="${x+42}" y2="215" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="280" x2="${x+42}" y2="280" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="345" x2="${x+42}" y2="345" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <text x="${x+21}" y="172" fill="#ffffff" font-size="9.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${d}</text>
+                    <text x="${x+21}" y="424" fill="${color}" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">${isAsIs ? '94%' : '82%'}</text>
                 </g>
             `;
         });
