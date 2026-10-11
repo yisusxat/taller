@@ -53,7 +53,7 @@ flowchart LR
 ### 4. 👥 Recursos Humanos, Turnos y Gestión del Personal
 - Panel integral y gráficos comparativos de productividad por turno en `index.html` (Tab 5).
 - Gráfico radar de competencias con cierre de la brecha del 39% en operarios temporales.
-- Reducción de la rotación laboral del 34% al 6% anual.
+- Reducción proyectada de la rotación laboral del 34% al 6% anual (hipótesis de diseño pedagógico del caso).
 
 ---
 
@@ -131,15 +131,13 @@ npx serve -l 8080 .
 | **Espera de Camiones** | 65,2 min | <15,0 min | **12,0 min** | -81,6% reducción |
 | **Multas Demurrage** | $146,3M CLP | $0 CLP | **$0 CLP** | Erradicación total |
 | **Slotting Mismatches** | 114 SKUs (25,3%) | 0 SKUs | **0 SKUs** | Reubicación ABC 100% |
-| **Caminata Operaria** | 67,6 km/día | <20,0 km/día | **14,2 km/día** | -79,0% fatiga física |
+| **Caminata Operaria (Exceso)** | 67,6 km/día (exceso neto) | <20,0 km/día | **14,2 km/día** (proyección) | -79,0% fatiga física |
 | **IRA (Inventario)** | 97,74% ($388,9M desc.) | $\ge$ 99,5% | **99,85%** | Conteos cíclicos WMS |
 | **Costo Pedido Fallido** | $29.628 CLP | <$10.000 CLP | **$8.532 CLP** | Tasa falla $\le$ 2,8% |
 | **Reclamos de clientes** | ≈117 / mes (700 en 6 meses) | −50% | **≈58 / mes (proyección)** | Mitiga el 95,3% de causas operativas |
 | **Accidentabilidad SST** | 83,8 / 100k HH | <15,0 | **0 graves** | Ley 20.949 garantizada |
-| **VAN (3 años, 12%)** | -$458M CLP | Positivo | **$1.289.400.543 CLP** | Payback 10,7 meses |
+| **VAN (3 años, 12%)** | -$458M CLP (costo inacción) | Positivo | **$1.289.400.543 CLP** | Payback 10,7 meses |
 | **TIR** | Negativa | > WACC | **98,4%** | Retorno sobresaliente |
-
----
 
 ---
 
@@ -147,13 +145,16 @@ npx serve -l 8080 .
 
 - **Superficie del CD:** 31.500 m² (suma de las 7 áreas de `Layout_Capacidad`: Recepción 4.800, A 5.200, B 6.100, C 7.200, D 4.900, Packing 2.100, Despacho 1.200).
 - **Capacidad:** el caso cita 20.400 posiciones pallet. `Layout_Capacidad` detalla 16.900 posiciones de rack (A-D) + 1.200 de staging = 18.100; las 2.300 restantes no están desglosadas. La calculadora de racks usa las 16.900.
-- **IT Freeze:** el caso indica un freeze de 4 semanas, comunicado en la semana 10 del calendario del curso (`Eventos_Semestre`); no fija cuándo cae en la implementación. El equipo lo ubicó en las **semanas 21 a 24** del WBS de 24 semanas (supuesto).
-- **"18 semanas":** corresponde al calendario académico del desafío (`Plan_18_Semanas`); el plan de implementación del CD es el WBS de 24 semanas (límite del caso: 36).
-- **Supuestos de ingeniería (no figuran en el caso):** altura de nave 12,5 m, alturas útiles por área, volúmenes (m³) y medidas del rack. Están rotulados con 🧮 en la interfaz.
-- **OTIF de CyberDay:** 43,5% es el valor de `Ordenes_Muestra` (352 pedidos peak; Click & Collect 11,5% con n=78). El agregado de `Pedidos_Diarios` da ≈65% (A tiempo × Completos). Ambos confirman el colapso; la cifra depende de la fuente.
-- **Pedidos de junio:** `KPI_Mensual` 171.400 vs `Pedidos_Diarios` 141.874. La brecha existe todos los meses (13% a 22%) porque el detalle diario cubre solo 3 canales.
-- **Resultados To-Be:** los valores To-Be (OTIF 96,2%, VAN, ahorros, reclamos ≈58/mes) son **proyecciones del modelo del equipo**, no mediciones. El caso es la base de un diagnóstico y no contiene datos posteriores a la implementación.
-- **Reclamos:** el caso registra 700 reclamos en 6 meses (≈117/mes); no distingue reclamos formales SERNAC.
+- **Estaciones de Packing:** 2.100 m² con 17 estaciones/mesas instaladas (16 operativas en línea base As-Is, 1 en mantenimiento), 6 tamaños de caja estandarizados y 3 líneas transportadoras (2 operativas al 66,7% de disponibilidad).
+- **IT Freeze:** el caso indica un freeze de 4 semanas, comunicado en la semana 10 del calendario del curso (`Eventos_Semestre`); no fija cuándo cae en la implementación. El equipo lo ubicó en las **semanas 21 a 24** del WBS de 24 semanas (supuesto de diseño).
+- **"18 semanas":** corresponde al calendario académico del desafío (`Plan_18_Semanas`); el plan de implementación del CD es el WBS de 24 semanas (límite del caso: 36 semanas).
+- **Supuestos de ingeniería (no figuran en el caso):** altura de nave 12,5 m, alturas útiles por área, volúmenes (m³) y medidas del rack (2,7 m largo × 1,1 m fondo × 10,5 m alto). Están rotulados con el distintivo 🧮 en la interfaz.
+- **OTIF de CyberDay:** 43,5% es el valor medido en `Ordenes_Muestra` (352 pedidos peak; Click & Collect 11,5% con n=78). El agregado de `Pedidos_Diarios` da ≈65% (A tiempo × Completos). Ambos confirman el colapso operativo; la cifra depende de la granularidad de la fuente analizada.
+- **Pedidos de junio:** `KPI_Mensual` 171.400 vs `Pedidos_Diarios` 141.874. La brecha existe todos los meses (13% a 22%) porque el detalle diario cubre 3 canales (E-commerce, C&C y Tiendas), omitiendo Bulky.
+- **Caminata Operaria (67,6 km/día vs 14,2 km/día):** 67,6 km/día es el exceso neto diario ida y vuelta causado por los 114 SKUs desubicados (calculado en `SKU_Master` con 3.018,8 visitas/día). El benchmark de 14,2 km/día representa el nivel residual proyectado con optimización progresiva de slotting (o bien el sobre-recorrido individual eliminado del SKU-0003 en D-Bulky, que sumaba 14,25 km/día).
+- **Rotación laboral (34% a 6%) y VAN As-Is (-$458M):** Corresponden a supuestos cualitativos de modelado y evaluación de inacción formulados por el equipo para el análisis pedagógico, dado que la base transaccional no incluye registros históricos plurianuales de finanzas o RRHH.
+- **Resultados To-Be:** Todos los valores To-Be (OTIF 96,2%, VAN, ahorros brutos de $1.033M, reducción de reclamos a ≈58/mes) son **proyecciones de ingeniería del portafolio P1-P5**, no mediciones empíricas. El caso suministrado es la base de un diagnóstico operativo riguroso.
+- **Reclamos:** El caso registra exactamente 700 reclamos en el primer semestre de 2026 (≈117/mes en `Reclamos_Clientes`); no desagrega denuncias formales ante SERNAC.
 
 ## 👥 Autores y Créditos
 - **Caso de Estudio**: Asignatura Gestión Logística Avanzada (GLA1104).
