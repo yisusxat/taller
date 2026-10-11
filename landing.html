@@ -2043,139 +2043,139 @@
                 </div>
             </div>
 
-            <!-- Cuadrícula Split: Layout 2D Cenital de Pasillos + Elevación Frontal del Módulo -->
-            <div class="rack-visual-split-grid">
-                <!-- Tarjeta 1: Layout 2D Cenital (Planta de Pasillos) -->
-                <div class="rack-card-box">
-                    <div class="rack-card-box-header">
-                        <div class="rack-box-title">
-                            <span>🗺️ Plano Cenital 2D de Pasillos y Baterías de Racks</span>
-                            <span id="rack-scene-tag" style="font-size: 0.7rem; font-family: var(--font-mono); padding: 2px 8px; border-radius: 4px; background: rgba(16, 185, 129, 0.2); color: #34d399;">PROPUESTA TO-BE</span>
-                        </div>
-                        <div style="font-size: 0.72rem; color: #94a3b8;">
-                            Haz clic en un pasillo para filtrar la Tabla Maestra
-                        </div>
+            <!-- Tarjeta 1: Layout 2D Cenital (Planta de Pasillos a Ancho Completo 100%) -->
+            <div class="rack-card-box full-width">
+                <div class="rack-card-box-header">
+                    <div class="rack-box-title">
+                        <span>🗺️ Plano Cenital 2D de Pasillos y Baterías de Racks</span>
+                        <span id="rack-scene-tag" style="font-size: 0.7rem; font-family: var(--font-mono); padding: 2px 8px; border-radius: 4px; background: rgba(16, 185, 129, 0.2); color: #34d399;">PROPUESTA TO-BE</span>
                     </div>
-
-                    <div class="rack-svg-wrap">
-                        <svg id="rack-floorplan-svg" viewBox="0 0 1050 580" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Fondo del almacén y grilla técnica -->
-                            <rect width="1050" height="580" fill="#060b18" rx="10"/>
-                            <defs>
-                                <pattern id="rack-grid" width="25" height="25" patternUnits="userSpaceOnUse">
-                                    <path d="M 25 0 L 0 0 0 25" fill="none" stroke="rgba(56, 189, 248, 0.04)" stroke-width="1"/>
-                                </pattern>
-                            </defs>
-                            <rect width="1050" height="580" fill="url(#rack-grid)" rx="10"/>
-                            <rect x="15" y="15" width="1020" height="550" fill="none" stroke="rgba(56, 189, 248, 0.2)" stroke-width="1.5" stroke-dasharray="6 4" rx="8"/>
-
-                            <!-- ZONA INBOUND (RECEPCIÓN & ANDENES NORTE) -->
-                            <rect x="25" y="25" width="1000" height="55" fill="rgba(30, 41, 59, 0.7)" stroke="rgba(148, 163, 184, 0.3)" stroke-width="1.5" rx="6"/>
-                            <rect x="35" y="33" width="18" height="38" fill="#0284c7" rx="3"/>
-                            <text x="62" y="48" fill="#ffffff" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="800">INBOUND &bull; RECEPCIÓN &amp; 24 ANDENES DE DESCARGA (FRENTE E-O: 210,00 m)</text>
-                            <text x="62" y="66" fill="#94a3b8" font-size="9.5" font-family="'JetBrains Mono', monospace">210,00 × 22,86 m &bull; Superficie: 4.800 m² &bull; Altura: 6,00 m &bull; Volumen útil: 28.800 m³ &bull; Staging: 1.200 pos (1.050 en uso &bull; 87,5%)</text>
-                            
-                            <!-- ZONA A: PICKING EXPRESS (6 PASILLOS A01 A A06) -> 200px ancho -->
-                            <g id="svg-cenital-zone-a-group">
-                                <rect x="25" y="92" width="205" height="340" fill="rgba(6, 182, 212, 0.06)" stroke="#06b6d4" stroke-width="1.8" rx="8"/>
-                                <rect x="25" y="92" width="205" height="42" fill="rgba(6, 182, 212, 0.15)" rx="8"/>
-                                <text id="svg-zone-a-title" x="35" y="110" fill="#22d3ee" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="900">ZONA A (35m) &bull; 54.600 m³</text>
-                                <text id="svg-zone-a-sub" x="35" y="126" fill="#cbd5e1" font-size="8.2" font-family="'JetBrains Mono', monospace" font-weight="600">46,67 × 111,43 m &bull; 5.200 m² &bull; 390 Racks</text>
-                                
-                                <!-- Pasillos A01 a A06 -->
-                                <g id="svg-aisles-a"></g>
-                            </g>
-
-                            <!-- ZONA B: PICKING ESTÁNDAR (12 PASILLOS B01 A B12) -> 370px ancho -->
-                            <g id="svg-cenital-zone-b-group">
-                                <rect x="240" y="92" width="375" height="340" fill="rgba(16, 185, 129, 0.06)" stroke="#10b981" stroke-width="1.8" rx="8"/>
-                                <rect x="240" y="92" width="375" height="42" fill="rgba(16, 185, 129, 0.15)" rx="8"/>
-                                <text id="svg-zone-b-title" x="252" y="110" fill="#34d399" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="900">ZONA B (72m) &bull; 64.050 m³</text>
-                                <text id="svg-zone-b-sub" x="252" y="126" fill="#cbd5e1" font-size="8.2" font-family="'JetBrains Mono', monospace" font-weight="600">54,74 × 111,43 m &bull; 6.100 m² &bull; 470 Racks</text>
-                                
-                                <!-- Pasillos B01 a B12 -->
-                                <g id="svg-aisles-b"></g>
-                            </g>
-
-                            <!-- ZONA C: LENTA ROTACIÓN (6 PASILLOS C01 A C06) -> 230px ancho -->
-                            <g id="svg-cenital-zone-c-group">
-                                <rect x="625" y="92" width="235" height="340" fill="rgba(245, 158, 11, 0.06)" stroke="#f59e0b" stroke-width="1.8" rx="8"/>
-                                <rect x="625" y="92" width="235" height="42" fill="rgba(245, 158, 11, 0.15)" rx="8"/>
-                                <text id="svg-zone-c-title" x="637" y="110" fill="#fbbf24" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="900">ZONA C (118m) &bull; 75.600 m³</text>
-                                <text id="svg-zone-c-sub" x="637" y="126" fill="#cbd5e1" font-size="8.2" font-family="'JetBrains Mono', monospace" font-weight="600">64,62 × 111,43 m &bull; 7.200 m² &bull; 580 Racks</text>
-                                
-                                <!-- Pasillos C01 a C06 -->
-                                <g id="svg-aisles-c"></g>
-                            </g>
-
-                            <!-- ZONA D: BULKY & MMC (3 PASILLOS D01 A D03) -> 155px ancho -->
-                            <g id="svg-cenital-zone-d-group">
-                                <rect x="870" y="92" width="155" height="340" fill="rgba(239, 68, 68, 0.06)" stroke="#ef4444" stroke-width="1.8" rx="8"/>
-                                <rect x="870" y="92" width="155" height="42" fill="rgba(239, 68, 68, 0.15)" rx="8"/>
-                                <text id="svg-zone-d-title" x="880" y="110" fill="#f87171" font-size="10" font-family="'JetBrains Mono', monospace" font-weight="900">ZONA D (Bulky)</text>
-                                <text id="svg-zone-d-sub" x="880" y="126" fill="#cbd5e1" font-size="7.8" font-family="'JetBrains Mono', monospace" font-weight="600">43,97 × 111,43 m &bull; 4.900m²</text>
-                                
-                                <!-- Pasillos D01 a D03 -->
-                                <g id="svg-aisles-d"></g>
-                            </g>
-
-                            <!-- ZONA OUTBOUND (PACKING & EXPEDICIÓN SUR) -->
-                            <rect x="25" y="445" width="1000" height="105" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1.5" rx="8"/>
-                            <text x="40" y="468" fill="#38bdf8" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="800">
-                                ZONA OUTBOUND &bull; PACKING: 133,64 × 15,71 m (h=4,5m &bull; 2.100 m² &bull; 9.450 m³) &bull; DESPACHO: 76,36 × 15,71 m (h=5,0m &bull; 1.200 m² &bull; 6.000 m³)
-                            </text>
-                            
-                            <!-- Dársenas de expedición -->
-                            <g id="svg-outbound-docks">
-                                <rect x="40" y="482" width="220" height="52" fill="rgba(56, 189, 248, 0.1)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" rx="5"/>
-                                <text x="52" y="504" fill="#ffffff" font-size="10.5" font-family="sans-serif" font-weight="700">Carrier 1: RM E-Comm</text>
-                                <text x="52" y="522" fill="#7dd3fc" font-size="8.5" font-family="'JetBrains Mono', monospace">6 Dársenas &bull; SLA: 24h Express</text>
-
-                                <rect x="275" y="482" width="220" height="52" fill="rgba(56, 189, 248, 0.1)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" rx="5"/>
-                                <text x="287" y="504" fill="#ffffff" font-size="10.5" font-family="sans-serif" font-weight="700">Carrier 2: Regiones</text>
-                                <text x="287" y="522" fill="#7dd3fc" font-size="8.5" font-family="'JetBrains Mono', monospace">5 Dársenas &bull; Troncal Interurbano</text>
-
-                                <rect x="510" y="482" width="220" height="52" fill="rgba(56, 189, 248, 0.1)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" rx="5"/>
-                                <text x="522" y="504" fill="#ffffff" font-size="10.5" font-family="sans-serif" font-weight="700">Click &amp; Collect (Stores)</text>
-                                <text x="522" y="522" fill="#7dd3fc" font-size="8.5" font-family="'JetBrains Mono', monospace">3 Dársenas &bull; 27 Tiendas Propias</text>
-
-                                <rect x="745" y="482" width="265" height="52" fill="rgba(16, 185, 129, 0.1)" stroke="rgba(16, 185, 129, 0.4)" stroke-width="1.2" rx="5"/>
-                                <text x="757" y="504" fill="#34d399" font-size="10.5" font-family="sans-serif" font-weight="800">TMS Cubicaje 3D &amp; Consolidación</text>
-                                <text x="757" y="522" fill="#a7f3d0" font-size="8.5" font-family="'JetBrains Mono', monospace">Right-Sizing P5 &bull; Ocupación camión: 91%</text>
-                            </g>
-                        </svg>
-                    </div>
-
-                    <!-- Leyenda del mapa de calor de racks -->
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 0.74rem; color: #cbd5e1; flex-wrap: wrap; gap: 8px;">
-                        <div style="display: flex; gap: 14px; align-items: center;">
-                            <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #10b981;"></span> <strong>&le; 80% Flujo Libre:</strong> Pasillos despejados y ágiles</span>
-                            <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #f59e0b;"></span> <strong>81-90% Precaución:</strong> Tránsito denso</span>
-                            <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #ef4444;"></span> <strong>&ge; 91% Colapso:</strong> Grúas y carros atascados</span>
-                        </div>
-                        <span id="floorplan-active-selection" style="font-family: var(--font-mono); color: #38bdf8; font-weight: 700;">Pasillo seleccionado: Todos (Haz clic en un pasillo para ver sus SKUs)</span>
+                    <div style="font-size: 0.72rem; color: #94a3b8;">
+                        Haz clic en un pasillo para filtrar la Tabla Maestra
                     </div>
                 </div>
 
-                <!-- Tarjeta 2: Alzado Frontal 2D del Módulo de Rack (Elevación) -->
-                <div class="rack-card-box">
-                    <div class="rack-card-box-header">
-                        <div class="rack-box-title">
-                            <span>🏗️ Alzado Frontal: ¿Cómo funciona una estantería por dentro?</span>
-                        </div>
-                        <div id="rack-spec-badge" style="font-size: 0.72rem; font-family: var(--font-mono); background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 2px 8px; border-radius: 4px; font-weight: 700;">
-                            5 Pisos &bull; 10 Pallets por Estantería
-                        </div>
-                    </div>
+                <div class="rack-svg-wrap">
+                    <svg id="rack-floorplan-svg" viewBox="0 0 1050 580" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Fondo del almacén y grilla técnica -->
+                        <rect width="1050" height="580" fill="#060b18" rx="10"/>
+                        <defs>
+                            <pattern id="rack-grid" width="25" height="25" patternUnits="userSpaceOnUse">
+                                <path d="M 25 0 L 0 0 0 25" fill="none" stroke="rgba(56, 189, 248, 0.04)" stroke-width="1"/>
+                            </pattern>
+                        </defs>
+                        <rect width="1050" height="580" fill="url(#rack-grid)" rx="10"/>
+                        <rect x="15" y="15" width="1020" height="550" fill="none" stroke="rgba(56, 189, 248, 0.2)" stroke-width="1.5" stroke-dasharray="6 4" rx="8"/>
 
-                    <div class="rack-svg-wrap">
+                        <!-- ZONA INBOUND (RECEPCIÓN & ANDENES NORTE) -->
+                        <rect x="25" y="25" width="1000" height="55" fill="rgba(30, 41, 59, 0.7)" stroke="rgba(148, 163, 184, 0.3)" stroke-width="1.5" rx="6"/>
+                        <rect x="35" y="33" width="18" height="38" fill="#0284c7" rx="3"/>
+                        <text x="62" y="48" fill="#ffffff" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="800">INBOUND &bull; RECEPCIÓN &amp; 24 ANDENES DE DESCARGA (FRENTE E-O: 210,00 m)</text>
+                        <text x="62" y="66" fill="#94a3b8" font-size="9.5" font-family="'JetBrains Mono', monospace">210,00 × 22,86 m &bull; Superficie: 4.800 m² &bull; Altura: 6,00 m &bull; Volumen útil: 28.800 m³ &bull; Staging: 1.200 pos (1.050 en uso &bull; 87,5%)</text>
+                        
+                        <!-- ZONA A: PICKING EXPRESS (6 PASILLOS A01 A A06) -> 200px ancho -->
+                        <g id="svg-cenital-zone-a-group">
+                            <rect x="25" y="92" width="205" height="340" fill="rgba(6, 182, 212, 0.06)" stroke="#06b6d4" stroke-width="1.8" rx="8"/>
+                            <rect x="25" y="92" width="205" height="42" fill="rgba(6, 182, 212, 0.15)" rx="8"/>
+                            <text id="svg-zone-a-title" x="35" y="110" fill="#22d3ee" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="900">ZONA A (35m) &bull; 54.600 m³</text>
+                            <text id="svg-zone-a-sub" x="35" y="126" fill="#cbd5e1" font-size="8.2" font-family="'JetBrains Mono', monospace" font-weight="600">46,67 × 111,43 m &bull; 5.200 m² &bull; 390 Racks</text>
+                            
+                            <!-- Pasillos A01 a A06 -->
+                            <g id="svg-aisles-a"></g>
+                        </g>
+
+                        <!-- ZONA B: PICKING ESTÁNDAR (12 PASILLOS B01 A B12) -> 370px ancho -->
+                        <g id="svg-cenital-zone-b-group">
+                            <rect x="240" y="92" width="375" height="340" fill="rgba(16, 185, 129, 0.06)" stroke="#10b981" stroke-width="1.8" rx="8"/>
+                            <rect x="240" y="92" width="375" height="42" fill="rgba(16, 185, 129, 0.15)" rx="8"/>
+                            <text id="svg-zone-b-title" x="252" y="110" fill="#34d399" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="900">ZONA B (72m) &bull; 64.050 m³</text>
+                            <text id="svg-zone-b-sub" x="252" y="126" fill="#cbd5e1" font-size="8.2" font-family="'JetBrains Mono', monospace" font-weight="600">54,74 × 111,43 m &bull; 6.100 m² &bull; 470 Racks</text>
+                            
+                            <!-- Pasillos B01 a B12 -->
+                            <g id="svg-aisles-b"></g>
+                        </g>
+
+                        <!-- ZONA C: LENTA ROTACIÓN (6 PASILLOS C01 A C06) -> 230px ancho -->
+                        <g id="svg-cenital-zone-c-group">
+                            <rect x="625" y="92" width="235" height="340" fill="rgba(245, 158, 11, 0.06)" stroke="#f59e0b" stroke-width="1.8" rx="8"/>
+                            <rect x="625" y="92" width="235" height="42" fill="rgba(245, 158, 11, 0.15)" rx="8"/>
+                            <text id="svg-zone-c-title" x="637" y="110" fill="#fbbf24" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="900">ZONA C (118m) &bull; 75.600 m³</text>
+                            <text id="svg-zone-c-sub" x="637" y="126" fill="#cbd5e1" font-size="8.2" font-family="'JetBrains Mono', monospace" font-weight="600">64,62 × 111,43 m &bull; 7.200 m² &bull; 580 Racks</text>
+                            
+                            <!-- Pasillos C01 a C06 -->
+                            <g id="svg-aisles-c"></g>
+                        </g>
+
+                        <!-- ZONA D: BULKY & MMC (3 PASILLOS D01 A D03) -> 155px ancho -->
+                        <g id="svg-cenital-zone-d-group">
+                            <rect x="870" y="92" width="155" height="340" fill="rgba(239, 68, 68, 0.06)" stroke="#ef4444" stroke-width="1.8" rx="8"/>
+                            <rect x="870" y="92" width="155" height="42" fill="rgba(239, 68, 68, 0.15)" rx="8"/>
+                            <text id="svg-zone-d-title" x="880" y="110" fill="#f87171" font-size="10" font-family="'JetBrains Mono', monospace" font-weight="900">ZONA D (Bulky)</text>
+                            <text id="svg-zone-d-sub" x="880" y="126" fill="#cbd5e1" font-size="7.8" font-family="'JetBrains Mono', monospace" font-weight="600">43,97 × 111,43 m &bull; 4.900m²</text>
+                            
+                            <!-- Pasillos D01 a D03 -->
+                            <g id="svg-aisles-d"></g>
+                        </g>
+
+                        <!-- ZONA OUTBOUND (PACKING & EXPEDICIÓN SUR) -->
+                        <rect x="25" y="445" width="1000" height="105" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1.5" rx="8"/>
+                        <text x="40" y="468" fill="#38bdf8" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="800">
+                            ZONA OUTBOUND &bull; PACKING: 133,64 × 15,71 m (h=4,5m &bull; 2.100 m² &bull; 9.450 m³) &bull; DESPACHO: 76,36 × 15,71 m (h=5,0m &bull; 1.200 m² &bull; 6.000 m³)
+                        </text>
+                        
+                        <!-- Dársenas de expedición -->
+                        <g id="svg-outbound-docks">
+                            <rect x="40" y="482" width="220" height="52" fill="rgba(56, 189, 248, 0.1)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" rx="5"/>
+                            <text x="52" y="504" fill="#ffffff" font-size="10.5" font-family="sans-serif" font-weight="700">Carrier 1: RM E-Comm</text>
+                            <text x="52" y="522" fill="#7dd3fc" font-size="8.5" font-family="'JetBrains Mono', monospace">6 Dársenas &bull; SLA: 24h Express</text>
+
+                            <rect x="275" y="482" width="220" height="52" fill="rgba(56, 189, 248, 0.1)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" rx="5"/>
+                            <text x="287" y="504" fill="#ffffff" font-size="10.5" font-family="sans-serif" font-weight="700">Carrier 2: Regiones</text>
+                            <text x="287" y="522" fill="#7dd3fc" font-size="8.5" font-family="'JetBrains Mono', monospace">5 Dársenas &bull; Troncal Interurbano</text>
+
+                            <rect x="510" y="482" width="220" height="52" fill="rgba(56, 189, 248, 0.1)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" rx="5"/>
+                            <text x="522" y="504" fill="#ffffff" font-size="10.5" font-family="sans-serif" font-weight="700">Click &amp; Collect (Stores)</text>
+                            <text x="522" y="522" fill="#7dd3fc" font-size="8.5" font-family="'JetBrains Mono', monospace">3 Dársenas &bull; 27 Tiendas Propias</text>
+
+                            <rect x="745" y="482" width="265" height="52" fill="rgba(16, 185, 129, 0.1)" stroke="rgba(16, 185, 129, 0.4)" stroke-width="1.2" rx="5"/>
+                            <text x="757" y="504" fill="#34d399" font-size="10.5" font-family="sans-serif" font-weight="800">TMS Cubicaje 3D &amp; Consolidación</text>
+                            <text x="757" y="522" fill="#a7f3d0" font-size="8.5" font-family="'JetBrains Mono', monospace">Right-Sizing P5 &bull; Ocupación camión: 91%</text>
+                        </g>
+                    </svg>
+                </div>
+
+                <!-- Leyenda del mapa de calor de racks -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px; font-size: 0.74rem; color: #cbd5e1; flex-wrap: wrap; gap: 8px;">
+                    <div style="display: flex; gap: 14px; align-items: center;">
+                        <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #10b981;"></span> <strong>&le; 80% Flujo Libre:</strong> Pasillos despejados y ágiles</span>
+                        <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #f59e0b;"></span> <strong>81-90% Precaución:</strong> Tránsito denso</span>
+                        <span style="display: flex; align-items: center; gap: 5px;"><span style="width: 10px; height: 10px; border-radius: 2px; background: #ef4444;"></span> <strong>&ge; 91% Colapso:</strong> Grúas y carros atascados</span>
+                    </div>
+                    <span id="floorplan-active-selection" style="font-family: var(--font-mono); color: #38bdf8; font-weight: 700;">Pasillo seleccionado: Todos (Haz clic en un pasillo para ver sus SKUs)</span>
+                </div>
+            </div>
+
+            <!-- Tarjeta 2: Alzado Frontal 2D del Módulo de Rack (Elevación Posicionada Debajo) -->
+            <div class="rack-card-box full-width" style="margin-top: 20px;">
+                <div class="rack-card-box-header">
+                    <div class="rack-box-title">
+                        <span>🏗️ Alzado Frontal: ¿Cómo funciona una estantería por dentro?</span>
+                    </div>
+                    <div id="rack-spec-badge" style="font-size: 0.72rem; font-family: var(--font-mono); background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 2px 8px; border-radius: 4px; font-weight: 700;">
+                        5 Pisos &bull; 10 Pallets por Estantería
+                    </div>
+                </div>
+
+                <!-- Contenedor interno en 2 columnas: Gráfico Frontal a la izquierda + Ficha Técnica Completa a la derecha -->
+                <div class="rack-elevation-layout-grid">
+                    <div class="rack-svg-wrap" style="align-self: start;">
                         <svg id="rack-elevation-svg" viewBox="0 0 520 480" xmlns="http://www.w3.org/2000/svg">
                             <!-- Contenedor dinámico generado por landing-2d.js -->
                         </svg>
                     </div>
 
                     <!-- Contenedor dinámico con todo el detalle de medidas de la estantería -->
-                    <div id="rack-elevation-specs-box" class="rack-elevation-specs-container">
+                    <div id="rack-elevation-specs-box" class="rack-elevation-specs-container" style="margin-top: 0;">
                         <!-- Generado dinámicamente por landing-2d.js -->
                     </div>
                 </div>

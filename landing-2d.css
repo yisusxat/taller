@@ -2675,8 +2675,8 @@ body {
 
 /* Cuadrícula Split: Floorplan 2D + Elevación Frontal */
 .rack-visual-split-grid {
-    display: grid;
-    grid-template-columns: 1.45fr 0.85fr;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
 }
 
@@ -2687,6 +2687,25 @@ body {
     padding: 18px 20px;
     display: flex;
     flex-direction: column;
+    width: 100%;
+}
+
+.rack-card-box.full-width {
+    width: 100%;
+}
+
+/* Grilla Interna para Elevación Frontal en posición inferior */
+.rack-elevation-layout-grid {
+    display: grid;
+    grid-template-columns: minmax(320px, 460px) 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+@media (max-width: 960px) {
+    .rack-elevation-layout-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .rack-card-box-header {
