@@ -134,7 +134,7 @@ npx serve -l 8080 .
 | **Caminata Operaria** | 67,6 km/día | <20,0 km/día | **14,2 km/día** | -79,0% fatiga física |
 | **IRA (Inventario)** | 97,74% ($388,9M desc.) | $\ge$ 99,5% | **99,85%** | Conteos cíclicos WMS |
 | **Costo Pedido Fallido** | $29.628 CLP | <$10.000 CLP | **$8.532 CLP** | Tasa falla $\le$ 2,8% |
-| **Reclamos SERNAC** | 1.240 / mes | <50 / mes | **14 / mes** | -98,9% reclamos |
+| **Reclamos de clientes** | ≈117 / mes (700 en 6 meses) | −50% | **≈58 / mes (proyección)** | Mitiga el 95,3% de causas operativas |
 | **Accidentabilidad SST** | 83,8 / 100k HH | <15,0 | **0 graves** | Ley 20.949 garantizada |
 | **VAN (3 años, 12%)** | -$458M CLP | Positivo | **$1.289.400.543 CLP** | Payback 10,7 meses |
 | **TIR** | Negativa | > WACC | **98,4%** | Retorno sobresaliente |
@@ -147,9 +147,13 @@ npx serve -l 8080 .
 
 - **Superficie del CD:** 31.500 m² (suma de las 7 áreas de `Layout_Capacidad`: Recepción 4.800, A 5.200, B 6.100, C 7.200, D 4.900, Packing 2.100, Despacho 1.200).
 - **Capacidad:** el caso cita 20.400 posiciones pallet. `Layout_Capacidad` detalla 16.900 posiciones de rack (A-D) + 1.200 de staging = 18.100; las 2.300 restantes no están desglosadas. La calculadora de racks usa las 16.900.
-- **IT Freeze:** ventana de 4 semanas ubicada en las **semanas 21 a 24** del WBS de 24 semanas (el caso solo indica "cuatro semanas"; la ubicación es un supuesto del equipo).
+- **IT Freeze:** el caso indica un freeze de 4 semanas, comunicado en la semana 10 del calendario del curso (`Eventos_Semestre`); no fija cuándo cae en la implementación. El equipo lo ubicó en las **semanas 21 a 24** del WBS de 24 semanas (supuesto).
 - **"18 semanas":** corresponde al calendario académico del desafío (`Plan_18_Semanas`); el plan de implementación del CD es el WBS de 24 semanas (límite del caso: 36).
 - **Supuestos de ingeniería (no figuran en el caso):** altura de nave 12,5 m, alturas útiles por área, volúmenes (m³) y medidas del rack. Están rotulados con 🧮 en la interfaz.
+- **OTIF de CyberDay:** 43,5% es el valor de `Ordenes_Muestra` (352 pedidos peak; Click & Collect 11,5% con n=78). El agregado de `Pedidos_Diarios` da ≈65% (A tiempo × Completos). Ambos confirman el colapso; la cifra depende de la fuente.
+- **Pedidos de junio:** `KPI_Mensual` 171.400 vs `Pedidos_Diarios` 141.874. La brecha existe todos los meses (13% a 22%) porque el detalle diario cubre solo 3 canales.
+- **Resultados To-Be:** los valores To-Be (OTIF 96,2%, VAN, ahorros, reclamos ≈58/mes) son **proyecciones del modelo del equipo**, no mediciones. El caso es la base de un diagnóstico y no contiene datos posteriores a la implementación.
+- **Reclamos:** el caso registra 700 reclamos en 6 meses (≈117/mes); no distingue reclamos formales SERNAC.
 
 ## 👥 Autores y Créditos
 - **Caso de Estudio**: Asignatura Gestión Logística Avanzada (GLA1104).

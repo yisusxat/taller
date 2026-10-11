@@ -13,7 +13,7 @@
 AndesHome Chile S.A. enfrenta una crisis operacional severa tras la ejecución del evento **CyberDay (1-3 de junio de 2026)**. La operación del Centro de Distribución (CD) Pudahuel excede su capacidad de proceso efectiva, generando un deterioro sistemático de los niveles de servicio y un aumento descontrolado en los costos operativos.
 
 ### 1.1. Principales Hallazgos Cuantitativos
-1. **Colapso del Nivel de Servicio (OTIF):** El OTIF mensual cayó desde **92,3% en julio 2025** a un crítico **80,9% en junio 2026** (meta $\ge 96,0\%$). Durante la ventana peak de CyberDay, el OTIF real de la muestra representativa cayó a **43,5%** (y **11,5% en Click & Collect**), debido al desbordamiento del canal e-commerce.
+1. **Colapso del Nivel de Servicio (OTIF):** El OTIF mensual cayó desde **92,3% en julio 2025** a un crítico **80,9% en junio 2026** (meta $\ge 96,0\%$). Durante la ventana peak de CyberDay, el OTIF real de la muestra representativa cayó a **43,5%** (y **11,5% en Click & Collect**, n=78), debido al desbordamiento del canal e-commerce. *Nota metodológica: el 43,5% proviene de `Ordenes_Muestra` (352 pedidos peak; el peak pesa 11,7% de la muestra frente a ~6,6% de los pedidos diarios reales). Con el agregado diario de `Pedidos_Diarios` (A tiempo × Completos) el OTIF peak estimado es ≈65%. Ambas fuentes confirman el colapso; la cifra puntual depende de la fuente.*
 2. **Acumulación Estructural de Backlog:** El volumen de pedidos no despachados creció de **69 pedidos el 1 de enero de 2026** a **15.387 pedidos al 30 de junio de 2026** (equivalente a 4,32 días completos de demanda). El backlog creció en el **95,6% de los días** del primer semestre.
 3. **Escalamiento del Costo Unitario:** El costo logístico por pedido aumentó de **CLP 5.880 en julio 2025** a **CLP 7.920 en junio 2026** (+34,7%), impulsado por sobretiempos, reprocesos, reintentos de despacho y demurrage. En la muestra de pedidos, los envíos fallidos promedian un costo de **CLP 29.628** vs **CLP 8.532** para los pedidos cumplidos (un recargo del +247%).
 4. **Dock-to-Stock ineficiente:** El tiempo transcurrido desde el arribo del camión hasta la disponibilidad en stock subió de **10,8 horas a 22,6 horas** en junio 2026 (meta $\le 8,0\text{ h}$). La baja adopción de **ASN (65,3%)** y **Citas de Andén (65,0%)** genera esperas promedio de 63,4 a 65,2 minutos en los arribos no programados.
@@ -32,15 +32,17 @@ AndesHome opera una red de **58 tiendas**, canal E-commerce (RM y Regiones), Cli
 * **Directorio:** Exige OTIF $\ge 96\%$, CAPEX $\le \text{CLP 850 MM}$ en 36 semanas sin detener la operación.
 * **Operaciones CD:** Teme que el rediseño tecnológico/proceso interrumpa la continuidad del CD durante la temporada alta 2026-2027.
 * **Finanzas:** Exige la eliminación de duplicidad de beneficios y validación rigurosa del retorno económico (tasa de descuento 12% anual).
-* **TI:** Exige datos depurados y prohíbe despliegues sin pruebas de integración (advierte un freeze corporativo de 4 semanas; el plan de implementación lo ubica en las semanas 21 a 24).
+* **TI:** Exige datos depurados y prohíbe despliegues sin pruebas de integración (advierte un freeze corporativo de 4 semanas, restricción comunicada en la semana 10 del calendario del curso; el plan de implementación lo ubica en las semanas 21 a 24).
 * **Prevención de Riesgos:** Condiciona cualquier cambio en layout a la erradicación del manejo manual >25 kg en D-Bulky.
 
 ### 2.3. Auditoría de Calidad de Datos (Data Quality)
-Se identificaron 12 anomalías críticas en los registros que requieren depuración previa al rediseño:
+La hoja `Calidad_Datos` del caso registra 12 hallazgos (7 de criticidad Alta) que requieren validación previa al rediseño. Los principales:
 * **DQ-02 (SKU_Master):** SKU-0118 de alta rotación carece de EAN-13 (código interno), elevando el error de picking en un +25% vs SKU estandarizados (1,10% vs 0,88%).
 * **DQ-03 / DQ-04 (Inventario):** SKU-0023 presenta una diferencia física >15%; 82 SKU (18,2%) no han sido contados en los últimos 100 días. 130 de 161 SKU A llevan >30 días sin conteo cíclico.
 * **DQ-07 (Rutas):** RUT-0106 reporta utilización volumétrica >100% debido a datos maestros de cubicaje imprecisos.
-* **DQ-11 (Pedidos_Diarios):** Inconsistencia en pedidos totales entre hojas: `KPI_Mensual` reporta 171.400 pedidos en junio 2026, mientras `Pedidos_Diarios` suma 141.874 pedidos (brecha de 29.526 pedidos no consolidados o registrados en contingencia).
+* **DQ-11 (Pedidos_Diarios, CyberDay 1-3 jun):** el backlog crece pese a las horas extra; el cierre de junio es de 15.387 pedidos (11.027 + 2.847 + 1.513 por canal). Acción del caso: distinguir capacidad, método y productividad.
+* **DQ-12 (KPI_Mensual, junio 2026):** ocupación 96,4% con OTIF 80,9%; relación entre congestión y servicio.
+* **Hallazgo adicional del equipo (HA-01, no figura en `Calidad_Datos`):** `KPI_Mensual` reporta 171.400 pedidos en junio y `Pedidos_Diarios` suma 141.874 (diferencia de 29.526). La brecha se repite todos los meses (entre 12.301 y 29.526 pedidos; 13% a 22% menos en el detalle diario) y `Pedidos_Diarios` solo cubre 3 canales (E-commerce domicilio, Click & Collect y Reposición tiendas), sin Bulky domicilio. Es una diferencia de alcance, no una anomalía puntual de junio. Se usa `KPI_Mensual` para tendencias y `Pedidos_Diarios` para el análisis por canal.
 
 ---
 
