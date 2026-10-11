@@ -18,7 +18,7 @@
 ## 1. Resumen Ejecutivo y Marco de Decisión Estratégica
 
 ### 1.1. Contexto de Urgencia Operativa
-El Diagnóstico Operativo (EA1) evidenció un deterioro crítico en el Centro de Distribución Pudahuel (12.500 m²):
+El Diagnóstico Operativo (EA1) evidenció un deterioro crítico en el Centro de Distribución Pudahuel (31.500 m²):
 * **Caída del OTIF Global:** Del 92,3% (Jul 2025) al 80,9% (Jun 2026), alcanzando un mínimo del **43,5% en Peak Cyber** (11,5% en Click & Collect).
 * **Backlog Acumulado:** 15.387 pedidos pendientes al 30 de Junio de 2026 (equivalente a 4,32 días de demanda continua desatendida).
 * **Sobrecosto Operativo:** El costo por pedido despachado subió a **CLP 7.920** (+34,7%), mientras que cada pedido fallido cuesta **CLP 29.628** (+247% vs. cumplido).
@@ -126,13 +126,13 @@ CRONOGRAMA DE HITOS Y GATES DE CONTROL (24 SEMANAS)
 |   - Depuración maestro SKU (EAN, dimensiones, peso). Gate 1 Aprobación Directiva.  |
 | FASE 2: QUICK WINS Y RE-SLOTTING FÍSICO (Sem 5 a 10)                              |
 |   - Ejecución P1 Re-slotting ABC + 5S + Reparación mesas elevadoras D-Bulky.      |
-|   - 🛑 [Semana 10: Freeze de TI Corporativo de 4 semanas].                        |
 | FASE 3: DESARROLLO E INTEGRACIÓN TECNOLÓGICA (Sem 11 a 18)                         |
 |   - Despliegue P3 Portal ASN, P4 TMS y P2 WMS NextGen en ambiente staging.        |
-| FASE 4: PILOTOS Y CUTOVER POR ZONAS (Sem 19 a 22)                                 |
+| FASE 4: PILOTOS POR ZONAS (Sem 19 a 20)                                           |
 |   - Piloto A-Rápida con Voice/RF + Piloto Carrier LogiExpress en TMS.              |
-| FASE 5: ESTABILIZACIÓN Y GO-LIVE GENERAL (Sem 23 a 24)                            |
-|   - Cutover general sin detener el CD, certificación de superusuarios y handover.  |
+| FASE 5: CUTOVER, ESTABILIZACIÓN Y GO-LIVE GENERAL (Sem 21 a 24)                   |
+|   - Cutover general sin detener el CD, certificación de superusuarios y handover. |
+|   - 🛑 [Semanas 21 a 24: Freeze de TI corporativo de 4 semanas; solo estabilización].|
 +-----------------------------------------------------------------------------------+
 ```
 

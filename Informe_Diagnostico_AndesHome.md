@@ -32,7 +32,7 @@ AndesHome opera una red de **58 tiendas**, canal E-commerce (RM y Regiones), Cli
 * **Directorio:** Exige OTIF $\ge 96\%$, CAPEX $\le \text{CLP 850 MM}$ en 36 semanas sin detener la operación.
 * **Operaciones CD:** Teme que el rediseño tecnológico/proceso interrumpa la continuidad del CD durante la temporada alta 2026-2027.
 * **Finanzas:** Exige la eliminación de duplicidad de beneficios y validación rigurosa del retorno económico (tasa de descuento 12% anual).
-* **TI:** Exige datos depurados y prohíbe despliegues sin pruebas de integración (advierte freeze corporativo de 4 semanas en semana 10).
+* **TI:** Exige datos depurados y prohíbe despliegues sin pruebas de integración (advierte un freeze corporativo de 4 semanas; el plan de implementación lo ubica en las semanas 21 a 24).
 * **Prevención de Riesgos:** Condiciona cualquier cambio en layout a la erradicación del manejo manual >25 kg en D-Bulky.
 
 ### 2.3. Auditoría de Calidad de Datos (Data Quality)

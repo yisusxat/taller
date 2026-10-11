@@ -141,6 +141,16 @@ npx serve -l 8080 .
 
 ---
 
+---
+
+## 🧾 Notas de Conciliación de Datos
+
+- **Superficie del CD:** 31.500 m² (suma de las 7 áreas de `Layout_Capacidad`: Recepción 4.800, A 5.200, B 6.100, C 7.200, D 4.900, Packing 2.100, Despacho 1.200).
+- **Capacidad:** el caso cita 20.400 posiciones pallet. `Layout_Capacidad` detalla 16.900 posiciones de rack (A-D) + 1.200 de staging = 18.100; las 2.300 restantes no están desglosadas. La calculadora de racks usa las 16.900.
+- **IT Freeze:** ventana de 4 semanas ubicada en las **semanas 21 a 24** del WBS de 24 semanas (el caso solo indica "cuatro semanas"; la ubicación es un supuesto del equipo).
+- **"18 semanas":** corresponde al calendario académico del desafío (`Plan_18_Semanas`); el plan de implementación del CD es el WBS de 24 semanas (límite del caso: 36).
+- **Supuestos de ingeniería (no figuran en el caso):** altura de nave 12,5 m, alturas útiles por área, volúmenes (m³) y medidas del rack. Están rotulados con 🧮 en la interfaz.
+
 ## 👥 Autores y Créditos
 - **Caso de Estudio**: Asignatura Gestión Logística Avanzada (GLA1104).
 - **Institución**: Duoc UC.

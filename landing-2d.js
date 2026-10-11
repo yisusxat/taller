@@ -1854,7 +1854,7 @@ function renderRackElevation() {
         specsBox.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
                 <span style="font-size: 0.82rem; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 6px;">
-                    <span>📐</span> Ficha Técnica de Medidas Exactas del Módulo
+                    <span>📐</span> Ficha Técnica de Medidas de Referencia del Módulo 🧮 <span style="font-weight: 600; color: #fbbf24; font-size: 0.7rem;">(supuesto de ingeniería: rack selectivo típico, no figura en el caso)</span>
                 </span>
                 <span style="font-size: 0.72rem; font-family: var(--font-mono); color: #34d399; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 3px 8px; border-radius: 4px; font-weight: 700;">
                     ${lvls} Pisos &bull; ${lvls * ppb} Pallets &bull; ${totVolM3}
