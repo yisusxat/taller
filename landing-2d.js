@@ -1812,7 +1812,7 @@ function renderRackElevation() {
         specLevelsTxt.innerText = `${lvls - 1}`;
     }
 
-    const floorY = 410;
+    const floorY = 460;
     const rackWidth = ppb === 2 ? 260 : 310;
     const leftX = 35;
     const rightX = leftX + rackWidth;
@@ -1830,8 +1830,8 @@ function renderRackElevation() {
         return (l * beamStepH).toFixed(1);
     };
 
-    // Altura gráfica proporcional dentro del SVG (pisoY = 410, tope = 410 - totalSvgH)
-    const totalSvgH = 320;
+    // Altura gráfica proporcional dentro del SVG (pisoY = 460, tope = 460 - totalSvgH = 80px)
+    const totalSvgH = 380;
     const lvlSvgStep = totalSvgH / lvls;
 
     const extW = ppb === 2 ? '2,88 m' : '3,48 m';
@@ -1907,7 +1907,7 @@ function renderRackElevation() {
         // Pallets en este nivel
         for (let p = 0; p < ppb; p++) {
             const px = leftX + 18 + p * (palW + 6);
-            const boxH = Math.min(lvlSvgStep - 18, 42);
+            const boxH = Math.min(lvlSvgStep - 16, 52);
             const py = palletBaseY - boxH - 6;
 
             // Pallet base (Madera industrial 1,20x1,00m) apoyado en suelo o sobre viga
