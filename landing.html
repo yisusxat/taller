@@ -1688,21 +1688,21 @@
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
                                 Ficha Técnica de Medidas de Referencia del Módulo (Layout 2D)
                             </span>
-                            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #fbbf24;">6 Pisos &bull; 18 Pallets &bull; 48,23 m³</span>
+                            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: #fbbf24;">6 Pisos &bull; 18 Pallets &bull; 45,94 m³</span>
                         </div>
 
                         <!-- Grid de Métricas Clave -->
                         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px; margin-bottom: 12px;">
                             <div style="background: rgba(30, 41, 59, 0.7); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
                                 <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase;">Alto Total (H)</div>
-                                <div style="font-size: 1.05rem; font-weight: 800; color: #38bdf8; font-family: var(--font-mono);">12,6 m</div>
+                                <div style="font-size: 1.05rem; font-weight: 800; color: #38bdf8; font-family: var(--font-mono);">12,0 m</div>
                             </div>
                             <div style="background: rgba(30, 41, 59, 0.7); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
                                 <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase;">Ancho Exterior</div>
                                 <div style="font-size: 1.05rem; font-weight: 800; color: #fff; font-family: var(--font-mono);">3,48 m</div>
                             </div>
                             <div style="background: rgba(30, 41, 59, 0.7); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
-                                <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase;">Luz de Viga</div>
+                                <div style="font-size: 0.68rem; color: #fbbf24; text-transform: uppercase;">Luz de Viga</div>
                                 <div style="font-size: 1.05rem; font-weight: 800; color: #fbbf24; font-family: var(--font-mono);">3,30 m</div>
                             </div>
                             <div style="background: rgba(30, 41, 59, 0.7); padding: 8px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05);">
@@ -1725,8 +1725,8 @@
                                 &bull; <strong>Huella en suelo:</strong> Solo <strong>749 estanterías en uso</strong> (para 13.480 pallets guardados) de 1.690 racks base.<br/>
                                 &bull; <strong>Saturación Global:</strong> Desciende a <strong>44,3%</strong> (frente a la meta de seguridad del 85%), generando <strong>941 racks libres (55,7% de colchón)</strong>.<br/>
                                 &bull; <strong>Distancia lineal total:</strong> <strong>2.472 m</strong> distribuidos en 27 pasillos (A: 6, B: 12, C: 6, D: 3 pasillos con tránsito seguro y señalizado).<br/>
-                                &bull; <strong>Ingeniería &amp; Normativa:</strong> Acero estructural NCh2369 sismo-resistente (bastidores 90&times;70 mm, e=2,5 mm, pernos M16) y Ley 20.949 (Piso 0 picking manual a pie; Pisos 1 a 5 reserva aérea bajada por grúa reach).<br/>
-                                &bull; <strong>Zonificación To-Be:</strong> Zona A (390 racks &bull; 54.600 m³), Zona B (470 racks &bull; 64.050 m³), Zona C (580 racks &bull; 75.600 m³), Zona D (250 racks &bull; 51.450 m³).
+                                &bull; <strong>Ingeniería &amp; Normativa:</strong> Acero estructural NCh2369 sismo-resistente (bastidores 90&times;70 mm, e=2,5 mm, pernos M16, H=12,00 m) y Ley 20.949 (Piso 0 picking manual apoyado directo en losa NPT ±0,00 m; Pisos 1 a 5 reserva aérea en 5 niveles de vigas naranjas operadas por grúa reach).<br/>
+                                &bull; <strong>Zonificación To-Be (h=12,0m):</strong> Zona A (390 racks &bull; 62.400 m³), Zona B (470 racks &bull; 73.200 m³), Zona C (580 racks &bull; 86.400 m³), Zona D (250 racks &bull; 58.800 m³).
                             </div>
                         </div>
                     </div>
@@ -2038,7 +2038,7 @@
                     <div class="rack-kpi-tile">
                         <div class="rack-kpi-lbl">Distancia Total de Estanterías</div>
                         <div class="rack-kpi-val" id="kpi-racks-meters" style="color: #fbbf24;">3.640 m</div>
-                        <div class="rack-kpi-sub">27 pasillos con tránsito seguro y señalizado</div>
+                        <div class="rack-kpi-sub" id="kpi-racks-meters-sub">En uso de 4.563 m instalados (27 pasillos)</div>
                     </div>
                 </div>
             </div>
@@ -2058,72 +2058,90 @@
                     </div>
 
                     <div class="rack-svg-wrap">
-                        <svg id="rack-floorplan-svg" viewBox="0 0 850 480" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Fondo del almacén -->
-                            <rect width="850" height="480" fill="#070c18" rx="8"/>
-                            <rect x="15" y="15" width="820" height="450" fill="none" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1.5" stroke-dasharray="4 3"/>
+                        <svg id="rack-floorplan-svg" viewBox="0 0 1050 580" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Fondo del almacén y grilla técnica -->
+                            <rect width="1050" height="580" fill="#060b18" rx="10"/>
+                            <defs>
+                                <pattern id="rack-grid" width="25" height="25" patternUnits="userSpaceOnUse">
+                                    <path d="M 25 0 L 0 0 0 25" fill="none" stroke="rgba(56, 189, 248, 0.04)" stroke-width="1"/>
+                                </pattern>
+                            </defs>
+                            <rect width="1050" height="580" fill="url(#rack-grid)" rx="10"/>
+                            <rect x="15" y="15" width="1020" height="550" fill="none" stroke="rgba(56, 189, 248, 0.2)" stroke-width="1.5" stroke-dasharray="6 4" rx="8"/>
 
-                            <!-- ZONA INBOUND (RECEPCIÓN & ANDENES) -->
-                            <rect x="25" y="25" width="800" height="40" fill="rgba(30, 41, 59, 0.6)" stroke="rgba(255,255,255,0.1)" rx="4"/>
-                            <text x="40" y="49" fill="#94a3b8" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="700">INBOUND &bull; 24 ANDENES DE DESCARGA &bull; STAGING 4.800 m² (1.200 POS) &bull; VOLUMEN ÚTIL: 28.800 m³ (h=6,0m)</text>
+                            <!-- ZONA INBOUND (RECEPCIÓN & ANDENES NORTE) -->
+                            <rect x="25" y="25" width="1000" height="55" fill="rgba(30, 41, 59, 0.7)" stroke="rgba(148, 163, 184, 0.3)" stroke-width="1.5" rx="6"/>
+                            <rect x="35" y="33" width="18" height="38" fill="#0284c7" rx="3"/>
+                            <text x="62" y="48" fill="#ffffff" font-size="11" font-family="'JetBrains Mono', monospace" font-weight="800">INBOUND &bull; RECEPCIÓN &amp; 24 ANDENES DE DESCARGA (FRENTE E-O: 210,00 m)</text>
+                            <text x="62" y="66" fill="#94a3b8" font-size="9.5" font-family="'JetBrains Mono', monospace">210,00 × 22,86 m &bull; Superficie: 4.800 m² &bull; Altura: 6,00 m &bull; Volumen útil: 28.800 m³ &bull; Staging: 1.200 pos (1.050 en uso &bull; 87,5%)</text>
                             
-                            <!-- ZONA A: PICKING EXPRESS (6 PASILLOS A01 A A06) -->
+                            <!-- ZONA A: PICKING EXPRESS (6 PASILLOS A01 A A06) -> 200px ancho -->
                             <g id="svg-cenital-zone-a-group">
-                                <rect x="25" y="80" width="180" height="270" fill="rgba(6, 182, 212, 0.08)" stroke="#06b6d4" stroke-width="1.5" rx="6"/>
-                                <text id="svg-zone-a-title" x="35" y="98" fill="#22d3ee" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="800">ZONA A (35m) &bull; 54.600 m³</text>
-                                <text id="svg-zone-a-sub" x="35" y="113" fill="#94a3b8" font-size="8.5" font-family="sans-serif">Pick Express &bull; 5.200 m² &bull; 390 Racks (h=10,5m)</text>
+                                <rect x="25" y="92" width="205" height="340" fill="rgba(6, 182, 212, 0.06)" stroke="#06b6d4" stroke-width="1.8" rx="8"/>
+                                <rect x="25" y="92" width="205" height="42" fill="rgba(6, 182, 212, 0.15)" rx="8"/>
+                                <text id="svg-zone-a-title" x="35" y="110" fill="#22d3ee" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="900">ZONA A (35m) &bull; 54.600 m³</text>
+                                <text id="svg-zone-a-sub" x="35" y="126" fill="#cbd5e1" font-size="8.2" font-family="'JetBrains Mono', monospace" font-weight="600">46,67 × 111,43 m &bull; 5.200 m² &bull; 390 Racks</text>
                                 
                                 <!-- Pasillos A01 a A06 -->
                                 <g id="svg-aisles-a"></g>
                             </g>
 
-                            <!-- ZONA B: PICKING ESTÁNDAR (12 PASILLOS B01 A B12) -->
+                            <!-- ZONA B: PICKING ESTÁNDAR (12 PASILLOS B01 A B12) -> 370px ancho -->
                             <g id="svg-cenital-zone-b-group">
-                                <rect x="220" y="80" width="310" height="270" fill="rgba(16, 185, 129, 0.08)" stroke="#10b981" stroke-width="1.5" rx="6"/>
-                                <text id="svg-zone-b-title" x="230" y="98" fill="#34d399" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="800">ZONA B (72m) &bull; 64.050 m³</text>
-                                <text id="svg-zone-b-sub" x="230" y="113" fill="#94a3b8" font-size="8.5" font-family="sans-serif">Picking Estándar &bull; 6.100 m² &bull; 470 Racks (h=10,5m)</text>
+                                <rect x="240" y="92" width="375" height="340" fill="rgba(16, 185, 129, 0.06)" stroke="#10b981" stroke-width="1.8" rx="8"/>
+                                <rect x="240" y="92" width="375" height="42" fill="rgba(16, 185, 129, 0.15)" rx="8"/>
+                                <text id="svg-zone-b-title" x="252" y="110" fill="#34d399" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="900">ZONA B (72m) &bull; 64.050 m³</text>
+                                <text id="svg-zone-b-sub" x="252" y="126" fill="#cbd5e1" font-size="8.2" font-family="'JetBrains Mono', monospace" font-weight="600">54,74 × 111,43 m &bull; 6.100 m² &bull; 470 Racks</text>
                                 
                                 <!-- Pasillos B01 a B12 -->
                                 <g id="svg-aisles-b"></g>
                             </g>
 
-                            <!-- ZONA C: LENTA ROTACIÓN (6 PASILLOS C01 A C06) -->
+                            <!-- ZONA C: LENTA ROTACIÓN (6 PASILLOS C01 A C06) -> 230px ancho -->
                             <g id="svg-cenital-zone-c-group">
-                                <rect x="545" y="80" width="160" height="270" fill="rgba(245, 158, 11, 0.08)" stroke="#f59e0b" stroke-width="1.5" rx="6"/>
-                                <text id="svg-zone-c-title" x="555" y="98" fill="#fbbf24" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="800">ZONA C (118m) &bull; 75.600 m³</text>
-                                <text id="svg-zone-c-sub" x="555" y="113" fill="#94a3b8" font-size="8.5" font-family="sans-serif">Lenta &bull; 7.200 m² &bull; 580 Racks (h=10,5m)</text>
+                                <rect x="625" y="92" width="235" height="340" fill="rgba(245, 158, 11, 0.06)" stroke="#f59e0b" stroke-width="1.8" rx="8"/>
+                                <rect x="625" y="92" width="235" height="42" fill="rgba(245, 158, 11, 0.15)" rx="8"/>
+                                <text id="svg-zone-c-title" x="637" y="110" fill="#fbbf24" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="900">ZONA C (118m) &bull; 75.600 m³</text>
+                                <text id="svg-zone-c-sub" x="637" y="126" fill="#cbd5e1" font-size="8.2" font-family="'JetBrains Mono', monospace" font-weight="600">64,62 × 111,43 m &bull; 7.200 m² &bull; 580 Racks</text>
                                 
                                 <!-- Pasillos C01 a C06 -->
                                 <g id="svg-aisles-c"></g>
                             </g>
 
-                            <!-- ZONA D: BULKY & MMC (3 PASILLOS D01 A D03) -->
+                            <!-- ZONA D: BULKY & MMC (3 PASILLOS D01 A D03) -> 155px ancho -->
                             <g id="svg-cenital-zone-d-group">
-                                <rect x="720" y="80" width="105" height="270" fill="rgba(239, 68, 68, 0.08)" stroke="#ef4444" stroke-width="1.5" rx="6"/>
-                                <text id="svg-zone-d-title" x="728" y="98" fill="#f87171" font-size="9.5" font-family="'JetBrains Mono', monospace" font-weight="800">ZONA D &bull; 51.450 m³</text>
-                                <text id="svg-zone-d-sub" x="728" y="113" fill="#94a3b8" font-size="8" font-family="sans-serif">Bulky &bull; 4.900 m² &bull; 250 Racks</text>
+                                <rect x="870" y="92" width="155" height="340" fill="rgba(239, 68, 68, 0.06)" stroke="#ef4444" stroke-width="1.8" rx="8"/>
+                                <rect x="870" y="92" width="155" height="42" fill="rgba(239, 68, 68, 0.15)" rx="8"/>
+                                <text id="svg-zone-d-title" x="880" y="110" fill="#f87171" font-size="10" font-family="'JetBrains Mono', monospace" font-weight="900">ZONA D (Bulky)</text>
+                                <text id="svg-zone-d-sub" x="880" y="126" fill="#cbd5e1" font-size="7.8" font-family="'JetBrains Mono', monospace" font-weight="600">43,97 × 111,43 m &bull; 4.900m²</text>
                                 
                                 <!-- Pasillos D01 a D03 -->
                                 <g id="svg-aisles-d"></g>
                             </g>
 
-                            <!-- ZONA OUTBOUND (EXPEDICIÓN & CONSOLIDACIÓN) -->
-                            <rect x="25" y="370" width="800" height="85" fill="rgba(15, 23, 42, 0.7)" stroke="rgba(255,255,255,0.12)" rx="6"/>
-                            <text x="40" y="392" fill="#38bdf8" font-size="10" font-family="'JetBrains Mono', monospace" font-weight="800">ZONA OUTBOUND &bull; PACKING RIGHT-SIZING: 2.100 m² (9.450 m³) &bull; DESPACHO: 1.200 m² (6.000 m³)</text>
+                            <!-- ZONA OUTBOUND (PACKING & EXPEDICIÓN SUR) -->
+                            <rect x="25" y="445" width="1000" height="105" fill="rgba(15, 23, 42, 0.85)" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1.5" rx="8"/>
+                            <text x="40" y="468" fill="#38bdf8" font-size="10.5" font-family="'JetBrains Mono', monospace" font-weight="800">
+                                ZONA OUTBOUND &bull; PACKING: 133,64 × 15,71 m (h=4,5m &bull; 2.100 m² &bull; 9.450 m³) &bull; DESPACHO: 76,36 × 15,71 m (h=5,0m &bull; 1.200 m² &bull; 6.000 m³)
+                            </text>
                             
                             <!-- Dársenas de expedición -->
                             <g id="svg-outbound-docks">
-                                <rect x="40" y="405" width="160" height="36" fill="rgba(56, 189, 248, 0.12)" stroke="rgba(56, 189, 248, 0.3)" rx="4"/>
-                                <text x="50" y="427" fill="#bae6fd" font-size="10" font-family="sans-serif" font-weight="600">Carrier 1: RM E-Comm</text>
+                                <rect x="40" y="482" width="220" height="52" fill="rgba(56, 189, 248, 0.1)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" rx="5"/>
+                                <text x="52" y="504" fill="#ffffff" font-size="10.5" font-family="sans-serif" font-weight="700">Carrier 1: RM E-Comm</text>
+                                <text x="52" y="522" fill="#7dd3fc" font-size="8.5" font-family="'JetBrains Mono', monospace">6 Dársenas &bull; SLA: 24h Express</text>
 
-                                <rect x="220" y="405" width="160" height="36" fill="rgba(56, 189, 248, 0.12)" stroke="rgba(56, 189, 248, 0.3)" rx="4"/>
-                                <text x="230" y="427" fill="#bae6fd" font-size="10" font-family="sans-serif" font-weight="600">Carrier 2: Regiones</text>
+                                <rect x="275" y="482" width="220" height="52" fill="rgba(56, 189, 248, 0.1)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" rx="5"/>
+                                <text x="287" y="504" fill="#ffffff" font-size="10.5" font-family="sans-serif" font-weight="700">Carrier 2: Regiones</text>
+                                <text x="287" y="522" fill="#7dd3fc" font-size="8.5" font-family="'JetBrains Mono', monospace">5 Dársenas &bull; Troncal Interurbano</text>
 
-                                <rect x="400" y="405" width="160" height="36" fill="rgba(56, 189, 248, 0.12)" stroke="rgba(56, 189, 248, 0.3)" rx="4"/>
-                                <text x="410" y="427" fill="#bae6fd" font-size="10" font-family="sans-serif" font-weight="600">Click &amp; Collect (Stores)</text>
+                                <rect x="510" y="482" width="220" height="52" fill="rgba(56, 189, 248, 0.1)" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1.2" rx="5"/>
+                                <text x="522" y="504" fill="#ffffff" font-size="10.5" font-family="sans-serif" font-weight="700">Click &amp; Collect (Stores)</text>
+                                <text x="522" y="522" fill="#7dd3fc" font-size="8.5" font-family="'JetBrains Mono', monospace">3 Dársenas &bull; 27 Tiendas Propias</text>
 
-                                <rect x="580" y="405" width="230" height="36" fill="rgba(16, 185, 129, 0.12)" stroke="rgba(16, 185, 129, 0.3)" rx="4"/>
-                                <text x="590" y="427" fill="#a7f3d0" font-size="10" font-family="sans-serif" font-weight="600">TMS Cubicaje 3D &amp; Consolidación</text>
+                                <rect x="745" y="482" width="265" height="52" fill="rgba(16, 185, 129, 0.1)" stroke="rgba(16, 185, 129, 0.4)" stroke-width="1.2" rx="5"/>
+                                <text x="757" y="504" fill="#34d399" font-size="10.5" font-family="sans-serif" font-weight="800">TMS Cubicaje 3D &amp; Consolidación</text>
+                                <text x="757" y="522" fill="#a7f3d0" font-size="8.5" font-family="'JetBrains Mono', monospace">Right-Sizing P5 &bull; Ocupación camión: 91%</text>
                             </g>
                         </svg>
                     </div>
@@ -2433,8 +2451,8 @@
                 <div style="margin-top: 12px; padding: 12px 14px; background: rgba(56, 189, 248, 0.07); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 8px; font-size: 0.78rem; color: #bae6fd; line-height: 1.55;">
                     <strong>📏 Cómo se obtienen Ancho × Largo 🧮:</strong> la base oficial entrega solo superficies; el ancho y largo salen de repartirlas en franjas sobre una nave <em>supuesta</em> de <strong>210 m (E-O) × 150 m (N-S)</strong> = 31.500 m²: recepción al norte (22,86 m de fondo), franja de racks A-D (111,43 m de fondo) y packing + despacho al sur (15,71 m de fondo). Es una distribución de referencia, no un dato del caso. Plano a escala: <em>planimetria_interna_balance_volumetrico_4k</em>.
                 </div>
-                <div style="margin-top: 10px; padding: 12px 14px; background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.4); border-radius: 8px; font-size: 0.78rem; color: #fecdd3; line-height: 1.55;">
-                    <strong>⚠️ Verificación de altura:</strong> el rack de <strong>6 pisos mide 12,60 m</strong> y la altura libre supuesta de la nave es <strong>12,50 m</strong>; con los 2,0 m de rociadores que el propio supuesto reserva, 6 pisos exigen una nave de <strong>≥ 14,60 m</strong>. Con 5 pisos (10,50 m) el supuesto cierra exacto (10,5 + 2,0 = 12,5 m). La capacidad de 30.420 posiciones solo es viable si la nave real alcanza esa altura o se limita a 5 pisos × 3 pallets (25.350 pos).
+                <div style="margin-top: 10px; padding: 12px 14px; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 8px; font-size: 0.78rem; color: #a7f3d0; line-height: 1.55;">
+                    <strong>✅ Verificación de altura calibrada (12,00 m):</strong> al apoyar el <strong>Piso 0 directamente sobre la losa de hormigón (picking a piso sin viga inferior)</strong> y disponer de <strong>5 niveles de vigas aéreas</strong> para reserva, el módulo de 6 pisos reduce su altura nominal de 12,60 m a <strong>12,00 m exactos</strong>. Esto permite que el sistema de 6 pisos <strong>quepa bajo la altura de nave (12,50 m)</strong> cumpliendo la normativa sismo-resistente NCh2369 y la Ley 20.949 de manipulación manual.
                 </div>
 
                 <!-- Cuadrícula de Especificaciones Físicas y Dimensionamiento Unitario -->
@@ -2444,9 +2462,9 @@
                         <ul class="vol-spec-list">
                             <li><strong>Luz de viga:</strong> 2,70 m (2 pallets) o 3,30 m (3 pallets).</li>
                             <li><strong>Fondo de bastidor:</strong> 1,10 m (pallet de 1,20 m con voladizo de 5 cm por lado).</li>
-                            <li><strong>Altura por nivel:</strong> 2,10 m &rarr; 10,50 m con 5 pisos, 12,60 m con 6 pisos.</li>
-                            <li><strong>Volumen de 1 módulo (2 pallets):</strong> 2,88 &times; 1,10 &times; 10,5 = <strong>33,3 m³</strong>.</li>
-                            <li><strong>Capacidad referencial:</strong> 2.000 kg por nivel (3.000 kg en Zona D).</li>
+                            <li><strong>Altura total:</strong> 10,50 m con 5 pisos (Oficial); 12,00 m con 6 pisos (Piso 0 a losa + 5 vigas aéreas).</li>
+                            <li><strong>Volumen de 1 módulo:</strong> 5P×2 = <strong>33,3 m³</strong>; 6P×3 = <strong>45,9 m³</strong> (3,48 × 1,10 × 12,0 m).</li>
+                            <li><strong>Capacidad referencial:</strong> 2.000 kg por nivel (3.000 kg en vigas largas y Zona D).</li>
                             <li>Medidas típicas de rack selectivo; confirmar con el fabricante.</li>
                         </ul>
                     </div>

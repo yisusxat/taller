@@ -2676,8 +2676,8 @@ body {
 /* Cuadrícula Split: Floorplan 2D + Elevación Frontal */
 .rack-visual-split-grid {
     display: grid;
-    grid-template-columns: 1.25fr 0.75fr;
-    gap: 18px;
+    grid-template-columns: 1.45fr 0.85fr;
+    gap: 20px;
 }
 
 .rack-card-box {
@@ -2728,6 +2728,20 @@ body {
     width: 100%;
     height: auto;
     display: block;
+}
+
+.svg-rack-aisle-block {
+    transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.svg-rack-aisle-block:hover rect {
+    filter: brightness(1.3) drop-shadow(0 0 6px rgba(56, 189, 248, 0.6));
+    stroke-width: 2px !important;
+}
+
+.svg-rack-aisle-block:hover text {
+    fill: #ffffff !important;
+    font-weight: 900 !important;
 }
 
 /* Matriz Comparativa de Zonas */

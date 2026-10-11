@@ -1577,18 +1577,25 @@ function calculateRackMetrics() {
         bufferRacks = baseInstalledRacks - occupiedRacks;
     }
 
-    const linearMeters = Math.round(occupiedRacks * beamLen);
+    const linearMetersUsed = Math.round(occupiedRacks * beamLen);
+    const linearMetersTotal = Math.round(baseInstalledRacks * beamLen);
 
-    // Etiquetas del plano cenital: altura y volumen segun los pisos seleccionados
-    const rackH = rackCalcState.levels * 2.1;
+    // Etiquetas del plano cenital: dimensiones físicas exactas (ancho × largo × alto), superficie y volumen
+    const heightMap = { 3: 6.5, 4: 8.5, 5: 10.5, 6: 12.0 };
+    const rackH = heightMap[rackCalcState.levels] || (rackCalcState.levels * 2.0);
     const fmtM3 = v => Math.round(v).toLocaleString('es-CL');
-    const zoneSvg = { a: ['A (35m)', 'Pick Express', 5200, 390], b: ['B (72m)', 'Picking Estándar', 6100, 470], c: ['C (118m)', 'Lenta', 7200, 580], d: ['D', 'Bulky', 4900, 250] };
+    const zoneSvg = { 
+        a: ['A (35m)', '46,67 × 111,43 m', 5200, 390], 
+        b: ['B (72m)', '54,74 × 111,43 m', 6100, 470], 
+        c: ['C (118m)', '64,62 × 111,43 m', 7200, 580], 
+        d: ['D (Bulky)', '43,97 × 111,43 m', 4900, 250] 
+    };
     Object.keys(zoneSvg).forEach(k => {
-        const [nm, fn, area, racks] = zoneSvg[k];
+        const [nm, dims, area, racks] = zoneSvg[k];
         const t = document.getElementById('svg-zone-' + k + '-title');
         const sb = document.getElementById('svg-zone-' + k + '-sub');
         if (t) t.textContent = 'ZONA ' + nm + ' \u2022 ' + fmtM3(area * rackH) + ' m\u00b3';
-        if (sb) sb.textContent = fn + ' \u2022 ' + area.toLocaleString('es-CL') + ' m\u00b2 \u2022 ' + racks + ' Racks (h=' + rackH.toFixed(1).replace('.', ',') + 'm)';
+        if (sb) sb.textContent = `${dims} \u2022 ${racks} Racks (h=${rackH.toFixed(1).replace('.', ',')}m)`;
     });
 
     // Actualizar Insignia de Fórmula
@@ -1644,8 +1651,12 @@ function calculateRackMetrics() {
     }
 
     const kpiMeters = document.getElementById('kpi-racks-meters');
+    const kpiMetersSub = document.getElementById('kpi-racks-meters-sub');
     if (kpiMeters) {
-        kpiMeters.innerText = `${linearMeters.toLocaleString('es-CL')} m`;
+        kpiMeters.innerText = `${linearMetersUsed.toLocaleString('es-CL')} m`;
+    }
+    if (kpiMetersSub) {
+        kpiMetersSub.innerText = `En uso de ${linearMetersTotal.toLocaleString('es-CL')} m instalados (27 pasillos)`;
     }
 }
 
@@ -1665,97 +1676,97 @@ function renderRackFloorplan() {
         }
     }
 
-    // Render ZONA A (6 Pasillos A01-A06)
+    // Render ZONA A (6 Pasillos A01-A06) en caja X: 25 a 230 (ancho 205, interior 35 a 220)
     const gA = document.getElementById('svg-aisles-a');
     if (gA) {
         const aisles = RACK_ZONES_CONFIG['A-Rápida'].aisles;
         const color = isAsIs ? '#ef4444' : '#06b6d4';
-        const fill = isAsIs ? 'rgba(239, 68, 68, 0.35)' : 'rgba(6, 182, 212, 0.25)';
+        const fill = isAsIs ? 'rgba(239, 68, 68, 0.35)' : 'rgba(6, 182, 212, 0.22)';
         let html = '';
         aisles.forEach((a, i) => {
-            const x = 33 + i * 28;
+            const x = 36 + i * 32;
             html += `
                 <g class="svg-rack-aisle-block" onclick="selectFloorplanZone('A-Rápida', '${a}')" style="cursor: pointer;">
                     <title>${a} - Zona A-Rápida | Capacidad: 650 pos | Saturación: ${isAsIs ? '95,4%' : '80,0%'}</title>
-                    <rect x="${x}" y="125" width="22" height="210" fill="${fill}" stroke="${color}" stroke-width="1.2" rx="3"/>
-                    <line x1="${x}" y1="170" x2="${x+22}" y2="170" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="215" x2="${x+22}" y2="215" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="260" x2="${x+22}" y2="260" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="305" x2="${x+22}" y2="305" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <text x="${x+11}" y="142" fill="#ffffff" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">${a}</text>
-                    <text x="${x+11}" y="325" fill="${color}" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${isAsIs ? '95%' : '80%'}</text>
+                    <rect x="${x}" y="145" width="26" height="268" fill="${fill}" stroke="${color}" stroke-width="1.3" rx="4"/>
+                    <line x1="${x}" y1="200" x2="${x+26}" y2="200" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="255" x2="${x+26}" y2="255" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="310" x2="${x+26}" y2="310" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="365" x2="${x+26}" y2="365" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <text x="${x+13}" y="165" fill="#ffffff" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${a}</text>
+                    <text x="${x+13}" y="395" fill="${color}" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">${isAsIs ? '95%' : '80%'}</text>
                 </g>
             `;
         });
         gA.innerHTML = html;
     }
 
-    // Render ZONA B (12 Pasillos B01-B12)
+    // Render ZONA B (12 Pasillos B01-B12) en caja X: 240 a 615 (ancho 375, interior 252 a 602)
     const gB = document.getElementById('svg-aisles-b');
     if (gB) {
         const aisles = RACK_ZONES_CONFIG['B-Media'].aisles;
         const color = isAsIs ? '#f59e0b' : '#10b981';
-        const fill = isAsIs ? 'rgba(245, 158, 11, 0.3)' : 'rgba(16, 185, 129, 0.22)';
+        const fill = isAsIs ? 'rgba(245, 158, 11, 0.3)' : 'rgba(16, 185, 129, 0.2)';
         let html = '';
         aisles.forEach((b, i) => {
-            const x = 228 + i * 25;
+            const x = 250 + i * 30;
             html += `
                 <g class="svg-rack-aisle-block" onclick="selectFloorplanZone('B-Media', '${b}')" style="cursor: pointer;">
                     <title>${b} - Zona B-Media | Capacidad: 390 pos | Saturación: ${isAsIs ? '93,2%' : '81,9%'}</title>
-                    <rect x="${x}" y="125" width="20" height="210" fill="${fill}" stroke="${color}" stroke-width="1.2" rx="3"/>
-                    <line x1="${x}" y1="170" x2="${x+20}" y2="170" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="215" x2="${x+20}" y2="215" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="260" x2="${x+20}" y2="260" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <text x="${x+10}" y="142" fill="#ffffff" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">${b}</text>
-                    <text x="${x+10}" y="325" fill="${color}" font-size="7" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${isAsIs ? '93%' : '82%'}</text>
+                    <rect x="${x}" y="145" width="24" height="268" fill="${fill}" stroke="${color}" stroke-width="1.3" rx="4"/>
+                    <line x1="${x}" y1="200" x2="${x+24}" y2="200" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="255" x2="${x+24}" y2="255" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="310" x2="${x+24}" y2="310" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <text x="${x+12}" y="165" fill="#ffffff" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${b}</text>
+                    <text x="${x+12}" y="395" fill="${color}" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">${isAsIs ? '93%' : '82%'}</text>
                 </g>
             `;
         });
         gB.innerHTML = html;
     }
 
-    // Render ZONA C (6 Pasillos C01-C06)
+    // Render ZONA C (6 Pasillos C01-C06) en caja X: 625 a 860 (ancho 235, interior 637 a 847)
     const gC = document.getElementById('svg-aisles-c');
     if (gC) {
         const aisles = RACK_ZONES_CONFIG['C-Lenta'].aisles;
         const color = isAsIs ? '#eab308' : '#34d399';
-        const fill = isAsIs ? 'rgba(234, 179, 8, 0.28)' : 'rgba(52, 211, 153, 0.22)';
+        const fill = isAsIs ? 'rgba(234, 179, 8, 0.28)' : 'rgba(52, 211, 153, 0.2)';
         let html = '';
         aisles.forEach((c, i) => {
-            const x = 553 + i * 25.5;
+            const x = 638 + i * 36;
             html += `
                 <g class="svg-rack-aisle-block" onclick="selectFloorplanZone('C-Lenta', '${c}')" style="cursor: pointer;">
                     <title>${c} - Zona C-Lenta | Capacidad: 960 pos | Saturación: ${isAsIs ? '90,7%' : '76,7%'}</title>
-                    <rect x="${x}" y="125" width="20" height="210" fill="${fill}" stroke="${color}" stroke-width="1.2" rx="3"/>
-                    <line x1="${x}" y1="170" x2="${x+20}" y2="170" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="215" x2="${x+20}" y2="215" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="260" x2="${x+20}" y2="260" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <text x="${x+10}" y="142" fill="#ffffff" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">${c}</text>
-                    <text x="${x+10}" y="325" fill="${color}" font-size="7" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${isAsIs ? '91%' : '77%'}</text>
+                    <rect x="${x}" y="145" width="28" height="268" fill="${fill}" stroke="${color}" stroke-width="1.3" rx="4"/>
+                    <line x1="${x}" y1="200" x2="${x+28}" y2="200" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="255" x2="${x+28}" y2="255" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="310" x2="${x+28}" y2="310" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <text x="${x+14}" y="165" fill="#ffffff" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${c}</text>
+                    <text x="${x+14}" y="395" fill="${color}" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">${isAsIs ? '91%' : '77%'}</text>
                 </g>
             `;
         });
         gC.innerHTML = html;
     }
 
-    // Render ZONA D (3 Pasillos D01-D03)
+    // Render ZONA D (3 Pasillos D01-D03) en caja X: 870 a 1025 (ancho 155, interior 880 a 1015)
     const gD = document.getElementById('svg-aisles-d');
     if (gD) {
         const aisles = RACK_ZONES_CONFIG['D-Bulky'].aisles;
         const color = isAsIs ? '#ef4444' : '#38bdf8';
-        const fill = isAsIs ? 'rgba(239, 68, 68, 0.35)' : 'rgba(56, 189, 248, 0.22)';
+        const fill = isAsIs ? 'rgba(239, 68, 68, 0.35)' : 'rgba(56, 189, 248, 0.2)';
         let html = '';
         aisles.forEach((d, i) => {
-            const x = 728 + i * 31;
+            const x = 884 + i * 46;
             html += `
                 <g class="svg-rack-aisle-block" onclick="selectFloorplanZone('D-Bulky', '${d}')" style="cursor: pointer;">
                     <title>${d} - Zona D-Bulky | Capacidad: 830 pos | Saturación: ${isAsIs ? '94,4%' : '82,4%'}</title>
-                    <rect x="${x}" y="125" width="26" height="210" fill="${fill}" stroke="${color}" stroke-width="1.2" rx="3"/>
-                    <line x1="${x}" y1="175" x2="${x+26}" y2="175" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="225" x2="${x+26}" y2="225" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <line x1="${x}" y1="275" x2="${x+26}" y2="275" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
-                    <text x="${x+13}" y="142" fill="#ffffff" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="700" text-anchor="middle">${d}</text>
-                    <text x="${x+13}" y="325" fill="${color}" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${isAsIs ? '94%' : '82%'}</text>
+                    <rect x="${x}" y="145" width="36" height="268" fill="${fill}" stroke="${color}" stroke-width="1.3" rx="4"/>
+                    <line x1="${x}" y1="210" x2="${x+36}" y2="210" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="275" x2="${x+36}" y2="275" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <line x1="${x}" y1="340" x2="${x+36}" y2="340" stroke="${color}" stroke-width="0.8" opacity="0.6"/>
+                    <text x="${x+18}" y="165" fill="#ffffff" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">${d}</text>
+                    <text x="${x+18}" y="395" fill="${color}" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">${isAsIs ? '94%' : '82%'}</text>
                 </g>
             `;
         });
@@ -1800,81 +1811,109 @@ function renderRackElevation() {
     }
 
     const floorY = 410;
-    const lvlH = Math.floor(335 / lvls);
     const rackWidth = ppb === 2 ? 260 : 310;
     const leftX = 35;
     const rightX = leftX + rackWidth;
 
+    // Altura total oficial calibrada según pisos de selector
+    const heightMap = { 3: 6.5, 4: 8.5, 5: 10.5, 6: 12.0 };
+    const nominalTotalH = heightMap[lvls] || (lvls * 2.0);
+    const totH = nominalTotalH.toFixed(1).replace('.', ',') + ' m';
+    
+    // Cotas de altura acumuladas por nivel (Piso 0 a nivel de losa 0,0m)
+    // Para 6 pisos (12,0m total): Nivel 0 = 0,0m; Niveles 1 a 5 con vigas a +2,0m, +4,0m, +6,0m, +8,0m, +10,0m.
+    const beamStepH = (nominalTotalH - 2.0) / (lvls - 1);
+    const getLevelBeamElev = (l) => {
+        if (l === 0) return 0.0;
+        return (l * beamStepH).toFixed(1);
+    };
+
+    // Altura gráfica proporcional dentro del SVG (pisoY = 410, tope = 410 - totalSvgH)
+    const totalSvgH = 320;
+    const lvlSvgStep = totalSvgH / lvls;
+
     const extW = ppb === 2 ? '2,88 m' : '3,48 m';
     const beamW = ppb === 2 ? '2,70 m' : '3,30 m';
-    const totH = (lvls * 2.1).toFixed(1) + ' m';
     const totCapKg = (lvls * (ppb === 2 ? 2000 : 3000)).toLocaleString('es-CL') + ' kg';
     const lvlCapKg = ppb === 2 ? '2.000 kg' : '3.000 kg';
-    const totVolM3 = ((ppb === 2 ? 2.88 : 3.48) * 1.10 * (lvls * 2.1)).toFixed(2) + ' m³';
+    const totVolM3 = ((ppb === 2 ? 2.88 : 3.48) * 1.10 * nominalTotalH).toFixed(2).replace('.', ',') + ' m³';
     const palOverhang = '50 mm frontal / 50 mm posterior';
     const lateralClear = ppb === 2 ? '100 mm entre pallets' : '75 mm entre pallets';
 
     let svgHtml = `
-        <!-- Suelo con Franja de Advertencia Operacional -->
+        <!-- Suelo con Franja de Advertencia Operacional (Losa Hormigón NPT ±0,00m) -->
         <rect x="10" y="${floorY}" width="490" height="25" fill="#1e293b" rx="2"/>
         <line x1="10" y1="${floorY}" x2="500" y2="${floorY}" stroke="#e2e8f0" stroke-width="2"/>
         <line x1="20" y1="${floorY+6}" x2="490" y2="${floorY+6}" stroke="#fbbf24" stroke-width="3" stroke-dasharray="10 8"/>
+        <text x="495" y="${floorY + 16}" fill="#94a3b8" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="end">LOSA NPT ±0,00 m</text>
 
         <!-- Cota Total de Altura (Izquierda) -->
-        <line x1="22" y1="${floorY}" x2="22" y2="${floorY - lvls * lvlH}" stroke="#94a3b8" stroke-width="1.2"/>
+        <line x1="22" y1="${floorY}" x2="22" y2="${floorY - totalSvgH}" stroke="#94a3b8" stroke-width="1.2"/>
         <line x1="16" y1="${floorY}" x2="28" y2="${floorY}" stroke="#94a3b8" stroke-width="1.2"/>
-        <line x1="16" y1="${floorY - lvls * lvlH}" x2="28" y2="${floorY - lvls * lvlH}" stroke="#94a3b8" stroke-width="1.2"/>
-        <text x="14" y="${floorY - (lvls * lvlH)/2}" fill="#38bdf8" font-size="10" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle" transform="rotate(-90 14 ${floorY - (lvls * lvlH)/2})">
-            ${totH} (5 pisos x 2,1m)
+        <line x1="16" y1="${floorY - totalSvgH}" x2="28" y2="${floorY - totalSvgH}" stroke="#94a3b8" stroke-width="1.2"/>
+        <text x="14" y="${floorY - totalSvgH/2}" fill="#38bdf8" font-size="10" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle" transform="rotate(-90 14 ${floorY - totalSvgH/2})">
+            ${totH} (${lvls} pisos: Suelo + ${lvls - 1} aéreos)
         </text>
 
         <!-- Bastidor Izquierdo (Puntal de Acero Perfilado 90x70mm) -->
-        <rect x="${leftX}" y="${floorY - lvls * lvlH - 12}" width="16" height="${lvls * lvlH + 12}" fill="#0284c7" stroke="#0369a1" stroke-width="1.5" rx="2"/>
-        <!-- Placa Base Sísmica Izquierda -->
+        <rect x="${leftX}" y="${floorY - totalSvgH - 10}" width="16" height="${totalSvgH + 10}" fill="#0284c7" stroke="#0369a1" stroke-width="1.5" rx="2"/>
+        <!-- Placa Base Sísmica Izquierda fijada a piso -->
         <rect x="${leftX - 4}" y="${floorY - 2}" width="24" height="4" fill="#e2e8f0" rx="1"/>
 
         <!-- Bastidor Derecho -->
-        <rect x="${rightX - 16}" y="${floorY - lvls * lvlH - 12}" width="16" height="${lvls * lvlH + 12}" fill="#0284c7" stroke="#0369a1" stroke-width="1.5" rx="2"/>
-        <!-- Placa Base Sísmica Derecha -->
+        <rect x="${rightX - 16}" y="${floorY - totalSvgH - 10}" width="16" height="${totalSvgH + 10}" fill="#0284c7" stroke="#0369a1" stroke-width="1.5" rx="2"/>
+        <!-- Placa Base Sísmica Derecha fijada a piso -->
         <rect x="${rightX - 20}" y="${floorY - 2}" width="24" height="4" fill="#e2e8f0" rx="1"/>
     `;
 
-    // Celosías y arriostramientos diagonales de puntal
+    // Celosías y arriostramientos diagonales tipo K/X en puntal
     for (let i = 0; i < lvls; i++) {
-        const yTop = floorY - (i + 1) * lvlH;
-        const yBot = floorY - i * lvlH;
+        const yTop = floorY - (i + 1) * lvlSvgStep;
+        const yBot = floorY - i * lvlSvgStep;
         svgHtml += `
-            <line x1="${leftX + 8}" y1="${yTop}" x2="${rightX - 8}" y2="${yBot}" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.2"/>
-            <line x1="${leftX + 8}" y1="${yBot}" x2="${rightX - 8}" y2="${yTop}" stroke="rgba(56, 189, 248, 0.3)" stroke-width="1.2"/>
+            <line x1="${leftX + 8}" y1="${yTop}" x2="${rightX - 8}" y2="${yBot}" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1.2"/>
+            <line x1="${leftX + 8}" y1="${yBot}" x2="${rightX - 8}" y2="${yTop}" stroke="rgba(56, 189, 248, 0.25)" stroke-width="1.2"/>
         `;
     }
 
-    // Vigas horizontales de carga y estiba de pallets
+    // Estiba de Pallets y Vigas Naranjas
     const palW = Math.floor((rackWidth - 40) / ppb);
 
     for (let l = 0; l < lvls; l++) {
-        const beamY = floorY - (l + 1) * lvlH;
+        // En Piso 0 el pallet asienta DIRECTO en la losa de hormigón (floorY)
+        // En Pisos 1 a lvls-1 se monta sobre la viga naranja correspondiente
+        const isGroundLevel = (l === 0);
+        const palletBaseY = isGroundLevel ? floorY : (floorY - l * lvlSvgStep);
+        const beamY = floorY - l * lvlSvgStep; // Posición de la viga para l >= 1
 
-        // Par de Vigas Naranjas
-        svgHtml += `
-            <rect x="${leftX - 4}" y="${beamY}" width="${rackWidth + 8}" height="8" fill="#f97316" stroke="#c2410c" stroke-width="1.2" rx="1"/>
-            <!-- Pasadores de seguridad -->
-            <circle cx="${leftX + 2}" cy="${beamY + 4}" r="2" fill="#ffffff"/>
-            <circle cx="${rightX - 2}" cy="${beamY + 4}" r="2" fill="#ffffff"/>
-        `;
+        // DIBUJAR VIGA NARANJA SOLO EN NIVELES ELEVADOS (l >= 1)
+        if (!isGroundLevel) {
+            svgHtml += `
+                <!-- Par de Vigas Naranjas Elevadas Nivel ${l} -->
+                <rect x="${leftX - 4}" y="${beamY}" width="${rackWidth + 8}" height="8" fill="#f97316" stroke="#c2410c" stroke-width="1.2" rx="1"/>
+                <!-- Pasadores de seguridad sísmicos -->
+                <circle cx="${leftX + 2}" cy="${beamY + 4}" r="2" fill="#ffffff"/>
+                <circle cx="${rightX - 2}" cy="${beamY + 4}" r="2" fill="#ffffff"/>
+            `;
+        } else {
+            // Demarcación en piso de celda de picking a nivel de suelo
+            svgHtml += `
+                <rect x="${leftX + 4}" y="${floorY - 2}" width="${rackWidth - 8}" height="2" fill="#fbbf24" stroke="#d97706" stroke-width="0.5"/>
+            `;
+        }
 
         // Pallets en este nivel
         for (let p = 0; p < ppb; p++) {
             const px = leftX + 18 + p * (palW + 6);
-            const boxH = Math.min(lvlH - 18, 44);
-            const py = beamY - boxH - 6;
+            const boxH = Math.min(lvlSvgStep - 18, 42);
+            const py = palletBaseY - boxH - 6;
 
-            // Pallet base (Madera industrial 1,20x1,00m)
+            // Pallet base (Madera industrial 1,20x1,00m) apoyado en suelo o sobre viga
             svgHtml += `
-                <rect x="${px}" y="${beamY - 6}" width="${palW}" height="6" fill="#b45309" stroke="#78350f" stroke-width="0.8" rx="1"/>
-                <rect x="${px + 2}" y="${beamY - 4}" width="${Math.floor(palW/4)}" height="4" fill="#78350f"/>
-                <rect x="${px + Math.floor(palW*0.4)}" y="${beamY - 4}" width="${Math.floor(palW/4)}" height="4" fill="#78350f"/>
-                <rect x="${px + Math.floor(palW*0.75)}" y="${beamY - 4}" width="${Math.floor(palW/4)}" height="4" fill="#78350f"/>
+                <rect x="${px}" y="${palletBaseY - 6}" width="${palW}" height="6" fill="#b45309" stroke="#78350f" stroke-width="0.8" rx="1"/>
+                <rect x="${px + 2}" y="${palletBaseY - 4}" width="${Math.floor(palW/4)}" height="4" fill="#78350f"/>
+                <rect x="${px + Math.floor(palW*0.4)}" y="${palletBaseY - 4}" width="${Math.floor(palW/4)}" height="4" fill="#78350f"/>
+                <rect x="${px + Math.floor(palW*0.75)}" y="${palletBaseY - 4}" width="${Math.floor(palW/4)}" height="4" fill="#78350f"/>
             `;
 
             // Carga estibada (Cajas / Bultos)
@@ -1898,10 +1937,14 @@ function renderRackElevation() {
         }
 
         // Cota y etiqueta de altura del nivel (Derecha, con espacio suficiente sin truncar)
-        const lvlHNum = (l * 2.1).toFixed(1);
-        const lvlName = l === 0 ? 'Piso 0: Picking (0,0 m)' : `Piso ${l}: Reserva (+${lvlHNum} m)`;
+        const lvlHNum = getLevelBeamElev(l);
+        const lvlName = isGroundLevel 
+            ? 'Piso 0: Picking a Suelo (0,0 m)' 
+            : `Piso ${l}: Reserva Aérea (+${lvlHNum} m)`;
+        const labelY = isGroundLevel ? (floorY - 4) : (beamY + 5);
+
         svgHtml += `
-            <text x="${rightX + 12}" y="${beamY + 5}" fill="${l === 0 ? '#38bdf8' : '#94a3b8'}" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="${l === 0 ? '800' : '600'}">
+            <text x="${rightX + 12}" y="${labelY}" fill="${isGroundLevel ? '#34d399' : '#94a3b8'}" font-size="9" font-family="'JetBrains Mono', monospace" font-weight="${isGroundLevel ? '800' : '600'}">
                 ${lvlName}
             </text>
         `;
@@ -1928,7 +1971,7 @@ function renderRackElevation() {
         specsBox.innerHTML = `
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
                 <span style="font-size: 0.82rem; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 6px;">
-                    <span>📐</span> Ficha Técnica de Medidas de Referencia del Módulo 🧮 <span style="font-weight: 600; color: #fbbf24; font-size: 0.7rem;">(supuesto de ingeniería: rack selectivo típico, no figura en el caso)</span>
+                    <span>📐</span> Ficha Técnica de Medidas del Módulo 🧮 <span style="font-weight: 600; color: #fbbf24; font-size: 0.7rem;">(Ingeniería NCh2369: Piso 0 en losa + ${lvls - 1} pares de vigas aéreas)</span>
                 </span>
                 <span style="font-size: 0.72rem; font-family: var(--font-mono); color: #34d399; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 3px 8px; border-radius: 4px; font-weight: 700;">
                     ${lvls} Pisos &bull; ${lvls * ppb} Pallets &bull; ${totVolM3}
@@ -1980,13 +2023,18 @@ function renderRackElevation() {
                     </tr>
                     <tr>
                         <td><strong>Puntales / Bastidores</strong></td>
-                        <td><strong>Sección 90 &times; 70 mm (e=2,5 mm)</strong></td>
+                        <td><strong>Sección 90 &times; 70 mm (e=2,5 mm) &bull; H=${totH}</strong></td>
                         <td>Acero estructural sismo-resistente NCh2369. Placas base 160&times;140 mm ancladas con pernos M16.</td>
                     </tr>
                     <tr>
-                        <td><strong>Paso entre Niveles</strong></td>
-                        <td><strong>2,10 m (2.100 mm)</strong></td>
-                        <td>1,70 m carga máx. con pallet + 260 mm huelgo de izaje horquilla + 140 mm peralte de viga naranja = 2,10 m.</td>
+                        <td><strong>Nivel 0 (Picking)</strong></td>
+                        <td><strong style="color: #34d399;">Cota ±0,00 m (A piso)</strong></td>
+                        <td>Apoyo directo sobre losa de hormigón (sin viga inferior). Cumplimiento ergonomía Ley 20.949.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vigas Aéreas (Reserva)</strong></td>
+                        <td><strong>${lvls - 1} Pares de Vigas (+${getLevelBeamElev(1)}m a +${getLevelBeamElev(lvls - 1)}m)</strong></td>
+                        <td>Paso vertical uniforme con huelgo para horquilla de grúa reach.</td>
                     </tr>
                     <tr>
                         <td><strong>Apoyo y Voladizo</strong></td>
@@ -2003,8 +2051,8 @@ function renderRackElevation() {
 
             <div style="margin-top: 10px; font-size: 0.74rem; color: #cbd5e1; line-height: 1.5; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px;">
                 <strong style="color: #38bdf8;">👷 Dinámica Operativa de Niveles:</strong>
-                &bull; <strong style="color: #34d399;">Piso 0 (0,0 m):</strong> Picking manual a pie sin grúa.
-                &bull; <strong style="color: #38bdf8;">Pisos 1 a ${lvls - 1} (+2,1 m a +${((lvls-1)*2.1).toFixed(1)} m):</strong> Reserva aérea con film stretch bajada por grúa reach.
+                &bull; <strong style="color: #34d399;">Piso 0 (0,0 m):</strong> Picking manual a pie sin grúa apoyado directo en losa.
+                &bull; <strong style="color: #38bdf8;">Pisos 1 a ${lvls - 1} (+${getLevelBeamElev(1)} m a +${getLevelBeamElev(lvls-1)} m):</strong> Reserva aérea con film stretch operada por grúa reach.
                 &bull; <strong style="color: #fbbf24;">Ley 20.949:</strong> Ningún bulto pesado (+15 kg) en niveles altos.
             </div>
         `;
@@ -2203,7 +2251,10 @@ function renderSkuMasterTable() {
                     <td><strong style="color: #ffffff; font-family: var(--font-mono);">${s.id}</strong></td>
                     <td>${s.fam}</td>
                     <td><span class="sku-abc-badge ${abcClass}">Clase ${s.abc}</span></td>
-                    <td style="font-family: var(--font-mono); font-size: 0.74rem;">${s.l}&times;${s.w}&times;${s.h} cm</td>
+                    <td style="font-family: var(--font-mono); font-size: 0.74rem;">
+                        ${s.l}&times;${s.w}&times;${s.h} cm
+                        <div style="font-size: 0.68rem; color: #94a3b8;">${((s.l * s.w * s.h) / 1000000).toFixed(3)} m³</div>
+                    </td>
                     <td style="font-family: var(--font-mono); font-size: 0.74rem;">${s.kg} kg</td>
                     <td style="font-family: var(--font-mono);">${s.stock.toLocaleString('es-CL')}</td>
                     <td style="font-family: var(--font-mono);">${s.u_pal} u</td>
