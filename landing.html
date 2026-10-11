@@ -2155,27 +2155,39 @@
                 </div>
             </div>
 
-            <!-- Tarjeta 2: Alzado Frontal 2D del Módulo de Rack (Elevación Posicionada Debajo) -->
-            <div class="rack-card-box full-width" style="margin-top: 20px;">
-                <div class="rack-card-box-header">
-                    <div class="rack-box-title">
-                        <span>🏗️ Alzado Frontal: ¿Cómo funciona una estantería por dentro?</span>
+            <!-- Fila Inferior: 2 Tarjetas Lado a Lado (Alzado Frontal a la Izquierda + Ficha Técnica de Medidas a la Derecha) -->
+            <div class="rack-dual-cards-row">
+                <!-- Tarjeta A: Alzado Frontal (Esquema Gráfico 2D) -->
+                <div class="rack-card-box">
+                    <div class="rack-card-box-header">
+                        <div class="rack-box-title">
+                            <span>🏗️ Alzado Frontal: ¿Cómo funciona una estantería por dentro?</span>
+                        </div>
+                        <div id="rack-spec-badge" style="font-size: 0.72rem; font-family: var(--font-mono); background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 2px 8px; border-radius: 4px; font-weight: 700;">
+                            5 Pisos &bull; 10 Pallets por Estantería
+                        </div>
                     </div>
-                    <div id="rack-spec-badge" style="font-size: 0.72rem; font-family: var(--font-mono); background: rgba(56, 189, 248, 0.15); color: #38bdf8; padding: 2px 8px; border-radius: 4px; font-weight: 700;">
-                        5 Pisos &bull; 10 Pallets por Estantería
-                    </div>
-                </div>
 
-                <!-- Contenedor interno en 2 columnas: Gráfico Frontal a la izquierda + Ficha Técnica Completa a la derecha -->
-                <div class="rack-elevation-layout-grid">
-                    <div class="rack-svg-wrap" style="align-self: start;">
+                    <div class="rack-svg-wrap">
                         <svg id="rack-elevation-svg" viewBox="0 0 520 480" xmlns="http://www.w3.org/2000/svg">
                             <!-- Contenedor dinámico generado por landing-2d.js -->
                         </svg>
                     </div>
+                </div>
+
+                <!-- Tarjeta B: Ficha Técnica de Medidas del Módulo (Cotas, Medidas y Componentes) -->
+                <div class="rack-card-box">
+                    <div class="rack-card-box-header">
+                        <div class="rack-box-title">
+                            <span>📐 Ficha Técnica de Medidas del Módulo</span>
+                        </div>
+                        <div id="rack-spec-norm-badge" style="font-size: 0.72rem; font-family: var(--font-mono); background: rgba(251, 191, 36, 0.15); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.3); padding: 2px 8px; border-radius: 4px; font-weight: 700;">
+                            Norma NCh2369 &bull; Sismo-Resistente
+                        </div>
+                    </div>
 
                     <!-- Contenedor dinámico con todo el detalle de medidas de la estantería -->
-                    <div id="rack-elevation-specs-box" class="rack-elevation-specs-container" style="margin-top: 0;">
+                    <div id="rack-elevation-specs-box" class="rack-elevation-specs-container" style="margin-top: 0; background: transparent; border: none; padding: 0;">
                         <!-- Generado dinámicamente por landing-2d.js -->
                     </div>
                 </div>

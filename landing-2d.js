@@ -1969,9 +1969,9 @@ function renderRackElevation() {
     const specsBox = document.getElementById('rack-elevation-specs-box');
     if (specsBox) {
         specsBox.innerHTML = `
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
-                <span style="font-size: 0.82rem; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 6px;">
-                    <span>📐</span> Ficha Técnica de Medidas del Módulo 🧮 <span style="font-weight: 600; color: #fbbf24; font-size: 0.7rem;">(Ingeniería NCh2369: Piso 0 en losa + ${lvls - 1} pares de vigas aéreas)</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                <span style="font-size: 0.8rem; font-weight: 700; color: #94a3b8; display: flex; align-items: center; gap: 6px;">
+                    Cálculo estructural: <span style="font-weight: 700; color: #38bdf8;">Piso 0 en losa + ${lvls - 1} pares de vigas</span>
                 </span>
                 <span style="font-size: 0.72rem; font-family: var(--font-mono); color: #34d399; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); padding: 3px 8px; border-radius: 4px; font-weight: 700;">
                     ${lvls} Pisos &bull; ${lvls * ppb} Pallets &bull; ${totVolM3}

@@ -2694,16 +2694,17 @@ body {
     width: 100%;
 }
 
-/* Grilla Interna para Elevación Frontal en posición inferior */
-.rack-elevation-layout-grid {
+/* Fila de 2 Tarjetas Lado a Lado (Alzado Frontal + Ficha Técnica de Medidas) */
+.rack-dual-cards-row {
     display: grid;
-    grid-template-columns: minmax(320px, 460px) 1fr;
+    grid-template-columns: minmax(320px, 480px) 1fr;
     gap: 20px;
-    align-items: start;
+    margin-top: 20px;
+    align-items: stretch;
 }
 
-@media (max-width: 960px) {
-    .rack-elevation-layout-grid {
+@media (max-width: 992px) {
+    .rack-dual-cards-row {
         grid-template-columns: 1fr;
     }
 }
