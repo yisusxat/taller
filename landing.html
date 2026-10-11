@@ -218,6 +218,9 @@
                         <div class="chip-item"><span class="chip-color b"></span> Zona B (72m)</div>
                         <div class="chip-item"><span class="chip-color c"></span> Zona C (118m)</div>
                         <div class="chip-item"><span class="chip-color d"></span> Zona D (154m)</div>
+                        <a href="index.html#tab-slotting" class="chip-item" style="margin-left: auto; text-decoration: none; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); background: rgba(56, 189, 248, 0.08); font-weight: 700;">
+                            📊 Ver Slotting en Torre de Control &rarr;
+                        </a>
                     </div>
                 </div>
 
@@ -692,12 +695,17 @@
          ========================================================================== -->
     <section id="view-vsm" class="diag-view-content">
         <div class="vsm-container">
-            <div style="margin-bottom: 20px;">
-                <span class="inspector-header-tag">VALUE STREAM MAPPING (AS-IS) — CADENA DE VALOR</span>
-                <h3 style="font-size: 1.3rem; font-weight: 800; color: #fff;">Flujo de Valor End-to-End: Tiempos de Proceso vs Colas</h3>
-                <p style="color: var(--text-muted); font-size: 0.85rem;">
-                    Diagnóstico cuantitativo de tiempos por etapa en el CD Pudahuel. La cola de espera para packing explotó a 28,0 horas en CyberDay.
-                </p>
+            <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <span class="inspector-header-tag">VALUE STREAM MAPPING (AS-IS) — CADENA DE VALOR</span>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #fff;">Flujo de Valor End-to-End: Tiempos de Proceso vs Colas</h3>
+                    <p style="color: var(--text-muted); font-size: 0.85rem;">
+                        Diagnóstico cuantitativo de tiempos por etapa en el CD Pudahuel. La cola de espera para packing explotó a 28,0 horas en CyberDay.
+                    </p>
+                </div>
+                <a href="index.html#tab-vsm" class="btn-action secondary" style="font-size: 0.78rem; text-decoration: none; padding: 6px 14px; border-radius: 8px;">
+                    <span>📊 Ver Gráficos VSM en Torre de Control</span> &rarr;
+                </a>
             </div>
 
             <!-- Pipeline de Nodos VSM -->
@@ -976,12 +984,17 @@
          ========================================================================== -->
     <section id="view-inbound" class="diag-view-content">
         <div class="vsm-container">
-            <div style="margin-bottom: 20px;">
-                <span class="inspector-header-tag">INBOUND & RECEPCIÓN — 24 ANDENES | 30 PROVEEDORES</span>
-                <h3 style="font-size: 1.3rem; font-weight: 800; color: #fff;">Impacto del Agendamiento (ASN & Citas de Andén)</h3>
-                <p style="color: var(--text-muted); font-size: 0.88rem;">
-                    La falta de adopción de citas digitales duplica el tiempo de descarga y acumula demurrage millonario.
-                </p>
+            <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <span class="inspector-header-tag">INBOUND & RECEPCIÓN — 24 ANDENES | 30 PROVEEDORES</span>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #fff;">Impacto del Agendamiento (ASN & Citas de Andén)</h3>
+                    <p style="color: var(--text-muted); font-size: 0.88rem;">
+                        La falta de adopción de citas digitales duplica el tiempo de descarga y acumula demurrage millonario.
+                    </p>
+                </div>
+                <a href="index.html#tab-inbound" class="btn-action secondary" style="font-size: 0.78rem; text-decoration: none; padding: 6px 14px; border-radius: 8px;">
+                    <span>🚚 Ver Detalle Inbound en Torre de Control</span> &rarr;
+                </a>
             </div>
 
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px;">
@@ -1136,11 +1149,16 @@
          ========================================================================== -->
     <section id="view-priorizacion" class="diag-view-content">
         <div class="apqc-table-wrapper">
-            <div style="margin-bottom: 20px;">
-                <span class="inspector-header-tag">MATRIZ MULTICRITERIO DE PRIORIZACIÓN</span>
-                <h3 style="font-size: 1.3rem; font-weight: 800; color: #fff;">
-                    Problemas Críticos Identificados en el Diagnóstico (P-01 a P-06)
-                </h3>
+            <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 12px;">
+                <div>
+                    <span class="inspector-header-tag">MATRIZ MULTICRITERIO DE PRIORIZACIÓN</span>
+                    <h3 style="font-size: 1.3rem; font-weight: 800; color: #fff;">
+                        Problemas Críticos Identificados en el Diagnóstico (P-01 a P-06)
+                    </h3>
+                </div>
+                <a href="index.html#tab-proyectos" class="btn-action secondary" style="font-size: 0.78rem; text-decoration: none; padding: 6px 14px; border-radius: 8px;">
+                    <span>💼 Ver Sandbox de Portafolio en Torre de Control</span> &rarr;
+                </a>
             </div>
 
             <table class="apqc-table">
@@ -1222,8 +1240,13 @@
         <div class="solution-portal-2d">
             <!-- Hero Card de la Propuesta -->
             <div class="sol-hero-card">
-                <div class="sol-hero-badge">
-                    <span>🚀 PROPUESTA RECOMENDADA • EA2 / EA3</span>
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px;">
+                    <div class="sol-hero-badge">
+                        <span>🚀 PROPUESTA RECOMENDADA • EA2 / EA3</span>
+                    </div>
+                    <a href="index.html#tab-documento-solucion" class="btn-action primary" style="font-size: 0.78rem; text-decoration: none; padding: 6px 14px; border-radius: 8px;">
+                        <span>📄 Ver Propuesta Formal &amp; WBS en Torre de Control</span> &rarr;
+                    </a>
                 </div>
                 <h3 class="sol-hero-title">Rediseño & Optimización Omnicanal CD Pudahuel</h3>
                 <p class="sol-hero-desc">
@@ -1810,6 +1833,9 @@
                         <span style="font-size: 0.72rem; font-family: var(--font-mono); background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); color: #7dd3fc; padding: 6px 12px; border-radius: 8px; font-weight: 700;">
                             📏 Pallet Industrial Estándar: 1,20 x 1,00 m | Carga máx &le; 1,70 m
                         </span>
+                        <a href="index.html#tab-slotting" class="btn-action secondary" style="font-size: 0.76rem; text-decoration: none; padding: 6px 12px; border-radius: 8px;">
+                            <span>📊 Slotting 450 SKUs en Torre de Control</span> &rarr;
+                        </a>
                     </div>
                 </div>
 
@@ -2482,10 +2508,13 @@
                             La implementación sinérgica del Portafolio P1-P5 revierte de forma definitiva el colapso del CyberDay Mayo 2026, blindando el CD Pudahuel contra quiebres de servicio, recuperando la rentabilidad y dignificando las condiciones de trabajo de los operarios.
                         </p>
                     </div>
-                    <div style="display: flex; gap: 10px;">
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                         <button class="btn-action primary" onclick="setMode2D('optimized')" style="background: #10b981; color: #022c22; font-weight: 800;">
                             ✨ Ver Estado To-Be en el Plano 2D
                         </button>
+                        <a href="index.html#tab-resultados-ea3" class="btn-action secondary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 700; border-color: rgba(16, 185, 129, 0.4); color: #34d399;">
+                            <span>📊 Ver Modelo VAN/TIR &amp; Sensibilidad en Torre de Control</span> &rarr;
+                        </a>
                     </div>
                 </div>
 

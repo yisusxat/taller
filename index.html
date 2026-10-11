@@ -331,6 +331,16 @@
 
         <!-- TAB 2: VSM & END-TO-END LEAD TIME -->
         <section id="tab-vsm" class="tab-content">
+            <div class="proposal-banner" style="background: linear-gradient(135deg, rgba(244, 63, 94, 0.12), rgba(15, 23, 42, 0.85)); border-color: rgba(244, 63, 94, 0.4); margin-bottom: 20px;">
+                <div class="banner-text">
+                    <strong style="color: #f43f5e;">⏱️ Simulación VSM As-Is en Plano 2D</strong>
+                    <span>Visualice la línea de tiempo de valor, desperdicios por estación (88,6% Lead Time) y cuellos de botella con animación interactiva.</span>
+                </div>
+                <a href="landing.html#view-vsm" target="_blank" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; background: #e11d48;">
+                    Abrir VSM Interactivo 2D &rarr;
+                </a>
+            </div>
+
             <div class="panel-card">
                 <div class="card-header">
                     <h3>Value Stream Mapping (VSM) — Tiempos de Proceso vs Tiempos de Espera en CD</h3>
@@ -424,9 +434,14 @@
                     <strong style="color: #38bdf8;">📦 Nuevo: Layout 2D & Dimensionamiento Dinámico de Racks (Tabla Maestra 450 SKUs)</strong>
                     <span>Cálculo dinámico de posiciones pallet y racks a ocupar (1.690 racks instalados, niveles 3-6, 2-3 pallets/viga) contrastando As-Is (1.572 racks / 93,0%) vs To-Be (1.348 racks / 79,8%) con plano cenital 2D y alzado frontal SVG.</span>
                 </div>
-                <a href="landing.html#view-racks-calc" target="_blank" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
-                    Abrir Layout 2D & Racks &rarr;
-                </a>
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <a href="landing.html#view-racks-calc" target="_blank" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
+                        Abrir Layout 2D &amp; Racks &rarr;
+                    </a>
+                    <a href="landing.html#view-layout" target="_blank" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">
+                        🗺️ Ver Heatmap Pasillos 2D &rarr;
+                    </a>
+                </div>
             </div>
 
             <div class="panel-card">
@@ -576,6 +591,16 @@
 
         <!-- TAB 4: INBOUND & PROVEEDORES -->
         <section id="tab-inbound" class="tab-content">
+            <div class="proposal-banner" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.12), rgba(15, 23, 42, 0.85)); border-color: rgba(245, 158, 11, 0.4); margin-bottom: 20px;">
+                <div class="banner-text">
+                    <strong style="color: #fbbf24;">🚚 Simulador Interactivo de Inbound &amp; Demurrage en Plano 2D</strong>
+                    <span>Analice la fila de camiones en patio Pudahuel (65,2 min de espera) y el impacto del agendamiento digital ASN/YMS.</span>
+                </div>
+                <a href="landing.html#view-inbound" target="_blank" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; background: #d97706;">
+                    Abrir Simulador Inbound 2D &rarr;
+                </a>
+            </div>
+
             <div class="grid-2col">
                 <div class="panel-card">
                     <div class="card-header">
@@ -608,6 +633,16 @@
 
         <!-- TAB 5: PRODUCTIVIDAD, PERSONAL, TURNOS & SST -->
         <section id="tab-productividad" class="tab-content">
+            <div class="proposal-banner" style="background: linear-gradient(135deg, rgba(168, 85, 247, 0.12), rgba(15, 23, 42, 0.85)); border-color: rgba(168, 85, 247, 0.4); margin-bottom: 20px;">
+                <div class="banner-text">
+                    <strong style="color: #c084fc;">🌙 Simulador de Dinámica de Turnos &amp; Modo Nocturno en Plano 2D</strong>
+                    <span>Evalúe el impacto de la fatiga en pasillos C y D durante el turno nocturno (-14% productividad) y puntos críticos SST.</span>
+                </div>
+                <a href="landing.html#view-layout" target="_blank" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; background: #9333ea;">
+                    Ver Turnos en Plano 2D &rarr;
+                </a>
+            </div>
+
             <!-- Gráficos de Productividad por Turnos y Competencias del Personal -->
             <div class="grid-2col margin-bottom">
                 <div class="panel-card">
@@ -708,6 +743,21 @@
 
         <!-- TAB 6: PROYECTOS EA2 / EA3 -->
         <section id="tab-proyectos" class="tab-content">
+            <div class="proposal-banner" style="background: linear-gradient(135deg, rgba(2, 132, 199, 0.15), rgba(15, 23, 42, 0.85)); border-color: rgba(2, 132, 199, 0.4); margin-bottom: 20px;">
+                <div class="banner-text">
+                    <strong style="color: #38bdf8;">📐 Integración con Simulador 2D de Racks Dinámicos &amp; Matriz AHP</strong>
+                    <span>Explore la priorización multicriterio interactiva y el dimensionamiento vertical a 6 pisos (P8) en la suite gráfica 2D.</span>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="landing.html#view-racks-calc" target="_blank" class="btn-primary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">
+                        Simulador Racks 2D (P8) &rarr;
+                    </a>
+                    <a href="landing.html#view-priorizacion" target="_blank" class="btn-secondary" style="text-decoration: none; display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">
+                        Matriz Priorización 2D &rarr;
+                    </a>
+                </div>
+            </div>
+
             <div class="panel-card">
                 <div class="card-header">
                     <h3>Simulador de Selección de Portafolio de Inversión (EA2 / EA3)</h3>
@@ -841,16 +891,19 @@
                 <!-- Hero Header -->
                 <div class="solution-hero">
                     <div class="hero-text">
-                        <div class="hero-badge">PROPUESTA DE SOLUCIÓN INTEGRAL • EA2 / EA3</div>
+                        <div class="hero-badge">FASE 02 • EA2: PROPUESTA TÉCNICA, SELECCIÓN Y PLAN MAESTRO</div>
                         <h2 class="hero-title">Rediseño & Optimización Omnicanal CD Pudahuel</h2>
-                        <p class="hero-subtitle">Transformación Operacional, Tecnológica y Financiera de AndesHome Chile S.A. (24 Semanas)</p>
+                        <p class="hero-subtitle">Diseño de Ingeniería, Portafolio Priorizado (P1-P5 & P8), Arquitectura To-Be, WBS 24 Semanas y Gobernanza RACI/ADKAR</p>
                     </div>
                     <div class="hero-actions">
-                        <a href="landing.html" class="btn-secondary-hero">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
-                            <span>Plano 2D Interactivo</span>
+                        <a href="landing.html#view-propuesta" class="btn-secondary-hero">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9"></line></svg>
+                            <span>Fichas 2D To-Be</span>
                         </a>
-                        <a href="Propuesta_Solucion_AndesHome.md" target="_blank" class="btn-primary-hero">
+                        <button class="btn-primary-hero" onclick="switchIndexPhase(3)">
+                            <span>Ver Resultados & Modelo VAN (Fase 3) &rarr;</span>
+                        </button>
+                        <a href="Propuesta_Solucion_AndesHome.md" target="_blank" class="btn-secondary-hero">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
                             <span>Abrir Documento .md</span>
                         </a>
@@ -886,79 +939,27 @@
 
                 <!-- Solution Proposal Inner Navigation Subtabs -->
                 <div class="sol-subtabs">
-                    <button class="sol-tab-btn active" onclick="switchSolSubtab('sol-roi')">📊 Resumen Financiero & ROI</button>
-                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-ahp')">⚖️ Evaluación Multicriterio AHP</button>
-                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-portafolio')">🧩 Portafolio P1-P5</button>
-                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-arquitectura')">🏗️ Arquitectura & VSM Futuro</button>
-                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-wbs')">📅 Cronograma WBS (24 sem)</button>
-                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-raci')">👥 Gobernanza RACI & Riesgos</button>
-                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-markdown')">📄 Visor Markdown Completo</button>
-                </div>
-
-                <!-- SUBSECTION 1: FINANCIAL ROI & CALCULATOR -->
-                <div id="sol-roi" class="sol-subcontent active">
-                    <div class="financial-strip">
-                        <div class="fin-card">
-                            <span class="fin-lbl">CAPEX Total Proyecto</span>
-                            <span class="fin-val text-success" id="calc-capex-display">$766.800.000 CLP</span>
-                            <span class="fin-sub">Reserva 8% incluida ($56,8M)</span>
-                        </div>
-                        <div class="fin-card">
-                            <span class="fin-lbl">EBITDA Incremental / Año</span>
-                            <span class="fin-val text-success" id="calc-ebitda-display">$856.097.000 CLP</span>
-                            <span class="fin-sub">Ahorro Bruto: $1.033M / OPEX: $177M</span>
-                        </div>
-                        <div class="fin-card">
-                            <span class="fin-lbl">Valor Actual Neto (VAN 3 Años)</span>
-                            <span class="fin-val text-success" id="calc-van-display">$1.289.400.543 CLP</span>
-                            <span class="fin-sub" id="calc-rate-sub">Tasa Descuento: 12%</span>
-                        </div>
-                        <div class="fin-card">
-                            <span class="fin-lbl">Payback Simple & TIR</span>
-                            <span class="fin-val text-success" id="calc-payback-display">10,7 Meses</span>
-                            <span class="fin-sub" id="calc-tir-sub">TIR: 98,4% | B/C: 2,68</span>
-                        </div>
-                    </div>
-
-                    <!-- Preset Scenario Switchers -->
-                    <div class="preset-scenario-bar margin-top">
-                        <span class="preset-label">Escenarios de Negocio Directorio:</span>
-                        <button class="btn-preset active" onclick="applyPresetScenario('base')">🟢 Caso Base (Target 100%)</button>
-                        <button class="btn-preset" onclick="applyPresetScenario('pesimista')">🟡 Caso Pesimista (-25% Captura)</button>
-                        <button class="btn-preset" onclick="applyPresetScenario('optimista')">🚀 Caso Optimista (+15% Sinergia)</button>
-                    </div>
-
-                    <!-- Interactive ROI Sensitivity Calculator -->
-                    <div class="panel-card margin-top card-inner">
-                        <div class="card-header">
-                            <h3>🧮 Simulación de Sensibilidad Financiera (Calculadora Interactiva)</h3>
-                            <span class="info-tag">Ajuste parámetros en tiempo real</span>
-                        </div>
-                        <div class="calculator-grid">
-                            <div class="calc-controls">
-                                <div class="control-group">
-                                    <label>Tasa de Descuento ($r$): <strong id="val-rate">12%</strong></label>
-                                    <input type="range" id="slider-rate" min="8" max="18" step="1" value="12" oninput="recalculateROI()">
-                                </div>
-                                <div class="control-group">
-                                    <label>Reserva Contingencia CAPEX: <strong id="val-contingency">8%</strong></label>
-                                    <input type="range" id="slider-contingency" min="0" max="15" step="1" value="8" oninput="recalculateROI()">
-                                </div>
-                                <div class="control-group">
-                                    <label>Captura de Ahorros Operacionales: <strong id="val-savings">100%</strong></label>
-                                    <input type="range" id="slider-savings" min="70" max="120" step="5" value="100" oninput="recalculateROI()">
-                                </div>
-                            </div>
-                            <div class="calc-chart-container">
-                                <canvas id="chartFinancialProposal"></canvas>
-                            </div>
-                        </div>
-                    </div>
+                    <button class="sol-tab-btn active" onclick="switchSolSubtab('sol-ahp')">⚖️ 1. Decisión Multicriterio AHP</button>
+                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-portafolio')">🧩 2. Portafolio P1-P5 &amp; P8</button>
+                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-arquitectura')">🏗️ 3. Arquitectura &amp; VSM Futuro</button>
+                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-wbs')">📅 4. Cronograma WBS (24 sem)</button>
+                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-raci')">👥 5. Gobernanza RACI &amp; ADKAR</button>
+                    <button class="sol-tab-btn" onclick="switchSolSubtab('sol-markdown')">📄 6. Visor Ejecutivo &amp; Acta</button>
                 </div>
 
                 <!-- SUBSECTION: AHP MULTICRITERIA EVALUATION -->
-                <div id="sol-ahp" class="sol-subcontent">
-                    <div class="panel-card card-inner margin-top">
+                <div id="sol-ahp" class="sol-subcontent active">
+                    <div class="doc-alert-box note" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 16px;">
+                        <div>
+                            <strong>📊 Transición de Fases: Modelo Financiero Detallado en Fase 3 (EA3)</strong>
+                            <p style="margin: 4px 0 0 0; font-size: 0.82rem; color: #94a3b8;">La evaluación económica (VAN CLP $1.289M, TIR 98,4%, Payback 10,7 meses) y el simulador de sensibilidad en 3 escenarios están consolidados en la pestaña de Fase 3.</p>
+                        </div>
+                        <button class="btn-primary-hero" style="padding: 6px 14px; font-size: 0.82rem; white-space: nowrap;" onclick="switchIndexPhase(3)">
+                            Ver Retorno &amp; VAN en Fase 3 &rarr;
+                        </button>
+                    </div>
+
+                    <div class="panel-card card-inner">
                         <div class="card-header">
                             <h3>⚖️ Matriz de Evaluación Multicriterio de Decisión (AHP / Scoring)</h3>
                             <span class="info-tag">Evaluación Ponderada de Portafolios Recomendados vs. Alternativas</span>
@@ -1026,8 +1027,8 @@
                 <!-- SUBSECTION 2: PORTFOLIO P1-P5 DETAILED CARDS -->
                 <div id="sol-portafolio" class="sol-subcontent">
                     <div class="card-header margin-top">
-                        <h3>Desglose del Portafolio Seleccionado (P1 - P5)</h3>
-                        <span class="info-tag">CAPEX Total Directo: $710M + $56,8M Contingencia</span>
+                        <h3>Desglose del Portafolio Seleccionado (P1 - P5 &amp; P8)</h3>
+                        <span class="info-tag">CAPEX Total Directo: $710M + $56,8M Contingencia | P8 Expansión Modular</span>
                     </div>
 
                     <div class="portfolio-grid">
@@ -1543,6 +1544,72 @@
                             <div class="hm-lbl">CAMINATA OPERARIA</div>
                             <div class="hm-val" style="color: #fbbf24;">14,2 km/día</div>
                             <div class="hm-sub">-79% fatiga (Línea base: 67,6 km)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- EVALUACIÓN FINANCIERA & SIMULADOR DE SENSIBILIDAD INTERACTIVO (FASE 3 / EA3) -->
+                <div class="margin-top">
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                        <span>💰 Modelo de Retorno Económico &amp; Sensibilidad de Inversión (VAN / TIR)</span>
+                        <span class="info-tag">Tasa de Descuento 12% • Horizonte 3 Años • EBITDA Neto $856M/año</span>
+                    </h3>
+
+                    <div class="financial-strip">
+                        <div class="fin-card">
+                            <span class="fin-lbl">CAPEX Total Proyecto</span>
+                            <span class="fin-val text-success" id="calc-capex-display">$766.800.000 CLP</span>
+                            <span class="fin-sub">Reserva 8% incluida ($56,8M)</span>
+                        </div>
+                        <div class="fin-card">
+                            <span class="fin-lbl">EBITDA Incremental / Año</span>
+                            <span class="fin-val text-success" id="calc-ebitda-display">$856.097.000 CLP</span>
+                            <span class="fin-sub">Ahorro Bruto: $1.033M / OPEX: $177M</span>
+                        </div>
+                        <div class="fin-card">
+                            <span class="fin-lbl">Valor Actual Neto (VAN 3 Años)</span>
+                            <span class="fin-val text-success" id="calc-van-display">$1.289.400.543 CLP</span>
+                            <span class="fin-sub" id="calc-rate-sub">Tasa Descuento: 12%</span>
+                        </div>
+                        <div class="fin-card">
+                            <span class="fin-lbl">Payback Simple &amp; TIR</span>
+                            <span class="fin-val text-success" id="calc-payback-display">10,7 Meses</span>
+                            <span class="fin-sub" id="calc-tir-sub">TIR: 98,4% | B/C: 2,68</span>
+                        </div>
+                    </div>
+
+                    <!-- Preset Scenario Switchers -->
+                    <div class="preset-scenario-bar margin-top">
+                        <span class="preset-label">Escenarios de Negocio Directorio:</span>
+                        <button class="btn-preset active" onclick="applyPresetScenario('base')">🟢 Caso Base (Target 100%)</button>
+                        <button class="btn-preset" onclick="applyPresetScenario('pesimista')">🟡 Caso Pesimista (-25% Captura)</button>
+                        <button class="btn-preset" onclick="applyPresetScenario('optimista')">🚀 Caso Optimista (+15% Sinergia)</button>
+                    </div>
+
+                    <!-- Interactive ROI Sensitivity Calculator -->
+                    <div class="panel-card margin-top card-inner">
+                        <div class="card-header">
+                            <h3>🧮 Simulación de Sensibilidad Financiera (Calculadora Interactiva)</h3>
+                            <span class="info-tag">Ajuste parámetros en tiempo real</span>
+                        </div>
+                        <div class="calculator-grid">
+                            <div class="calc-controls">
+                                <div class="control-group">
+                                    <label>Tasa de Descuento ($r$): <strong id="val-rate">12%</strong></label>
+                                    <input type="range" id="slider-rate" min="8" max="18" step="1" value="12" oninput="recalculateROI()">
+                                </div>
+                                <div class="control-group">
+                                    <label>Reserva Contingencia CAPEX: <strong id="val-contingency">8%</strong></label>
+                                    <input type="range" id="slider-contingency" min="0" max="15" step="1" value="8" oninput="recalculateROI()">
+                                </div>
+                                <div class="control-group">
+                                    <label>Captura de Ahorros Operacionales: <strong id="val-savings">100%</strong></label>
+                                    <input type="range" id="slider-savings" min="70" max="120" step="5" value="100" oninput="recalculateROI()">
+                                </div>
+                            </div>
+                            <div class="calc-chart-container">
+                                <canvas id="chartFinancialProposal"></canvas>
+                            </div>
                         </div>
                     </div>
                 </div>

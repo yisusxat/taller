@@ -33,8 +33,29 @@ function initTabNavigation() {
             if (targetElem) targetElem.classList.add('active');
 
             syncIndexPhasePill(target);
+
+            if (target === 'tab-resultados-ea3') {
+                if (chartFinProposalInstance) {
+                    chartFinProposalInstance.resize();
+                } else {
+                    initChartFinancialProposal();
+                }
+            }
         });
     });
+
+    // Soporte para navegación directa por Hash (#tab-slotting, #tab-resultados-ea3, etc.)
+    const handleUrlHash = () => {
+        const hash = window.location.hash.replace('#', '');
+        if (hash) {
+            const matchingBtn = document.querySelector(`.tab-btn[data-tab="${hash}"]`);
+            if (matchingBtn) {
+                matchingBtn.click();
+            }
+        }
+    };
+    handleUrlHash();
+    window.addEventListener('hashchange', handleUrlHash);
 }
 
 function syncIndexPhasePill(tabId) {
@@ -438,7 +459,7 @@ function updatePortfolio() {
 }
 
 // Global Helper to open Solution Proposal Tab
-function openSolutionProposal() {
+function openSolutionProposal(subtab = 'sol-ahp') {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
@@ -453,6 +474,8 @@ function openSolutionProposal() {
         solTab.classList.add('active');
         solTab.scrollIntoView({ behavior: 'smooth' });
     }
+    syncIndexPhasePill('tab-documento-solucion');
+    switchSolSubtab(subtab);
 }
 
 // Subtab Navigation inside Solution Proposal Portal
