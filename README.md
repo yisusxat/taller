@@ -61,15 +61,15 @@ flowchart LR
 ## 📂 Estructura del Repositorio
 
 ```text
-├── index.html                           # Suite Analítica y de Control Operacional
-├── landing.html                         # Suite Interactiva 2D (Plano Vectorial SVG y 8 Vistas)
+├── index.html                           # Suite Analítica y Control Tower (8 Pestañas en 3 Fases)
+├── landing.html                         # Suite Interactiva 2D (Plano Vectorial SVG y 9 Vistas en 3 Fases)
 ├── styles.css                           # Estilos base y diseño responsivo de index.html
 ├── landing-2d.css                       # Estilos para blueprint 2D, widgets didácticos y temas
-├── app.js                               # Controlador principal de index.html y gráficos Chart.js
-├── landing-2d.js                        # Lógica interactiva del plano 2D, sliders y WBS
-├── andeshome-store.js                   # Store reactivo centralizado con persistencia
+├── app.js                               # Controlador principal de index.html y sincronización de fases
+├── landing-2d.js                        # Lógica interactiva del plano 2D, sliders, WBS y 9 vistas
+├── andeshome-store.js                   # Store reactivo centralizado con persistencia y finanzas
 ├── Informe_Diagnostico_AndesHome.md     # Documento ejecutivo Fase 1 (EA1)
-├── Propuesta_Solucion_AndesHome.md      # Documento ejecutivo Fase 2 (EA2)
+├── Propuesta_Solucion_AndesHome.md      # Documento ejecutivo Fase 2 & Fase 3 (EA2 / EA3)
 ├── Base_Datos_GLA1104_AndesHome_v2.xlsx # Dataset operativo y registros del CyberDay
 ├── Caso_GLA1104_AndesHome_Estudiantes.docx # Caso de estudio académico oficial
 └── README.md                            # Documentación integral del proyecto

@@ -165,7 +165,7 @@ CRONOGRAMA DE HITOS Y GATES DE CONTROL (24 SEMANAS)
 
 | Indicador KPI | Línea Base (Jun 2026) | Meta Directorio | Proyección Semana 24 | Frecuencia Control | Owner Responsable |
 | :--- | :---: | :---: | :---: | :---: | :--- |
-| **OTIF Global** | 80,9% | $\ge 96,0\%$ | **97,2%** | Semanal | Gerenta Supply Chain |
+| **OTIF Global** | 80,9% | $\ge 96,0\%$ | **96,2%** | Semanal | Gerenta Supply Chain |
 | **Exactitud Inventario (IRA)** | 93,8% | $\ge 99,2\%$ | **99,5%** | Quincenal | Jefe Inventario |
 | **Dock-to-Stock** | 22,6 h | $\le 8,0\text{ h}$ | **4,5 h** | Diaria | Jefa Inbound |
 | **Costo por Pedido** | CLP 7.920 | CLP 5.675 (-12%) | **CLP 5.420** | Mensual | Gerente Finanzas |

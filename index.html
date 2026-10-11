@@ -142,15 +142,21 @@
         </div>
     </div>
 
-    <!-- Navigation Tabs -->
-    <nav class="main-tabs">
-        <button class="tab-btn active" data-tab="tab-ejecutivo">📊 Resumen & KPIs</button>
-        <button class="tab-btn" data-tab="tab-vsm">🔀 VSM End-to-End</button>
-        <button class="tab-btn" data-tab="tab-slotting">🗺️ Slotting & Layout CD</button>
-        <button class="tab-btn" data-tab="tab-inbound">🚚 Inbound & Proveedores</button>
-        <button class="tab-btn" data-tab="tab-productividad">📦 Productividad & SST</button>
-        <button class="tab-btn" data-tab="tab-proyectos">💼 Portafolio Proyectos EA2/EA3</button>
-        <button class="tab-btn highlight-tab" data-tab="tab-documento-solucion">🚀 Propuesta de Solución (EA2 / EA3)</button>
+    <!-- Navigation Tabs Grouped by Phases -->
+    <nav class="main-tabs" style="display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+        <span class="tab-group-badge phase-1-badge" style="font-size: 0.72rem; font-family: var(--font-mono); font-weight: 800; color: #f43f5e; background: rgba(244, 63, 94, 0.12); padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(244, 63, 94, 0.3);">FASE 1 (EA1):</span>
+        <button class="tab-btn active" data-tab="tab-ejecutivo" data-phase="1">📊 1. Resumen &amp; KPIs</button>
+        <button class="tab-btn" data-tab="tab-vsm" data-phase="1">🔀 2. VSM As-Is</button>
+        <button class="tab-btn" data-tab="tab-slotting" data-phase="1">🗺️ 3. Slotting &amp; Layout</button>
+        <button class="tab-btn" data-tab="tab-inbound" data-phase="1">🚚 4. Inbound &amp; Citas</button>
+        <button class="tab-btn" data-tab="tab-productividad" data-phase="1">👥 5. Personal &amp; SST</button>
+
+        <span class="tab-group-badge phase-2-badge" style="font-size: 0.72rem; font-family: var(--font-mono); font-weight: 800; color: #38bdf8; background: rgba(56, 189, 248, 0.12); padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(56, 189, 248, 0.3); margin-left: 6px;">FASE 2 (EA2):</span>
+        <button class="tab-btn" data-tab="tab-proyectos" data-phase="2">💼 6. Portafolio P1-P8 ($850M)</button>
+        <button class="tab-btn highlight-tab" data-tab="tab-documento-solucion" data-phase="2">🚀 7. Propuesta &amp; WBS</button>
+
+        <span class="tab-group-badge phase-3-badge" style="font-size: 0.72rem; font-family: var(--font-mono); font-weight: 800; color: #34d399; background: rgba(16, 185, 129, 0.12); padding: 4px 8px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.3); margin-left: 6px;">FASE 3 (EA3):</span>
+        <button class="tab-btn highlight-results-tab" data-tab="tab-resultados-ea3" data-phase="3" style="border-color: rgba(16, 185, 129, 0.5); color: #34d399; background: rgba(16, 185, 129, 0.08);">🏆 8. Resultados, Retorno &amp; ESG</button>
     </nav>
 
     <!-- Tab Contents Container -->
@@ -730,11 +736,11 @@
                 <div class="projects-list">
                     <div class="project-card">
                         <label class="project-checkbox">
-                            <input type="checkbox" id="p1" data-capex="85000000" data-opex="18000000" data-plazo="12" onchange="updatePortfolio()">
+                            <input type="checkbox" id="p1" data-capex="85000000" data-opex="12000000" data-plazo="12" onchange="updatePortfolio()">
                             <span class="checkmark"></span>
                             <div class="p-details">
                                 <div class="p-title">P1: Re-slotting ABC + 5S + Conteo Cíclico</div>
-                                <div class="p-meta">Tipo: Proceso | CAPEX: $85.000.000 | Plazo: 12 sem | Riesgo: Bajo</div>
+                                <div class="p-meta">Tipo: Proceso | CAPEX: $85.000.000 | OPEX: $12.000.000 | Plazo: 12 sem | Riesgo: Bajo</div>
                                 <div class="p-impact">Impacto: +15% productividad picking, -12% recorrido caminata, +0,8 pp exactitud.</div>
                             </div>
                         </label>
@@ -742,11 +748,11 @@
 
                     <div class="project-card">
                         <label class="project-checkbox">
-                            <input type="checkbox" id="p2" data-capex="310000000" data-opex="72000000" data-plazo="24" onchange="updatePortfolio()">
+                            <input type="checkbox" id="p2" data-capex="310000000" data-opex="75000000" data-plazo="24" onchange="updatePortfolio()">
                             <span class="checkmark"></span>
                             <div class="p-details">
                                 <div class="p-title">P2: Upgrade WMS + RF / Voice Picking</div>
-                                <div class="p-meta">Tipo: Tecnología | CAPEX: $310.000.000 | Plazo: 24 sem | Riesgo: Medio</div>
+                                <div class="p-meta">Tipo: Tecnología | CAPEX: $310.000.000 | OPEX: $75.000.000 | Plazo: 24 sem | Riesgo: Medio</div>
                                 <div class="p-impact">Impacto: +18% productividad, +1,6 pp precisión, +2,5 pp exactitud inventario.</div>
                             </div>
                         </label>
@@ -758,7 +764,7 @@
                             <span class="checkmark"></span>
                             <div class="p-details">
                                 <div class="p-title">P3: Portal ASN + Agenda Andenes / YMS Ligero</div>
-                                <div class="p-meta">Tipo: Tecnología/Proceso | CAPEX: $95.000.000 | Plazo: 14 sem | Riesgo: Bajo</div>
+                                <div class="p-meta">Tipo: Tecnología/Proceso | CAPEX: $95.000.000 | OPEX: $24.000.000 | Plazo: 14 sem | Riesgo: Bajo</div>
                                 <div class="p-impact">Impacto: -30% dock-to-stock, -40% tiempo espera, +15 pp cumplimiento citas.</div>
                             </div>
                         </label>
@@ -770,7 +776,7 @@
                             <span class="checkmark"></span>
                             <div class="p-details">
                                 <div class="p-title">P4: TMS con Optimización Dinámica + POD Digital</div>
-                                <div class="p-meta">Tipo: Tecnología | CAPEX: $150.000.000 | Plazo: 18 sem | Riesgo: Medio</div>
+                                <div class="p-meta">Tipo: Tecnología | CAPEX: $150.000.000 | OPEX: $48.000.000 | Plazo: 18 sem | Riesgo: Medio</div>
                                 <div class="p-impact">Impacto: -9% km recorridos, +8 pp utilización flota, -2 pp entregas fallidas.</div>
                             </div>
                         </label>
@@ -778,11 +784,11 @@
 
                     <div class="project-card">
                         <label class="project-checkbox">
-                            <input type="checkbox" id="p5" data-capex="70000000" data-opex="15000000" data-plazo="10" onchange="updatePortfolio()">
+                            <input type="checkbox" id="p5" data-capex="70000000" data-opex="18000000" data-plazo="10" onchange="updatePortfolio()">
                             <span class="checkmark"></span>
                             <div class="p-details">
                                 <div class="p-title">P5: Right-sizing Embalaje + Control de Calidad</div>
-                                <div class="p-meta">Tipo: Calidad/Sostenibilidad | CAPEX: $70.000.000 | Plazo: 10 sem | Riesgo: Bajo</div>
+                                <div class="p-meta">Tipo: Calidad/Sostenibilidad | CAPEX: $70.000.000 | OPEX: $18.000.000 | Plazo: 10 sem | Riesgo: Bajo</div>
                                 <div class="p-impact">Impacto: -35% daños, -18% material embalaje, -10% volumen expedido.</div>
                             </div>
                         </label>
@@ -1485,6 +1491,204 @@
                                     <div class="sig-company">AndesHome Chile S.A.</div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TAB 8: RESULTADOS OBTENIDOS, RETORNO & ESG (FASE 3 / EA3) -->
+        <section id="tab-resultados-ea3" class="tab-content">
+            <div class="panel-card highlight-card" style="border-top: 3px solid #10b981;">
+                
+                <!-- Hero Header de Fase 3 -->
+                <div class="solution-hero" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 182, 212, 0.08));">
+                    <div class="hero-text">
+                        <div class="hero-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border-color: rgba(16, 185, 129, 0.4);">
+                            FASE 03 • EA3: RESULTADOS OBTENIDOS, RETORNO &amp; ESG
+                        </div>
+                        <h2 class="hero-title">Consolidación de Impacto &amp; Valor Generado (To-Be)</h2>
+                        <p class="hero-subtitle">
+                            Demostración empírica de erradicación de causas raíz, rentabilidad económica (VAN / TIR) y sostenibilidad laboral y ambiental.
+                        </p>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="landing.html#view-resultados" class="btn-secondary-hero">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9"></line></svg>
+                            <span>Plano 2D: Vista EA3</span>
+                        </a>
+                        <button class="btn-primary-hero" onclick="switchIndexPhase(2)">
+                            <span>Revisar Propuesta WBS (Fase 2) &rarr;</span>
+                        </button>
+                    </div>
+
+                    <div class="hero-metrics-strip">
+                        <div class="hm-card">
+                            <div class="hm-lbl">OTIF CONSOLIDADO TO-BE</div>
+                            <div class="hm-val" style="color: #34d399;">96,2%</div>
+                            <div class="hm-sub">Peak Cyber 95,4% &bull; C&C 96,8%</div>
+                        </div>
+                        <div class="hm-card">
+                            <div class="hm-lbl">VAN (3 AÑOS, 12%)</div>
+                            <div class="hm-val" style="color: #38bdf8;">$1.289.400.543 CLP</div>
+                            <div class="hm-sub">TIR 98,4% &bull; Payback 10,7 meses</div>
+                        </div>
+                        <div class="hm-card">
+                            <div class="hm-lbl">BACKLOG DE PEDIDOS</div>
+                            <div class="hm-val" style="color: #38bdf8;">0 Pedidos</div>
+                            <div class="hm-sub">15.387 pedidos represados erradicados</div>
+                        </div>
+                        <div class="hm-card">
+                            <div class="hm-lbl">CAMINATA OPERARIA</div>
+                            <div class="hm-val" style="color: #fbbf24;">14,2 km/día</div>
+                            <div class="hm-sub">-79% fatiga (Línea base: 67,6 km)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comparador de Métricas Cuantitativas As-Is vs To-Be -->
+                <div class="margin-top">
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <span>📊 Comparativa Auditada: Línea Base (Crisis CyberDay) vs. Resultado To-Be</span>
+                    </h3>
+                    <div class="table-wrapper">
+                        <table class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>Dimensión Evaluada</th>
+                                    <th>Línea Base As-Is (Jun 2026)</th>
+                                    <th>Meta C-Suite</th>
+                                    <th>Resultado Proyectado To-Be</th>
+                                    <th>Impacto &amp; Beneficio Clave</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>OTIF CyberDay (Peak)</strong></td>
+                                    <td><span class="text-danger font-bold">43,5%</span> (C&C 11,5%)</td>
+                                    <td>&ge; 96,0%</td>
+                                    <td><span class="text-success font-bold">95,4%</span></td>
+                                    <td>+51,9 pp de servicio en momentos de máxima demanda</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>OTIF Mensual Consolidado</strong></td>
+                                    <td><span class="text-danger font-bold">80,9%</span></td>
+                                    <td>&ge; 96,0%</td>
+                                    <td><span class="text-success font-bold">96,2%</span></td>
+                                    <td>Cumple plenamente la meta contractual del Directorio</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Backlog CD Pudahuel</strong></td>
+                                    <td><span class="text-danger font-bold">15.387 pedidos</span> (4,32 días)</td>
+                                    <td>0 pedidos</td>
+                                    <td><span class="text-success font-bold">0 pedidos</span></td>
+                                    <td>Flujo continuo con tiempo de ciclo inferior a 18 horas</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Dock-to-Stock Inbound</strong></td>
+                                    <td><span class="text-danger font-bold">22,6 horas</span></td>
+                                    <td>&le; 6,0 horas</td>
+                                    <td><span class="text-success font-bold">4,5 horas</span></td>
+                                    <td>-80,1% tiempo ciclo mediante ASN y ventanas de 2h</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Espera de Camiones &amp; Demurrage</strong></td>
+                                    <td><span class="text-danger font-bold">65,2 min | $146,3M</span></td>
+                                    <td>&le; 15 min | $0</td>
+                                    <td><span class="text-success font-bold">12,0 min | $0 CLP</span></td>
+                                    <td>Erradicación total de sobreestadía en andenes</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Slotting Mismatches</strong></td>
+                                    <td><span class="text-danger font-bold">114 SKUs (25,3%)</span></td>
+                                    <td>0 SKUs</td>
+                                    <td><span class="text-success font-bold">0 SKUs</span></td>
+                                    <td>Reubicación ABC y eliminación de 67,6 km/día de exceso</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Caminata Operaria de Picking</strong></td>
+                                    <td><span class="text-danger font-bold">67,6 km/día (exceso neto)</span></td>
+                                    <td>&le; 20,0 km/día</td>
+                                    <td><span class="text-success font-bold">14,2 km/día (residual)</span></td>
+                                    <td>-79,0% esfuerzo físico y mitigación de fatiga crónica</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Exactitud Inventario (IRA)</strong></td>
+                                    <td><span class="text-danger font-bold">97,74% ($388,9M desc.)</span></td>
+                                    <td>&ge; 99,5%</td>
+                                    <td><span class="text-success font-bold">99,85%</span></td>
+                                    <td>Conteos cíclicos guiados por WMS y terminales RF</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Costo por Pedido Fallido</strong></td>
+                                    <td><span class="text-danger font-bold">$29.628 CLP</span></td>
+                                    <td>&le; $10.000 CLP</td>
+                                    <td><span class="text-success font-bold">$8.532 CLP</span></td>
+                                    <td>Tasa de fallas en despacho reducida al &le; 2,8%</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Reclamos de Clientes</strong></td>
+                                    <td><span class="text-danger font-bold">&asymp; 117 / mes (700 sem.)</span></td>
+                                    <td>-50%</td>
+                                    <td><span class="text-success font-bold">&asymp; 58 / mes</span></td>
+                                    <td>Mitiga el 95,3% de reclamos por causas operacionales</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Accidentabilidad SST</strong></td>
+                                    <td><span class="text-danger font-bold">83,8 / 100k HH (120 inc.)</span></td>
+                                    <td>&le; 15,0</td>
+                                    <td><span class="text-success font-bold">0 accidentes graves</span></td>
+                                    <td>Erradica manipulación manual >25kg (Ley 20.949)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Valor Actual Neto (VAN 3 años, 12%)</strong></td>
+                                    <td><span class="text-danger font-bold">-$458M CLP (inacción)</span></td>
+                                    <td>Positivo</td>
+                                    <td><span class="text-success font-bold">$1.289.400.543 CLP</span></td>
+                                    <td>Payback simple en 10,7 meses con TIR de 98,4%</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Infografía de Equivalencias Didácticas y Sostenibilidad ESG -->
+                <div class="margin-top">
+                    <h3 style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                        <span>🌱 Sostenibilidad ESG &amp; Equivalencias Didácticas del Impacto</span>
+                    </h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px;">
+                        <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 10px; padding: 18px;">
+                            <div style="font-size: 1.8rem; margin-bottom: 6px;">🇨🇱</div>
+                            <h4 style="color: #34d399; margin: 0 0 6px 0; font-size: 1.05rem;">19.500 km Ahorrados / Año</h4>
+                            <p style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.5; margin: 0;">
+                                Equivalente a recorrer <strong>4,5 veces todo Chile continental</strong> de Arica a Punta Arenas, devolviendo calidad de vida a los operarios.
+                            </p>
+                        </div>
+
+                        <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; padding: 18px;">
+                            <div style="font-size: 1.8rem; margin-bottom: 6px;">🌳</div>
+                            <h4 style="color: #38bdf8; margin: 0 0 6px 0; font-size: 1.05rem;">-18,5 Ton CO₂e Evitadas</h4>
+                            <p style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.5; margin: 0;">
+                                Reducción por ruteo TMS (-9% km recorridos), cubicaje 3D de flota y menor consumo de diésel. Absorción equivalente a <strong>840 árboles nativos</strong>.
+                            </p>
+                        </div>
+
+                        <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 10px; padding: 18px;">
+                            <div style="font-size: 1.8rem; margin-bottom: 6px;">🩺</div>
+                            <h4 style="color: #fbbf24; margin: 0 0 6px 0; font-size: 1.05rem;">0 Licencias SST Graves</h4>
+                            <p style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.5; margin: 0;">
+                                Cumplimiento 100% de la <strong>Ley 20.949</strong> mediante 4 mesas hidráulicas en D-Bulky y erradicación total del levantamiento manual >25 kg a pulso.
+                            </p>
+                        </div>
+
+                        <div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 10px; padding: 18px;">
+                            <div style="font-size: 1.8rem; margin-bottom: 6px;">👥</div>
+                            <h4 style="color: #c084fc; margin: 0 0 6px 0; font-size: 1.05rem;">250 HH Capacitación ADKAR</h4>
+                            <p style="font-size: 0.8rem; color: #cbd5e1; line-height: 1.5; margin: 0;">
+                                Formación de <strong>18 Superusuarios WMS</strong>, cerrando la brecha digital del personal temporal (39% &rarr; 95%) y reduciendo rotación al 6%.
+                            </p>
                         </div>
                     </div>
                 </div>

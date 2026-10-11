@@ -38,9 +38,14 @@ function initTabNavigation() {
 }
 
 function syncIndexPhasePill(tabId) {
+    const btn = document.querySelector(`.tab-btn[data-tab="${tabId}"]`);
     let phase = 1;
-    if (tabId === 'tab-documento-solucion') phase = 2;
-    else if (tabId === 'tab-proyectos') phase = 3;
+    if (btn && btn.getAttribute('data-phase')) {
+        phase = parseInt(btn.getAttribute('data-phase'), 10);
+    } else {
+        if (tabId === 'tab-proyectos' || tabId === 'tab-documento-solucion') phase = 2;
+        else if (tabId === 'tab-resultados-ea3') phase = 3;
+    }
 
     document.querySelectorAll('.iphase-pill').forEach((pill, idx) => {
         if (idx + 1 === phase) pill.classList.add('active');
@@ -56,7 +61,7 @@ window.switchIndexPhase = function(phaseNum) {
         const btn = document.querySelector('.tab-btn[data-tab="tab-documento-solucion"]');
         if (btn) btn.click();
     } else if (phaseNum === 3) {
-        const btn = document.querySelector('.tab-btn[data-tab="tab-proyectos"]');
+        const btn = document.querySelector('.tab-btn[data-tab="tab-resultados-ea3"]');
         if (btn) btn.click();
     }
 };
