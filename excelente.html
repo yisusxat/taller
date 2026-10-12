@@ -599,6 +599,393 @@
             border: 1px solid rgba(251, 191, 36, 0.3);
         }
 
+        /* -----------------------------------------------------------------
+           1. CONMUTADOR INTERACTIVO TO-BE VS EXCELENTE (FEATURE 1)
+           ----------------------------------------------------------------- */
+        .exc-switcher-bar {
+            background: rgba(13, 21, 39, 0.95);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 14px;
+            padding: 12px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+        }
+
+        .exc-switcher-toggle {
+            display: flex;
+            background: #060b18;
+            padding: 4px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            gap: 4px;
+        }
+
+        .exc-switch-btn {
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .exc-switch-btn.active.tobe {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
+        }
+
+        .exc-switch-btn.active.exc {
+            background: linear-gradient(135deg, #0284c7, #38bdf8);
+            color: #ffffff;
+            border: 1px solid #38bdf8;
+            box-shadow: 0 0 16px rgba(2, 132, 199, 0.5);
+        }
+
+        .exc-morph-dashboard {
+            background: linear-gradient(135deg, rgba(13, 21, 39, 0.95), rgba(7, 13, 30, 0.98));
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 16px;
+            padding: 22px;
+            margin-bottom: 24px;
+            transition: all 0.35s ease;
+        }
+
+        .exc-morph-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+
+        .exc-morph-tile {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .exc-morph-tile .lbl {
+            font-size: 0.68rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            color: #94a3b8;
+            font-weight: 700;
+        }
+
+        .exc-morph-tile .val {
+            font-size: 1.35rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 900;
+            color: #ffffff;
+            margin-top: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .exc-morph-tile .sub {
+            font-size: 0.72rem;
+            color: #64748b;
+            margin-top: 4px;
+        }
+
+        /* -----------------------------------------------------------------
+           2. SIMULADOR SLIDER ROI Y ABSORCIÓN DEL EXCESO (FEATURE 2)
+           ----------------------------------------------------------------- */
+        .exc-slider-box {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 14px;
+            padding: 20px;
+            margin-top: 18px;
+        }
+
+        .exc-slider-control {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin: 14px 0;
+            flex-wrap: wrap;
+        }
+
+        .exc-range-input {
+            flex: 1;
+            min-width: 200px;
+            accent-color: #38bdf8;
+            cursor: pointer;
+            height: 6px;
+        }
+
+        .exc-slider-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .exc-slider-stat {
+            background: #060b18;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        /* -----------------------------------------------------------------
+           3. RADAR 360° Y CORTE TRANSVERSAL DE PASILLOS (FEATURE 3 & 4)
+           ----------------------------------------------------------------- */
+        .exc-visuals-duo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .exc-visual-card {
+            background: rgba(13, 21, 39, 0.9);
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 14px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .exc-visual-card h4 {
+            margin: 0;
+            font-size: 0.95rem;
+            color: #38bdf8;
+            font-weight: 800;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* -----------------------------------------------------------------
+           4. ANIMACIÓN SVG DIGITAL TWIN Y PLAY/PAUSE (FEATURE 5)
+           ----------------------------------------------------------------- */
+        .exc-sim-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 8px;
+            padding: 8px 14px;
+            margin-bottom: 10px;
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .exc-sim-btn {
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid #38bdf8;
+            color: #38bdf8;
+            padding: 5px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+        }
+
+        .exc-sim-btn:hover {
+            background: #38bdf8;
+            color: #060b18;
+        }
+
+        @keyframes shuttleTransit1 {
+            0% { transform: translateX(0px); }
+            50% { transform: translateX(38px); }
+            100% { transform: translateX(0px); }
+        }
+
+        @keyframes shuttleTransit2 {
+            0% { transform: translateX(0px); }
+            50% { transform: translateX(-35px); }
+            100% { transform: translateX(0px); }
+        }
+
+        @keyframes lifterBlink {
+            0%, 100% { opacity: 0.35; }
+            50% { opacity: 1; fill: #10b981; }
+        }
+
+        @keyframes amrPatrolMove {
+            0% { transform: translateX(0px); }
+            50% { transform: translateX(75px); }
+            100% { transform: translateX(0px); }
+        }
+
+        .sim-anim-shuttle1 { animation: shuttleTransit1 4.5s ease-in-out infinite; }
+        .sim-anim-shuttle2 { animation: shuttleTransit2 5.2s ease-in-out infinite; }
+        .sim-anim-lifter { animation: lifterBlink 2.2s ease-in-out infinite; }
+        .sim-anim-amr { animation: amrPatrolMove 6.5s ease-in-out infinite; }
+
+        .simulation-paused .sim-anim-shuttle1,
+        .simulation-paused .sim-anim-shuttle2,
+        .simulation-paused .sim-anim-lifter,
+        .simulation-paused .sim-anim-amr {
+            animation-play-state: paused !important;
+        }
+
+        /* -----------------------------------------------------------------
+           5. MODAL DE INSPECCIÓN TÉCNICA DE HARDWARE (FEATURE 6)
+           ----------------------------------------------------------------- */
+        .exc-hardware-pills-bar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .exc-hw-inspect-btn {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #94a3b8;
+            font-size: 0.74rem;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .exc-hw-inspect-btn:hover {
+            color: #38bdf8;
+            border-color: #38bdf8;
+            background: rgba(2, 132, 199, 0.15);
+        }
+
+        .exc-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(4, 8, 20, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 9999;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .exc-modal-overlay.active {
+            display: flex;
+        }
+
+        .exc-modal-dialog {
+            background: #0d1527;
+            border: 1px solid #38bdf8;
+            border-radius: 16px;
+            max-width: 600px;
+            width: 100%;
+            padding: 26px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+            position: relative;
+            animation: modalFadeIn 0.25s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: translateY(20px) scale(0.97); }
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        .exc-modal-close {
+            position: absolute;
+            top: 16px;
+            right: 18px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .exc-modal-close:hover {
+            color: #ffffff;
+        }
+
+        /* -----------------------------------------------------------------
+           6. FILTROS Y BARRAS DE PROGRESO DEPARTAMENTALES (FEATURE 7)
+           ----------------------------------------------------------------- */
+        .exc-filter-bar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .exc-filter-btn {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #94a3b8;
+            font-size: 0.76rem;
+            font-weight: 700;
+            padding: 7px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .exc-filter-btn:hover {
+            border-color: rgba(56, 189, 248, 0.4);
+            color: #ffffff;
+        }
+
+        .exc-filter-btn.active {
+            background: rgba(2, 132, 199, 0.25);
+            color: #38bdf8;
+            border-color: #38bdf8;
+        }
+
+        .exc-progress-wrap {
+            margin-top: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .exc-prog-track {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 3px;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .exc-prog-bar-tobe {
+            height: 100%;
+            background: #38bdf8;
+        }
+
+        .exc-prog-bar-exc {
+            height: 100%;
+            background: #10b981;
+        }
+
         /* Detalle del Exceso Presupuestario & Análisis Financiero */
         .exc-budget-deepdive {
             background: #091020;
@@ -820,6 +1207,14 @@
                 padding: 20px 20px 60px 20px;
             }
 
+            .exc-morph-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .exc-visuals-duo-grid {
+                grid-template-columns: 1fr;
+            }
+
             .exc-budget-summary {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -906,6 +1301,35 @@
             .exc-budget-summary {
                 grid-template-columns: 1fr;
                 gap: 12px;
+            }
+
+            .exc-switcher-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .exc-switcher-toggle {
+                width: 100%;
+            }
+
+            .exc-switch-btn {
+                flex: 1;
+                justify-content: center;
+                font-size: 0.75rem;
+                padding: 8px 10px;
+            }
+
+            .exc-filter-bar {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 6px;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .exc-filter-btn {
+                white-space: nowrap;
+                font-size: 0.72rem;
+                padding: 6px 10px;
             }
 
             .exc-project-row {
@@ -1006,6 +1430,29 @@
 
             .exc-section-title {
                 font-size: 1.05rem;
+            }
+
+            .exc-morph-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .exc-slider-stats-grid {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .exc-hardware-pills-bar {
+                flex-direction: column;
+            }
+
+            .exc-hw-inspect-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .exc-modal-dialog {
+                padding: 18px 14px;
             }
 
             .exc-robot-stats-strip {
@@ -1137,6 +1584,94 @@
                 </div>
             </div>
         </section>
+
+        <!-- CONMUTADOR INTERACTIVO TO-BE VS EXCELENTE (FEATURE 1) -->
+        <div class="exc-switcher-bar">
+            <div>
+                <div style="font-size: 0.95rem; font-weight: 800; color: #ffffff; display: flex; align-items: center; gap: 8px;">
+                    <span>🎛️ Vista Comparativa Ejecutiva en Tiempo Real</span>
+                    <span style="font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; background: rgba(56, 189, 248, 0.2); color: #38bdf8; padding: 2px 6px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.4);">LIVE SWITCH</span>
+                </div>
+                <div style="font-size: 0.76rem; color: #94a3b8; margin-top: 2px;">
+                    Alterna entre escenarios para contrastar inmediatamente la arquitectura logística, CAPEX y capacidad:
+                </div>
+            </div>
+
+            <div class="exc-switcher-toggle">
+                <button type="button" id="btnSwitchToBe" class="exc-switch-btn" onclick="switchScenario('tobe')">
+                    <span>✨ To-Be Convencional (P1-P5)</span>
+                </button>
+                <button type="button" id="btnSwitchExc" class="exc-switch-btn active exc" onclick="switchScenario('excelente')">
+                    <span>💎 Escenario Excelente (P1-P8)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- DASHBOARD MORFODINÁMICO CONMUTABLE -->
+        <div id="morphDashboard" class="exc-morph-dashboard">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+                <div style="font-size: 0.82rem; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 800;">
+                    <span id="morphBadgeScenario">● MODO ACTIVO: ESCENARIO DE EXCELENCIA (P1 A P8 ROBOTIZADO)</span>
+                </div>
+                <div style="font-size: 0.74rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8;">
+                    <span id="morphBadgeDetail">Sin Límite de Tiempo &bull; 8 Iniciativas Integradas &bull; Shuttle AS/RS</span>
+                </div>
+            </div>
+
+            <div class="exc-morph-grid">
+                <div class="exc-morph-tile">
+                    <div class="lbl">Inversión Total (CAPEX)</div>
+                    <div class="val" id="morphCapex" style="color: #f43f5e;">$1.420.000.000</div>
+                    <div class="sub" id="morphCapexSub">+$570M sobre techo ($850M) &bull; Amortizado en 5,6m</div>
+                </div>
+
+                <div class="exc-morph-tile">
+                    <div class="lbl">Capacidad de Racks Pudahuel</div>
+                    <div class="val" id="morphCapacity" style="color: #38bdf8;">45.630 Pos</div>
+                    <div class="sub" id="morphCapacitySub">2.535 racks compactos (+50%) &bull; 29,5% ocupación actual</div>
+                </div>
+
+                <div class="exc-morph-tile">
+                    <div class="lbl">Velocidad de Picking</div>
+                    <div class="val" id="morphSpeed" style="color: #34d399;">220 lín/h</div>
+                    <div class="sub" id="morphSpeedSub">+221,6% vs To-Be &bull; Shuttle + Cobots AMR GTP</div>
+                </div>
+
+                <div class="exc-morph-tile">
+                    <div class="lbl">Costo por Pedido Regular</div>
+                    <div class="val" id="morphCostOrder" style="color: #fbbf24;">CLP $3.850</div>
+                    <div class="sub" id="morphCostOrderSub">-29,0% vs To-Be ($5.420) &bull; Fallido baja a $4.820</div>
+                </div>
+
+                <div class="exc-morph-tile">
+                    <div class="lbl">Nivel de Servicio (OTIF)</div>
+                    <div class="val" id="morphOtif" style="color: #34d399;">98,7%</div>
+                    <div class="sub" id="morphOtifSub">World-Class Superior &bull; Click & Collect 99,2%</div>
+                </div>
+
+                <div class="exc-morph-tile">
+                    <div class="lbl">Ahorro Operativo (EBITDA)</div>
+                    <div class="val" id="morphEbitda" style="color: #38bdf8;">$1.226.097.000/a</div>
+                    <div class="sub" id="morphEbitdaSub">+$370M/año extra sobre To-Be ($856M/a)</div>
+                </div>
+
+                <div class="exc-morph-tile">
+                    <div class="lbl">Retorno de Inversión (Payback)</div>
+                    <div class="val" id="morphPayback" style="color: #a78bfa;">13,9 Meses</div>
+                    <div class="sub" id="morphPaybackSub">Recuperación total &bull; VAN 3a: $1.842M CLP</div>
+                </div>
+
+                <div class="exc-morph-tile">
+                    <div class="lbl">Sostenibilidad & Ergonomía</div>
+                    <div class="val" id="morphEsg" style="color: #34d399;">65% Solar (ESG)</div>
+                    <div class="sub" id="morphEsgSub">Cero trabajo en altura &bull; -85,5% caminatas operarios</div>
+                </div>
+            </div>
+
+            <div id="morphAlertNote" style="margin-top: 14px; padding: 10px 14px; background: rgba(2, 132, 199, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 8px; font-size: 0.78rem; color: #cbd5e1; line-height: 1.45;">
+                💡 <strong>Análisis Estratégico del Escenario Seleccionado:</strong> El Escenario Excelente libera todo el potencial operativo del CD Pudahuel. Al no limitar el tiempo a 24 semanas, se integra la planta solar y el sistema AS/RS Robot Shuttle en los 2.535 módulos de rack, llevando la capacidad a 45.630 pallets y derrumbando el costo por pedido a solo $3.850 CLP.
+            </div>
+        </div>
 
         <!-- SECCIÓN 1: DETALLE DE IMPLEMENTACIÓN PROYECTOS DEL 1 AL 8 -->
         <section>
@@ -1402,6 +1937,47 @@
 
             <div style="margin-top: 14px; padding: 12px 16px; background: rgba(16, 185, 129, 0.1); border-radius: 8px; border: 1px solid rgba(16, 185, 129, 0.3); font-size: 0.8rem; color: #a7f3d0;">
                 💡 <strong>Conclusión Financiera del Directorio:</strong> Aunque el CAPEX excede en $570M el tope inicial, el ahorro operativo total aumenta a <strong>$1.226 Millones por año</strong>, lo que permite pagar la totalidad del exceso en tan solo <strong>5,6 meses adicionales</strong>, logrando un <strong>Payback total consolidado de 13,9 meses</strong> y un <strong>VAN a 3 años de $1.842M CLP</strong>.
+            </div>
+
+            <!-- SIMULADOR DINÁMICO DE ABSORCIÓN DEL EXCESO PRESUPUESTARIO (FEATURE 2) -->
+            <div class="exc-slider-box">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <div style="font-size: 0.92rem; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
+                        <span>🧮 Simulador Dinámico: Amortización del Exceso Presupuestario (+$570M CLP)</span>
+                    </div>
+                    <span style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; background: rgba(52, 211, 153, 0.2); color: #34d399; padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(52, 211, 153, 0.4);">SENSIBILIDAD ROI</span>
+                </div>
+                <p style="margin: 6px 0 12px 0; font-size: 0.78rem; color: #94a3b8; line-height: 1.45;">
+                    Simula la velocidad de absorción del exceso de CAPEX ($570M) en función del crecimiento de demanda y volumen procesado (CyberDay / Omnicanalidad). A mayor escala en el CD robotizado, menor es el tiempo de retorno:
+                </p>
+
+                <div class="exc-slider-control">
+                    <label for="cyberGrowthSlider" style="font-size: 0.8rem; font-weight: 700; color: #ffffff; min-width: 170px;">
+                        Crecimiento Ventas / Cyber:
+                    </label>
+                    <input type="range" id="cyberGrowthSlider" class="exc-range-input" min="0" max="100" step="5" value="25" oninput="updateBudgetSim(this.value)">
+                    <span id="sliderGrowthVal" style="font-size: 0.95rem; font-weight: 900; font-family: 'JetBrains Mono', monospace; color: #fbbf24; min-width: 60px;">+25%</span>
+                </div>
+
+                <div class="exc-slider-stats-grid">
+                    <div class="exc-slider-stat">
+                        <div style="font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8; text-transform: uppercase;">Ahorro Incremental Anual</div>
+                        <div id="simAnnualSavings" style="font-size: 1.22rem; font-weight: 900; font-family: 'JetBrains Mono', monospace; color: #34d399; margin-top: 4px;">$1.318M CLP/a</div>
+                        <div id="simAnnualSavingsSub" style="font-size: 0.7rem; color: #64748b; margin-top: 2px;">+$92M/a por escala de volumen</div>
+                    </div>
+
+                    <div class="exc-slider-stat">
+                        <div style="font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8; text-transform: uppercase;">Meses para Absorber Exceso</div>
+                        <div id="simMonthsPayback" style="font-size: 1.22rem; font-weight: 900; font-family: 'JetBrains Mono', monospace; color: #38bdf8; margin-top: 4px;">5,2 Meses</div>
+                        <div style="font-size: 0.7rem; color: #64748b; margin-top: 2px;">Exceso $570M totalmente pagado</div>
+                    </div>
+
+                    <div class="exc-slider-stat">
+                        <div style="font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8; text-transform: uppercase;">VAN a 5 Años Proyectado</div>
+                        <div id="simVanVal" style="font-size: 1.22rem; font-weight: 900; font-family: 'JetBrains Mono', monospace; color: #fbbf24; margin-top: 4px;">$2.480M CLP</div>
+                        <div style="font-size: 0.7rem; color: #64748b; margin-top: 2px;">TIR estimada: 88,4%</div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -1709,6 +2285,175 @@
                 </div>
             </div>
 
+            <!-- VISUALS DUO GRID: RADAR 360° + CORTE TRANSVERSAL DE PASILLOS (FEATURES 3 & 4) -->
+            <div class="exc-visuals-duo-grid">
+                
+                <!-- FEATURE 3: RADAR 360° MULTIDIMENSIONAL -->
+                <div class="exc-visual-card">
+                    <h4>
+                        <span>🕸️ Gráfico Radar 360° Multidimensional</span>
+                        <span style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #34d399;">TRIPLE BENCHMARK</span>
+                    </h4>
+                    <p style="margin: 0; font-size: 0.78rem; color: #94a3b8; line-height: 1.45;">
+                        Comparación simultánea en 6 dimensiones críticas: As-Is (Crisis), To-Be (P1-P5) y Excelente (P1-P8). Observa la expansión geométrica total lograda por la robotización y la planta solar:
+                    </p>
+
+                    <svg viewBox="0 0 350 310" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; background: #060b18; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                        <!-- Ejes radiales -->
+                        <line x1="175" y1="155" x2="175" y2="45" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                        <line x1="175" y1="155" x2="270" y2="100" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                        <line x1="175" y1="155" x2="270" y2="210" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                        <line x1="175" y1="155" x2="175" y2="265" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                        <line x1="175" y1="155" x2="80" y2="210" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+                        <line x1="175" y1="155" x2="80" y2="100" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+
+                        <!-- Grilla concéntrica de referencia (25%, 50%, 75%, 100%) -->
+                        <polygon points="175,128 199,141 199,169 175,183 151,169 151,141" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+                        <polygon points="175,100 223,128 223,183 175,210 127,183 127,128" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+                        <polygon points="175,73 247,114 247,196 175,238 104,196 104,114" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+                        <polygon points="175,45 270,100 270,210 175,265 80,210 80,100" fill="none" stroke="rgba(56,189,248,0.25)" stroke-width="1.2" stroke-dasharray="2 2"/>
+
+                        <!-- Polígono 1: Crisis As-Is (Rojo Punteado) -->
+                        <polygon points="175,114 195,143 217,179 175,183 118,188 161,147" fill="rgba(244, 63, 94, 0.2)" stroke="#f43f5e" stroke-width="1.8" stroke-dasharray="3 3"/>
+
+                        <!-- Polígono 2: To-Be Convencional (Azul Cielo) -->
+                        <polygon points="175,81 211,134 259,203 175,230 85,207 123,125" fill="rgba(56, 189, 248, 0.25)" stroke="#38bdf8" stroke-width="2"/>
+
+                        <!-- Polígono 3: Escenario Excelente (Verde Esmeralda Brillante) -->
+                        <polygon points="175,45 270,100 269,210 175,260 80,210 82,101" fill="rgba(16, 185, 129, 0.35)" stroke="#34d399" stroke-width="2.5"/>
+
+                        <!-- Puntos destacados Excelente -->
+                        <circle cx="175" cy="45" r="3.5" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
+                        <circle cx="270" cy="100" r="3.5" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
+                        <circle cx="269" cy="210" r="3.5" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
+                        <circle cx="175" cy="260" r="3.5" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
+                        <circle cx="80" cy="210" r="3.5" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
+                        <circle cx="82" cy="101" r="3.5" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
+
+                        <!-- Rótulos de los 6 Ejes -->
+                        <text x="175" y="34" fill="#38bdf8" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">Capacidad (45.630)</text>
+                        <text x="282" y="98" fill="#34d399" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="start">Picking (220 l/h)</text>
+                        <text x="282" y="215" fill="#fbbf24" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="start">OTIF (98,7%)</text>
+                        <text x="175" y="280" fill="#34d399" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">Costo ($3.850)</text>
+                        <text x="68" y="215" fill="#38bdf8" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="end">IRA (99,8%)</text>
+                        <text x="68" y="98" fill="#a78bfa" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="end">Solar ESG (65%)</text>
+                    </svg>
+
+                    <!-- Leyenda del Radar -->
+                    <div style="display: flex; justify-content: space-between; font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; flex-wrap: wrap; gap: 8px;">
+                        <span style="color: #f87171; display: inline-flex; align-items: center; gap: 4px;">
+                            <span style="display: inline-block; width: 12px; height: 2px; background: #f43f5e; border-top: 1px dashed #f43f5e;"></span> Crisis As-Is (43,5% OTIF)
+                        </span>
+                        <span style="color: #38bdf8; display: inline-flex; align-items: center; gap: 4px;">
+                            <span style="display: inline-block; width: 12px; height: 3px; background: #38bdf8;"></span> To-Be (30.420 pos)
+                        </span>
+                        <span style="color: #34d399; font-weight: 800; display: inline-flex; align-items: center; gap: 4px;">
+                            <span style="display: inline-block; width: 12px; height: 3px; background: #34d399;"></span> Excelente (45.630 pos)
+                        </span>
+                    </div>
+                </div>
+
+                <!-- FEATURE 4: CORTE TRANSVERSAL COMPARATIVO DE PASILLOS -->
+                <div class="exc-visual-card">
+                    <h4>
+                        <span>📐 Corte Transversal: To-Be vs. Excelente</span>
+                        <span style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #fbbf24;">PASILLO 3,0M VS SHUTTLE</span>
+                    </h4>
+                    <p style="margin: 0; font-size: 0.78rem; color: #94a3b8; line-height: 1.45;">
+                        ¿Cómo se ganan <strong>+15.210 posiciones (+50% racks)</strong> en la misma nave? En To-Be, las grúas exigen 27 pasillos anchos. En Excelente, el Robot Shuttle suprime los pasillos interiores:
+                    </p>
+
+                    <svg viewBox="0 0 350 310" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; background: #060b18; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                        <!-- SECCIÓN SUPERIOR: TO-BE CONVENCIONAL -->
+                        <g>
+                            <rect x="15" y="10" width="320" height="135" rx="6" fill="rgba(15, 23, 42, 0.6)" stroke="rgba(56, 189, 248, 0.2)"/>
+                            <text x="25" y="24" fill="#38bdf8" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="800">A. TO-BE (P1-P5): 27 PASILLOS REACH DE 3,00m &bull; 1.690 RACKS (30.420 POS)</text>
+                            
+                            <!-- Rack Izquierdo To-Be (6 Pisos) -->
+                            <rect x="25" y="32" width="28" height="100" fill="rgba(2, 132, 199, 0.2)" stroke="#0284c7" stroke-width="1"/>
+                            <line x1="25" y1="48" x2="53" y2="48" stroke="#38bdf8" stroke-width="0.8"/>
+                            <line x1="25" y1="65" x2="53" y2="65" stroke="#38bdf8" stroke-width="0.8"/>
+                            <line x1="25" y1="81" x2="53" y2="81" stroke="#38bdf8" stroke-width="0.8"/>
+                            <line x1="25" y1="98" x2="53" y2="98" stroke="#38bdf8" stroke-width="0.8"/>
+                            <line x1="25" y1="115" x2="53" y2="115" stroke="#38bdf8" stroke-width="0.8"/>
+
+                            <!-- Pasillo Central Ancho (3,00m para Grúa Reach) -->
+                            <rect x="58" y="32" width="105" height="100" fill="rgba(244, 63, 94, 0.06)" stroke="rgba(244, 63, 94, 0.25)" stroke-dasharray="3 3"/>
+                            <!-- Cotas de pasillo -->
+                            <line x1="60" y1="38" x2="161" y2="38" stroke="#f43f5e" stroke-width="1"/>
+                            <text x="110" y="48" fill="#f87171" font-size="7.5" font-family="'JetBrains Mono', monospace" text-anchor="middle" font-weight="800">&harr; Pasillo 3,00 m (Grúa Reach)</text>
+                            
+                            <!-- Silueta de Grúa Reach maniobrando en pasillo -->
+                            <rect x="92" y="70" width="36" height="58" rx="3" fill="#e11d48" stroke="#ffffff" stroke-width="1"/>
+                            <text x="110" y="95" fill="#ffffff" font-size="7" font-family="'JetBrains Mono', monospace" text-anchor="middle" font-weight="900">GRÚA REACH</text>
+                            <text x="110" y="106" fill="#fecdd3" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle">Radio Giro 3m</text>
+                            <text x="110" y="122" fill="#f87171" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle">50% espacio perdido</text>
+
+                            <!-- Rack Derecho To-Be -->
+                            <rect x="168" y="32" width="28" height="100" fill="rgba(2, 132, 199, 0.2)" stroke="#0284c7" stroke-width="1"/>
+                            <line x1="168" y1="48" x2="196" y2="48" stroke="#38bdf8" stroke-width="0.8"/>
+                            <line x1="168" y1="65" x2="196" y2="65" stroke="#38bdf8" stroke-width="0.8"/>
+                            <line x1="168" y1="81" x2="196" y2="81" stroke="#38bdf8" stroke-width="0.8"/>
+                            <line x1="168" y1="98" x2="196" y2="98" stroke="#38bdf8" stroke-width="0.8"/>
+                            <line x1="168" y1="115" x2="196" y2="115" stroke="#38bdf8" stroke-width="0.8"/>
+
+                            <!-- Resumen To-Be -->
+                            <text x="210" y="55" fill="#cbd5e1" font-size="7.5" font-family="'JetBrains Mono', monospace">&bull; Pasillos vacíos consumen 50% nave</text>
+                            <text x="210" y="72" fill="#cbd5e1" font-size="7.5" font-family="'JetBrains Mono', monospace">&bull; Riesgo choques contra postes</text>
+                            <text x="210" y="89" fill="#38bdf8" font-size="7.5" font-family="'JetBrains Mono', monospace">&bull; Capacidad: 30.420 pos máx</text>
+                        </g>
+
+                        <!-- SECCIÓN INFERIOR: ESCENARIO EXCELENTE ROBOTIZADO -->
+                        <g>
+                            <rect x="15" y="155" width="320" height="145" rx="6" fill="rgba(16, 185, 129, 0.08)" stroke="rgba(16, 185, 129, 0.3)"/>
+                            <text x="25" y="169" fill="#34d399" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="800">B. EXCELENTE (P1-P8): RACKS COMPACTOS ROBOT SHUTTLE &bull; 2.535 RACKS (45.630 POS)</text>
+                            
+                            <!-- Bloque Continuo de Alta Densidad (Sin pasillos interiores de grúas) -->
+                            <rect x="25" y="177" width="170" height="108" fill="rgba(2, 132, 199, 0.25)" stroke="#0284c7" stroke-width="1.2"/>
+                            
+                            <!-- 6 Niveles con rieles continuos para Carros Robot Shuttle -->
+                            <line x1="25" y1="195" x2="195" y2="195" stroke="#38bdf8" stroke-width="1"/>
+                            <line x1="25" y1="213" x2="195" y2="213" stroke="#38bdf8" stroke-width="1"/>
+                            <line x1="25" y1="231" x2="195" y2="231" stroke="#38bdf8" stroke-width="1"/>
+                            <line x1="25" y1="249" x2="195" y2="249" stroke="#38bdf8" stroke-width="1"/>
+                            <line x1="25" y1="267" x2="195" y2="267" stroke="#38bdf8" stroke-width="1"/>
+
+                            <!-- Pallets continuos en alta densidad (ocupación profunda) -->
+                            <rect x="28" y="179" width="18" height="14" fill="#f59e0b" rx="1"/>
+                            <rect x="50" y="179" width="18" height="14" fill="#f59e0b" rx="1"/>
+                            <rect x="72" y="179" width="18" height="14" fill="#f59e0b" rx="1"/>
+                            <rect x="94" y="179" width="18" height="14" fill="#f59e0b" rx="1"/>
+                            <rect x="116" y="179" width="18" height="14" fill="#f59e0b" rx="1"/>
+
+                            <!-- Micro Carro Robot Shuttle operando en Nivel 3 -->
+                            <rect x="68" y="215" width="28" height="14" rx="2" fill="#e11d48" stroke="#ffffff" stroke-width="1"/>
+                            <text x="82" y="225" fill="#ffffff" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle" font-weight="900">SHUTTLE</text>
+
+                            <!-- Micro Carro Robot Shuttle operando en Nivel 5 -->
+                            <rect x="120" y="251" width="28" height="14" rx="2" fill="#e11d48" stroke="#ffffff" stroke-width="1"/>
+                            <text x="134" y="261" fill="#ffffff" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle" font-weight="900">SHUTTLE</text>
+
+                            <!-- Elevador Lifter en Cabecera -->
+                            <rect x="198" y="177" width="24" height="108" fill="rgba(16, 185, 129, 0.3)" stroke="#10b981" stroke-width="1.2" rx="2"/>
+                            <text x="210" y="225" fill="#34d399" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle" transform="rotate(-90 210 225)" font-weight="900">↕ LIFTER VERTICAL</text>
+
+                            <!-- Indicadores Clave Excelente -->
+                            <text x="230" y="195" fill="#34d399" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="800">+50% MÁS RACKS (2.535)</text>
+                            <text x="230" y="212" fill="#fbbf24" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="800">45.630 POSICIONES</text>
+                            <text x="230" y="229" fill="#cbd5e1" font-size="7.2" font-family="'JetBrains Mono', monospace">&bull; Cero pasillos de grúa</text>
+                            <text x="230" y="244" fill="#cbd5e1" font-size="7.2" font-family="'JetBrains Mono', monospace">&bull; Cero colisiones postes</text>
+                            <text x="230" y="259" fill="#38bdf8" font-size="7.2" font-family="'JetBrains Mono', monospace">&bull; Norma Sísmica NCh2369</text>
+                            <text x="230" y="274" fill="#34d399" font-size="7.2" font-family="'JetBrains Mono', monospace">&bull; 29,5% ocup (32.150 libres)</text>
+                        </g>
+                    </svg>
+
+                    <div style="font-size: 0.74rem; color: #a7f3d0; background: rgba(16, 185, 129, 0.12); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.25);">
+                        💎 <strong>Ganancia Volumétrica Neta:</strong> Al compactar el área de racks mediante canales servidos por Robot Shuttle, se eliminan los 27 pasillos de grúas reach de 3,00m, logrando un aprovechamiento del 88% del volumen vertical y sumando <strong>15.210 posiciones adicionales</strong> (+50% vs To-Be).
+                    </div>
+                </div>
+
+            </div>
+
             <!-- Comparativa Sección por Sección vs To-Be -->
             <div style="margin-top: 24px;">
                 <h4 style="margin: 0 0 12px 0; font-size: 0.95rem; color: #38bdf8; font-weight: 800;">
@@ -1801,12 +2546,27 @@
 
                 <div class="exc-robot-content-grid">
                     <!-- Diagrama Técnico SVG del Centro Robotizado con Robot Shuttle -->
-                    <div style="background: #040814; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: 14px; overflow: hidden;">
+                    <div id="simContainer" style="background: #040814; border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 12px; padding: 14px; overflow: hidden;">
                         <div style="font-size: 0.78rem; font-weight: 800; color: #38bdf8; margin-bottom: 8px; font-family: 'JetBrains Mono', monospace; display: flex; justify-content: space-between;">
                             <span>🗺️ Layout Dinámico: Robot Shuttle en Racks + Elevadores Lifter + Flota AMR</span>
                             <span style="color: #34d399;">SISTEMA AS/RS 6 PISOS (12m)</span>
                         </div>
-                        <svg viewBox="0 0 680 370" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; display: block; border-radius: 8px; background: #060b18;">
+
+                        <!-- BARRA DE CONTROL DE SIMULACIÓN EN VIVO (FEATURE 5) -->
+                        <div class="exc-sim-bar">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span id="simStatusDot" style="color: #34d399; font-size: 0.8rem;">●</span>
+                                <span id="simStatusText" style="color: #ffffff; font-weight: 700;">SIMULACIÓN ACTIVA: SISTEMA AS/RS DIGITAL TWIN</span>
+                            </div>
+                            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+                                <span id="simThroughput" style="color: #fbbf24; font-size: 0.72rem;">Throughput: 220 lín/h &bull; Shuttle: 2,0 m/s</span>
+                                <button type="button" id="btnToggleSim" class="exc-sim-btn" onclick="toggleSim()">
+                                    <span id="btnToggleSimText">⏸️ Pausar Simulación</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <svg id="shuttleSvgDigitalTwin" viewBox="0 0 680 370" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; display: block; border-radius: 8px; background: #060b18;">
                             <!-- Grilla de piso guiado -->
                             <defs>
                                 <pattern id="shuttle-grid" width="20" height="20" patternUnits="userSpaceOnUse">
@@ -1894,27 +2654,35 @@
                                 <rect x="340" y="193" width="18" height="22" rx="2"/>
                             </g>
 
-                            <!-- CARROS ROBOT SHUTTLE (Desplazándose sobre rieles internos en canales) -->
-                            <!-- Shuttle en Bloque 1 (Nivel 4) -->
-                            <rect x="35" y="152" width="26" height="15" rx="3" fill="#e11d48" stroke="#ffffff" stroke-width="1.2"/>
-                            <text x="48" y="163" fill="#ffffff" font-size="7" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">⚡SHUTTLE</text>
+                            <!-- CARROS ROBOT SHUTTLE (Desplazándose sobre rieles internos en canales - ANIMADOS) -->
+                            <!-- Shuttle en Bloque 1 (Nivel 4 - Animación 1) -->
+                            <g class="sim-anim-shuttle1">
+                                <rect x="35" y="152" width="26" height="15" rx="3" fill="#e11d48" stroke="#ffffff" stroke-width="1.2"/>
+                                <text x="48" y="163" fill="#ffffff" font-size="7" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">⚡SHUTTLE</text>
+                            </g>
                             <line x1="30" y1="170" x2="70" y2="170" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="2 2"/>
 
-                            <!-- Shuttle en Bloque 2 (Nivel 1) -->
-                            <rect x="145" y="37" width="26" height="15" rx="3" fill="#e11d48" stroke="#ffffff" stroke-width="1.2"/>
-                            <text x="158" y="48" fill="#ffffff" font-size="7" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">⚡SHUTTLE</text>
+                            <!-- Shuttle en Bloque 2 (Nivel 1 - Animación 2) -->
+                            <g class="sim-anim-shuttle2">
+                                <rect x="145" y="37" width="26" height="15" rx="3" fill="#e11d48" stroke="#ffffff" stroke-width="1.2"/>
+                                <text x="158" y="48" fill="#ffffff" font-size="7" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">⚡SHUTTLE</text>
+                            </g>
                             <line x1="130" y1="55" x2="185" y2="55" stroke="#fb7185" stroke-width="1.5" stroke-dasharray="2 2"/>
 
-                            <!-- Shuttle en Bloque 3 (Nivel 5) -->
-                            <rect x="250" y="191" width="26" height="15" rx="3" fill="#e11d48" stroke="#ffffff" stroke-width="1.2"/>
-                            <text x="263" y="202" fill="#ffffff" font-size="7" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">⚡SHUTTLE</text>
+                            <!-- Shuttle en Bloque 3 (Nivel 5 - Animación 1) -->
+                            <g class="sim-anim-shuttle1">
+                                <rect x="250" y="191" width="26" height="15" rx="3" fill="#e11d48" stroke="#ffffff" stroke-width="1.2"/>
+                                <text x="263" y="202" fill="#ffffff" font-size="7" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">⚡SHUTTLE</text>
+                            </g>
 
-                            <!-- Shuttle en Bloque 4 (Nivel 3) -->
-                            <rect x="340" y="114" width="26" height="15" rx="3" fill="#e11d48" stroke="#ffffff" stroke-width="1.2"/>
-                            <text x="353" y="125" fill="#ffffff" font-size="7" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">⚡SHUTTLE</text>
+                            <!-- Shuttle en Bloque 4 (Nivel 3 - Animación 2) -->
+                            <g class="sim-anim-shuttle2">
+                                <rect x="340" y="114" width="26" height="15" rx="3" fill="#e11d48" stroke="#ffffff" stroke-width="1.2"/>
+                                <text x="353" y="125" fill="#ffffff" font-size="7" font-family="'JetBrains Mono', monospace" font-weight="900" text-anchor="middle">⚡SHUTTLE</text>
+                            </g>
 
-                            <!-- ELEVADORES VERTICALES LIFTER (Cabeceras de Racks AS/RS) -->
-                            <g fill="rgba(16, 185, 129, 0.25)" stroke="#10b981" stroke-width="1.5">
+                            <!-- ELEVADORES VERTICALES LIFTER (Cabeceras de Racks AS/RS - ANIMADOS) -->
+                            <g fill="rgba(16, 185, 129, 0.25)" stroke="#10b981" stroke-width="1.5" class="sim-anim-lifter">
                                 <rect x="42" y="268" width="46" height="22" rx="4"/>
                                 <rect x="137" y="268" width="46" height="22" rx="4"/>
                                 <rect x="232" y="268" width="46" height="22" rx="4"/>
@@ -1933,12 +2701,16 @@
                             <path d="M 430 315 L 475 315 L 475 80 L 490 80" fill="none" stroke="rgba(56, 189, 248, 0.5)" stroke-width="1.5" stroke-dasharray="3 3"/>
                             <path d="M 475 175 L 490 175" fill="none" stroke="rgba(56, 189, 248, 0.5)" stroke-width="1.5" stroke-dasharray="3 3"/>
 
-                            <!-- ROBOTS AMR EN CALZADA DE PISO (Cobots transportadores de enlace) -->
-                            <circle cx="110" cy="315" r="7" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
-                            <rect x="104" y="309" width="12" height="12" fill="#0284c7" stroke="#38bdf8" stroke-width="1" rx="2"/>
+                            <!-- ROBOTS AMR EN CALZADA DE PISO (Cobots transportadores de enlace - ANIMADOS) -->
+                            <g class="sim-anim-amr">
+                                <circle cx="110" cy="315" r="7" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
+                                <rect x="104" y="309" width="12" height="12" fill="#0284c7" stroke="#38bdf8" stroke-width="1" rx="2"/>
+                            </g>
 
-                            <circle cx="280" cy="315" r="7" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
-                            <rect x="274" y="309" width="12" height="12" fill="#0284c7" stroke="#38bdf8" stroke-width="1" rx="2"/>
+                            <g class="sim-anim-amr">
+                                <circle cx="280" cy="315" r="7" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
+                                <rect x="274" y="309" width="12" height="12" fill="#0284c7" stroke="#38bdf8" stroke-width="1" rx="2"/>
+                            </g>
 
                             <circle cx="450" cy="315" r="7" fill="#38bdf8" stroke="#ffffff" stroke-width="1.5"/>
                             <rect x="444" y="309" width="12" height="12" fill="#0284c7" stroke="#38bdf8" stroke-width="1" rx="2"/>
@@ -1979,6 +2751,28 @@
                             <rect x="585" y="340" width="14" height="12" fill="rgba(245, 158, 11, 0.2)" stroke="#f59e0b" rx="2"/>
                             <text x="604" y="350" fill="#cbd5e1" font-size="8" font-family="'JetBrains Mono', monospace">Canal Pallet</text>
                         </svg>
+
+                        <!-- BARRA DE INSPECCIÓN TÉCNICA DE HARDWARE (FEATURE 6) -->
+                        <div class="exc-hardware-pills-bar">
+                            <span style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8; display: flex; align-items: center; gap: 4px; margin-right: 4px;">
+                                <span>🔬 INSPECCIÓN TÉCNICA:</span>
+                            </span>
+                            <button type="button" class="exc-hw-inspect-btn" onclick="openModal('shuttle')">
+                                <span>⚡ Robot Shuttle Autónomo</span>
+                            </button>
+                            <button type="button" class="exc-hw-inspect-btn" onclick="openModal('lifter')">
+                                <span>↕ Elevador Lifter AS/RS</span>
+                            </button>
+                            <button type="button" class="exc-hw-inspect-btn" onclick="openModal('amr')">
+                                <span>🤖 Flota Cobots AMR</span>
+                            </button>
+                            <button type="button" class="exc-hw-inspect-btn" onclick="openModal('gtp')">
+                                <span>🎯 Estación Goods-to-Person</span>
+                            </button>
+                            <button type="button" class="exc-hw-inspect-btn" onclick="openModal('solar')">
+                                <span>☀️ Planta Solar 250 kWp</span>
+                            </button>
+                        </div>
                     </div>
 
                     <!-- Explicación Técnica de las Mejoras con Robot Shuttle -->
@@ -2020,10 +2814,35 @@
                 </div>
             </div>
 
+            <!-- BARRA DE FILTRO DEPARTAMENTAL (FEATURE 7) -->
+            <div class="exc-filter-bar">
+                <button type="button" class="exc-filter-btn active" onclick="filterDepts('all', this)">
+                    🏢 Todos los Departamentos (6)
+                </button>
+                <button type="button" class="exc-filter-btn" onclick="filterDepts('inbound', this)">
+                    📥 1. Inbound & Andenes
+                </button>
+                <button type="button" class="exc-filter-btn" onclick="filterDepts('storage', this)">
+                    📦 2. Racks & Inventario
+                </button>
+                <button type="button" class="exc-filter-btn" onclick="filterDepts('picking', this)">
+                    ⚡ 3. Picking & GTP
+                </button>
+                <button type="button" class="exc-filter-btn" onclick="filterDepts('packing', this)">
+                    📦 4. Empaque & Sorter
+                </button>
+                <button type="button" class="exc-filter-btn" onclick="filterDepts('shipping', this)">
+                    🚚 5. Despacho & TMS
+                </button>
+                <button type="button" class="exc-filter-btn" onclick="filterDepts('sales', this)">
+                    🛍️ 6. Omnicanal & Tiendas
+                </button>
+            </div>
+
             <div class="exc-dept-grid">
 
                 <!-- 1. RECEPCIÓN & INBOUND -->
-                <div class="exc-dept-card">
+                <div class="exc-dept-card" data-dept="inbound">
                     <div class="exc-dept-header">
                         <div class="exc-dept-title">
                             <span>📥 1. Recepción & Inbound (24 Andenes)</span>
@@ -2034,14 +2853,46 @@
                         Antes, 38 camiones al día llegaban sin aviso generando tacos de 6 horas en Av. Américo Vespucio y $146M de multas. Con el agendamiento digital obligatorio, los camiones llegan en <strong>ventanas de 2 horas</strong> con manifiesto electrónico precargado. Las grúas reach descargan en 12 minutos y el putaway dirigido por RF ubica el pallet de inmediato.
                     </div>
                     <ul class="exc-dept-kpis-list">
-                        <li><span>Dock-to-Stock (Entrada a Racks):</span> <strong style="color: #34d399;">De 22,6 h &rarr; 3,2 horas (-85,8%)</strong></li>
-                        <li><span>Cobro de Demurrage / Sobreestadía:</span> <strong style="color: #34d399;">$0 CLP (Erradicado al 100%)</strong></li>
-                        <li><span>Puntualidad de Proveedores en Citas:</span> <strong style="color: #38bdf8;">97,5% de cumplimiento</strong></li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Dock-to-Stock (Entrada a Racks):</span>
+                                <strong style="color: #34d399;">De 22,6 h &rarr; 3,2 horas (-85,8%)</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-tobe" style="width: 20%;" title="Crisis: 22,6h | To-Be: 4,5h"></div>
+                                    <div class="exc-prog-bar-exc" style="width: 80%;" title="Excelente: 3,2h"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Cobro de Demurrage / Sobreestadía:</span>
+                                <strong style="color: #34d399;">$0 CLP (Erradicado al 100%)</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-exc" style="width: 100%;" title="100% Ahorro Multas"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Puntualidad de Proveedores en Citas:</span>
+                                <strong style="color: #38bdf8;">97,5% de cumplimiento</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-tobe" style="width: 70%;"></div>
+                                    <div class="exc-prog-bar-exc" style="width: 27.5%;"></div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
                 <!-- 2. ALMACENAMIENTO & INVENTARIOS -->
-                <div class="exc-dept-card">
+                <div class="exc-dept-card" data-dept="storage">
                     <div class="exc-dept-header">
                         <div class="exc-dept-title">
                             <span>📦 2. Almacenamiento & Control de Inventarios</span>
@@ -2052,14 +2903,46 @@
                         Con el sistema de estanterías de alta densidad servidas por <strong>Robot Shuttle</strong>, se eliminan los 27 pasillos anchos de grúa horquilla y se instalan <strong>2.535 módulos de rack compactos</strong> (6 niveles a 12,0m), alcanzando <strong>45.630 posiciones pallet</strong>. Se erradica el descalce de 114 SKU que obligaba a buscar bultos a ciegas. Con el WMS NextGen y conteos cíclicos por RF, cada canal tiene coordenadas 3D exactas en tiempo real. Cero impactos contra postes, blindando la <strong>Norma Sísmica NCh2369</strong>.
                     </div>
                     <ul class="exc-dept-kpis-list">
-                        <li><span>Exactitud de Registro de Inventario (IRA):</span> <strong style="color: #34d399;">De 93,8% &rarr; 99,8%</strong></li>
-                        <li><span>Mismatches de Slotting:</span> <strong style="color: #34d399;">0 SKU desalineados (100% corregido)</strong></li>
-                        <li><span>Capacidad con Robot Shuttle:</span> <strong style="color: #38bdf8;">45.630 pos (29,5% ocupación / 32.150 libres)</strong></li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Exactitud Registro Inventario (IRA):</span>
+                                <strong style="color: #34d399;">De 93,8% &rarr; 99,8%</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-tobe" style="width: 60%;"></div>
+                                    <div class="exc-prog-bar-exc" style="width: 40%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Mismatches de Slotting:</span>
+                                <strong style="color: #34d399;">0 SKU desalineados (100% corregido)</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-exc" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Capacidad con Robot Shuttle:</span>
+                                <strong style="color: #38bdf8;">45.630 pos (29,5% ocup / 32.150 libres)</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-tobe" style="width: 66.7%;" title="To-Be: 30.420 pos"></div>
+                                    <div class="exc-prog-bar-exc" style="width: 33.3%;" title="Excelente: +15.210 pos"></div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
                 <!-- 3. PREPARACIÓN DE PEDIDOS (PICKING) -->
-                <div class="exc-dept-card">
+                <div class="exc-dept-card" data-dept="picking">
                     <div class="exc-dept-header">
                         <div class="exc-dept-title">
                             <span>⚡ 3. Preparación de Pedidos (Picking)</span>
@@ -2070,14 +2953,45 @@
                         Los operarios abandonan las planillas de papel. En la zona manual se opera con <strong>Voice Picking manos libres y escáneres de anillo Zebra</strong>. En la zona automatizada, los carros <strong>Robot Shuttle</strong> extraen los pallets/totes en altura, los descienden mediante <strong>Elevadores Lifter</strong> y los cobots AMR los entregan directamente a las <strong>Estaciones Goods-to-Person (GTP)</strong>. El trabajador pickea a nivel de piso con confirmación <em>Pick-by-Light</em> eliminando el 100% de los trabajos en altura y el 85% de las caminatas físicas.
                     </div>
                     <ul class="exc-dept-kpis-list">
-                        <li><span>Productividad de Picado:</span> <strong style="color: #34d399;">De 46,8 &rarr; 68,4 lín/HH (manual) y 220 lín/h (Shuttle)</strong></li>
-                        <li><span>Caminata Diaria de los Trabajadores:</span> <strong style="color: #34d399;">De 67,6 km &rarr; 9,8 km (-85,5%)</strong></li>
-                        <li><span>Tasa de Error en Preparación:</span> <strong style="color: #38bdf8;">De 2,44% &rarr; &le; 0,15%</strong></li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Productividad de Picado:</span>
+                                <strong style="color: #34d399;">De 46,8 &rarr; 68,4 (manual) &bull; 220 lín/h (Shuttle)</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-tobe" style="width: 31%;" title="To-Be: 68,4 lín/HH"></div>
+                                    <div class="exc-prog-bar-exc" style="width: 69%;" title="Excelente: 220 lín/h"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Caminata Diaria de Operarios:</span>
+                                <strong style="color: #34d399;">De 67,6 km &rarr; 9,8 km (-85,5%)</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-exc" style="width: 85.5%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Tasa de Error en Preparación:</span>
+                                <strong style="color: #38bdf8;">De 2,44% &rarr; &le; 0,15%</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-exc" style="width: 94%;"></div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
                 <!-- 4. EMPAQUE, EMBALAJE & FACTURACIÓN -->
-                <div class="exc-dept-card">
+                <div class="exc-dept-card" data-dept="packing">
                     <div class="exc-dept-header">
                         <div class="exc-dept-title">
                             <span>📦 4. Empaque, Embalaje & Facturación</span>
@@ -2088,14 +3002,44 @@
                         Se implementa el estándar de 6 cajas dimensionales óptimas para e-commerce, reduciendo el aire transportado y el consumo de film stretch y cinta. En la zona de muebles y productos pesados (D-Bulky), 4 mesas elevadoras hidráulicas nivelan la carga a la cintura del trabajador, cumpliendo con los estándares de la Dirección del Trabajo (DT).
                     </div>
                     <ul class="exc-dept-kpis-list">
-                        <li><span>Accidentabilidad SST (Lumbago/Cargas):</span> <strong style="color: #34d399;">0 accidentes (Cero días perdidos)</strong></li>
-                        <li><span>Merma por Daños y Golpes en Empaque:</span> <strong style="color: #34d399;">Reducción del 35,0%</strong></li>
-                        <li><span>Tiempo Medio de Packing por Pedido:</span> <strong style="color: #38bdf8;">Baja de 4,2 min &rarr; 1,8 min</strong></li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Accidentabilidad SST (Lumbago/Cargas):</span>
+                                <strong style="color: #34d399;">0 accidentes (Cero días perdidos)</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-exc" style="width: 100%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Merma por Daños y Golpes en Empaque:</span>
+                                <strong style="color: #34d399;">Reducción del 35,0%</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-exc" style="width: 35%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Tiempo Medio de Packing por Pedido:</span>
+                                <strong style="color: #38bdf8;">Baja de 4,2 min &rarr; 1,8 min</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-exc" style="width: 57%;"></div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
                 <!-- 5. DESPACHO & TRANSPORTE (EXPEDICIÓN) -->
-                <div class="exc-dept-card">
+                <div class="exc-dept-card" data-dept="shipping">
                     <div class="exc-dept-header">
                         <div class="exc-dept-title">
                             <span>🚚 5. Despacho & Transporte (Expedición Sur)</span>
@@ -2106,14 +3050,45 @@
                         Las 14 dársenas de salida operan con preclasificación por transportista (RM Express 24h, Troncal Regiones y Click & Collect). El TMS optimiza los camiones mediante cubicaje 3D (ocupación del 91% del furgón). Los choferes confirman la entrega en tiempo real con foto y firma digital en su celular, alertando cualquier problema al instante.
                     </div>
                     <ul class="exc-dept-kpis-list">
-                        <li><span>Entregas Fallidas en Última Milla:</span> <strong style="color: #34d399;">De 11,5% &rarr; &le; 2,5% (-78,3%)</strong></li>
-                        <li><span>Ocupación de Espacio en Camiones:</span> <strong style="color: #34d399;">De 72% &rarr; 91% (+19 pp)</strong></li>
-                        <li><span>Cumplimiento SLA Despacho 24h:</span> <strong style="color: #38bdf8;">98,5% en Región Metropolitana</strong></li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Entregas Fallidas en Última Milla:</span>
+                                <strong style="color: #34d399;">De 11,5% &rarr; &le; 2,0% (-82,6%)</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-exc" style="width: 82.6%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Ocupación de Espacio en Camiones:</span>
+                                <strong style="color: #34d399;">De 72% &rarr; 91% (+19 pp)</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-tobe" style="width: 79%;"></div>
+                                    <div class="exc-prog-bar-exc" style="width: 21%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Cumplimiento SLA Despacho 24h:</span>
+                                <strong style="color: #38bdf8;">98,5% en Región Metropolitana</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-exc" style="width: 98.5%;"></div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
                 <!-- 6. SERVICIO AL CLIENTE & CANALES COMERCIALES -->
-                <div class="exc-dept-card">
+                <div class="exc-dept-card" data-dept="sales">
                     <div class="exc-dept-header">
                         <div class="exc-dept-title">
                             <span>🛍️ 6. Comercial, Tiendas & Atención al Cliente</span>
@@ -2124,9 +3099,39 @@
                         Al garantizar stock en línea real y eliminar el backlog, las 27 tiendas físicas de AndesHome reciben sus pedidos nocturnos a primera hora de la mañana para el Click & Collect. El departamento de Call Center y Post-Venta deja de lidiar con clientes furiosos por pedidos cancelados en CyberDay, recuperando la reputación de marca.
                     </div>
                     <ul class="exc-dept-kpis-list">
-                        <li><span>Nivel de Servicio Click &amp; Collect:</span> <strong style="color: #34d399;">De 11,5% &rarr; 99,2%</strong></li>
-                        <li><span>Reclamos SERNAC / Redes Sociales:</span> <strong style="color: #34d399;">De 842 &rarr; &le; 18 casos/mes (-97,8%)</strong></li>
-                        <li><span>NPS (Net Promoter Score / Lealtad):</span> <strong style="color: #38bdf8;">Sube de -18 &rarr; +68 puntos</strong></li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Nivel de Servicio Click &amp; Collect:</span>
+                                <strong style="color: #34d399;">De 11,5% &rarr; 99,2%</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-exc" style="width: 99.2%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>Reclamos SERNAC / Redes Sociales:</span>
+                                <strong style="color: #34d399;">De 842 &rarr; &le; 18 casos/mes (-97,8%)</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-exc" style="width: 97.8%;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div style="display: flex; justify-content: space-between; width: 100%;">
+                                <span>NPS (Net Promoter Score / Lealtad):</span>
+                                <strong style="color: #38bdf8;">Sube de -18 &rarr; +68 puntos</strong>
+                            </div>
+                            <div class="exc-progress-wrap" style="width: 100%;">
+                                <div class="exc-prog-track">
+                                    <div class="exc-prog-bar-exc" style="width: 86%;"></div>
+                                </div>
+                            </div>
+                        </li>
                     </ul>
                 </div>
 
@@ -2140,11 +3145,11 @@
                     <span>&larr; Volver a Propuesta To-Be &amp; Plano Cenital 2D</span>
                 </a>
             </div>
-            <div style="display: flex; gap: 12px;">
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
                 <a href="index.html" class="exc-nav-pill tower" style="font-size: 0.88rem; padding: 10px 18px;">
                     <span>Ir a Torre de Control Completa</span>
                 </a>
-                <button class="exc-nav-pill active-exc" onclick="window.print()" style="font-size: 0.88rem; padding: 10px 18px; cursor: pointer;">
+                <button class="exc-nav-pill active-exc" onclick="window.print()" style="font-size: 0.88rem; padding: 10px 18px; cursor: pointer; border: none;">
                     <span>🖨️ Imprimir Acta Escenario Excelente</span>
                 </button>
             </div>
@@ -2152,5 +3157,313 @@
 
     </main>
 
+    <!-- MODAL DE INSPECCIÓN TÉCNICA DE HARDWARE (FEATURE 6) -->
+    <div id="excModalOverlay" class="exc-modal-overlay" onclick="closeModalOnBg(event)">
+        <div class="exc-modal-dialog" onclick="event.stopPropagation()">
+            <button type="button" class="exc-modal-close" onclick="closeModal()" aria-label="Cerrar">&times;</button>
+            <div id="hwModalHeader" style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px;">
+                <div id="hwModalIcon" style="font-size: 28px; line-height: 1;">⚡</div>
+                <div>
+                    <h3 id="hwModalTitle" style="margin: 0; color: #38bdf8; font-size: 1.15rem; font-weight: 800;">Ficha Técnica de Hardware</h3>
+                    <div id="hwModalSubtitle" style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8; margin-top: 2px;">Especificaciones de Ingeniería &bull; CD Pudahuel</div>
+                </div>
+            </div>
+            <div id="hwModalBody" style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.6; max-height: 65vh; overflow-y: auto;">
+                <!-- Contenido Dinámico inyectado por JavaScript -->
+            </div>
+            <div style="margin-top: 18px; text-align: right; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px;">
+                <button type="button" class="exc-sim-btn" onclick="closeModal()" style="padding: 7px 18px;">
+                    Cerrar Ficha Técnica
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT: TODAS LAS INTERACCIONES Y SIMULADORES -->
+    <script>
+        // 1. CONMUTADOR TO-BE VS EXCELENTE (FEATURE 1)
+        function switchScenario(mode) {
+            const btnToBe = document.getElementById('btnSwitchToBe');
+            const btnExc = document.getElementById('btnSwitchExc');
+            const badgeScen = document.getElementById('morphBadgeScenario');
+            const badgeDet = document.getElementById('morphBadgeDetail');
+            const capex = document.getElementById('morphCapex');
+            const capexSub = document.getElementById('morphCapexSub');
+            const cap = document.getElementById('morphCapacity');
+            const capSub = document.getElementById('morphCapacitySub');
+            const spd = document.getElementById('morphSpeed');
+            const spdSub = document.getElementById('morphSpeedSub');
+            const cost = document.getElementById('morphCostOrder');
+            const costSub = document.getElementById('morphCostOrderSub');
+            const otif = document.getElementById('morphOtif');
+            const otifSub = document.getElementById('morphOtifSub');
+            const ebitda = document.getElementById('morphEbitda');
+            const ebitdaSub = document.getElementById('morphEbitdaSub');
+            const payback = document.getElementById('morphPayback');
+            const paybackSub = document.getElementById('morphPaybackSub');
+            const esg = document.getElementById('morphEsg');
+            const esgSub = document.getElementById('morphEsgSub');
+            const alertNote = document.getElementById('morphAlertNote');
+
+            if (mode === 'tobe') {
+                btnToBe.classList.add('active', 'tobe');
+                btnExc.classList.remove('active', 'exc');
+
+                badgeScen.innerText = '● MODO ACTIVO: TO-BE CONVENCIONAL (P1 A P5 ESTÁNDAR)';
+                badgeScen.style.color = '#38bdf8';
+                badgeDet.innerText = 'Límite 24 Semanas con IT Freeze • 5 Iniciativas • Grúas Reach';
+
+                capex.innerText = '$766.800.000';
+                capex.style.color = '#38bdf8';
+                capexSub.innerText = 'Bajo presupuesto techo ($850M) • Aprobado Directorio';
+
+                cap.innerText = '30.420 Pos';
+                cap.style.color = '#94a3b8';
+                capSub.innerText = '1.690 racks con 27 pasillos de 3m • 44,3% ocupación actual';
+
+                spd.innerText = '68,4 lín/HH';
+                spd.style.color = '#94a3b8';
+                spdSub.innerText = 'Voice Picking manual por pasillos • 14,2 km/día caminata';
+
+                cost.innerText = 'CLP $5.420';
+                cost.style.color = '#cbd5e1';
+                costSub.innerText = 'Fallido: CLP $8.532 • Margen regular';
+
+                otif.innerText = '96,2%';
+                otif.style.color = '#38bdf8';
+                otifSub.innerText = 'Cyber 95,4% • Cumplimiento de estándar base';
+
+                ebitda.innerText = '$856.097.000/a';
+                ebitda.style.color = '#94a3b8';
+                ebitdaSub.innerText = 'Base ahorro consolidado 5 proyectos';
+
+                payback.innerText = '10,7 Meses';
+                payback.style.color = '#94a3b8';
+                paybackSub.innerText = 'VAN 3a: $1.289M CLP';
+
+                esg.innerText = '0% Solar (Red Fósil)';
+                esg.style.color = '#f87171';
+                esgSub.innerText = 'Gasto $130M/año eléctrico • Trabajo en altura persiste';
+
+                alertNote.innerHTML = '⚠️ <strong>Diagnóstico Modo To-Be:</strong> Cumple con el presupuesto techo de $850M y resuelve la crisis operativa inmediata en 24 semanas. Sin embargo, no captura el +50% de posiciones adicionales, mantiene pasillos de 3m para grúas reach y pierde $370M CLP/año en ahorros que la robotización Shuttle y la planta solar sí ofrecen.';
+                alertNote.style.borderColor = 'rgba(56, 189, 248, 0.4)';
+                alertNote.style.background = 'rgba(2, 132, 199, 0.12)';
+            } else {
+                btnExc.classList.add('active', 'exc');
+                btnToBe.classList.remove('active', 'tobe');
+
+                badgeScen.innerText = '● MODO ACTIVO: ESCENARIO DE EXCELENCIA (P1 A P8 ROBOTIZADO)';
+                badgeScen.style.color = '#34d399';
+                badgeDet.innerText = 'Sin Límite de Tiempo • 8 Iniciativas Integradas • Shuttle AS/RS';
+
+                capex.innerText = '$1.420.000.000';
+                capex.style.color = '#f43f5e';
+                capexSub.innerText = '+$570M sobre techo ($850M) • Amortizado en 5,6m';
+
+                cap.innerText = '45.630 Pos';
+                cap.style.color = '#38bdf8';
+                capSub.innerText = '2.535 racks compactos (+50%) • 29,5% ocupación actual';
+
+                spd.innerText = '220 lín/h';
+                spd.style.color = '#34d399';
+                spdSub.innerText = '+221,6% vs To-Be • Shuttle + Cobots AMR GTP';
+
+                cost.innerText = 'CLP $3.850';
+                cost.style.color = '#fbbf24';
+                costSub.innerText = '-29,0% vs To-Be ($5.420) • Fallido baja a $4.820';
+
+                otif.innerText = '98,7%';
+                otif.style.color = '#34d399';
+                otifSub.innerText = 'World-Class Superior • Click & Collect 99,2%';
+
+                ebitda.innerText = '$1.226.097.000/a';
+                ebitda.style.color = '#38bdf8';
+                ebitdaSub.innerText = '+$370M/año extra sobre To-Be ($856M/a)';
+
+                payback.innerText = '13,9 Meses';
+                payback.style.color = '#a78bfa';
+                paybackSub.innerText = 'Recuperación total • VAN 3a: $1.842M CLP';
+
+                esg.innerText = '65% Solar (ESG)';
+                esg.style.color = '#34d399';
+                esgSub.innerText = 'Cero trabajo en altura • -85,5% caminatas operarios';
+
+                alertNote.innerHTML = '💡 <strong>Análisis Estratégico del Escenario Seleccionado:</strong> El Escenario Excelente libera todo el potencial operativo del CD Pudahuel. Al no limitar el tiempo a 24 semanas, se integra la planta solar y el sistema AS/RS Robot Shuttle en los 2.535 módulos de rack, llevando la capacidad a 45.630 pallets y derrumbando el costo por pedido a solo $3.850 CLP.';
+                alertNote.style.borderColor = 'rgba(52, 211, 153, 0.4)';
+                alertNote.style.background = 'rgba(16, 185, 129, 0.12)';
+            }
+        }
+
+        // 2. SIMULADOR SLIDER ROI Y ABSORCIÓN DEL EXCESO (FEATURE 2)
+        function updateBudgetSim(val) {
+            const growth = parseInt(val, 10);
+            document.getElementById('sliderGrowthVal').innerText = '+' + growth + '%';
+
+            // Base ahorro: 1.226M. Por cada 10% de volumen adicional, se generan ~37M extras de ahorro operacional por escala.
+            const extraSavings = Math.round(growth * 3.7);
+            const totalAnnualSavings = 1226 + extraSavings;
+            document.getElementById('simAnnualSavings').innerText = '$' + totalAnnualSavings.toLocaleString('es-CL') + 'M CLP/a';
+            document.getElementById('simAnnualSavingsSub').innerText = '+$' + (extraSavings + 92) + 'M/a por escala de volumen';
+
+            // Meses para amortizar el exceso de $570M:
+            const monthlySavings = totalAnnualSavings / 12;
+            const monthsToPayExcess = (570 / monthlySavings).toFixed(1);
+            document.getElementById('simMonthsPayback').innerText = monthsToPayExcess + ' Meses';
+
+            // VAN a 5 años dinámico:
+            const dynamicVan = 1842 + Math.round(growth * 25.5);
+            document.getElementById('simVanVal').innerText = '$' + dynamicVan.toLocaleString('es-CL') + 'M CLP';
+        }
+
+        // 3. CONTROL DE SIMULACIÓN SVG PLAY / PAUSE (FEATURE 5)
+        let isSimRunning = true;
+        function toggleSim() {
+            const container = document.getElementById('simContainer');
+            const dot = document.getElementById('simStatusDot');
+            const text = document.getElementById('simStatusText');
+            const btnText = document.getElementById('btnToggleSimText');
+
+            isSimRunning = !isSimRunning;
+            if (isSimRunning) {
+                container.classList.remove('simulation-paused');
+                dot.innerText = '●';
+                dot.style.color = '#34d399';
+                text.innerText = 'SIMULACIÓN ACTIVA: SISTEMA AS/RS DIGITAL TWIN';
+                btnText.innerText = '⏸️ Pausar Simulación';
+            } else {
+                container.classList.add('simulation-paused');
+                dot.innerText = '⏸️';
+                dot.style.color = '#fbbf24';
+                text.innerText = 'SIMULACIÓN PAUSADA (PASO A PASO DETENIDO)';
+                btnText.innerText = '▶️ Reanudar Simulación';
+            }
+        }
+
+        // 4. MODAL DE INSPECCIÓN TÉCNICA DE HARDWARE (FEATURE 6)
+        const hwSpecsData = {
+            shuttle: {
+                title: 'Carro Robot Shuttle Autónomo (Pallet Runner)',
+                subtitle: 'P6: AS/RS Alta Densidad en Canales Profundos',
+                icon: '⚡',
+                html: `
+                    <p>El <strong>Robot Shuttle</strong> es una plataforma robótica autónoma ultracompacta que navega sobre rieles galvanizados internos dentro de los canales de almacenamiento.</p>
+                    <table class="exc-master-table" style="margin-top: 10px;">
+                        <tr><td style="width: 40%;"><strong>Velocidad de Traslación</strong></td><td>2,0 m/s con aceleración suave (1,2 m/s²)</td></tr>
+                        <tr><td><strong>Capacidad de Carga</strong></td><td>1.500 kg nominal (Pallet estándar 1.000x1.200mm)</td></tr>
+                        <tr><td><strong>Batería & Autonomía</strong></td><td>Baterías Litio LiFePO4 24V con carga inductiva (15 min carga = 8h operación)</td></tr>
+                        <tr><td><strong>Sensores de Guiado</strong></td><td>Doble escáner láser ToF + odometría óptica (precisión ±1,5 mm)</td></tr>
+                        <tr><td><strong>Comunicación</strong></td><td>Wi-Fi 6 Industrial 5 GHz con roaming continuo (<10ms handover)</td></tr>
+                        <tr><td><strong>Impacto Estructural</strong></td><td>Cero choques de horquillas contra postes &bull; 100% blindaje NCh2369 Sísmica</td></tr>
+                    </table>
+                `
+            },
+            lifter: {
+                title: 'Elevador Vertical AS/RS (Lifter de Cabecera)',
+                subtitle: 'P6: Conexión Vertical Inter-nivel (12 Metros de Altura)',
+                icon: '↕',
+                html: `
+                    <p>El <strong>Elevador Vertical Lifter</strong> conecta los 6 niveles de altura del bloque de racks con la losa de piso donde circulan los robots AMR.</p>
+                    <table class="exc-master-table" style="margin-top: 10px;">
+                        <tr><td style="width: 40%;"><strong>Recorrido Vertical</strong></td><td>12,0 metros de elevación continua (6 niveles AS/RS)</td></tr>
+                        <tr><td><strong>Velocidad Vertical</strong></td><td>3,0 m/s con servocontrol vectorial de frecuencia</td></tr>
+                        <tr><td><strong>Capacidad de Ciclo</strong></td><td>65 transferencias pallet/hora por torre (4 torres = 260 pallets/h)</td></tr>
+                        <tr><td><strong>Eficiencia Energética</strong></td><td>Motor síncrono regenerativo (reinyecta energía en descenso)</td></tr>
+                        <tr><td><strong>Sistemas de Seguridad</strong></td><td>Paracaídas electromecánico certificado EN 528 + cortinas ópticas SIL-3</td></tr>
+                    </table>
+                `
+            },
+            amr: {
+                title: 'Flota de 32 Cobots AMR (Autonomous Mobile Robots)',
+                subtitle: 'P6: Transporte Colaborativo de Piso hacia Estaciones GTP',
+                icon: '🤖',
+                html: `
+                    <p>Los <strong>Cobots AMR</strong> reciben los pallets y totes procedentes de los elevadores Lifters y los transportan de forma autónoma hasta las estaciones de preparación de pedidos.</p>
+                    <table class="exc-master-table" style="margin-top: 10px;">
+                        <tr><td style="width: 40%;"><strong>Flota Desplegada</strong></td><td>32 unidades operando en simultáneo en piso nivelado</td></tr>
+                        <tr><td><strong>Carga Útil</strong></td><td>1.000 kg con mesa elevadora hidráulica integrada</td></tr>
+                        <tr><td><strong>Velocidad de Tránsito</strong></td><td>1,8 m/s en pasillos compartidos de forma segura con personal</td></tr>
+                        <tr><td><strong>Navegación</strong></td><td>SLAM LiDAR 360° + cámaras 3D estereoscópicas (sin cables ni bandas en piso)</td></tr>
+                        <tr><td><strong>Batería</strong></td><td>Recarga por oportunidad en estaciones automáticas de piso (99,2% disponibilidad)</td></tr>
+                        <tr><td><strong>Certificación</strong></td><td>Norma ISO 3691-4 para robots industriales sin conductor</td></tr>
+                    </table>
+                `
+            },
+            gtp: {
+                title: 'Estación Ergonómica Goods-to-Person (GTP)',
+                subtitle: 'P2 + P6: Preparación de Pedidos a Nivel de Piso',
+                icon: '🎯',
+                html: `
+                    <p>En el modelo <strong>Goods-to-Person</strong>, el operario ya no camina buscando productos por la nave: los robots llevan la carga a su puesto de trabajo ergonómico.</p>
+                    <table class="exc-master-table" style="margin-top: 10px;">
+                        <tr><td style="width: 40%;"><strong>Throughput Sostenido</strong></td><td>220 líneas de picking por hora (vs 46,8 en crisis y 68,4 en To-Be)</td></tr>
+                        <tr><td><strong>Confirmación Visual</strong></td><td>Pick-by-Light interactivo con display de confirmación de cantidad</td></tr>
+                        <tr><td><strong>Control de Calidad</strong></td><td>Báscula de pesaje continuo en línea (detecta sobrantes o faltantes en tiempo real)</td></tr>
+                        <tr><td><strong>Salud & Seguridad</strong></td><td>Altura ajustable a la cintura (ISO 11228-1) &bull; Erradica 100% de trabajos en altura</td></tr>
+                        <tr><td><strong>Reducción Fatiga</strong></td><td>Caminatas físicas caen de 67,6 km &rarr; 9,8 km diarios por turno</td></tr>
+                    </table>
+                `
+            },
+            solar: {
+                title: 'Planta Solar Fotovoltaica CD Pudahuel (250 kWp)',
+                subtitle: 'P7: Energía Sostenible & Reducción Drástica de OPEX',
+                icon: '☀️',
+                html: `
+                    <p>La <strong>Planta Solar</strong> cubre la techumbre de la nave logística de Pudahuel para energizar los sistemas robotizados AS/RS y la carga de baterías de los cobots.</p>
+                    <table class="exc-master-table" style="margin-top: 10px;">
+                        <tr><td style="width: 40%;"><strong>Potencia Instalada</strong></td><td>250 kWp distribuidos en 3.200 m² de techumbre</td></tr>
+                        <tr><td><strong>Paneles Solares</strong></td><td>550 paneles monocristalinos Tier-1 de 455W de alta eficiencia</td></tr>
+                        <tr><td><strong>Generación Anual</strong></td><td>385.000 kWh / año (385 MWh anuales)</td></tr>
+                        <tr><td><strong>Ahorro en Facturación</strong></td><td>CLP $85.000.000 al año (absorbe el 65% de la factura eléctrica)</td></tr>
+                        <tr><td><strong>Impacto ESG</strong></td><td>-18,5 toneladas de CO2 evitadas cada año (Certificación Green Warehouse)</td></tr>
+                    </table>
+                `
+            }
+        };
+
+        function openModal(techId) {
+            const data = hwSpecsData[techId];
+            if (!data) return;
+
+            document.getElementById('hwModalIcon').innerText = data.icon;
+            document.getElementById('hwModalTitle').innerText = data.title;
+            document.getElementById('hwModalSubtitle').innerText = data.subtitle;
+            document.getElementById('hwModalBody').innerHTML = data.html;
+
+            document.getElementById('excModalOverlay').classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('excModalOverlay').classList.remove('active');
+        }
+
+        function closeModalOnBg(e) {
+            if (e.target.id === 'excModalOverlay') {
+                closeModal();
+            }
+        }
+
+        // 5. FILTROS DEPARTAMENTALES (FEATURE 7)
+        function filterDepts(deptKey, btnElement) {
+            const buttons = document.querySelectorAll('.exc-filter-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            if (btnElement) btnElement.classList.add('active');
+
+            const cards = document.querySelectorAll('.exc-dept-card');
+            cards.forEach(card => {
+                if (deptKey === 'all' || card.getAttribute('data-dept') === deptKey) {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // 6. TECLA ESCAPE PARA CERRAR MODAL
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        });
+    </script>
 </body>
 </html>
