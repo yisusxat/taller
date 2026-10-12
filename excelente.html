@@ -773,6 +773,112 @@
             align-items: center;
         }
 
+        /* Radar 360° Filtro Interactivo y Detalle */
+        .exc-radar-filter-bar {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .exc-radar-pill-btn {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #94a3b8;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 6px 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.22s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .exc-radar-pill-btn:hover {
+            color: #ffffff;
+            border-color: rgba(56, 189, 248, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .exc-radar-pill-btn.active.crisis {
+            background: rgba(244, 63, 94, 0.25);
+            color: #fca5a5;
+            border-color: #f43f5e;
+            box-shadow: 0 0 12px rgba(244, 63, 94, 0.35);
+        }
+
+        .exc-radar-pill-btn.active.tobe {
+            background: rgba(2, 132, 199, 0.28);
+            color: #38bdf8;
+            border-color: #38bdf8;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
+        }
+
+        .exc-radar-pill-btn.active.excelente {
+            background: rgba(16, 185, 129, 0.28);
+            color: #34d399;
+            border-color: #10b981;
+            box-shadow: 0 0 12px rgba(16, 185, 129, 0.35);
+        }
+
+        .exc-radar-pill-btn.active.all {
+            background: rgba(255, 255, 255, 0.18);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .exc-radar-detail-box {
+            margin-top: 10px;
+            background: #040814;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 10px;
+            padding: 12px 14px;
+            transition: all 0.25s ease;
+        }
+
+        .exc-radar-detail-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+        }
+
+        .exc-radar-detail-item {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 6px;
+            padding: 8px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .exc-radar-detail-item .lbl {
+            font-size: 0.65rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: #94a3b8;
+            text-transform: uppercase;
+        }
+
+        .exc-radar-detail-item .val {
+            font-size: 0.88rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            color: #ffffff;
+        }
+
+        .radar-interactive-group {
+            cursor: pointer;
+            transition: opacity 0.3s ease, filter 0.3s ease, stroke-width 0.3s ease;
+        }
+
+        .radar-interactive-group:hover {
+            filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4));
+        }
+
         /* -----------------------------------------------------------------
            4. ANIMACIÓN SVG DIGITAL TWIN Y PLAY/PAUSE (FEATURE 5)
            ----------------------------------------------------------------- */
@@ -1500,6 +1606,17 @@
             .exc-budget-table th, .exc-budget-table td {
                 padding: 6px 6px;
                 font-size: 0.7rem;
+            }
+
+            .exc-radar-detail-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .exc-radar-pill-btn {
+                font-size: 0.68rem;
+                padding: 5px 8px;
+                flex: 1;
+                justify-content: center;
             }
         }
     </style>
@@ -2288,14 +2405,14 @@
             <!-- VISUALS DUO GRID: RADAR 360° + CORTE TRANSVERSAL DE PASILLOS (FEATURES 3 & 4) -->
             <div class="exc-visuals-duo-grid">
                 
-                <!-- FEATURE 3: RADAR 360° MULTIDIMENSIONAL -->
+                <!-- FEATURE 3: RADAR 360° MULTIDIMENSIONAL (CON FILTRO INTERACTIVO) -->
                 <div class="exc-visual-card">
                     <h4>
                         <span>🕸️ Gráfico Radar 360° Multidimensional</span>
-                        <span style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #34d399;">TRIPLE BENCHMARK</span>
+                        <span style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #34d399;">FILTRO ACTIVO CLICKEABLE</span>
                     </h4>
                     <p style="margin: 0; font-size: 0.78rem; color: #94a3b8; line-height: 1.45;">
-                        Comparación simultánea en 6 dimensiones críticas: As-Is (Crisis), To-Be (P1-P5) y Excelente (P1-P8). Observa la expansión geométrica total lograda por la robotización y la planta solar:
+                        Haz clic en cualquiera de las 3 opciones (o directamente en las capas del gráfico) para <strong>aislar, filtrar y auditar</strong> el perfil de rendimiento de cada escenario:
                     </p>
 
                     <svg viewBox="0 0 350 310" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; background: #060b18; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.08);">
@@ -2313,22 +2430,38 @@
                         <polygon points="175,73 247,114 247,196 175,238 104,196 104,114" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
                         <polygon points="175,45 270,100 270,210 175,265 80,210 80,100" fill="none" stroke="rgba(56,189,248,0.25)" stroke-width="1.2" stroke-dasharray="2 2"/>
 
-                        <!-- Polígono 1: Crisis As-Is (Rojo Punteado) -->
-                        <polygon points="175,114 195,143 217,179 175,183 118,188 161,147" fill="rgba(244, 63, 94, 0.2)" stroke="#f43f5e" stroke-width="1.8" stroke-dasharray="3 3"/>
+                        <!-- Polígono 1: Crisis As-Is (Clickeable con filtro) -->
+                        <g id="radarGroupCrisis" class="radar-interactive-group" onclick="filterRadar('crisis')">
+                            <polygon id="radarPolyCrisis" points="175,114 195,143 217,179 175,183 118,188 161,147" fill="rgba(244, 63, 94, 0.22)" stroke="#f43f5e" stroke-width="2" stroke-dasharray="3 3"/>
+                            <circle cx="175" cy="114" r="3.2" fill="#f43f5e"/>
+                            <circle cx="195" cy="143" r="3.2" fill="#f43f5e"/>
+                            <circle cx="217" cy="179" r="3.2" fill="#f43f5e"/>
+                            <circle cx="175" cy="183" r="3.2" fill="#f43f5e"/>
+                            <circle cx="118" cy="188" r="3.2" fill="#f43f5e"/>
+                            <circle cx="161" cy="147" r="3.2" fill="#f43f5e"/>
+                        </g>
 
-                        <!-- Polígono 2: To-Be Convencional (Azul Cielo) -->
-                        <polygon points="175,81 211,134 259,203 175,230 85,207 123,125" fill="rgba(56, 189, 248, 0.25)" stroke="#38bdf8" stroke-width="2"/>
+                        <!-- Polígono 2: To-Be Convencional (Clickeable con filtro) -->
+                        <g id="radarGroupToBe" class="radar-interactive-group" onclick="filterRadar('tobe')">
+                            <polygon id="radarPolyToBe" points="175,81 211,134 259,203 175,230 85,207 123,125" fill="rgba(56, 189, 248, 0.28)" stroke="#38bdf8" stroke-width="2.2"/>
+                            <circle cx="175" cy="81" r="3.5" fill="#38bdf8"/>
+                            <circle cx="211" cy="134" r="3.5" fill="#38bdf8"/>
+                            <circle cx="259" cy="203" r="3.5" fill="#38bdf8"/>
+                            <circle cx="175" cy="230" r="3.5" fill="#38bdf8"/>
+                            <circle cx="85" cy="207" r="3.5" fill="#38bdf8"/>
+                            <circle cx="123" cy="125" r="3.5" fill="#38bdf8"/>
+                        </g>
 
-                        <!-- Polígono 3: Escenario Excelente (Verde Esmeralda Brillante) -->
-                        <polygon points="175,45 270,100 269,210 175,260 80,210 82,101" fill="rgba(16, 185, 129, 0.35)" stroke="#34d399" stroke-width="2.5"/>
-
-                        <!-- Puntos destacados Excelente -->
-                        <circle cx="175" cy="45" r="3.5" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
-                        <circle cx="270" cy="100" r="3.5" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
-                        <circle cx="269" cy="210" r="3.5" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
-                        <circle cx="175" cy="260" r="3.5" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
-                        <circle cx="80" cy="210" r="3.5" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
-                        <circle cx="82" cy="101" r="3.5" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
+                        <!-- Polígono 3: Escenario Excelente (Clickeable con filtro) -->
+                        <g id="radarGroupExcelente" class="radar-interactive-group" onclick="filterRadar('excelente')">
+                            <polygon id="radarPolyExcelente" points="175,45 270,100 269,210 175,260 80,210 82,101" fill="rgba(16, 185, 129, 0.35)" stroke="#34d399" stroke-width="2.8"/>
+                            <circle cx="175" cy="45" r="4" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
+                            <circle cx="270" cy="100" r="4" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
+                            <circle cx="269" cy="210" r="4" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
+                            <circle cx="175" cy="260" r="4" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
+                            <circle cx="80" cy="210" r="4" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
+                            <circle cx="82" cy="101" r="4" fill="#34d399" stroke="#ffffff" stroke-width="1"/>
+                        </g>
 
                         <!-- Rótulos de los 6 Ejes -->
                         <text x="175" y="34" fill="#38bdf8" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">Capacidad (45.630)</text>
@@ -2339,17 +2472,83 @@
                         <text x="68" y="98" fill="#a78bfa" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="end">Solar ESG (65%)</text>
                     </svg>
 
-                    <!-- Leyenda del Radar -->
-                    <div style="display: flex; justify-content: space-between; font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; flex-wrap: wrap; gap: 8px;">
-                        <span style="color: #f87171; display: inline-flex; align-items: center; gap: 4px;">
-                            <span style="display: inline-block; width: 12px; height: 2px; background: #f43f5e; border-top: 1px dashed #f43f5e;"></span> Crisis As-Is (43,5% OTIF)
-                        </span>
-                        <span style="color: #38bdf8; display: inline-flex; align-items: center; gap: 4px;">
-                            <span style="display: inline-block; width: 12px; height: 3px; background: #38bdf8;"></span> To-Be (30.420 pos)
-                        </span>
-                        <span style="color: #34d399; font-weight: 800; display: inline-flex; align-items: center; gap: 4px;">
-                            <span style="display: inline-block; width: 12px; height: 3px; background: #34d399;"></span> Excelente (45.630 pos)
-                        </span>
+                    <!-- BARRA DE FILTROS INTERACTIVA DEL RADAR -->
+                    <div class="exc-radar-filter-bar">
+                        <button type="button" id="btnRadarCrisis" class="exc-radar-pill-btn crisis" onclick="filterRadar('crisis')">
+                            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #f43f5e;"></span>
+                            <span>Crisis As-Is (43,5% OTIF)</span>
+                        </button>
+                        <button type="button" id="btnRadarToBe" class="exc-radar-pill-btn tobe" onclick="filterRadar('tobe')">
+                            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #38bdf8;"></span>
+                            <span>To-Be (30.420 pos)</span>
+                        </button>
+                        <button type="button" id="btnRadarExc" class="exc-radar-pill-btn active excelente" onclick="filterRadar('excelente')">
+                            <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #34d399;"></span>
+                            <span>Excelente (45.630 pos)</span>
+                        </button>
+                        <button type="button" id="btnRadarAll" class="exc-radar-pill-btn all" onclick="filterRadar('all')" title="Ver las 3 capas superpuestas">
+                            <span>👁️ Ver Todos</span>
+                        </button>
+                    </div>
+
+                    <!-- DETALLE DINÁMICO DE LA DIMENSIÓN FILTRADA -->
+                    <div id="radarScenarioDetail" class="exc-radar-detail-box">
+                        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                            <div style="display: flex; align-items: center; gap: 8px;">
+                                <span id="radarDetailDot" style="color: #34d399; font-size: 1rem;">●</span>
+                                <strong id="radarDetailTitle" style="color: #ffffff; font-size: 0.88rem;">Escenario de Excelente (P1 a P8 Robotizado)</strong>
+                            </div>
+                            <span id="radarDetailBadge" style="font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; background: rgba(52, 211, 153, 0.2); color: #34d399; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(52, 211, 153, 0.4);">
+                                WORLD-CLASS BENCHMARK
+                            </span>
+                        </div>
+                        <div id="radarDetailSub" style="font-size: 0.74rem; color: #94a3b8; margin-top: 4px; line-height: 1.4;">
+                            Robot Shuttle AS/RS + 32 Cobots AMR + Planta Solar 250 kWp &bull; Desempeño superior en las 6 dimensiones.
+                        </div>
+
+                        <!-- Grilla de las 6 dimensiones filtradas -->
+                        <div class="exc-radar-detail-grid">
+                            <div class="exc-radar-detail-item">
+                                <span class="lbl">1. Capacidad Almacén</span>
+                                <span class="val" id="rfCapVal" style="color: #38bdf8;">45.630 Pos</span>
+                                <span style="font-size: 0.68rem; color: #64748b;" id="rfCapSub">+50% racks compactos</span>
+                            </div>
+                            <div class="exc-radar-detail-item">
+                                <span class="lbl">2. Velocidad Picking</span>
+                                <span class="val" id="rfPickVal" style="color: #34d399;">220 lín/h</span>
+                                <span style="font-size: 0.68rem; color: #64748b;" id="rfPickSub">+221,6% con Shuttle GTP</span>
+                            </div>
+                            <div class="exc-radar-detail-item">
+                                <span class="lbl">3. Nivel Servicio OTIF</span>
+                                <span class="val" id="rfOtifVal" style="color: #fbbf24;">98,7%</span>
+                                <span style="font-size: 0.68rem; color: #64748b;" id="rfOtifSub">Click & Collect 99,2%</span>
+                            </div>
+                            <div class="exc-radar-detail-item">
+                                <span class="lbl">4. Costo por Pedido</span>
+                                <span class="val" id="rfCostVal" style="color: #34d399;">CLP $3.850</span>
+                                <span style="font-size: 0.68rem; color: #64748b;" id="rfCostSub">-29,0% vs To-Be ($5.420)</span>
+                            </div>
+                            <div class="exc-radar-detail-item">
+                                <span class="lbl">5. Exactitud Inventario</span>
+                                <span class="val" id="rfIraVal" style="color: #38bdf8;">99,8% IRA</span>
+                                <span style="font-size: 0.68rem; color: #64748b;" id="rfIraSub">0 descalces con WMS 3D</span>
+                            </div>
+                            <div class="exc-radar-detail-item">
+                                <span class="lbl">6. ESG & Sostenibilidad</span>
+                                <span class="val" id="rfEsgVal" style="color: #a78bfa;">65% Solar</span>
+                                <span style="font-size: 0.68rem; color: #64748b;" id="rfEsgSub">-18,5 ton CO2 Pudahuel</span>
+                            </div>
+                        </div>
+
+                        <!-- Botón de sincronización con conmutador superior -->
+                        <div id="radarSyncContainer" style="margin-top: 10px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.06); padding-top: 8px; flex-wrap: wrap; gap: 8px;">
+                            <span id="radarSyncHint" style="font-size: 0.72rem; color: #64748b;">
+                                💡 Haz clic en los botones o en el gráfico para alternar el filtro.
+                            </span>
+                            <button type="button" id="btnRadarSyncScen" class="exc-sim-btn" onclick="syncRadarWithSwitcher()" style="font-size: 0.7rem; padding: 4px 10px;">
+                                🔄 Aplicar al Tablero Superior
+                            </button>
+                        </div>
                     </div>
                 </div>
 
@@ -3458,11 +3657,234 @@
             });
         }
 
-        // 6. TECLA ESCAPE PARA CERRAR MODAL
+        // 6. FILTRO INTERACTIVO RADAR 360° (FEATURE 3)
+        let currentRadarMode = 'excelente';
+
+        const radarDataStore = {
+            crisis: {
+                title: 'Crisis As-Is (Línea Base Histórica)',
+                subtitle: 'Colapso Operacional CyberDay • OTIF 43,5% • Costo Pedido CLP $7.920 reg / $29.628 fallido',
+                badge: 'CRISIS SEVERA',
+                dotColor: '#f43f5e',
+                capVal: '16.900 Pos',
+                capSub: '5 pisos manual • 80% ocupación descalzada',
+                pickVal: '46,8 lín/HH',
+                pickSub: 'Planillas de papel • 67,6 km caminatas',
+                otifVal: '43,5%',
+                otifSub: '80,9% mes regular • 842 reclamos SERNAC',
+                costVal: 'CLP $7.920',
+                costSub: 'Pedido fallido se dispara a CLP $29.628',
+                iraVal: '93,8% IRA',
+                iraSub: '114 SKU descalzados en slotting',
+                esgVal: '0% Solar',
+                esgSub: '$130M gasto eléctrico • Fatiga lumbar',
+                syncText: 'Modo Crisis (Solo Referencia)',
+                canSync: false
+            },
+            tobe: {
+                title: 'Escenario To-Be (P1 a P5 Estándar)',
+                subtitle: 'Solución Base en 24 Semanas • 30.420 Pos • OTIF 96,2% • Costo Pedido CLP $5.420',
+                badge: 'ESTÁNDAR BASE',
+                dotColor: '#38bdf8',
+                capVal: '30.420 Pos',
+                capSub: '1.690 racks selectivos (27 pasillos 3m)',
+                pickVal: '68,4 lín/HH',
+                pickSub: '+46,1% vs Crisis • Voice Picking manual',
+                otifVal: '96,2%',
+                otifSub: 'Cyber 95,4% • Cumplimiento SLA base',
+                costVal: 'CLP $5.420',
+                costSub: '-31,6% vs Crisis / Fallido: CLP $8.532',
+                iraVal: '99,8% IRA',
+                iraSub: 'WMS NextGen + radiofrecuencia Zebra',
+                esgVal: '0% Solar',
+                esgSub: '14,2 km caminatas • Mesas hidráulicas',
+                syncText: '🔄 Sincronizar Modo To-Be en Tablero Superior',
+                canSync: true,
+                targetScen: 'tobe'
+            },
+            excelente: {
+                title: 'Escenario de Excelente (P1 a P8 Robotizado)',
+                subtitle: 'World-Class Logistics • 45.630 Pos • OTIF 98,7% • Costo Pedido CLP $3.850 • 65% Solar',
+                badge: 'WORLD-CLASS BENCHMARK',
+                dotColor: '#34d399',
+                capVal: '45.630 Pos',
+                capSub: '+50% más racks compactos Shuttle (2.535)',
+                pickVal: '220 lín/h',
+                pickSub: '+221,6% superior con AS/RS + GTP',
+                otifVal: '98,7%',
+                otifSub: 'Click & Collect 99,2% en 27 tiendas',
+                costVal: 'CLP $3.850',
+                costSub: '-29,0% vs To-Be / Fallido CLP $4.820',
+                iraVal: '99,8% IRA',
+                iraSub: '0 descalces en tiempo real con WMS 3D',
+                esgVal: '65% Solar',
+                esgSub: '-18,5 ton CO2 CD Pudahuel • Cero altura',
+                syncText: '🔄 Sincronizar Modo Excelente en Tablero Superior',
+                canSync: true,
+                targetScen: 'excelente'
+            },
+            all: {
+                title: 'Comparativa Global Tridimensional (3 Escenarios Superpuestos)',
+                subtitle: 'Observa la evolución geométrica: Crisis As-Is (rojo), To-Be (azul) y Excelente (verde esmeralda)',
+                badge: 'VISTA TRIPLE BENCHMARK',
+                dotColor: '#ffffff',
+                capVal: '16,9k → 30,4k → 45,6k',
+                capSub: 'De colapso a +50% capacidad libre',
+                pickVal: '46,8 → 68,4 → 220 l/h',
+                pickSub: 'Salto cuántico con Goods-to-Person',
+                otifVal: '43,5% → 96,2% → 98,7%',
+                otifSub: 'Blindaje total en CyberDay y Retail',
+                costVal: '$7.920 → $5.420 → $3.850',
+                costSub: 'Reducción neta del 51,4% por pedido',
+                iraVal: '93,8% → 99,8% → 99,8%',
+                iraSub: 'Erradicación de descalces',
+                esgVal: '0% → 0% → 65% Solar',
+                esgSub: 'Autosuficiencia y cero trabajo altura',
+                syncText: 'Selecciona un escenario individual para sincronizar',
+                canSync: false
+            }
+        };
+
+        function filterRadar(mode) {
+            currentRadarMode = mode;
+            
+            // 1. Botones activos
+            const btnCrisis = document.getElementById('btnRadarCrisis');
+            const btnToBe = document.getElementById('btnRadarToBe');
+            const btnExc = document.getElementById('btnRadarExc');
+            const btnAll = document.getElementById('btnRadarAll');
+
+            if (btnCrisis) btnCrisis.className = 'exc-radar-pill-btn crisis' + (mode === 'crisis' ? ' active' : '');
+            if (btnToBe) btnToBe.className = 'exc-radar-pill-btn tobe' + (mode === 'tobe' ? ' active' : '');
+            if (btnExc) btnExc.className = 'exc-radar-pill-btn excelente' + (mode === 'excelente' ? ' active' : '');
+            if (btnAll) btnAll.className = 'exc-radar-pill-btn all' + (mode === 'all' ? ' active' : '');
+
+            // 2. Opacidades e intensidades en SVG
+            const gCrisis = document.getElementById('radarGroupCrisis');
+            const gToBe = document.getElementById('radarGroupToBe');
+            const gExc = document.getElementById('radarGroupExcelente');
+
+            if (gCrisis && gToBe && gExc) {
+                if (mode === 'crisis') {
+                    gCrisis.style.opacity = '1';
+                    gCrisis.style.filter = 'drop-shadow(0 0 8px rgba(244, 63, 94, 0.7))';
+                    gToBe.style.opacity = '0.12';
+                    gToBe.style.filter = 'none';
+                    gExc.style.opacity = '0.12';
+                    gExc.style.filter = 'none';
+                } else if (mode === 'tobe') {
+                    gCrisis.style.opacity = '0.12';
+                    gCrisis.style.filter = 'none';
+                    gToBe.style.opacity = '1';
+                    gToBe.style.filter = 'drop-shadow(0 0 8px rgba(56, 189, 248, 0.7))';
+                    gExc.style.opacity = '0.12';
+                    gExc.style.filter = 'none';
+                } else if (mode === 'excelente') {
+                    gCrisis.style.opacity = '0.12';
+                    gCrisis.style.filter = 'none';
+                    gToBe.style.opacity = '0.12';
+                    gToBe.style.filter = 'none';
+                    gExc.style.opacity = '1';
+                    gExc.style.filter = 'drop-shadow(0 0 8px rgba(52, 211, 153, 0.8))';
+                } else {
+                    // all
+                    gCrisis.style.opacity = '0.85';
+                    gCrisis.style.filter = 'none';
+                    gToBe.style.opacity = '0.9';
+                    gToBe.style.filter = 'none';
+                    gExc.style.opacity = '1';
+                    gExc.style.filter = 'none';
+                }
+            }
+
+            // 3. Actualizar detalle dinámico
+            const d = radarDataStore[mode] || radarDataStore.excelente;
+            const dot = document.getElementById('radarDetailDot');
+            const title = document.getElementById('radarDetailTitle');
+            const sub = document.getElementById('radarDetailSub');
+            const badge = document.getElementById('radarDetailBadge');
+
+            if (dot) dot.style.color = d.dotColor;
+            if (title) title.innerText = d.title;
+            if (sub) sub.innerText = d.subtitle;
+            
+            if (badge) {
+                badge.innerText = d.badge;
+                if (mode === 'crisis') {
+                    badge.style.color = '#fca5a5';
+                    badge.style.borderColor = 'rgba(244, 63, 94, 0.4)';
+                    badge.style.background = 'rgba(244, 63, 94, 0.2)';
+                } else if (mode === 'tobe') {
+                    badge.style.color = '#38bdf8';
+                    badge.style.borderColor = 'rgba(56, 189, 248, 0.4)';
+                    badge.style.background = 'rgba(2, 132, 199, 0.2)';
+                } else if (mode === 'excelente') {
+                    badge.style.color = '#34d399';
+                    badge.style.borderColor = 'rgba(52, 211, 153, 0.4)';
+                    badge.style.background = 'rgba(16, 185, 129, 0.2)';
+                } else {
+                    badge.style.color = '#ffffff';
+                    badge.style.borderColor = 'rgba(255, 255, 255, 0.4)';
+                    badge.style.background = 'rgba(255, 255, 255, 0.15)';
+                }
+            }
+
+            const capVal = document.getElementById('rfCapVal');
+            const capSub = document.getElementById('rfCapSub');
+            const pickVal = document.getElementById('rfPickVal');
+            const pickSub = document.getElementById('rfPickSub');
+            const otifVal = document.getElementById('rfOtifVal');
+            const otifSub = document.getElementById('rfOtifSub');
+            const costVal = document.getElementById('rfCostVal');
+            const costSub = document.getElementById('rfCostSub');
+            const iraVal = document.getElementById('rfIraVal');
+            const iraSub = document.getElementById('rfIraSub');
+            const esgVal = document.getElementById('rfEsgVal');
+            const esgSub = document.getElementById('rfEsgSub');
+
+            if (capVal) capVal.innerText = d.capVal;
+            if (capSub) capSub.innerText = d.capSub;
+            if (pickVal) pickVal.innerText = d.pickVal;
+            if (pickSub) pickSub.innerText = d.pickSub;
+            if (otifVal) otifVal.innerText = d.otifVal;
+            if (otifSub) otifSub.innerText = d.otifSub;
+            if (costVal) costVal.innerText = d.costVal;
+            if (costSub) costSub.innerText = d.costSub;
+            if (iraVal) iraVal.innerText = d.iraVal;
+            if (iraSub) iraSub.innerText = d.iraSub;
+            if (esgVal) esgVal.innerText = d.esgVal;
+            if (esgSub) esgSub.innerText = d.esgSub;
+
+            const btnSync = document.getElementById('btnRadarSyncScen');
+            if (btnSync) {
+                if (d.canSync) {
+                    btnSync.style.display = 'inline-block';
+                    btnSync.innerText = d.syncText;
+                } else {
+                    btnSync.style.display = 'none';
+                }
+            }
+        }
+
+        function syncRadarWithSwitcher() {
+            const d = radarDataStore[currentRadarMode];
+            if (d && d.targetScen) {
+                switchScenario(d.targetScen);
+                const switcher = document.getElementById('morphDashboard');
+                if (switcher) switcher.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // 7. TECLA ESCAPE PARA CERRAR MODAL
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
             }
+        });
+
+        // Inicialización
+        window.addEventListener('DOMContentLoaded', function() {
+            filterRadar('excelente');
         });
     </script>
 </body>
