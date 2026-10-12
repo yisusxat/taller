@@ -101,6 +101,7 @@
     const styleEl = document.createElement('style');
     styleEl.id = 'ah-gate-core-styles';
     styleEl.innerHTML = `
+        /* Ocultar contenido mientras esté bloqueado */
         html.ah-gate-locked body > *:not(#ahSecurityGateOverlay) {
             display: none !important;
             visibility: hidden !important;
@@ -113,12 +114,14 @@
             margin: 0 !important;
             padding: 0 !important;
         }
+
+        /* El overlay SOLO se muestra cuando el documento tiene la clase ah-gate-locked */
         #ahSecurityGateOverlay {
+            display: none !important;
             position: fixed !important;
             inset: 0 !important;
             z-index: 2147483647 !important;
             background: radial-gradient(circle at 50% 25%, #0f1c3f 0%, #070d1e 50%, #03060f 100%) !important;
-            display: flex !important;
             align-items: center !important;
             justify-content: center !important;
             padding: 16px !important;
@@ -126,7 +129,18 @@
             color: #ffffff !important;
             box-sizing: border-box !important;
             overflow-y: auto !important;
+            transition: opacity 0.25s ease-out !important;
         }
+        html.ah-gate-locked #ahSecurityGateOverlay {
+            display: flex !important;
+        }
+        #ahSecurityGateOverlay.ah-hidden {
+            display: none !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            visibility: hidden !important;
+        }
+
         .ah-gate-card {
             background: rgba(13, 21, 39, 0.95) !important;
             border: 1px solid rgba(56, 189, 248, 0.35) !important;
@@ -429,7 +443,8 @@
                 });
             });
         } else {
-            overlay.style.display = 'flex';
+            overlay.classList.remove('ah-hidden');
+            overlay.style.removeProperty('display');
             if (customMessage) {
                 setStatusMessage(customMessage, 'error');
             }
@@ -503,9 +518,16 @@
                 localStorage.setItem(STORAGE_KEY_ACTIVITY, Date.now().toString());
             } catch (e) {}
 
+            // Transición suave: ocultar overlay y entrar al sitio
             setTimeout(function () {
+                const overlay = document.getElementById('ahSecurityGateOverlay');
+                if (overlay) {
+                    overlay.classList.add('ah-hidden');
+                }
                 unlockGate();
-            }, 400);
+                // Recargar para entrar de forma limpia con todos los componentes y gráficos inicializados
+                window.location.reload();
+            }, 350);
         } else {
             // PIN INCORRECTO
             for (let i = 0; i < 4; i++) {
@@ -532,11 +554,18 @@
         document.documentElement.classList.remove('ah-gate-locked');
         const overlay = document.getElementById('ahSecurityGateOverlay');
         if (overlay) {
-            overlay.style.display = 'none';
+            overlay.classList.add('ah-hidden');
+            overlay.style.setProperty('display', 'none', 'important');
+            try {
+                overlay.remove();
+            } catch (e) {}
         }
         currentInput = '';
         startInactivityWatcher();
         renderFloatingSessionPill();
+        try {
+            window.dispatchEvent(new Event('resize'));
+        } catch (e) {}
     }
 
     // 8. BLOQUEO DEL SITIO POR EXPIRACIÓN O CIERRE MANUAL
@@ -639,6 +668,7 @@
                 lockBtn.addEventListener('click', function () {
                     if (confirm('¿Desea bloquear el acceso y borrar la caché local de la sesión?')) {
                         lockGate('🔒 Sesión cerrada manualmente por el usuario. Caché eliminada.');
+                        window.location.reload();
                     }
                 });
             }
