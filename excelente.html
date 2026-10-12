@@ -509,6 +509,96 @@
             font-family: 'JetBrains Mono', monospace;
         }
 
+        .exc-kpi-diff-table td.mid {
+            color: #38bdf8;
+            font-weight: 700;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .exc-kpi-diff-table td.delta {
+            color: #fbbf24;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+        }
+
+        /* Comparativa Estratégica To-Be vs Excelente */
+        .exc-comparison-section {
+            background: linear-gradient(180deg, #091226 0%, #060b18 100%);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 16px;
+            padding: 26px;
+            margin-top: 28px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .exc-comp-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-top: 18px;
+        }
+
+        .exc-comp-card {
+            background: rgba(13, 21, 39, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .exc-comp-card.highlight {
+            border-color: rgba(56, 189, 248, 0.45);
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.18), rgba(13, 21, 39, 0.95));
+        }
+
+        .exc-master-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+            margin-top: 16px;
+        }
+
+        .exc-master-table th {
+            background: #040814;
+            color: #94a3b8;
+            padding: 10px 12px;
+            text-align: left;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid rgba(56, 189, 248, 0.35);
+        }
+
+        .exc-master-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            color: #cbd5e1;
+        }
+
+        .exc-master-table tr:hover td {
+            background: rgba(56, 189, 248, 0.06);
+        }
+
+        .exc-tag-delta {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(52, 211, 153, 0.15);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.3);
+        }
+
+        .exc-tag-delta.gold {
+            background: rgba(251, 191, 36, 0.15);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.3);
+        }
+
         /* Detalle del Exceso Presupuestario & Análisis Financiero */
         .exc-budget-deepdive {
             background: #091020;
@@ -1074,7 +1164,7 @@
                     <span>🏆 Beneficios Obtenidos y Resultados Operacionales</span>
                 </div>
                 <div style="font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: #34d399;">
-                    Comparativa: Crisis As-Is vs. Escenario de Excelente
+                    Matriz Comparativa Tridimensional: Crisis As-Is vs. To-Be (P1-P5) vs. Excelente (P1-P8)
                 </div>
             </div>
 
@@ -1087,7 +1177,8 @@
                         <thead>
                             <tr>
                                 <th>Indicador</th>
-                                <th>Crisis (As-Is)</th>
+                                <th>Crisis As-Is</th>
+                                <th>To-Be (P1-P5)</th>
                                 <th>Excelente (P1-P8)</th>
                             </tr>
                         </thead>
@@ -1095,22 +1186,26 @@
                             <tr>
                                 <td><strong>Nivel de Servicio OTIF</strong></td>
                                 <td class="bad">43,5%</td>
-                                <td class="good">98,7% (+55,2 pp)</td>
+                                <td class="mid">96,2%</td>
+                                <td class="good">98,7% <span class="exc-tag-delta">+2,5 pp</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Click & Collect (Stores)</strong></td>
                                 <td class="bad">11,5%</td>
-                                <td class="good">99,2% (+87,7 pp)</td>
+                                <td class="mid">96,8%</td>
+                                <td class="good">99,2% <span class="exc-tag-delta">+2,4 pp</span></td>
                             </tr>
                             <tr>
-                                <td><strong>Backlog Acumulado</strong></td>
-                                <td class="bad">15.387 pedidos</td>
-                                <td class="good">0 pedidos (Al día)</td>
+                                <td><strong>Backlog de Pedidos</strong></td>
+                                <td class="bad">15.387 ped</td>
+                                <td class="mid">0 ped (&lt;18h)</td>
+                                <td class="good">0 ped (&lt;4h real)</td>
                             </tr>
                             <tr>
-                                <td><strong>Reclamos SERNAC / Mes</strong></td>
+                                <td><strong>Reclamos Clientes / Mes</strong></td>
                                 <td class="bad">842 reclamos</td>
-                                <td class="good">&le; 18 reclamos (-97,8%)</td>
+                                <td class="mid">~58 reclamos</td>
+                                <td class="good">&le; 18 reclamos <span class="exc-tag-delta">-69%</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1123,71 +1218,300 @@
                         <thead>
                             <tr>
                                 <th>Indicador</th>
-                                <th>Crisis (As-Is)</th>
+                                <th>Crisis As-Is</th>
+                                <th>To-Be (P1-P5)</th>
                                 <th>Excelente (P1-P8)</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td><strong>Dock-to-Stock Inbound</strong></td>
-                                <td class="bad">22,6 horas</td>
-                                <td class="good">3,2 horas (-85,8%)</td>
+                                <td class="bad">22,6 h</td>
+                                <td class="mid">4,5 h</td>
+                                <td class="good">3,2 h <span class="exc-tag-delta">-1,3 h</span></td>
                             </tr>
                             <tr>
-                                <td><strong>Productividad Picking</strong></td>
+                                <td><strong>Velocidad Picking</strong></td>
                                 <td class="bad">46,8 lín/HH</td>
-                                <td class="good">68,4 lín/HH (+46,1%)</td>
+                                <td class="mid">68,4 lín/HH</td>
+                                <td class="good">220 lín/h <span class="exc-tag-delta">+221%</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Exactitud Inventario (IRA)</strong></td>
                                 <td class="bad">93,8%</td>
-                                <td class="good">99,8% (World-Class)</td>
+                                <td class="mid">99,85%</td>
+                                <td class="good">99,95% <span class="exc-tag-delta">Sensor 3D</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Caminata Diaria Picking</strong></td>
-                                <td class="bad">67,6 km/día</td>
-                                <td class="good">9,8 km/día (-85,5%)</td>
+                                <td class="bad">67,6 km/d</td>
+                                <td class="mid">14,2 km/d</td>
+                                <td class="good">9,8 km/d <span class="exc-tag-delta">-31%</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <!-- Tarjeta 3: Finanzas, SST y Sostenibilidad -->
+                <!-- Tarjeta 3: Finanzas, Capacidad & ESG -->
                 <div class="exc-result-card">
-                    <h4><span>💰</span> 3. Finanzas, Personas & ESG</h4>
+                    <h4><span>💰</span> 3. Costos, Capacidad & ESG</h4>
                     <table class="exc-kpi-diff-table">
                         <thead>
                             <tr>
                                 <th>Indicador</th>
-                                <th>Crisis (As-Is)</th>
+                                <th>Crisis As-Is</th>
+                                <th>To-Be (P1-P5)</th>
                                 <th>Excelente (P1-P8)</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><strong>Costo por Pedido</strong></td>
+                                <td><strong>Costo Operativo / Pedido</strong></td>
+                                <td class="bad">CLP $7.920</td>
+                                <td class="mid">CLP $5.420</td>
+                                <td class="good">CLP $3.850 <span class="exc-tag-delta">-29%</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Costo por Pedido Fallido</strong></td>
                                 <td class="bad">CLP $29.628</td>
-                                <td class="good">CLP $6.840 (-76,9%)</td>
+                                <td class="mid">CLP $8.532</td>
+                                <td class="good">CLP $4.820 <span class="exc-tag-delta">-43,5%</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Capacidad Total Racks</strong></td>
                                 <td class="bad">16.900 pos</td>
-                                <td class="good">45.630 pos (+170,0% Shuttle)</td>
+                                <td class="mid">30.420 pos (reach)</td>
+                                <td class="good">45.630 pos <span class="exc-tag-delta">+15.210</span></td>
                             </tr>
                             <tr>
-                                <td><strong>Accidentes SST / Cargas</strong></td>
-                                <td class="bad">53 días pérd/año</td>
-                                <td class="good">0 incidentes (Mesa Hidr.)</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Gasto Energético Nave</strong></td>
+                                <td><strong>Gasto Eléctrico Nave</strong></td>
                                 <td class="bad">100% Red</td>
-                                <td class="good">-65% Autoconsumo Solar</td>
+                                <td class="mid">100% Red</td>
+                                <td class="good">-65% Solar <span class="exc-tag-delta">-$85M/año</span></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
+            </div>
+        </section>
+
+        <!-- SECCIÓN 3.1: ANÁLISIS COMPARATIVO EXHAUSTIVO: ESCENARIO TO-BE (P1-P5) VS. ESCENARIO DE EXCELENTE (P1-P8) -->
+        <section class="exc-comparison-section">
+            <div class="exc-section-header">
+                <div class="exc-section-title">
+                    <span>⚔️ Análisis Comparativo Estratégico: To-Be (P1-P5) vs. Escenario de Excelente (P1-P8)</span>
+                </div>
+                <div style="font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: #fbbf24;">
+                    Diferenciales de Rendimiento, Costo Unitario por Pedido y Transformación por Secciones
+                </div>
+            </div>
+
+            <!-- Resumen de Respuestas Clave del Directorio -->
+            <div class="exc-comp-grid">
+                <div class="exc-comp-card highlight">
+                    <div style="font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 800;">
+                        ⚡ ¿DÓNDE AUMENTA EL RENDIMIENTO OPERATIVO (THROUGHPUT)?
+                    </div>
+                    <ul style="margin: 0; padding-left: 18px; font-size: 0.82rem; color: #cbd5e1; line-height: 1.6;">
+                        <li><strong>Velocidad de Picking:</strong> Pasa de 68,4 lín/HH en el To-Be (operador con Voice Picking caminando por pasillos) a <strong>220 líneas por hora en Excelente (+221,6% de aumento)</strong> con el sistema Robot Shuttle + Elevadores Lifters + Estaciones Goods-to-Person (GTP).</li>
+                        <li><strong>Ciclo Dock-to-Stock:</strong> Se acelera de 4,5 horas en To-Be a <strong>3,2 horas en Excelente (-28,9% de tiempo adicional)</strong> gracias a la inducción directa en cabecera sin depender de disponibilidad de grúas reach.</li>
+                        <li><strong>Capacidad de Despacho en Horas Peak:</strong> El Sorter 3D continuo clasifica y direcciona hasta <strong>3.600 bultos/hora</strong> hacia las 14 dársenas de salida, triplicando la capacidad manual del To-Be.</li>
+                    </ul>
+                </div>
+
+                <div class="exc-comp-card highlight">
+                    <div style="font-size: 0.78rem; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 800;">
+                        💰 ¿CUÁNTO MÁS BAJA EL COSTO POR PEDIDO?
+                    </div>
+                    <ul style="margin: 0; padding-left: 18px; font-size: 0.82rem; color: #cbd5e1; line-height: 1.6;">
+                        <li><strong>Costo Operativo Regular por Pedido:</strong> Baja de <strong>CLP $5.420 en el To-Be a CLP $3.850 en Excelente (-CLP $1.570 / -29,0% de ahorro directo adicional)</strong>. El costo de mano de obra por línea pickeada cae drásticamente y la energía solar absorbe el costo motriz de los MHE.</li>
+                        <li><strong>Costo de Pedido Fallido / Reclamado:</strong> Se desploma de <strong>CLP $8.532 en To-Be a CLP $4.820 en Excelente (-CLP $3.712 / -43,5% de reducción)</strong>, ya que la tasa de entregas fallidas se contrae a &le; 2,0% y los errores de preparación se reducen a &le; 0,15%.</li>
+                        <li><strong>Ahorro EBITDA Adicional Generado:</strong> El Escenario Excelente genera <strong>+$370.000.000 CLP/año de ahorro adicional</strong> sobre el To-Be ($1.226M vs $856M anuales).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Tabla Maestra Comparativa: To-Be vs. Excelente -->
+            <div style="margin-top: 24px;">
+                <h4 style="margin: 0 0 10px 0; font-size: 0.95rem; color: #ffffff; font-weight: 800;">
+                    📊 Matriz Comparativa Detallada: To-Be Convencional vs. Excelente Robotizado
+                </h4>
+                <div style="overflow-x: auto;">
+                    <table class="exc-master-table">
+                        <thead>
+                            <tr>
+                                <th>Dimensión / Parámetro</th>
+                                <th>Escenario To-Be (P1 a P5)</th>
+                                <th>Escenario de Excelente (P1 a P8)</th>
+                                <th>Diferencial Ganado en Excelente</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Alcance y Proyectos</strong></td>
+                                <td>P1, P2, P3, P4, P5 (5 Proyectos)</td>
+                                <td>P1 al P8 completos (+ Shuttle, AMR, Solar y Alta Densidad)</td>
+                                <td><span class="exc-tag-delta">+3 Iniciativas World-Class</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Presupuesto CAPEX</strong></td>
+                                <td>$766.800.000 CLP (Bajo techo $850M)</td>
+                                <td>$1.420.000.000 CLP (+$570M sobre techo)</td>
+                                <td style="color: #f87171;">+$570.000.000 CLP (+67,1% exceso)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ahorro Operativo Anual (EBITDA)</strong></td>
+                                <td>$856.097.000 CLP / año</td>
+                                <td>$1.226.097.000 CLP / año</td>
+                                <td><span class="exc-tag-delta gold">+$370.000.000 CLP / año (+43,2%)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Valor Actual Neto (VAN 3 años)</strong></td>
+                                <td>$1.289.400.543 CLP</td>
+                                <td>$1.842.300.000 CLP</td>
+                                <td><span class="exc-tag-delta gold">+$552.899.457 CLP (+42,9%)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Plazo de Payback</strong></td>
+                                <td>10,7 meses</td>
+                                <td>13,9 meses</td>
+                                <td style="color: #cbd5e1;">+3,2 meses (Exceso amortizado en 5,6m)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Límite de Tiempo en Ejecución</strong></td>
+                                <td>Restringido a 24 Semanas con IT Freeze</td>
+                                <td><strong>Sin límite de tiempo</strong> (Roadmap por fases continuas)</td>
+                                <td><span class="exc-tag-delta">Cero riesgo de corte o prisa</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tecnología de Almacenamiento</strong></td>
+                                <td>Racks Selectivos (1.690 racks, 27 pasillos de 3m)</td>
+                                <td><strong>Racks Compactos Alta Densidad con Robot Shuttle</strong></td>
+                                <td><span class="exc-tag-delta">+50% más racks (2.535 módulos)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Capacidad Total de Posiciones</strong></td>
+                                <td>30.420 posiciones (con grúas reach P8)</td>
+                                <td><strong>45.630 posiciones (con Robot Shuttle)</strong></td>
+                                <td><span class="exc-tag-delta gold">+15.210 posiciones (+50,0%)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ocupación con 13.480 Pallets</strong></td>
+                                <td>44,3% de ocupación (16.940 pos libres)</td>
+                                <td><strong>29,5% de ocupación (32.150 pos libres)</strong></td>
+                                <td><span class="exc-tag-delta">70,5% colchón de holgura</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Modelo Operativo de Picking</strong></td>
+                                <td>Manual guiado: Voice Picking + RF Zebra</td>
+                                <td><strong>Goods-to-Person: Shuttle + Lifter + Cobots AMR</strong></td>
+                                <td><span class="exc-tag-delta gold">El producto viaja al preparador</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Velocidad de Picking en Racks</strong></td>
+                                <td>68,4 líneas / HH</td>
+                                <td><strong>220 líneas / hora</strong></td>
+                                <td><span class="exc-tag-delta gold">+221,6% más rápido (+151,6 lín/h)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Caminata Diaria de Operarios</strong></td>
+                                <td>14,2 km / día (-79% vs crisis)</td>
+                                <td><strong>9,8 km / día (-85,5% vs crisis)</strong></td>
+                                <td><span class="exc-tag-delta">-31,0% menos fatiga física</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Costo Operativo Unitario / Pedido</strong></td>
+                                <td>CLP $5.420</td>
+                                <td><strong>CLP $3.850</strong></td>
+                                <td><span class="exc-tag-delta gold">-CLP $1.570 / pedido (-29,0%)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Costo por Pedido Fallido</strong></td>
+                                <td>CLP $8.532</td>
+                                <td><strong>CLP $4.820</strong></td>
+                                <td><span class="exc-tag-delta gold">-CLP $3.712 / falla (-43,5%)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Nivel de Servicio OTIF Global</strong></td>
+                                <td>96,2% (Cyber 95,4%)</td>
+                                <td><strong>98,7% (World-Class Superior)</strong></td>
+                                <td><span class="exc-tag-delta">+2,5 puntos porcentuales</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Click & Collect (Tiendas)</strong></td>
+                                <td>96,8%</td>
+                                <td><strong>99,2%</strong></td>
+                                <td><span class="exc-tag-delta">+2,4 puntos porcentuales</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Reclamos SERNAC / Clientes</strong></td>
+                                <td>~58 casos / mes</td>
+                                <td><strong>&le; 18 casos / mes</strong></td>
+                                <td><span class="exc-tag-delta">-69,0% menos reclamos</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Sostenibilidad Energética (ESG)</strong></td>
+                                <td>100% Red fósil ($130M CLP/año)</td>
+                                <td><strong>Planta Solar CD Pudahuel (-65% Red Eléctrica)</strong></td>
+                                <td><span class="exc-tag-delta gold">Ahorro $85M/año &bull; -18,5 ton CO2</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Comparativa Sección por Sección vs To-Be -->
+            <div style="margin-top: 24px;">
+                <h4 style="margin: 0 0 12px 0; font-size: 0.95rem; color: #38bdf8; font-weight: 800;">
+                    🏢 Diferenciales Clave Sección por Sección: ¿Cómo Supera Excelente al To-Be?
+                </h4>
+
+                <div class="exc-comp-grid">
+                    <!-- 1. Inbound vs To-Be -->
+                    <div class="exc-comp-card">
+                        <div style="font-size: 0.82rem; font-weight: 800; color: #ffffff;">
+                            📥 1. Recepción & Inbound vs. To-Be
+                        </div>
+                        <p style="margin: 0; font-size: 0.78rem; color: #cbd5e1; line-height: 1.55;">
+                            <strong>En To-Be:</strong> La descarga y guardado dependen de grúas reach manuales guiadas por RF (Dock-to-Stock de 4,5 horas).<br>
+                            <strong>En Excelente:</strong> Los pallets se depositan en los <strong>Elevadores Lifters de cabecera</strong> y los carros <strong>Robot Shuttle</strong> los ingresan a los canales a 2,0 m/s sin esperar grúas. El Dock-to-Stock se reduce a <strong>3,2 horas (-28,9% más veloz)</strong>, eliminando por completo la congestión en la losa de recepción.
+                        </p>
+                    </div>
+
+                    <!-- 2. Almacenamiento vs To-Be -->
+                    <div class="exc-comp-card">
+                        <div style="font-size: 0.82rem; font-weight: 800; color: #ffffff;">
+                            📦 2. Almacenamiento & Inventarios vs. To-Be
+                        </div>
+                        <p style="margin: 0; font-size: 0.78rem; color: #cbd5e1; line-height: 1.55;">
+                            <strong>En To-Be:</strong> Conserva 27 pasillos de grúas reach de 3,0m (1.690 racks y 30.420 pos con P8). Persiste el riesgo de choques de grúa contra postes.<br>
+                            <strong>En Excelente:</strong> Se eliminan los pasillos de grúas y se instalan <strong>2.535 racks compactos de alta densidad (+50% más racks)</strong> para Robot Shuttle, alcanzando <strong>45.630 posiciones (+15.210 posiciones ganadas)</strong>. La ocupación cae al <strong>29,5% (32.150 posiciones libres)</strong> y se erradica al 100% el impacto de maquinaria en las estanterías (Norma Sísmica NCh2369).
+                        </p>
+                    </div>
+
+                    <!-- 3. Picking vs To-Be -->
+                    <div class="exc-comp-card">
+                        <div style="font-size: 0.82rem; font-weight: 800; color: #ffffff;">
+                            ⚡ 3. Preparación de Pedidos (Picking) vs. To-Be
+                        </div>
+                        <p style="margin: 0; font-size: 0.78rem; color: #cbd5e1; line-height: 1.55;">
+                            <strong>En To-Be:</strong> Operarios caminan 14,2 km/día con terminales Voice Picking y escáneres Zebra; velocidad de 68,4 lín/HH.<br>
+                            <strong>En Excelente:</strong> Modelo <strong>Goods-to-Person (El producto viaja al hombre)</strong>. El Robot Shuttle y los elevadores Lifters bajan la carga a piso y 32 Cobots AMR la llevan a estaciones ergonómicas climatizadas. Velocidad de <strong>220 líneas/hora (+221,6% superior)</strong>, caminatas bajan a 9,8 km/día y se elimina el 100% de trabajos en altura para el personal.
+                        </p>
+                    </div>
+
+                    <!-- 4. Empaque & Expedición vs To-Be -->
+                    <div class="exc-comp-card">
+                        <div style="font-size: 0.82rem; font-weight: 800; color: #ffffff;">
+                            🚚 4. Empaque, Despacho & Transporte vs. To-Be
+                        </div>
+                        <p style="margin: 0; font-size: 0.78rem; color: #cbd5e1; line-height: 1.55;">
+                            <strong>En To-Be:</strong> 16 mesas de packing manuales con 4 mesas hidráulicas; TMS optimiza furgones al 85-88% con app de chofer.<br>
+                            <strong>En Excelente:</strong> Sorter 3D continuo automatizado con pesaje en línea y lectura RFID directa. Preclasificación automática por transportista que eleva el llenado de camiones al <strong>91%</strong> y reduce las entregas fallidas de 2,8% a <strong>&le; 2,0%</strong>.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
 
