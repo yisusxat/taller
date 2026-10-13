@@ -3634,6 +3634,20 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- NOTA TÉCNICA DE INGENIERÍA: ESTRATIFICACIÓN VERTICAL 3D DE ZONA A -->
+                    <div style="margin-top: 12px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 12px 14px; font-size: 0.78rem; color: #cbd5e1; line-height: 1.55;">
+                        <strong style="color: #38bdf8; display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+                            <span>💡 Justificación Técnica: ¿Por qué la Zona A-Rápida ocupa 3 niveles si los racks miden 12 metros de altura?</span>
+                        </strong>
+                        La estructura metálica de racks es <strong>100% continua a 12,00 m de altura bajo viga (6 niveles útiles) en toda la nave</strong>. La asignación de 3 niveles útiles para Zona A corresponde a una ingeniería de <strong>Estratificación Vertical 3D</strong>:
+                        <ul style="margin: 6px 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 4px;">
+                            <li><strong>Cinemática de Ultra Alta Velocidad (220 lín/h):</strong> Al operar en niveles 1, 2 y 3 (alturas de 0,0m a 3,4m), los Elevadores Lifters realizan carreras verticales mínimas de 2 a 4 segundos (en lugar de 25-35 segundos en niveles 4 a 6), sosteniendo el throughput express hacia los 32 Cobots AMR y estaciones Goods-to-Person.</li>
+                            <li><strong>Pulmón Vertical de Reposición Directa (Niveles 4 al 6):</strong> El volumen vertical sobre Zona A no se desaprovecha. Los niveles 4, 5 y 6 (alturas 5,1m a 10,2m) se asignan como <strong>Buffer de Reserva de Zona A y Zona B-Media</strong>, permitiendo reposición vertical inmediata por gravedad hacia los niveles activos sin traslados horizontales.</li>
+                            <li><strong>Balance de Capacidad sin Dispersión:</strong> En solo 3 niveles, los 50 canales frontales ya brindan <strong>10.500 posiciones</strong>, albergando con holgura los 3.120 pallets de los 105 SKUs Clase A de AndesHome con más de 7.300 posiciones libres para buffer dinámico.</li>
+                            <li><strong>Seguridad Sísmica (NCh2369) &amp; Resiliencia Failsafe:</strong> Concentrar la mayor masa de flujo dinámico en la base reduce drásticamente el centro de gravedad del CD ante sismos severos, y garantiza que, ante cualquier mantenimiento del elevador Lifter, los pallets de Zona A puedan operarse a nivel de piso con apiladores convencionales sin detener la expedición.</li>
+                        </ul>
+                    </div>
                 </div>
 
                 <!-- SUBCOMPONENTE 2C: FLUJO OPERACIONAL END-TO-END Y TIPO DE FLUJO LOGÍSTICO -->
