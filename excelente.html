@@ -1310,6 +1310,143 @@
         }
 
         /* -------------------------------------------------------------
+           NUEVAS CLASES: INGENIERÍA PALLET SHUTTLE OPCIÓN B (112.560 PALLETS)
+           ------------------------------------------------------------- */
+        .exc-schematic-box {
+            background: #040814;
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            border-radius: 14px;
+            padding: 20px;
+            margin-top: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .exc-schematic-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 14px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .exc-schematic-title {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: #38bdf8;
+            font-family: 'JetBrains Mono', monospace;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .exc-kinematic-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .exc-kinematic-tile {
+            background: #091226;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            border-radius: 10px;
+            padding: 14px;
+            text-align: center;
+            transition: all 0.2s ease;
+        }
+
+        .exc-kinematic-tile:hover {
+            border-color: #38bdf8;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(2, 132, 199, 0.25);
+        }
+
+        .exc-kinematic-val {
+            font-size: 1.55rem;
+            font-weight: 900;
+            font-family: 'JetBrains Mono', monospace;
+            color: #34d399;
+            line-height: 1;
+        }
+
+        .exc-kinematic-lbl {
+            font-size: 0.72rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: #94a3b8;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-top: 6px;
+        }
+
+        .exc-kinematic-sub {
+            font-size: 0.68rem;
+            color: #64748b;
+            margin-top: 4px;
+            line-height: 1.35;
+        }
+
+        .exc-justif-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .exc-justif-card {
+            background: rgba(13, 21, 39, 0.9);
+            border: 1px solid rgba(56, 189, 248, 0.22);
+            border-radius: 12px;
+            padding: 16px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .exc-justif-card.accent {
+            border-left: 4px solid #10b981;
+        }
+
+        .exc-justif-card.warning {
+            border-left: 4px solid #f59e0b;
+        }
+
+        .exc-justif-card.blue {
+            border-left: 4px solid #38bdf8;
+        }
+
+        .exc-justif-card.gold {
+            border-left: 4px solid #eab308;
+            background: linear-gradient(135deg, rgba(234, 179, 8, 0.08), rgba(13, 21, 39, 0.95));
+        }
+
+        .exc-justif-title {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .exc-justif-body {
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        .exc-civil-box {
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(6, 11, 24, 0.95));
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 12px;
+            padding: 18px 20px;
+            margin-top: 16px;
+        }
+
+        /* -------------------------------------------------------------
            RESPONSIVE BREAKPOINTS (TABLET & MOBILE OPTIMIZATIONS)
            ------------------------------------------------------------- */
 
@@ -1317,6 +1454,14 @@
         @media (max-width: 1100px) {
             .exc-container {
                 padding: 20px 20px 60px 20px;
+            }
+
+            .exc-kinematic-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .exc-justif-grid {
+                grid-template-columns: 1fr;
             }
 
             .exc-morph-grid {
@@ -1572,6 +1717,10 @@
                 gap: 8px;
             }
 
+            .exc-kinematic-grid {
+                grid-template-columns: 1fr;
+            }
+
             .exc-robot-stat {
                 padding: 10px 12px;
             }
@@ -1662,10 +1811,10 @@
         
         <!-- HERO BANNER -->
         <section class="exc-hero">
-            <div class="exc-tag">Marco Estratégico &bull; Escenario de Excelencia Absoluta</div>
+            <div class="exc-tag">Marco Estratégico &bull; Escenario de Excelencia Absoluta &bull; Memoria Técnica Shuttle</div>
             <h2 class="exc-title">Implementación Integral de Proyectos: Punto 1 al 8</h2>
             <p class="exc-desc">
-                En este <strong>Escenario de Excelente</strong>, AndesHome trasciende las restricciones tradicionales de contención de crisis y adopta la <strong>totalidad de las 8 iniciativas de ingeniería logística (P1 a P8)</strong>. Se eliminan las limitaciones temporales de ejecución para maximizar la sinergia, la automatización con <strong>Robot Shuttle en estanterías de alta densidad</strong>, la flota de cobots AMR Goods-to-Person, la autosuficiencia energética solar y la expansión masiva a <strong>45.630 posiciones de almacenamiento</strong> (superando ampliamente los 30.420 del To-Be convencional).
+                En este <strong>Escenario de Excelente</strong>, AndesHome trasciende las restricciones tradicionales de contención de crisis y adopta la <strong>totalidad de las 8 iniciativas de ingeniería logística (P1 a P8)</strong>. Se eliminan las limitaciones temporales de ejecución para integrar la automatización con <strong>Pallet Shuttle de Ultra Alta Densidad (Opción B: Pasillo Central)</strong>, la flota de cobots AMR Goods-to-Person, la planta solar de 250 kWp y la expansión formal a <strong>112.560 posiciones de almacenamiento estándar</strong> ($191.352\text{ m}^3$ de volumen útil con 84,2% de utilización cúbica), superando en <strong>+270% al To-Be convencional (30.420 pos)</strong> y en <strong>+735% a la Crisis As-Is</strong>.
             </p>
 
             <!-- Premisa Estratégica Clave -->
@@ -1750,8 +1899,8 @@
 
                 <div class="exc-morph-tile">
                     <div class="lbl">Capacidad de Racks Pudahuel</div>
-                    <div class="val" id="morphCapacity" style="color: #38bdf8;">45.630 Pos</div>
-                    <div class="sub" id="morphCapacitySub">2.535 racks compactos (+50%) &bull; 29,5% ocupación actual</div>
+                    <div class="val" id="morphCapacity" style="color: #38bdf8;">112.560 Pos</div>
+                    <div class="sub" id="morphCapacitySub">1.608 slots independientes &bull; 12,0% ocupación (99.080 libres para Hub 3PL)</div>
                 </div>
 
                 <div class="exc-morph-tile">
@@ -1792,7 +1941,7 @@
             </div>
 
             <div id="morphAlertNote" style="margin-top: 14px; padding: 10px 14px; background: rgba(2, 132, 199, 0.15); border: 1px solid rgba(56, 189, 248, 0.35); border-radius: 8px; font-size: 0.78rem; color: #cbd5e1; line-height: 1.45;">
-                💡 <strong>Análisis Estratégico del Escenario Seleccionado:</strong> El Escenario Excelente libera todo el potencial operativo del CD Pudahuel. Al no limitar el tiempo a 24 semanas, se integra la planta solar y el sistema AS/RS Robot Shuttle en los 2.535 módulos de rack, llevando la capacidad a 45.630 pallets y derrumbando el costo por pedido a solo $3.850 CLP.
+                💡 <strong>Análisis Estratégico del Escenario Seleccionado:</strong> El Escenario Excelente libera todo el potencial operativo del CD Pudahuel. Al aplicar la Memoria Técnica de Pallet Shuttle (Opción B: Pasillo Central de 3,5m), se instalan 1.608 túneles en 6 niveles con flujo FIFO estricto, alcanzando 112.560 posiciones netas de pallet ($191.352\text{ m}^3$, 84,2% utilización cúbica). AndesHome ocupa solo el 12,0% de la capacidad y monetiza más de 99.000 posiciones como Hub 3PL, derrumbando el costo por pedido a solo $3.850 CLP.
             </div>
         </div>
 
@@ -1949,15 +2098,15 @@
                     </div>
                 </div>
 
-                <!-- P8: MEJORA DE RACKS COMPACTOS ALTA DENSIDAD SHUTTLE -->
+                <!-- P8: MEJORA DE RACKS COMPACTOS ALTA DENSIDAD SHUTTLE (OPCIÓN B) -->
                 <div class="exc-project-row expansion">
                     <div class="exc-p-num">P8</div>
                     <div class="exc-p-info">
-                        <h3>Racks de Alta Densidad con Rieles Shuttle 2D <span class="exc-badge modular">2.535 Módulos &bull; 45.630 Pos</span></h3>
-                        <p>Eliminación de pasillos anchos de grúa reach de 3m. Se instalan 2.535 módulos de rack compactos en 6 niveles (12,0m) para Robot Shuttle.</p>
+                        <h3>Racks de Ultra Alta Densidad Pallet Shuttle (Opción B) <span class="exc-badge modular">1.608 Slots &bull; 112.560 Pallets</span></h3>
+                        <p>Dimensionamiento formal: 2 bloques gemelos de 70 pallets de fondo ($13.125\text{ m}^2$ c/u) interconectados por pasillo central de maniobra de 3,50m ($525\text{ m}^2$). 134 canales en el frente de 150m, 6 niveles útiles ($10,20\text{ m}$) y $1,80\text{ m}$ libre a cubierta para rociadores ESFR (NFPA 13).</p>
                     </div>
                     <div class="exc-p-benefits">
-                        <strong>Beneficio Clave:</strong> +15.210 posiciones sobre el To-Be convencional (45.630 pos vs 30.420). 70,5% de holgura libre (32.150 pos libres).
+                        <strong>Beneficio Clave:</strong> +82.140 posiciones sobre To-Be (112.560 vs 30.420 pos, +270%). Ocupación actual del 12,0% (13.480 pallets en stock), liberando 99.080 posiciones para operar como Hub Logístico 3PL Omnicanal.
                     </div>
                     <div class="exc-p-financial">
                         <span class="exc-p-capex" style="color: #38bdf8;">$110M CLP</span>
@@ -2028,7 +2177,7 @@
                     </tr>
                     <tr style="background: rgba(2, 132, 199, 0.08);">
                         <td><strong>P8: Racks Alta Densidad Robot Shuttle</strong></td>
-                        <td>Infraestructura (45.630 Pos)</td>
+                        <td>Infraestructura Opción B (112.560 Pos)</td>
                         <td>$110.000.000</td>
                         <td>$135.000.000/año</td>
                         <td style="color: #38bdf8;">Acumulado P1-P5 + P8: $820M (&le; $850M)</td>
@@ -2228,7 +2377,7 @@
                                 <td><strong>Capacidad Total Racks</strong></td>
                                 <td class="bad">16.900 pos</td>
                                 <td class="mid">30.420 pos (reach)</td>
-                                <td class="good">45.630 pos <span class="exc-tag-delta">+15.210</span></td>
+                                <td class="good">112.560 pos <span class="exc-tag-delta gold">+82.140</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Gasto Eléctrico Nave</strong></td>
@@ -2334,20 +2483,32 @@
                             <tr>
                                 <td><strong>Tecnología de Almacenamiento</strong></td>
                                 <td>Racks Selectivos (1.690 racks, 27 pasillos de 3m)</td>
-                                <td><strong>Racks Compactos Alta Densidad con Robot Shuttle</strong></td>
-                                <td><span class="exc-tag-delta">+50% más racks (2.535 módulos)</span></td>
+                                <td><strong>Pallet Shuttle Opción B (2 Bloques Gemelos + Pasillo Central 3,5m)</strong></td>
+                                <td><span class="exc-tag-delta gold">1.608 slots en 134 canales en batería</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Capacidad Total de Posiciones</strong></td>
                                 <td>30.420 posiciones (con grúas reach P8)</td>
-                                <td><strong>45.630 posiciones (con Robot Shuttle)</strong></td>
-                                <td><span class="exc-tag-delta gold">+15.210 posiciones (+50,0%)</span></td>
+                                <td><strong>112.560 posiciones estándar (1.000 &times; 1.200 mm)</strong></td>
+                                <td><span class="exc-tag-delta gold">+82.140 posiciones (+270,0%)</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Ocupación con 13.480 Pallets</strong></td>
                                 <td>44,3% de ocupación (16.940 pos libres)</td>
-                                <td><strong>29,5% de ocupación (32.150 pos libres)</strong></td>
-                                <td><span class="exc-tag-delta">70,5% colchón de holgura</span></td>
+                                <td><strong>12,0% de ocupación (99.080 pos libres para Hub 3PL)</strong></td>
+                                <td><span class="exc-tag-delta">88,0% colchón libre / 3PL activo</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Volumen Cúbico Efectivo</strong></td>
+                                <td>103.428 m³ brutos (54,0% utilización nave)</td>
+                                <td><strong>191.352 m³ brutos (84,2% utilización volumétrica)</strong></td>
+                                <td><span class="exc-tag-delta gold">+87.924 m³ útiles (+85,0%)</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Throughput Peak de Despacho</strong></td>
+                                <td>120 a 150 pallets / hora (grúas manuales)</td>
+                                <td><strong>400 a 500 pallets / hora (12-16 Shuttles + 4 grúas)</strong></td>
+                                <td><span class="exc-tag-delta gold">3,3x capacidad en Peak Cyber</span></td>
                             </tr>
                             <tr>
                                 <td><strong>Modelo Operativo de Picking</strong></td>
@@ -2470,7 +2631,7 @@
                         </g>
 
                         <!-- Rótulos de los 6 Ejes -->
-                        <text x="175" y="34" fill="#38bdf8" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">Capacidad (45.630)</text>
+                        <text x="175" y="34" fill="#38bdf8" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">Capacidad (112.560)</text>
                         <text x="282" y="98" fill="#34d399" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="start">Picking (220 l/h)</text>
                         <text x="282" y="215" fill="#fbbf24" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="start">OTIF (98,7%)</text>
                         <text x="175" y="280" fill="#34d399" font-size="8.5" font-family="'JetBrains Mono', monospace" font-weight="800" text-anchor="middle">Costo ($3.850)</text>
@@ -2490,7 +2651,7 @@
                         </button>
                         <button type="button" id="btnRadarExc" class="exc-radar-pill-btn active excelente" onclick="filterRadar('excelente')">
                             <span style="display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #34d399;"></span>
-                            <span>Excelente (45.630 pos)</span>
+                            <span>Excelente (112.560 pos)</span>
                         </button>
                         <button type="button" id="btnRadarAll" class="exc-radar-pill-btn all" onclick="filterRadar('all')" title="Ver las 3 capas superpuestas">
                             <span>👁️ Ver Todos</span>
@@ -2509,15 +2670,15 @@
                             </span>
                         </div>
                         <div id="radarDetailSub" style="font-size: 0.74rem; color: #94a3b8; margin-top: 4px; line-height: 1.4;">
-                            Robot Shuttle AS/RS + 32 Cobots AMR + Planta Solar 250 kWp &bull; Desempeño superior en las 6 dimensiones.
+                            Pallet Shuttle Opción B (112.560 pos) + 32 Cobots AMR + Planta Solar 250 kWp &bull; Desempeño superior en las 6 dimensiones.
                         </div>
 
                         <!-- Grilla de las 6 dimensiones filtradas -->
                         <div class="exc-radar-detail-grid">
                             <div class="exc-radar-detail-item">
                                 <span class="lbl">1. Capacidad Almacén</span>
-                                <span class="val" id="rfCapVal" style="color: #38bdf8;">45.630 Pos</span>
-                                <span style="font-size: 0.68rem; color: #64748b;" id="rfCapSub">+50% racks compactos</span>
+                                <span class="val" id="rfCapVal" style="color: #38bdf8;">112.560 Pos</span>
+                                <span style="font-size: 0.68rem; color: #64748b;" id="rfCapSub">1.608 slots (84,2% cúbico)</span>
                             </div>
                             <div class="exc-radar-detail-item">
                                 <span class="lbl">2. Velocidad Picking</span>
@@ -2562,10 +2723,10 @@
                 <div class="exc-visual-card">
                     <h4>
                         <span>📐 Corte Transversal: To-Be vs. Excelente</span>
-                        <span style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #fbbf24;">PASILLO 3,0M VS SHUTTLE</span>
+                        <span style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #fbbf24;">PASILLO 3,0M VS SHUTTLE OPCIÓN B</span>
                     </h4>
                     <p style="margin: 0; font-size: 0.78rem; color: #94a3b8; line-height: 1.45;">
-                        ¿Cómo se ganan <strong>+15.210 posiciones (+50% racks)</strong> en la misma nave? En To-Be, las grúas exigen 27 pasillos anchos. En Excelente, el Robot Shuttle suprime los pasillos interiores:
+                        ¿Cómo se ganan <strong>+82.140 posiciones (+270% vs To-Be)</strong> en la misma nave? En To-Be, las grúas exigen 27 pasillos anchos. En Excelente (Opción B: Pasillo Central), se aprovechan $26.250\text{ m}^2$ netos bajo racks continuos con canales de 70 pallets de fondo:
                     </p>
 
                     <svg viewBox="0 0 350 310" xmlns="http://www.w3.org/2000/svg" style="width: 100%; height: auto; background: #060b18; border-radius: 10px; border: 1px solid rgba(255, 255, 255, 0.08);">
@@ -2611,7 +2772,7 @@
                         <!-- SECCIÓN INFERIOR: ESCENARIO EXCELENTE ROBOTIZADO -->
                         <g>
                             <rect x="15" y="155" width="320" height="145" rx="6" fill="rgba(16, 185, 129, 0.08)" stroke="rgba(16, 185, 129, 0.3)"/>
-                            <text x="25" y="169" fill="#34d399" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="800">B. EXCELENTE (P1-P8): RACKS COMPACTOS ROBOT SHUTTLE &bull; 2.535 RACKS (45.630 POS)</text>
+                            <text x="25" y="169" fill="#34d399" font-size="8" font-family="'JetBrains Mono', monospace" font-weight="800">B. EXCELENTE (P1-P8): OPCIÓN B PASILLO CENTRAL &bull; 1.608 SLOTS (112.560 PALLETS)</text>
                             
                             <!-- Bloque Continuo de Alta Densidad (Sin pasillos interiores de grúas) -->
                             <rect x="25" y="177" width="170" height="108" fill="rgba(2, 132, 199, 0.25)" stroke="#0284c7" stroke-width="1.2"/>
@@ -2643,17 +2804,17 @@
                             <text x="210" y="225" fill="#34d399" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle" transform="rotate(-90 210 225)" font-weight="900">↕ LIFTER VERTICAL</text>
 
                             <!-- Indicadores Clave Excelente -->
-                            <text x="230" y="195" fill="#34d399" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="800">+50% MÁS RACKS (2.535)</text>
-                            <text x="230" y="212" fill="#fbbf24" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="800">45.630 POSICIONES</text>
-                            <text x="230" y="229" fill="#cbd5e1" font-size="7.2" font-family="'JetBrains Mono', monospace">&bull; Cero pasillos de grúa</text>
-                            <text x="230" y="244" fill="#cbd5e1" font-size="7.2" font-family="'JetBrains Mono', monospace">&bull; Cero colisiones postes</text>
-                            <text x="230" y="259" fill="#38bdf8" font-size="7.2" font-family="'JetBrains Mono', monospace">&bull; Norma Sísmica NCh2369</text>
-                            <text x="230" y="274" fill="#34d399" font-size="7.2" font-family="'JetBrains Mono', monospace">&bull; 29,5% ocup (32.150 libres)</text>
+                            <text x="230" y="195" fill="#34d399" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="800">1.608 SLOTS EN BATERÍA</text>
+                            <text x="230" y="212" fill="#fbbf24" font-size="7.5" font-family="'JetBrains Mono', monospace" font-weight="800">112.560 PALLETS</text>
+                            <text x="230" y="229" fill="#cbd5e1" font-size="7.2" font-family="'JetBrains Mono', monospace">&bull; Pasillo Central 3,5m (FIFO)</text>
+                            <text x="230" y="244" fill="#cbd5e1" font-size="7.2" font-family="'JetBrains Mono', monospace">&bull; Cero colisiones de postes</text>
+                            <text x="230" y="259" fill="#38bdf8" font-size="7.2" font-family="'JetBrains Mono', monospace">&bull; NFPA 13 (ESFR en techo)</text>
+                            <text x="230" y="274" fill="#34d399" font-size="7.2" font-family="'JetBrains Mono', monospace">&bull; 12% ocup (99k libres 3PL)</text>
                         </g>
                     </svg>
 
                     <div style="font-size: 0.74rem; color: #a7f3d0; background: rgba(16, 185, 129, 0.12); padding: 8px 12px; border-radius: 6px; border: 1px solid rgba(16, 185, 129, 0.25);">
-                        💎 <strong>Ganancia Volumétrica Neta:</strong> Al compactar el área de racks mediante canales servidos por Robot Shuttle, se eliminan los 27 pasillos de grúas reach de 3,00m, logrando un aprovechamiento del 88% del volumen vertical y sumando <strong>15.210 posiciones adicionales</strong> (+50% vs To-Be).
+                        💎 <strong>Ganancia Volumétrica Neta:</strong> La arquitectura de Opción B (2 bloques de 70 pallets + pasillo central de 3,5m) aprovecha el 98,04% de la superficie disponible ($26.250\text{ m}^2$ netos bajo racks), alcanzando un factor de utilización cúbica del <strong>84,2% ($191.352\text{ m}^3$)</strong> y sumando <strong>82.140 posiciones adicionales sobre To-Be</strong> (+270,0%).
                     </div>
                 </div>
 
@@ -2684,7 +2845,7 @@
                         </div>
                         <p style="margin: 0; font-size: 0.78rem; color: #cbd5e1; line-height: 1.55;">
                             <strong>En To-Be:</strong> Conserva 27 pasillos de grúas reach de 3,0m (1.690 racks y 30.420 pos con P8). Persiste el riesgo de choques de grúa contra postes.<br>
-                            <strong>En Excelente:</strong> Se eliminan los pasillos de grúas y se instalan <strong>2.535 racks compactos de alta densidad (+50% más racks)</strong> para Robot Shuttle, alcanzando <strong>45.630 posiciones (+15.210 posiciones ganadas)</strong>. La ocupación cae al <strong>29,5% (32.150 posiciones libres)</strong> y se erradica al 100% el impacto de maquinaria en las estanterías (Norma Sísmica NCh2369).
+                            <strong>En Excelente:</strong> Se instalan dos bloques gemelos de 70 pallets de fondo interconectados por pasillo central de 3,50m (1.608 slots / túneles independientes), alcanzando <strong>112.560 posiciones netas (+82.140 ganadas vs To-Be)</strong>. Con el inventario actual de 13.480 pallets, la ocupación cae a un holgado <strong>12,0% (99.080 posiciones libres)</strong>, lo que permite habilitar a CD Pudahuel como un <strong>Hub Logístico 3PL Omnicanal</strong> monetizando el espacio libre y blindando la Norma Sísmica NCh2369 y NFPA 13.
                         </p>
                     </div>
 
@@ -2713,39 +2874,39 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 4: ALMACENAMIENTO ROBOTIZADO CON ROBOT SHUTTLE & EXPANSIÓN A 45.630 POSICIONES (P6 + P8) -->
+        <!-- SECCIÓN 4: ALMACENAMIENTO ROBOTIZADO CON ROBOT SHUTTLE & EXPANSIÓN A 112.560 POSICIONES (OPCIÓN B) -->
         <section>
             <div class="exc-section-header">
                 <div class="exc-section-title">
-                    <span>🤖 Almacenamiento Robotizado con Robot Shuttle & Expansión Masiva de Racks (P6 + P8)</span>
+                    <span>🤖 Almacenamiento Robotizado con Pallet Shuttle (Opción B) & Expansión a 112.560 Posiciones (P6 + P8)</span>
                 </div>
                 <div style="font-size: 0.8rem; font-family: 'JetBrains Mono', monospace; color: #38bdf8;">
-                    Canales de Alta Densidad Pallet Shuttle + Elevadores Lifters + 32 Cobots AMR Goods-to-Person
+                    Memoria Técnica de Ingeniería: 1.608 Túneles Shuttle &bull; Pasillo Central 3,5m &bull; FIFO Estricto &bull; 84,2% Aprovechamiento Cúbico
                 </div>
             </div>
 
             <div class="exc-robot-card">
-                <!-- Tira de KPIs de Capacidad y Expansión Robotizada con Robot Shuttle -->
+                <!-- Tira de KPIs de Capacidad y Expansión Robotizada con Pallet Shuttle (Opción B) -->
                 <div class="exc-robot-stats-strip">
                     <div class="exc-robot-stat">
-                        <span class="exc-robot-stat-lbl">Capacidad Robot Shuttle</span>
-                        <span class="exc-robot-stat-val">45.630 Pos</span>
-                        <span class="exc-robot-stat-sub">+170% vs Crisis (16.900) &bull; +50% vs To-Be (30.420)</span>
+                        <span class="exc-robot-stat-lbl">Capacidad Pallet Shuttle</span>
+                        <span class="exc-robot-stat-val">112.560 Pallets</span>
+                        <span class="exc-robot-stat-sub">+735% vs Crisis (13.480) &bull; +270% vs To-Be (30.420)</span>
                     </div>
                     <div class="exc-robot-stat">
-                        <span class="exc-robot-stat-lbl">Módulos de Racks Instalados</span>
-                        <span class="exc-robot-stat-val" style="color: #38bdf8;">2.535 Racks</span>
-                        <span class="exc-robot-stat-sub">+50% más racks al suprimir los 27 pasillos de grúas reach</span>
+                        <span class="exc-robot-stat-lbl">Canales / Slots Autónomos</span>
+                        <span class="exc-robot-stat-val" style="color: #38bdf8;">1.608 Slots</span>
+                        <span class="exc-robot-stat-sub">134 canales en ancho (150m) &times; 6 niveles &times; 70 pallets fondo</span>
                     </div>
                     <div class="exc-robot-stat">
                         <span class="exc-robot-stat-lbl">Ocupación Actual (13.480 Pallets)</span>
-                        <span class="exc-robot-stat-val" style="color: #34d399;">29,5% Ocup</span>
-                        <span class="exc-robot-stat-sub">32.150 pos libres de reserva (70,5% de holgura anti-crisis)</span>
+                        <span class="exc-robot-stat-val" style="color: #34d399;">12,0% Ocup</span>
+                        <span class="exc-robot-stat-sub">99.080 pos libres para operar como Hub Logístico 3PL Omnicanal</span>
                     </div>
                     <div class="exc-robot-stat">
-                        <span class="exc-robot-stat-lbl">Velocidad Picking Robotizado</span>
-                        <span class="exc-robot-stat-val" style="color: #fbbf24;">220 lín/h</span>
-                        <span class="exc-robot-stat-sub">Robot Shuttle + GTP (vs 46,8 lín/h en crisis manual)</span>
+                        <span class="exc-robot-stat-lbl">Volumen Cúbico Efectivo</span>
+                        <span class="exc-robot-stat-val" style="color: #fbbf24;">191.352 m³</span>
+                        <span class="exc-robot-stat-sub">84,2% de utilización cúbica en 26.250 m² de huella efectiva</span>
                     </div>
                 </div>
 
@@ -2980,27 +3141,387 @@
                         </div>
                     </div>
 
-                    <!-- Explicación Técnica de las Mejoras con Robot Shuttle -->
+                    <!-- Explicación Técnica de las Mejoras con Robot Shuttle (Memoria Oficial) -->
                     <div style="display: flex; flex-direction: column; gap: 14px;">
                         <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 10px; padding: 14px;">
-                            <h4 style="margin: 0 0 6px 0; font-size: 0.9rem; color: #38bdf8; font-weight: 800;">¿Por qué aumentan los racks y las posiciones de 30.420 a 45.630?</h4>
+                            <h4 style="margin: 0 0 6px 0; font-size: 0.9rem; color: #38bdf8; font-weight: 800;">¿Por qué aumentan las posiciones de 30.420 a 112.560? (Memoria Técnica Oficial)</h4>
                             <p style="margin: 0; font-size: 0.8rem; color: #cbd5e1; line-height: 1.55;">
-                                En el To-Be convencional (grúas reach), se necesitaban <strong>27 pasillos anchos de 3,00m a 3,20m</strong> para el radio de giro de maquinaria, lo que consumía más del 50% de la superficie útil de la nave Pudahuel (limitando la instalación a 1.690 racks selectivos y 30.420 pos).<br><br>
-                                Al implementar el sistema <strong>Robot Shuttle</strong>, los pasillos anchos se suprimen en el área de almacenamiento para crear bloques compactos de canales continuos de alta densidad. Esto permite instalar <strong>2.535 módulos de racks compactos (+50% más racks)</strong>, disparando la capacidad a <strong>45.630 posiciones pallet</strong> (+15.210 posiciones adicionales sobre el To-Be y +170% sobre la crisis). Con el inventario actual de 13.480 pallets, la ocupación cae a un holgado <strong>29,5% (32.150 pos libres)</strong>, blindando a AndesHome para triplicar sus ventas omnicanal sin requerir ampliar la nave.
+                                En el To-Be convencional (grúas reach), se necesitaban <strong>27 pasillos anchos de 3,20 m</strong> para el radio de giro de maquinaria, lo que consumía más del 50% de la nave Pudahuel (limitando a 1.690 racks selectivos y 30.420 pos).<br><br>
+                                Al implementar la <strong>Opción B: Pasillo Central de Pallet Shuttle</strong>, se elimina el 98% de los pasillos de tránsito interno. La nave de 31.500 m² (150 m × 210 m) se divide en <strong>dos bloques continuos de 70 pallets de fondo</strong> (13.125 m² c/u) con 134 canales en el frente y 6 niveles de altura (12,0 m), totalizando <strong>1.608 túneles independientes y 112.560 posiciones pallet estándar (1.000 × 1.200 mm)</strong> (+270% sobre To-Be). Con el inventario actual de AndesHome (13.480 pallets), la ocupación cae a un holgado <strong>12,0% (99.080 posiciones libres)</strong>, transformando el CD en un <strong>Hub Logístico 3PL monetizable</strong> sin ampliar la nave.
                             </p>
                         </div>
 
                         <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 10px; padding: 14px;">
-                            <h4 style="margin: 0 0 6px 0; font-size: 0.9rem; color: #34d399; font-weight: 800;">Almacenamiento (Putaway) con Robot Shuttle</h4>
+                            <h4 style="margin: 0 0 6px 0; font-size: 0.9rem; color: #34d399; font-weight: 800;">Almacenamiento (Putaway) con Desacople en Pasillo Central</h4>
                             <p style="margin: 0; font-size: 0.8rem; color: #cbd5e1; line-height: 1.55;">
-                                Ninguna grúa entra a los pasillos. El pallet recibido se coloca en la cabecera del bloque o en el <strong>Elevador Vertical Lifter</strong>. El carro <strong>Robot Shuttle autónomo</strong> se posiciona por debajo del pallet en rieles internos, lo eleva y viaja a 2,0 m/s dentro del canal hasta la posición más profunda (FIFO/LIFO según WMS). Se eliminan al 100% los choques contra postes, protegiendo la estructura bajo <strong>Norma Sísmica NCh2369</strong>.
+                                Ninguna grúa reach ingresa al interior de las estanterías. El pallet recibido se deposita en la cabecera frontal o en el <strong>pasillo central de maniobra de 3,50 m</strong>. El carro <strong>Robot Shuttle autónomo</strong> se posiciona bajo el pallet en rieles galvanizados, lo eleva y viaja a 2,0 m/s dentro del túnel hasta la posición requerida en flujo <strong>FIFO estricto</strong>. La grúa de carga opera de forma totalmente desacoplada de la grúa de despacho, erradicando al 100% los choques contra puntales bajo <strong>Norma Sísmica NCh2369</strong>.
                             </p>
                         </div>
 
                         <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 10px; padding: 14px;">
                             <h4 style="margin: 0 0 6px 0; font-size: 0.9rem; color: #fbbf24; font-weight: 800;">Picking en Racks con Robot Shuttle & Goods-to-Person</h4>
                             <p style="margin: 0; font-size: 0.8rem; color: #cbd5e1; line-height: 1.55;">
-                                El Robot Shuttle extrae el pallet requerido en cualquiera de los 6 pisos y lo traslada a la cabecera. El <strong>Elevador Lifter</strong> desciende la carga a piso, donde los <strong>Robots AMR</strong> la conducen a la <strong>Estación Goods-to-Person</strong>. El operario permanece en su puesto ergonómico extrayendo unidades con guía Pick-by-Light a <strong>220 líneas por hora</strong> (vs 46,8 en crisis), con cero trabajo en altura y cero fatiga lumbar (Ley 20.949).
+                                El Robot Shuttle extrae el pallet en cualquiera de los 6 pisos a <strong>34 pal/h por carro</strong> y lo entrega al extremo de expedición. El <strong>Elevador Lifter</strong> desciende la carga a piso, donde los <strong>Robots AMR</strong> la transportan a la <strong>Estación Goods-to-Person</strong>. El operario pickea a nivel de piso con confirmación <em>Pick-by-Light</em> a <strong>220 líneas por hora</strong> (vs 46,8 en crisis), eliminando al 100% el trabajo en altura y protegiendo la salud osteomuscular (Ley 20.949).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBCOMPONENTE 1: PLANTA ESQUEMÁTICA DE NAVE OPCIÓN B (150 m × 210 m = 31.500 m²) -->
+                <div class="exc-schematic-box">
+                    <div class="exc-schematic-header">
+                        <div class="exc-schematic-title">
+                            <span>📐 Planta Esquemática de Nave: Zonificación Opción B (150 m × 210 m)</span>
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span class="exc-tag-delta">112.560 PALLETS TOTALES</span>
+                            <span class="exc-tag-delta gold">1.608 SLOTS INDEPENDIENTES</span>
+                            <span class="exc-dept-tag">26.250 m² RACKS (98,04%)</span>
+                        </div>
+                    </div>
+
+                    <!-- SVG PLANTA ESQUEMÁTICA INTERACTIVA Y RESPONSIVE -->
+                    <div style="background: #020617; border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 10px; padding: 12px; overflow-x: auto;">
+                        <svg viewBox="0 0 1000 620" width="100%" height="auto" style="display: block; max-width: 100%; min-width: 600px;" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <linearGradient id="opZoneGrad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#0284c7" stop-opacity="0.35"/>
+                                    <stop offset="100%" stop-color="#0369a1" stop-opacity="0.15"/>
+                                </linearGradient>
+                                <linearGradient id="block1Grad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#064e3b" stop-opacity="0.45"/>
+                                    <stop offset="100%" stop-color="#022c22" stop-opacity="0.25"/>
+                                </linearGradient>
+                                <linearGradient id="block2Grad" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stop-color="#022c22" stop-opacity="0.25"/>
+                                    <stop offset="100%" stop-color="#064e3b" stop-opacity="0.45"/>
+                                </linearGradient>
+                                <linearGradient id="aisleGrad" x1="0" y1="0" x2="1" y2="0">
+                                    <stop offset="0%" stop-color="#d97706" stop-opacity="0.4"/>
+                                    <stop offset="50%" stop-color="#f59e0b" stop-opacity="0.8"/>
+                                    <stop offset="100%" stop-color="#d97706" stop-opacity="0.4"/>
+                                </linearGradient>
+                                <pattern id="rackPattern" width="10" height="10" patternUnits="userSpaceOnUse">
+                                    <line x1="0" y1="10" x2="10" y2="10" stroke="rgba(52, 211, 153, 0.12)" stroke-width="1"/>
+                                    <line x1="10" y1="0" x2="10" y2="10" stroke="rgba(52, 211, 153, 0.12)" stroke-width="1"/>
+                                </pattern>
+                                <marker id="arrowUp" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                                    <path d="M0,6 L3,0 L6,6 Z" fill="#38bdf8"/>
+                                </marker>
+                                <marker id="arrowDown" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                                    <path d="M0,0 L3,6 L6,0 Z" fill="#34d399"/>
+                                </marker>
+                            </defs>
+
+                            <!-- Fondo de la Nave -->
+                            <rect x="0" y="0" width="1000" height="620" fill="#030712"/>
+
+                            <!-- Perímetro Exterior de Nave Pudahuel (150m × 210m) -->
+                            <rect x="140" y="30" width="720" height="550" fill="#080e1e" stroke="#38bdf8" stroke-width="2" stroke-dasharray="8 4" rx="6"/>
+
+                            <!-- Cotas de Frente Nave (150 m) -->
+                            <line x1="140" y1="18" x2="860" y2="18" stroke="#38bdf8" stroke-width="1.5"/>
+                            <circle cx="140" cy="18" r="3" fill="#38bdf8"/>
+                            <circle cx="860" cy="18" r="3" fill="#38bdf8"/>
+                            <text x="500" y="14" fill="#38bdf8" font-size="11" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="middle">FRENTE TOTAL DE NAVE: 150,00 METROS (134 MÓDULOS DE ANCHO)</text>
+
+                            <!-- Cotas Laterales de Fondo (210 m) -->
+                            <line x1="880" y1="30" x2="880" y2="580" stroke="#94a3b8" stroke-width="1.5"/>
+                            <circle cx="880" cy="30" r="3" fill="#94a3b8"/>
+                            <circle cx="880" cy="580" r="3" fill="#94a3b8"/>
+                            <text x="895" y="310" fill="#94a3b8" font-size="11" font-weight="800" font-family="'JetBrains Mono', monospace" transform="rotate(90, 895, 310)" text-anchor="middle">FONDO TOTAL NAVE: 210,00 METROS (31.500 m²)</text>
+
+                            <!-- ZONA 1: OPERACIONAL Y ANDENES (15% = 4.725 m²) -->
+                            <!-- 31,5m fondo -> 550 * (31.5 / 210) = 82.5 px -->
+                            <rect x="140" y="30" width="720" height="82" fill="url(#opZoneGrad)" stroke="#0284c7" stroke-width="1.5"/>
+                            <text x="500" y="60" fill="#38bdf8" font-size="12" font-weight="900" font-family="'Plus Jakarta Sans', sans-serif" text-anchor="middle">ZONA OPERACIONAL FRONTAL (15% = 4.725 m²)</text>
+                            <text x="500" y="78" fill="#94a3b8" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">24 Andenes Inbound/Outbound • Playa de Staging • Corredor de Cobots AMR Goods-to-Person</text>
+
+                            <!-- Andenes dibujados en la parte superior -->
+                            <g fill="#0284c7" opacity="0.8">
+                                <rect x="170" y="32" width="22" height="6" rx="1"/>
+                                <rect x="220" y="32" width="22" height="6" rx="1"/>
+                                <rect x="270" y="32" width="22" height="6" rx="1"/>
+                                <rect x="320" y="32" width="22" height="6" rx="1"/>
+                                <rect x="370" y="32" width="22" height="6" rx="1"/>
+                                <rect x="420" y="32" width="22" height="6" rx="1"/>
+                                <rect x="470" y="32" width="22" height="6" rx="1"/>
+                                <rect x="520" y="32" width="22" height="6" rx="1"/>
+                                <rect x="570" y="32" width="22" height="6" rx="1"/>
+                                <rect x="620" y="32" width="22" height="6" rx="1"/>
+                                <rect x="670" y="32" width="22" height="6" rx="1"/>
+                                <rect x="720" y="32" width="22" height="6" rx="1"/>
+                                <rect x="770" y="32" width="22" height="6" rx="1"/>
+                                <rect x="810" y="32" width="22" height="6" rx="1"/>
+                            </g>
+
+                            <!-- Cota Zona Operacional (31,5 m) -->
+                            <line x1="125" y1="30" x2="125" y2="112" stroke="#38bdf8" stroke-width="1.2"/>
+                            <text x="115" y="75" fill="#38bdf8" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="end">31,5 m</text>
+
+                            <!-- ZONA 2: BLOQUE 1 FRONTAL (13.125 m², 70 pallets fondo) -->
+                            <!-- 87,5m fondo -> 550 * (87.5 / 210) = 229 px -->
+                            <rect x="140" y="112" width="720" height="220" fill="url(#block1Grad)" stroke="#10b981" stroke-width="1.5"/>
+                            <rect x="140" y="112" width="720" height="220" fill="url(#rackPattern)"/>
+                            
+                            <text x="500" y="155" fill="#34d399" font-size="13" font-weight="900" font-family="'Plus Jakarta Sans', sans-serif" text-anchor="middle">BLOQUE 1 (FRONTAL) — 13.125 m² • 56.280 PALLETS</text>
+                            <text x="500" y="175" fill="#e2e8f0" font-size="10" font-weight="700" font-family="'JetBrains Mono', monospace" text-anchor="middle">134 Canales Frontales × 6 Niveles Altura = 804 Túneles Pallet Shuttle</text>
+                            <text x="500" y="195" fill="#94a3b8" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">Profundidad del Bloque: 70 Pallets en Fondo (87,50 m) • Ciclo Medio Shuttle: 105 s</text>
+
+                            <!-- Indicador de flujo FIFO Bloque 1 -->
+                            <g opacity="0.85">
+                                <line x1="280" y1="220" x2="280" y2="300" stroke="#34d399" stroke-width="2" marker-end="url(#arrowDown)"/>
+                                <text x="290" y="260" fill="#34d399" font-size="8.5" font-family="'JetBrains Mono', monospace">Flujo FIFO Shuttle</text>
+
+                                <line x1="720" y1="220" x2="720" y2="300" stroke="#34d399" stroke-width="2" marker-end="url(#arrowDown)"/>
+                                <text x="730" y="260" fill="#34d399" font-size="8.5" font-family="'JetBrains Mono', monospace">Flujo FIFO Shuttle</text>
+                            </g>
+
+                            <!-- Cota Bloque 1 (87,5 m) -->
+                            <line x1="125" y1="112" x2="125" y2="332" stroke="#34d399" stroke-width="1.2"/>
+                            <text x="115" y="225" fill="#34d399" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="end">87,5 m</text>
+
+                            <!-- ZONA 3: PASILLO CENTRAL DE MANIOBRA (3,50 m = 525 m²) -->
+                            <rect x="140" y="332" width="720" height="24" fill="url(#aisleGrad)" stroke="#f59e0b" stroke-width="1.5"/>
+                            <line x1="140" y1="344" x2="860" y2="344" stroke="#ffffff" stroke-width="1" stroke-dasharray="6 4" opacity="0.6"/>
+                            <text x="500" y="348" fill="#ffffff" font-size="9.5" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">PASILLO CENTRAL DE MANIOBRA (3,50 m = 525 m²) — DESACOPLE CINEMÁTICO GRÚAS REACH</text>
+
+                            <!-- Cota Pasillo Central (3,5 m) -->
+                            <line x1="125" y1="332" x2="125" y2="356" stroke="#fbbf24" stroke-width="1.5"/>
+                            <text x="115" y="348" fill="#fbbf24" font-size="8" font-family="'JetBrains Mono', monospace" text-anchor="end">3,5 m</text>
+
+                            <!-- ZONA 4: BLOQUE 2 POSTERIOR (13.125 m², 70 pallets fondo) -->
+                            <rect x="140" y="356" width="720" height="224" fill="url(#block2Grad)" stroke="#10b981" stroke-width="1.5"/>
+                            <rect x="140" y="356" width="720" height="224" fill="url(#rackPattern)"/>
+
+                            <text x="500" y="405" fill="#34d399" font-size="13" font-weight="900" font-family="'Plus Jakarta Sans', sans-serif" text-anchor="middle">BLOQUE 2 (POSTERIOR) — 13.125 m² • 56.280 PALLETS</text>
+                            <text x="500" y="425" fill="#e2e8f0" font-size="10" font-weight="700" font-family="'JetBrains Mono', monospace" text-anchor="middle">134 Canales Frontales × 6 Niveles Altura = 804 Túneles Pallet Shuttle</text>
+                            <text x="500" y="445" fill="#94a3b8" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="middle">Profundidad del Bloque: 70 Pallets en Fondo (87,50 m) • Despacho / Hub 3PL</text>
+
+                            <!-- Indicador de flujo FIFO Bloque 2 -->
+                            <g opacity="0.85">
+                                <line x1="280" y1="465" x2="280" y2="545" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowDown)"/>
+                                <text x="290" y="505" fill="#38bdf8" font-size="8.5" font-family="'JetBrains Mono', monospace">Despacho / 3PL Hub</text>
+
+                                <line x1="720" y1="465" x2="720" y2="545" stroke="#38bdf8" stroke-width="2" marker-end="url(#arrowDown)"/>
+                                <text x="730" y="505" fill="#38bdf8" font-size="8.5" font-family="'JetBrains Mono', monospace">Despacho / 3PL Hub</text>
+                            </g>
+
+                            <!-- Cota Bloque 2 (87,5 m) -->
+                            <line x1="125" y1="356" x2="125" y2="580" stroke="#34d399" stroke-width="1.2"/>
+                            <text x="115" y="470" fill="#34d399" font-size="9" font-family="'JetBrains Mono', monospace" text-anchor="end">87,5 m</text>
+
+                            <!-- Leyenda Técnica Inferior del Plano -->
+                            <rect x="140" y="586" width="720" height="26" fill="#091226" stroke="rgba(255, 255, 255, 0.1)" rx="4"/>
+                            <circle cx="160" cy="599" r="4" fill="#0284c7"/>
+                            <text x="170" y="602" fill="#94a3b8" font-size="8" font-family="'JetBrains Mono', monospace">Zona Operacional (15%)</text>
+
+                            <circle cx="310" cy="599" r="4" fill="#10b981"/>
+                            <text x="320" y="602" fill="#94a3b8" font-size="8" font-family="'JetBrains Mono', monospace">Racks Pallet Shuttle (83,3%)</text>
+
+                            <circle cx="485" cy="599" r="4" fill="#f59e0b"/>
+                            <text x="495" y="602" fill="#94a3b8" font-size="8" font-family="'JetBrains Mono', monospace">Pasillo Central 3,5m (1,7%)</text>
+
+                            <text x="840" y="602" fill="#38bdf8" font-size="8.5" font-weight="700" font-family="'JetBrains Mono', monospace" text-anchor="end">CD PUDAHUEL: 31.500 m² | 12,0m ALTURA</text>
+                        </svg>
+                    </div>
+
+                    <!-- Métricas de Balance Superficial de la Memoria Técnica -->
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 14px;">
+                        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 10px; text-align: center;">
+                            <div style="font-size: 0.68rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">SUPERFICIE TOTAL NAVE</div>
+                            <div style="font-size: 1.15rem; font-weight: 800; color: #38bdf8; font-family: 'JetBrains Mono', monospace;">31.500 m²</div>
+                            <div style="font-size: 0.65rem; color: #64748b;">150 m frente × 210 m fondo</div>
+                        </div>
+                        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 10px; text-align: center;">
+                            <div style="font-size: 0.68rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">HUELLA RACKS COMPACTOS</div>
+                            <div style="font-size: 1.15rem; font-weight: 800; color: #34d399; font-family: 'JetBrains Mono', monospace;">26.250 m²</div>
+                            <div style="font-size: 0.65rem; color: #64748b;">98,04% del área de almacenaje</div>
+                        </div>
+                        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 10px; text-align: center;">
+                            <div style="font-size: 0.68rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">ZONA OPERACIONAL FRONTAL</div>
+                            <div style="font-size: 1.15rem; font-weight: 800; color: #fbbf24; font-family: 'JetBrains Mono', monospace;">4.725 m²</div>
+                            <div style="font-size: 0.65rem; color: #64748b;">15,0% frente para andenes y GTP</div>
+                        </div>
+                        <div style="background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 10px; text-align: center;">
+                            <div style="font-size: 0.68rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace;">PASILLO CENTRAL MANIOBRA</div>
+                            <div style="font-size: 1.15rem; font-weight: 800; color: #f59e0b; font-family: 'JetBrains Mono', monospace;">525 m²</div>
+                            <div style="font-size: 0.65rem; color: #64748b;">3,50 m ancho × 150 m largo</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBCOMPONENTE 2: ANÁLISIS CINEMÁTICO Y CICLOS DE OPERACIÓN SHUTTLE -->
+                <div class="exc-schematic-box" style="margin-top: 18px; border-color: rgba(52, 211, 153, 0.35);">
+                    <div class="exc-schematic-header">
+                        <div class="exc-schematic-title" style="color: #34d399;">
+                            <span>⚡ Análisis Cinemático y Ciclos de Operación Pallet Shuttle</span>
+                        </div>
+                        <div style="display: flex; gap: 8px;">
+                            <span class="exc-tag-delta">CICLO MEDIO: 105s</span>
+                            <span class="exc-tag-delta gold">THROUGHPUT: 34 PAL/H</span>
+                        </div>
+                    </div>
+
+                    <!-- GRID DE 4 TILES CINEMÁTICOS -->
+                    <div class="exc-kinematic-grid">
+                        <div class="exc-kinematic-tile">
+                            <div class="exc-kinematic-val">105 s</div>
+                            <div class="exc-kinematic-lbl">Tiempo de Ciclo Promedio</div>
+                            <div class="exc-kinematic-sub">1 min 45 s por ciclo completo (ida, elevación, retorno y entrega)</div>
+                        </div>
+                        <div class="exc-kinematic-tile">
+                            <div class="exc-kinematic-val" style="color: #38bdf8;">34 pal/h</div>
+                            <div class="exc-kinematic-lbl">Throughput Unitario por Carro</div>
+                            <div class="exc-kinematic-sub">Capacidad sostenida por cada Pallet Shuttle en régimen nominal</div>
+                        </div>
+                        <div class="exc-kinematic-tile">
+                            <div class="exc-kinematic-val" style="color: #fbbf24;">43,8 m</div>
+                            <div class="exc-kinematic-lbl">Recorrido Promedio Shuttle</div>
+                            <div class="exc-kinematic-sub">Distancia media en canal de 70 pallets (35 pallets × 1,25 m) a 2,0 m/s</div>
+                        </div>
+                        <div class="exc-kinematic-tile">
+                            <div class="exc-kinematic-val" style="color: #a78bfa;">40 s</div>
+                            <div class="exc-kinematic-lbl">Espera de Grúa Reach Truck</div>
+                            <div class="exc-kinematic-sub">Solo 38% tiempo de ocio grúa vs 137 s (68%) en bloque ciego sin pasillo</div>
+                        </div>
+                    </div>
+
+                    <!-- DIMENSIONAMIENTO DE FLOTA Y COMPARATIVA CINEMÁTICA -->
+                    <div style="margin-top: 16px; background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 10px; padding: 14px;">
+                        <h4 style="margin: 0 0 8px 0; font-size: 0.88rem; color: #34d399; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+                            <span>🚀 Dimensionamiento de Flota para Picos de Expedición (400 - 500 pal/h)</span>
+                        </h4>
+                        <p style="margin: 0; font-size: 0.8rem; color: #cbd5e1; line-height: 1.55;">
+                            Para absorber los picos de despacho de AndesHome en eventos CyberDay o distribución masiva a 27 tiendas retail (400 a 500 pallets/hora), la Memoria Técnica dimensiona una <strong>flota de 12 a 16 carros Pallet Shuttle</strong> asistidos por <strong>4 grúas retráctiles (reach trucks)</strong> operando simultáneamente entre el frente y el pasillo central.<br><br>
+                            <span style="color: #f87171; font-weight: 700;">⚠️ Por qué fracasa el Bloque Ciego Único (140 pallets de fondo):</span> En un bloque ciego continuo sin pasillo central, el recorrido promedio se duplicaría a 87,5 m, elevando el tiempo de ciclo a <strong>202 segundos (3 min 22 s)</strong> y desplomando la productividad del carro a solo <strong>18 pal/h</strong>. La grúa reach permanecería parada <strong>137 segundos esperando que el carro regrese (68% de ocio de maquinaria)</strong>, triplicando la flota de grúas requerida y generando congestión terminal en cabecera.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- SUBCOMPONENTE 3: REQUERIMIENTOS CIVILES, CARGAS Y SEGURIDAD NFPA 13 -->
+                <div class="exc-civil-box">
+                    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 8px;">
+                        <div style="font-size: 0.95rem; font-weight: 800; color: #38bdf8; font-family: 'JetBrains Mono', monospace; display: flex; align-items: center; gap: 8px;">
+                            <span>🏗️ Requerimientos Civiles, Cargas sobre Pavimento y Seguridad Contra Incendio (NFPA 13)</span>
+                        </div>
+                        <span class="exc-tag-delta">CARGA MEDIA: 4,29 TON/M² • LOSA H30/G30</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                        <!-- Columna A: Ingeniería Civil y Pavimento -->
+                        <div style="background: rgba(13, 21, 39, 0.7); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 10px; padding: 14px;">
+                            <h4 style="margin: 0 0 8px 0; font-size: 0.85rem; color: #38bdf8; font-weight: 800;">1. Cargas Mecánicas y Diseño de Losa Industrial</h4>
+                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 0.78rem; color: #cbd5e1;">
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px;">
+                                    <span>Masa Bruta Almacenada:</span>
+                                    <strong style="color: #ffffff; font-family: 'JetBrains Mono', monospace;">112.560 toneladas (pallet 1.000 kg)</strong>
+                                </li>
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px;">
+                                    <span>Carga Media Distribuida:</span>
+                                    <strong style="color: #34d399; font-family: 'JetBrains Mono', monospace;">4,29 ton/m² (42,1 kN/m²) en racks</strong>
+                                </li>
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px;">
+                                    <span>Carga Puntual por Puntal:</span>
+                                    <strong style="color: #fbbf24; font-family: 'JetBrains Mono', monospace;">6,2 toneladas (6 niveles a 12,0m)</strong>
+                                </li>
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px;">
+                                    <span>Especificación de Pavimento:</span>
+                                    <strong style="color: #38bdf8; font-family: 'JetBrains Mono', monospace;">Losa H30 / G30 (22 a 25 cm espesor)</strong>
+                                </li>
+                                <li style="display: flex; justify-content: space-between;">
+                                    <span>Refuerzo Estructural:</span>
+                                    <strong style="color: #e2e8f0; font-family: 'JetBrains Mono', monospace;">Macrofibra sintética + doble malla FM2</strong>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- Columna B: Seguridad Contra Incendios NFPA 13 -->
+                        <div style="background: rgba(13, 21, 39, 0.7); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 10px; padding: 14px;">
+                            <h4 style="margin: 0 0 8px 0; font-size: 0.85rem; color: #34d399; font-weight: 800;">2. Protección Contra Incendios NFPA 13 (Sin In-Rack)</h4>
+                            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 7px; font-size: 0.78rem; color: #cbd5e1;">
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px;">
+                                    <span>Altura Libre de Nave:</span>
+                                    <strong style="color: #ffffff; font-family: 'JetBrains Mono', monospace;">12,00 metros bajo viga</strong>
+                                </li>
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px;">
+                                    <span>Altura Máxima de Carga:</span>
+                                    <strong style="color: #38bdf8; font-family: 'JetBrains Mono', monospace;">10,20 metros (6 niveles × 1,70 m)</strong>
+                                </li>
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px;">
+                                    <span>Holgura Libre al Cielo:</span>
+                                    <strong style="color: #34d399; font-family: 'JetBrains Mono', monospace;">1,80 metros (Cumple NFPA 13)</strong>
+                                </li>
+                                <li style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 4px;">
+                                    <span>Sistema de Rociadores:</span>
+                                    <strong style="color: #fbbf24; font-family: 'JetBrains Mono', monospace;">ESFR K=25.2 en cubierta (Techo)</strong>
+                                </li>
+                                <li style="display: flex; justify-content: space-between;">
+                                    <span>Supresión Rociadores In-Rack:</span>
+                                    <strong style="color: #34d399; font-family: 'JetBrains Mono', monospace;">Ahorro >$220M CLP • Cero fugas en túnel</strong>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SUBCOMPONENTE 4: MATRIZ DE 5 JUSTIFICACIONES TÉCNICAS Y OPERACIONALES -->
+                <div class="exc-schematic-box" style="margin-top: 18px; border-color: rgba(251, 191, 36, 0.35);">
+                    <div class="exc-schematic-header">
+                        <div class="exc-schematic-title" style="color: #fbbf24;">
+                            <span>📋 Matriz de 5 Justificaciones Técnicas, Operacionales y Estratégicas</span>
+                        </div>
+                        <span class="exc-tag-delta gold">MEMORIA TÉCNICA OFICIAL CD PUDAHUEL</span>
+                    </div>
+
+                    <div class="exc-justif-grid">
+                        <!-- Justificación 1 -->
+                        <div class="exc-justif-card warning">
+                            <div class="exc-justif-title">
+                                <span>⚖️ 1. Opción B (Pasillo Central) vs Bloque Ciego Único</span>
+                            </div>
+                            <p class="exc-justif-body">
+                                Un bloque ciego continuo de 140 pallets de fondo elevaría el tiempo de ciclo a <strong>202 segundos</strong> y hundiría la productividad a solo <strong>18 pal/h por carro</strong>, con la grúa esperando ociosa el 68% del tiempo (137s). Dividir la nave en dos bloques gemelos de 70 pallets con un pasillo central de 3,50 m <strong>reduce el ciclo a 105s, duplica el rendimiento a 34 pal/h</strong> y comprime la espera de la grúa a solo 40s (38% de ocio).
+                            </p>
+                        </div>
+
+                        <!-- Justificación 2 -->
+                        <div class="exc-justif-card accent">
+                            <div class="exc-justif-title">
+                                <span>🔄 2. Flujo FIFO Estricto y Desacople Inbound / Outbound</span>
+                            </div>
+                            <p class="exc-justif-body">
+                                Gracias al pasillo central, la alimentación (inbound/reposición) y la extracción (outbound/despacho) se realizan por extremos opuestos del túnel. <strong>Las grúas de reposición jamás compiten por espacio físico con las grúas de despacho</strong>, erradicando al 100% las colisiones operativas y asegurando una rotación PEPS/FIFO rigurosa para evitar obsolescencia en muebles y menaje.
+                            </p>
+                        </div>
+
+                        <!-- Justificación 3 -->
+                        <div class="exc-justif-card blue">
+                            <div class="exc-justif-title">
+                                <span>📦 3. Granularidad y Selectividad Multi-SKU (1.608 Canales)</span>
+                            </div>
+                            <p class="exc-justif-body">
+                                Con 134 canales frontales por 6 niveles en cada uno de los 2 bloques, el sistema ofrece <strong>1.608 slots o túneles independientes</strong>. Cada túnel aloja hasta 70 pallets de un SKU específico, permitiendo segregar perfectamente las diversas líneas de AndesHome (muebles armados, electrodomésticos, decoración y textiles) sin "enterrar" productos ni generar reubicaciones parásitas.
+                            </p>
+                        </div>
+
+                        <!-- Justificación 4 -->
+                        <div class="exc-justif-card gold">
+                            <div class="exc-justif-title">
+                                <span>💰 4. Monetización y Escalabilidad como Hub Logístico 3PL</span>
+                            </div>
+                            <p class="exc-justif-body">
+                                Con un inventario actual de 13.480 pallets, AndesHome ocupa solo el <strong>12,0% de la capacidad instalada</strong>. Las <strong>99.080 posiciones excedentes</strong> no constituyen capacidad ociosa, sino un activo estratégico para comercializar servicios de almacenaje a terceros (retailers, importadores y marketplaces), generando ingresos recurrentes de <strong>$600M a $900M CLP anuales</strong> y convirtiendo a Pudahuel en un centro de utilidades corporativo.
+                            </p>
+                        </div>
+
+                        <!-- Justificación 5 -->
+                        <div class="exc-justif-card accent" style="grid-column: span 2;">
+                            <div class="exc-justif-title">
+                                <span>🔧 5. Rescate Técnico, Mantenimiento Seguro y Redundancia de Flota</span>
+                            </div>
+                            <p class="exc-justif-body">
+                                En canales de 70 pallets (43,8 m promedio), cualquier desmoronamiento accidental o falla de sensor de un carro puede ser intervenido de manera segura mediante pértigas de rescate o acceso técnico desde el pasillo central de 3,50 m. En un bloque ciego de 140 pallets (175 m continuos), un atasco en el centro requeriría vaciar el túnel completo durante días. Asimismo, al contar con una flota de 12-16 shuttles independientes, el retiro de un carro a mantenimiento preventivo no detiene el canal ni afecta el cumplimiento de despachos.
                             </p>
                         </div>
                     </div>
@@ -3102,10 +3623,10 @@
                         <div class="exc-dept-title">
                             <span>📦 2. Almacenamiento & Control de Inventarios</span>
                         </div>
-                        <span class="exc-dept-tag">P1 + P8: Robot Shuttle 45.630 Pos</span>
+                        <span class="exc-dept-tag">P1 + P8: Robot Shuttle 112.560 Pos (Opción B)</span>
                     </div>
                     <div class="exc-dept-body">
-                        Con el sistema de estanterías de alta densidad servidas por <strong>Robot Shuttle</strong>, se eliminan los 27 pasillos anchos de grúa horquilla y se instalan <strong>2.535 módulos de rack compactos</strong> (6 niveles a 12,0m), alcanzando <strong>45.630 posiciones pallet</strong>. Se erradica el descalce de 114 SKU que obligaba a buscar bultos a ciegas. Con el WMS NextGen y conteos cíclicos por RF, cada canal tiene coordenadas 3D exactas en tiempo real. Cero impactos contra postes, blindando la <strong>Norma Sísmica NCh2369</strong>.
+                        Con la implementación de la <strong>Opción B (Pasillo Central)</strong> servida por carros <strong>Pallet Shuttle autónomos</strong>, se suprimen los pasillos anchos y la nave de 31.500 m² se optimiza en dos bloques de 70 pallets de fondo con <strong>1.608 túneles independientes (6 niveles a 12,0 m)</strong>, alcanzando <strong>112.560 posiciones pallet estándar</strong> (+270% sobre To-Be y +735% sobre la crisis). El inventario actual de AndesHome (13.480 pallets) ocupa solo el <strong>12,0% de la nave</strong>, liberando <strong>99.080 posiciones para monetizar como Hub Logístico 3PL</strong>. Con el WMS NextGen y conteos cíclicos por RF, cada canal tiene coordenadas 3D exactas en tiempo real. Cero impactos contra postes, blindando la <strong>Norma Sísmica NCh2369</strong>.
                     </div>
                     <ul class="exc-dept-kpis-list">
                         <li>
@@ -3133,13 +3654,13 @@
                         </li>
                         <li>
                             <div style="display: flex; justify-content: space-between; width: 100%;">
-                                <span>Capacidad con Robot Shuttle:</span>
-                                <strong style="color: #38bdf8;">45.630 pos (29,5% ocup / 32.150 libres)</strong>
+                                <span>Capacidad con Pallet Shuttle (Opción B):</span>
+                                <strong style="color: #38bdf8;">112.560 pos (12,0% ocup / 99.080 libres 3PL)</strong>
                             </div>
                             <div class="exc-progress-wrap" style="width: 100%;">
                                 <div class="exc-prog-track">
-                                    <div class="exc-prog-bar-tobe" style="width: 66.7%;" title="To-Be: 30.420 pos"></div>
-                                    <div class="exc-prog-bar-exc" style="width: 33.3%;" title="Excelente: +15.210 pos"></div>
+                                    <div class="exc-prog-bar-tobe" style="width: 27%;" title="To-Be: 30.420 pos"></div>
+                                    <div class="exc-prog-bar-exc" style="width: 73%;" title="Excelente: +82.140 pos (112.560)"></div>
                                 </div>
                             </div>
                         </li>
@@ -3465,9 +3986,9 @@
                 capex.style.color = '#f43f5e';
                 capexSub.innerText = '+$570M sobre techo ($850M) • Amortizado en 5,6m';
 
-                cap.innerText = '45.630 Pos';
+                cap.innerText = '112.560 Pos';
                 cap.style.color = '#38bdf8';
-                capSub.innerText = '2.535 racks compactos (+50%) • 29,5% ocupación actual';
+                capSub.innerText = '1.608 slots independientes (Opción B) • 12,0% ocupación actual';
 
                 spd.innerText = '220 lín/h';
                 spd.style.color = '#34d399';
@@ -3493,7 +4014,7 @@
                 esg.style.color = '#34d399';
                 esgSub.innerText = 'Cero trabajo en altura • -85,5% caminatas operarios';
 
-                alertNote.innerHTML = '💡 <strong>Análisis Estratégico del Escenario Seleccionado:</strong> El Escenario Excelente libera todo el potencial operativo del CD Pudahuel. Al no limitar el tiempo a 24 semanas, se integra la planta solar y el sistema AS/RS Robot Shuttle en los 2.535 módulos de rack, llevando la capacidad a 45.630 pallets y derrumbando el costo por pedido a solo $3.850 CLP.';
+                alertNote.innerHTML = '💡 <strong>Análisis Estratégico del Escenario Seleccionado:</strong> El Escenario Excelente libera todo el potencial operativo del CD Pudahuel. Al implementar la Opción B (Pasillo Central) de Pallet Shuttle en los 26.250 m² de nave con 1.608 slots y 6 niveles, la capacidad se expande a 112.560 pallets. AndesHome utiliza el 12,0% (13.480 pos), dejando 99.080 posiciones libres para monetizar como Hub Logístico 3PL ($600M-$900M CLP/año extras) y derrumbando el costo por pedido a solo $3.850 CLP.';
                 alertNote.style.borderColor = 'rgba(52, 211, 153, 0.4)';
                 alertNote.style.background = 'rgba(16, 185, 129, 0.12)';
             }
@@ -3710,11 +4231,11 @@
             },
             excelente: {
                 title: 'Escenario de Excelente (P1 a P8 Robotizado)',
-                subtitle: 'World-Class Logistics • 45.630 Pos • OTIF 98,7% • Costo Pedido CLP $3.850 • 65% Solar',
+                subtitle: 'World-Class Logistics • 112.560 Pos (Opción B) • OTIF 98,7% • Costo Pedido CLP $3.850 • 65% Solar',
                 badge: 'WORLD-CLASS BENCHMARK',
                 dotColor: '#34d399',
-                capVal: '45.630 Pos',
-                capSub: '+50% más racks compactos Shuttle (2.535)',
+                capVal: '112.560 Pos',
+                capSub: 'Opción B: Pasillo Central • 1.608 slots (12% ocup / 99k 3PL)',
                 pickVal: '220 lín/h',
                 pickSub: '+221,6% superior con AS/RS + GTP',
                 otifVal: '98,7%',
@@ -3734,8 +4255,8 @@
                 subtitle: 'Observa la evolución geométrica: Crisis As-Is (rojo), To-Be (azul) y Excelente (verde esmeralda)',
                 badge: 'VISTA TRIPLE BENCHMARK',
                 dotColor: '#ffffff',
-                capVal: '16,9k → 30,4k → 45,6k',
-                capSub: 'De colapso a +50% capacidad libre',
+                capVal: '16,9k → 30,4k → 112,5k',
+                capSub: 'De colapso a 99k pos libres para Hub 3PL',
                 pickVal: '46,8 → 68,4 → 220 l/h',
                 pickSub: 'Salto cuántico con Goods-to-Person',
                 otifVal: '43,5% → 96,2% → 98,7%',
