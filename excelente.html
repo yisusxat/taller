@@ -3772,6 +3772,661 @@
                     </div>
                 </div>
 
+                
+                <!-- ========================================================================= -->
+                <!-- SECCIÓN: LAYOUT CD PUDAHUEL - PLANO 2D ARQUITECTÓNICO DE DISTRIBUCIÓN     -->
+                <!-- ========================================================================= -->
+                <div class="exc-schematic-box" id="secLayoutCDPudahuel" style="margin-top: 22px; border-color: rgba(56, 189, 248, 0.55); box-shadow: 0 12px 36px rgba(2, 132, 199, 0.16);">
+                    <div class="exc-schematic-header">
+                        <div class="exc-schematic-title">
+                            <span>📐 Layout CD Pudahuel: Plano 2D Arquitectónico de Distribución de Racks y Canales (150 m × 210 m)</span>
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span class="exc-tag-delta">134 CANALES FRONTALES</span>
+                            <span class="exc-tag-delta gold">1.608 TÚNELES SHUTTLE</span>
+                            <span class="exc-dept-tag">112.560 POSICIONES EN 2 BLOQUES</span>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0 0 14px 0; line-height: 1.55;">
+                        Representación planimétrica 2D en planta del Centro de Distribución Pudahuel (31.500 m²). Muestra la distribución física real de las <strong>baterías de racks continuos de 70 pallets de fondo</strong>, los <strong>134 canales en el frente de 150 metros</strong>, la separación de los dos bloques mediante el <strong>Pasillo Central de Desacople de 3,50 m</strong>, las <strong>30 calles de piso de Zona D</strong> con mesas hidráulicas, y la integración de los <strong>24 andenes y estaciones robóticas Goods-to-Person</strong>.
+                    </p>
+
+                    <!-- Filtros Interactivos de Visualización de Racks -->
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; background: rgba(15, 23, 42, 0.6); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.08);">
+                        <span style="font-size: 0.75rem; color: #94a3b8; font-weight: 800; align-self: center; margin-right: 4px;">🔍 Filtro de Inspección Racks:</span>
+                        <button type="button" class="exc-radar-pill-btn active" id="btnRackAll" onclick="filterCadLayout('all')" style="font-size: 0.72rem; padding: 4px 10px;">
+                            Todos los Racks (112.560 Pos)
+                        </button>
+                        <button type="button" class="exc-radar-pill-btn" id="btnRackZA" onclick="filterCadLayout('za')" style="font-size: 0.72rem; padding: 4px 10px; color: #38bdf8;">
+                            Zona A: Picking GTP (50 Canales • 10.500 Pos)
+                        </button>
+                        <button type="button" class="exc-radar-pill-btn" id="btnRackZB" onclick="filterCadLayout('zb')" style="font-size: 0.72rem; padding: 4px 10px; color: #34d399;">
+                            Zona B: Reposición Olas (84 Canales • 45.780 Pos)
+                        </button>
+                        <button type="button" class="exc-radar-pill-btn" id="btnRackAisle" onclick="filterCadLayout('aisle')" style="font-size: 0.72rem; padding: 4px 10px; color: #fbbf24;">
+                            Pasillo Central Desacople (3,5m • Grúas Reach)
+                        </button>
+                        <button type="button" class="exc-radar-pill-btn" id="btnRackZD" onclick="filterCadLayout('zd')" style="font-size: 0.72rem; padding: 4px 10px; color: #f43f5e;">
+                            Zona D: Bulky a Piso (30 Calles • 2.100 Pos)
+                        </button>
+                        <button type="button" class="exc-radar-pill-btn" id="btnRackZC" onclick="filterCadLayout('zc')" style="font-size: 0.72rem; padding: 4px 10px; color: #fbbf24;">
+                            Zona C &amp; Hub 3PL (104 Canales • 54.180 Pos)
+                        </button>
+                    </div>
+
+                    <!-- CONTENEDOR DEL PLANO 2D ARQUITECTÓNICO SVG -->
+                    <div style="background: #020617; border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; padding: 10px; overflow-x: auto;">
+<svg viewBox="0 0 1400 980" xmlns="http://www.w3.org/2000/svg" id="svgCadLayout2D" style="width: 100%; height: auto; background: #030712; border-radius: 10px; border: 1px solid rgba(56, 189, 248, 0.4); box-shadow: 0 16px 48px rgba(0,0,0,0.85);">
+    <defs>
+        <!-- Grilla de dibujo arquitectónico CAD -->
+        <pattern id="cadGridSmall" width="10" height="10" patternUnits="userSpaceOnUse">
+            <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(56, 189, 248, 0.03)" stroke-width="0.5"/>
+        </pattern>
+        <pattern id="cadGridLarge" width="50" height="50" patternUnits="userSpaceOnUse">
+            <rect width="50" height="50" fill="url(#cadGridSmall)"/>
+            <path d="M 50 0 L 0 0 0 50" fill="none" stroke="rgba(56, 189, 248, 0.08)" stroke-width="1"/>
+        </pattern>
+
+        <!-- Patrón físico de canales de racks longitudinales (Zona A: Cyan) -->
+        <pattern id="cadRackZA" width="8.2" height="16" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="16" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1"/>
+            <line x1="8.2" y1="0" x2="8.2" y2="16" stroke="rgba(56, 189, 248, 0.35)" stroke-width="1"/>
+            <line x1="1.5" y1="0" x2="1.5" y2="16" stroke="rgba(56, 189, 248, 0.15)" stroke-width="0.6" stroke-dasharray="2 2"/>
+            <line x1="6.7" y1="0" x2="6.7" y2="16" stroke="rgba(56, 189, 248, 0.15)" stroke-width="0.6" stroke-dasharray="2 2"/>
+            <line x1="0" y1="8" x2="8.2" y2="8" stroke="rgba(56, 189, 248, 0.12)" stroke-width="0.5"/>
+        </pattern>
+
+        <!-- Patrón físico de canales de racks longitudinales (Zona B: Esmeralda) -->
+        <pattern id="cadRackZB" width="8.2" height="16" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="16" stroke="rgba(52, 211, 153, 0.35)" stroke-width="1"/>
+            <line x1="8.2" y1="0" x2="8.2" y2="16" stroke="rgba(52, 211, 153, 0.35)" stroke-width="1"/>
+            <line x1="1.5" y1="0" x2="1.5" y2="16" stroke="rgba(52, 211, 153, 0.15)" stroke-width="0.6" stroke-dasharray="2 2"/>
+            <line x1="6.7" y1="0" x2="6.7" y2="16" stroke="rgba(52, 211, 153, 0.15)" stroke-width="0.6" stroke-dasharray="2 2"/>
+            <line x1="0" y1="8" x2="8.2" y2="8" stroke="rgba(52, 211, 153, 0.12)" stroke-width="0.5"/>
+        </pattern>
+
+        <!-- Patrón físico de canales de racks longitudinales (Zona C: Ámbar) -->
+        <pattern id="cadRackZC" width="8.2" height="16" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="16" stroke="rgba(251, 191, 36, 0.35)" stroke-width="1"/>
+            <line x1="8.2" y1="0" x2="8.2" y2="16" stroke="rgba(251, 191, 36, 0.35)" stroke-width="1"/>
+            <line x1="1.5" y1="0" x2="1.5" y2="16" stroke="rgba(251, 191, 36, 0.15)" stroke-width="0.6" stroke-dasharray="2 2"/>
+            <line x1="6.7" y1="0" x2="6.7" y2="16" stroke="rgba(251, 191, 36, 0.15)" stroke-width="0.6" stroke-dasharray="2 2"/>
+            <line x1="0" y1="8" x2="8.2" y2="8" stroke="rgba(251, 191, 36, 0.12)" stroke-width="0.5"/>
+        </pattern>
+
+        <!-- Patrón físico de calles a piso gran gálibo (Zona D: Rosa) -->
+        <pattern id="cadFloorZD" width="8.2" height="20" patternUnits="userSpaceOnUse">
+            <line x1="0" y1="0" x2="0" y2="20" stroke="rgba(244, 63, 94, 0.4)" stroke-width="1.2"/>
+            <line x1="8.2" y1="0" x2="8.2" y2="20" stroke="rgba(244, 63, 94, 0.4)" stroke-width="1.2"/>
+            <rect x="1" y="2" width="6.2" height="7" fill="rgba(244, 63, 94, 0.08)" stroke="rgba(244, 63, 94, 0.2)" stroke-width="0.5"/>
+            <rect x="1" y="11" width="6.2" height="7" fill="rgba(244, 63, 94, 0.08)" stroke="rgba(244, 63, 94, 0.2)" stroke-width="0.5"/>
+        </pattern>
+
+        <!-- Franjas de seguridad vial para pasillo central -->
+        <pattern id="hazardStripes" width="16" height="16" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+            <rect width="8" height="16" fill="#f59e0b"/>
+            <rect x="8" width="8" height="16" fill="#1e293b"/>
+        </pattern>
+
+        <!-- Marcadores de flechas CAD -->
+        <marker id="cadArrCyan" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#38bdf8"/>
+        </marker>
+        <marker id="cadArrGreen" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#34d399"/>
+        </marker>
+        <marker id="cadArrAmber" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#fbbf24"/>
+        </marker>
+        <marker id="cadArrRose" markerWidth="6" markerHeight="6" refX="4" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#f43f5e"/>
+        </marker>
+    </defs>
+
+    <!-- Fondo de dibujo arquitectónico -->
+    <rect width="1400" height="980" fill="#030712"/>
+    <rect width="1400" height="980" fill="url(#cadGridLarge)"/>
+
+    <!-- ========================================================================= -->
+    <!-- 1. ENTORNO, MUROS PERIMETRALES Y EJES ESTRUCTURALES (150 m × 210 m)       -->
+    <!-- ========================================================================= -->
+    <!-- Muro Perimetral Principal de Nave: x=110 a 1210 (1100 px), y=60 a 785 (725 px) -->
+    <!-- Escala: 1100 px / 150 m = 7,33 px/metro en ancho.                         -->
+    <rect x="108" y="58" width="1104" height="729" fill="#080e1e" stroke="#1e293b" stroke-width="4" rx="4"/>
+    <rect x="110" y="60" width="1100" height="725" fill="none" stroke="#38bdf8" stroke-width="2"/>
+
+    <!-- Rosa de los Vientos y Norte Logístico -->
+    <g transform="translate(60, 90)">
+        <circle cx="0" cy="0" r="18" fill="#091226" stroke="#38bdf8" stroke-width="1.2"/>
+        <path d="M 0,-15 L 4,0 L -4,0 Z" fill="#38bdf8"/>
+        <path d="M 0,15 L 4,0 L -4,0 Z" fill="#64748b"/>
+        <path d="M -15,0 L 0,-4 L 0,4 Z" fill="#64748b"/>
+        <path d="M 15,0 L 0,-4 L 0,4 Z" fill="#64748b"/>
+        <text x="0" y="-18" fill="#38bdf8" font-size="8" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">N</text>
+        <text x="0" y="26" fill="#94a3b8" font-size="6.5" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="middle">NORTE</text>
+    </g>
+
+    <!-- Cota Superior de Frente: 150,00 METROS -->
+    <line x1="110" y1="36" x2="1210" y2="36" stroke="#38bdf8" stroke-width="1.5"/>
+    <circle cx="110" cy="36" r="3" fill="#38bdf8"/><circle cx="1210" cy="36" r="3" fill="#38bdf8"/>
+    <rect x="440" y="24" width="440" height="22" fill="#091226" rx="4" stroke="#38bdf8" stroke-width="1"/>
+    <text x="660" y="39" fill="#38bdf8" font-size="10" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">FACHADA FRONTAL: 150,00 METROS (134 MÓDULOS DE RACKS EN BATERÍA)</text>
+
+    <!-- Cota Lateral Izquierda de Fondo Total: 210,00 METROS -->
+    <line x1="45" y1="60" x2="45" y2="785" stroke="#94a3b8" stroke-width="1.5"/>
+    <circle cx="45" cy="60" r="3" fill="#94a3b8"/><circle cx="45" cy="785" r="3" fill="#94a3b8"/>
+    <rect x="18" y="370" width="24" height="140" fill="#091226" rx="4" stroke="#94a3b8" stroke-width="1"/>
+    <text x="34" y="440" fill="#cbd5e1" font-size="9" font-weight="900" font-family="'JetBrains Mono', monospace" transform="rotate(-90, 34, 440)" text-anchor="middle">FONDO: 210,00 m (31.500 m²)</text>
+
+    <!-- Cotas Parciales en el Lateral Izquierdo -->
+    <!-- Zona Operativa (31,5 m) -->
+    <line x1="85" y1="60" x2="85" y2="170" stroke="#38bdf8" stroke-width="1.2"/>
+    <circle cx="85" cy="60" r="2" fill="#38bdf8"/><circle cx="85" cy="170" r="2" fill="#38bdf8"/>
+    <text x="80" y="118" fill="#38bdf8" font-size="8" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="end">31,5m</text>
+
+    <!-- Bloque 1 (87,5 m) -->
+    <line x1="85" y1="170" x2="85" y2="455" stroke="#34d399" stroke-width="1.2"/>
+    <circle cx="85" cy="170" r="2" fill="#34d399"/><circle cx="85" cy="455" r="2" fill="#34d399"/>
+    <text x="80" y="315" fill="#34d399" font-size="8" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="end">87,5m</text>
+
+    <!-- Pasillo Central (3,5 m) -->
+    <line x1="85" y1="455" x2="85" y2="495" stroke="#fbbf24" stroke-width="1.2"/>
+    <circle cx="85" cy="455" r="2" fill="#fbbf24"/><circle cx="85" cy="495" r="2" fill="#fbbf24"/>
+    <text x="80" y="478" fill="#fbbf24" font-size="7.5" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="end">3,5m</text>
+
+    <!-- Bloque 2 (87,5 m) -->
+    <line x1="85" y1="495" x2="85" y2="785" stroke="#f43f5e" stroke-width="1.2"/>
+    <circle cx="85" cy="495" r="2" fill="#f43f5e"/><circle cx="85" cy="785" r="2" fill="#f43f5e"/>
+    <text x="80" y="642" fill="#f43f5e" font-size="8" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="end">87,5m</text>
+
+    <!-- ========================================================================= -->
+    <!-- 2. ZONA OPERATIVA FRONTAL (y=60 a 170): ANDENES Y GOODS-TO-PERSON          -->
+    <!-- ========================================================================= -->
+    <rect x="110" y="60" width="1100" height="110" fill="#091428" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1"/>
+
+    <!-- Andenes 1 al 12: Inbound / Recepción (x=120 a x=645) -->
+    <rect x="120" y="65" width="525" height="26" fill="rgba(2, 132, 199, 0.25)" stroke="#0284c7" stroke-width="1" rx="3"/>
+    <text x="382" y="82" fill="#7dd3fc" font-size="9" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">📥 ANDENES 1 AL 12: RECEPCIÓN &amp; DESCARGA INBOUND (12 RAMPAS NIVELADORAS)</text>
+    <!-- Puertas individuales de andén con números -->
+    <g font-family="'JetBrains Mono', monospace" font-size="6.5" font-weight="800" text-anchor="middle">
+        <!-- 12 andenes Inbound -->
+        <rect x="125" y="62" width="38" height="6" fill="#0284c7" rx="1"/><text x="144" y="60" fill="#38bdf8">D1</text>
+        <rect x="168" y="62" width="38" height="6" fill="#0284c7" rx="1"/><text x="187" y="60" fill="#38bdf8">D2</text>
+        <rect x="211" y="62" width="38" height="6" fill="#0284c7" rx="1"/><text x="230" y="60" fill="#38bdf8">D3</text>
+        <rect x="254" y="62" width="38" height="6" fill="#0284c7" rx="1"/><text x="273" y="60" fill="#38bdf8">D4</text>
+        <rect x="297" y="62" width="38" height="6" fill="#0284c7" rx="1"/><text x="316" y="60" fill="#38bdf8">D5</text>
+        <rect x="340" y="62" width="38" height="6" fill="#0284c7" rx="1"/><text x="359" y="60" fill="#38bdf8">D6</text>
+        <rect x="383" y="62" width="38" height="6" fill="#0284c7" rx="1"/><text x="402" y="60" fill="#38bdf8">D7</text>
+        <rect x="426" y="62" width="38" height="6" fill="#0284c7" rx="1"/><text x="445" y="60" fill="#38bdf8">D8</text>
+        <rect x="469" y="62" width="38" height="6" fill="#0284c7" rx="1"/><text x="488" y="60" fill="#38bdf8">D9</text>
+        <rect x="512" y="62" width="38" height="6" fill="#0284c7" rx="1"/><text x="531" y="60" fill="#38bdf8">D10</text>
+        <rect x="555" y="62" width="38" height="6" fill="#0284c7" rx="1"/><text x="574" y="60" fill="#38bdf8">D11</text>
+        <rect x="598" y="62" width="38" height="6" fill="#0284c7" rx="1"/><text x="617" y="60" fill="#38bdf8">D12</text>
+    </g>
+
+    <!-- Andenes 13 al 24: Outbound / Despacho (x=675 a x=1200) -->
+    <rect x="675" y="65" width="525" height="26" fill="rgba(16, 185, 129, 0.25)" stroke="#059669" stroke-width="1" rx="3"/>
+    <text x="937" y="82" fill="#6ee7b7" font-size="9" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">🚚 ANDENES 13 AL 24: DESPACHO OUTBOUND (12 RAMPAS NIVELADORAS)</text>
+    <g font-family="'JetBrains Mono', monospace" font-size="6.5" font-weight="800" text-anchor="middle">
+        <rect x="680" y="62" width="38" height="6" fill="#059669" rx="1"/><text x="699" y="60" fill="#34d399">D13</text>
+        <rect x="723" y="62" width="38" height="6" fill="#059669" rx="1"/><text x="742" y="60" fill="#34d399">D14</text>
+        <rect x="766" y="62" width="38" height="6" fill="#059669" rx="1"/><text x="785" y="60" fill="#34d399">D15</text>
+        <rect x="809" y="62" width="38" height="6" fill="#059669" rx="1"/><text x="828" y="60" fill="#34d399">D16</text>
+        <rect x="852" y="62" width="38" height="6" fill="#059669" rx="1"/><text x="871" y="60" fill="#34d399">D17</text>
+        <rect x="895" y="62" width="38" height="6" fill="#059669" rx="1"/><text x="914" y="60" fill="#34d399">D18</text>
+        <rect x="938" y="62" width="38" height="6" fill="#059669" rx="1"/><text x="957" y="60" fill="#34d399">D19</text>
+        <rect x="981" y="62" width="38" height="6" fill="#059669" rx="1"/><text x="1000" y="60" fill="#34d399">D20</text>
+        <rect x="1024" y="62" width="38" height="6" fill="#059669" rx="1"/><text x="1043" y="60" fill="#34d399">D21</text>
+        <rect x="1067" y="62" width="38" height="6" fill="#059669" rx="1"/><text x="1086" y="60" fill="#34d399">D22</text>
+        <rect x="1110" y="62" width="38" height="6" fill="#059669" rx="1"/><text x="1129" y="60" fill="#34d399">D23</text>
+        <rect x="1153" y="62" width="38" height="6" fill="#059669" rx="1"/><text x="1172" y="60" fill="#34d399">D24</text>
+    </g>
+
+    <!-- Playa Staging Inbound y Pistas AMR / GTP (y=98 a 165) -->
+    <!-- Playa Staging RF -->
+    <rect x="120" y="98" width="160" height="65" fill="#0b1730" stroke="#0284c7" stroke-width="0.8" rx="3"/>
+    <text x="200" y="114" fill="#38bdf8" font-size="8" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">PLAYA STAGING INBOUND</text>
+    <text x="200" y="128" fill="#94a3b8" font-size="7" font-family="'JetBrains Mono', monospace" text-anchor="middle">Portal YMS • RF Check</text>
+    <text x="200" y="142" fill="#34d399" font-size="7" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="middle">Dock-to-Stock: 3,2h</text>
+    <text x="200" y="156" fill="#cbd5e1" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle">12 Puertas Abiertas</text>
+
+    <!-- 4 Estaciones Ergonómicas Goods-to-Person (GTP 1 a 4) -->
+    <g transform="translate(295, 98)">
+        <rect x="0" y="0" width="340" height="65" fill="#071b26" stroke="#06b6d4" stroke-width="1" rx="4"/>
+        <text x="170" y="14" fill="#38bdf8" font-size="8.5" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">ÁREA GOODS-TO-PERSON (GTP): 4 ESTACIONES ERGONÓMICAS</text>
+        <!-- 4 puestos GTP -->
+        <g transform="translate(10, 22)">
+            <rect x="0" y="0" width="72" height="36" fill="#092535" stroke="#38bdf8" stroke-width="0.8" rx="3"/>
+            <text x="36" y="14" fill="#38bdf8" font-size="7" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="middle">PUESTO GTP-1</text>
+            <text x="36" y="27" fill="#34d399" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle">Pick-by-Light</text>
+
+            <rect x="80" y="0" width="72" height="36" fill="#092535" stroke="#38bdf8" stroke-width="0.8" rx="3"/>
+            <text x="116" y="14" fill="#38bdf8" font-size="7" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="middle">PUESTO GTP-2</text>
+            <text x="116" y="27" fill="#34d399" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle">220 lín/h</text>
+
+            <rect x="160" y="0" width="72" height="36" fill="#092535" stroke="#38bdf8" stroke-width="0.8" rx="3"/>
+            <text x="196" y="14" fill="#38bdf8" font-size="7" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="middle">PUESTO GTP-3</text>
+            <text x="196" y="27" fill="#34d399" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle">Ergonomía 100%</text>
+
+            <rect x="240" y="0" width="72" height="36" fill="#092535" stroke="#38bdf8" stroke-width="0.8" rx="3"/>
+            <text x="276" y="14" fill="#38bdf8" font-size="7" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="middle">PUESTO GTP-4</text>
+            <text x="276" y="27" fill="#34d399" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle">Flota 32 AMR</text>
+        </g>
+    </g>
+
+    <!-- Packing & Consolidación E-commerce -->
+    <rect x="648" y="98" width="180" height="65" fill="#140f28" stroke="#c084fc" stroke-width="0.8" rx="3"/>
+    <text x="738" y="114" fill="#c084fc" font-size="8" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">PACKING &amp; RIGHT-SIZING</text>
+    <text x="738" y="128" fill="#cbd5e1" font-size="7" font-family="'JetBrains Mono', monospace" text-anchor="middle">6 Tamaños Estandarizados</text>
+    <text x="738" y="142" fill="#34d399" font-size="7" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="middle">Cero Aire Transportado</text>
+    <text x="738" y="156" fill="#94a3b8" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle">Etiquetado GS1-128 con QR</text>
+
+    <!-- Sorter & Báscula Dinámica Checkweigher -->
+    <rect x="840" y="98" width="170" height="65" fill="#260f1b" stroke="#f43f5e" stroke-width="0.8" rx="3"/>
+    <text x="925" y="114" fill="#f87171" font-size="8" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">BÁSCULA CHECKWEIGHER</text>
+    <text x="925" y="128" fill="#fbbf24" font-size="7" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="middle">Tolerancia: ±15g Línea</text>
+    <text x="925" y="142" fill="#38bdf8" font-size="7" font-family="'JetBrains Mono', monospace" text-anchor="middle">Arco RFID Volumétrico 3D</text>
+    <text x="925" y="156" fill="#34d399" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle">Preclasificación por Ruta</text>
+
+    <!-- Staging Despacho Outbound -->
+    <rect x="1020" y="98" width="180" height="65" fill="#082218" stroke="#10b981" stroke-width="0.8" rx="3"/>
+    <text x="1110" y="114" fill="#34d399" font-size="8" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">PLAYA STAGING OUTBOUND</text>
+    <text x="1110" y="128" fill="#cbd5e1" font-size="7" font-family="'JetBrains Mono', monospace" text-anchor="middle">Consolidación por Andén</text>
+    <text x="1110" y="142" fill="#38bdf8" font-size="7" font-weight="800" font-family="'JetBrains Mono', monospace" text-anchor="middle">TMS 3D (91% Llenado)</text>
+    <text x="1110" y="156" fill="#34d399" font-size="6.5" font-family="'JetBrains Mono', monospace" text-anchor="middle">OTIF Global: 98,7%</text>
+
+
+    <!-- ========================================================================= -->
+    <!-- 3. BLOQUE 1 (FRONTAL): 150,00 m × 87,50 m = 13.125 m² • 804 TÚNELES       -->
+    <!-- ========================================================================= -->
+    <!-- ZONA A-RÁPIDA (x=110 a 521, ancho 411 px = 56,00 m, Canales 1 a 50) -->
+    <g id="cadGroupZA" class="cad-zone-group">
+        <!-- Racks físicos en patrón longitudinal -->
+        <rect x="110" y="170" width="411" height="285" fill="#041224" stroke="#06b6d4" stroke-width="1.5"/>
+        <rect x="110" y="170" width="411" height="285" fill="url(#cadRackZA)"/>
+
+        <!-- Franja frontal de inducción/extracción y Lifters AS/RS -->
+        <rect x="110" y="170" width="411" height="26" fill="rgba(6, 182, 212, 0.25)" stroke="#06b6d4" stroke-width="1"/>
+        <text x="315" y="187" fill="#38bdf8" font-size="9" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">ZONA A: CANALES 1 AL 50 • FRENTE 56,00 m (NIVELES 1 A 3)</text>
+
+        <!-- 4 Torres de Elevadores AS/RS Lifter en cabecera frontal -->
+        <g fill="#0284c7" stroke="#38bdf8" stroke-width="1" font-family="'JetBrains Mono', monospace" font-size="7" font-weight="900">
+            <rect x="150" y="172" width="42" height="22" rx="2"/><text x="171" y="186" fill="#ffffff" text-anchor="middle">LIFTER 1</text>
+            <rect x="240" y="172" width="42" height="22" rx="2"/><text x="261" y="186" fill="#ffffff" text-anchor="middle">LIFTER 2</text>
+            <rect x="330" y="172" width="42" height="22" rx="2"/><text x="351" y="186" fill="#ffffff" text-anchor="middle">LIFTER 3</text>
+            <rect x="420" y="172" width="42" height="22" rx="2"/><text x="441" y="186" fill="#ffffff" text-anchor="middle">LIFTER 4</text>
+        </g>
+
+        <!-- Tarjeta Flotante HUD Zona A -->
+        <rect x="135" y="240" width="360" height="110" rx="6" fill="#091428" stroke="#38bdf8" stroke-width="1.4" opacity="0.95"/>
+        <text x="150" y="260" fill="#38bdf8" font-size="9.5" font-weight="900" font-family="'JetBrains Mono', monospace">📦 ZONA A-RÁPIDA: PICKING EXPRESS GOODS-TO-PERSON</text>
+        <text x="150" y="278" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'JetBrains Mono', monospace">RACKS: 50 Canales Frontales × 3 Niveles Útiles</text>
+        <text x="150" y="296" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'JetBrains Mono', monospace">TÚNELES: 150 Túneles Pallet Shuttle (Fondo 70)</text>
+        <text x="150" y="314" fill="#fbbf24" font-size="9.5" font-weight="900" font-family="'JetBrains Mono', monospace">CAPACIDAD INSTALADA: 10.500 POSICIONES</text>
+        <text x="150" y="332" fill="#34d399" font-size="8.5" font-weight="800" font-family="'JetBrains Mono', monospace">AndesHome: 3.120 Pallets en Stock (105 SKUs Clase A)</text>
+        <text x="150" y="346" fill="#94a3b8" font-size="7.5" font-family="'JetBrains Mono', monospace">Buffer Dinámico de Peak: 7.380 Posiciones Libres</text>
+
+        <!-- Pistas de Cobots AMR conectando Lifters con GTP (Animación sutil) -->
+        <path d="M 171,194 L 171,215 L 340,215 L 340,165" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <path d="M 261,194 L 261,215 L 420,215 L 420,165" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <path d="M 351,194 L 351,222 L 500,222 L 500,165" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <path d="M 441,194 L 441,222 L 580,222 L 580,165" fill="none" stroke="#38bdf8" stroke-width="1.5" stroke-dasharray="4 3"/>
+    </g>
+
+    <!-- ZONA B-MEDIA (x=521 a 1210, ancho 689 px = 94,00 m, Canales 51 a 134) -->
+    <g id="cadGroupZB" class="cad-zone-group">
+        <!-- Racks físicos en patrón longitudinal -->
+        <rect x="521" y="170" width="689" height="285" fill="#041814" stroke="#10b981" stroke-width="1.5"/>
+        <rect x="521" y="170" width="689" height="285" fill="url(#cadRackZB)"/>
+
+        <!-- Franja frontal de cabecera de Zona B -->
+        <rect x="521" y="170" width="689" height="26" fill="rgba(16, 185, 129, 0.25)" stroke="#10b981" stroke-width="1"/>
+        <text x="865" y="187" fill="#34d399" font-size="9" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">ZONA B: CANALES 51 AL 134 • FRENTE 94,00 m (N1 A N6) + AÉREO 50 CANALES (N4 A N6)</text>
+
+        <!-- Tarjeta Flotante HUD Zona B -->
+        <rect x="635" y="240" width="460" height="110" rx="6" fill="#061c14" stroke="#10b981" stroke-width="1.4" opacity="0.95"/>
+        <text x="650" y="260" fill="#34d399" font-size="9.5" font-weight="900" font-family="'JetBrains Mono', monospace">📦 ZONA B-MEDIA: REPOSICIÓN POR OLAS &amp; RESERVA DINÁMICA</text>
+        <text x="650" y="278" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'JetBrains Mono', monospace">RACKS: 84 Canales en N1-N6 (12m) + 50 Canales en N4-N6 sobre Zona A</text>
+        <text x="650" y="296" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'JetBrains Mono', monospace">TÚNELES: 654 Túneles Pallet Shuttle (Fondo Útil: 70 Pallets)</text>
+        <text x="650" y="314" fill="#fbbf24" font-size="9.5" font-weight="900" font-family="'JetBrains Mono', monospace">CAPACIDAD INSTALADA: 45.780 POSICIONES ESTÁNDAR</text>
+        <text x="650" y="332" fill="#34d399" font-size="8.5" font-weight="800" font-family="'JetBrains Mono', monospace">AndesHome: 3.850 Pallets en Uso (120 SKUs Clase B)</text>
+        <text x="650" y="346" fill="#94a3b8" font-size="7.5" font-family="'JetBrains Mono', monospace">Capacidad Disponible / Hub 3PL: 41.930 Posiciones Libres</text>
+    </g>
+
+
+    <!-- ========================================================================= -->
+    <!-- 4. PASILLO CENTRAL DE DESACOPLE (y=455 a 495): 3,50 m ANCHO × 150,00 m     -->
+    <!-- ========================================================================= -->
+    <g id="cadGroupAisle" class="cad-zone-group">
+        <!-- Losa central con franjas de seguridad vial tipo cebra en bordes -->
+        <rect x="110" y="455" width="1100" height="40" fill="#141108" stroke="#f59e0b" stroke-width="1.5"/>
+        <rect x="110" y="455" width="1100" height="4" fill="url(#hazardStripes)"/>
+        <rect x="110" y="491" width="1100" height="4" fill="url(#hazardStripes)"/>
+
+        <!-- Línea central de tránsito vehicular para Grúas Reach -->
+        <line x1="110" y1="475" x2="1210" y2="475" stroke="#ffffff" stroke-width="1.2" stroke-dasharray="10 6"/>
+
+        <!-- Señalética vial y Grúas Reach dibujadas en 2D -->
+        <!-- Grúa Reach 1 (Extremo Izquierdo) -->
+        <g transform="translate(140, 463)">
+            <rect x="0" y="0" width="28" height="24" rx="3" fill="#b45309" stroke="#fbbf24" stroke-width="1"/>
+            <rect x="22" y="4" width="10" height="16" fill="#fbbf24"/>
+            <text x="14" y="15" fill="#ffffff" font-size="6.5" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">REACH</text>
+        </g>
+        <path d="M 180,475 L 240,475" stroke="#38bdf8" stroke-width="2.2" fill="none" marker-end="url(#cadArrCyan)"/>
+
+        <!-- Badge Central Inmaculado y Despejado (100% Legible) -->
+        <rect x="280" y="462" width="680" height="26" rx="4" fill="#091226" stroke="#f59e0b" stroke-width="1.4"/>
+        <text x="620" y="479" fill="#fbbf24" font-size="9" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">PASILLO CENTRAL DE DESACOPLE (150,00 m × 3,50 m = 525 m²) • DESACOPLE CINEMÁTICO BIDIRECCIONAL GRÚAS REACH</text>
+
+        <!-- Grúa Reach 2 (Extremo Derecho) -->
+        <path d="M 980,475 L 1040,475" stroke="#34d399" stroke-width="2.2" fill="none" marker-end="url(#cadArrGreen)"/>
+        <g transform="translate(1055, 463)">
+            <rect x="0" y="0" width="28" height="24" rx="3" fill="#b45309" stroke="#fbbf24" stroke-width="1"/>
+            <rect x="-4" y="4" width="10" height="16" fill="#fbbf24"/>
+            <text x="14" y="15" fill="#ffffff" font-size="6.5" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">REACH</text>
+        </g>
+    </g>
+
+
+    <!-- ========================================================================= -->
+    <!-- 5. BLOQUE 2 (POSTERIOR): 150,00 m × 87,50 m = 13.125 m² • 804 SLOTS       -->
+    <!-- ========================================================================= -->
+    <!-- ZONA D-BULKY (x=110 a 356, ancho 246 px = 33,60 m, Calles 1 a 30 a Piso) -->
+    <g id="cadGroupZD" class="cad-zone-group">
+        <!-- Calles de piso libre gran gálibo -->
+        <rect x="110" y="495" width="246" height="290" fill="#1c0710" stroke="#f43f5e" stroke-width="1.5"/>
+        <rect x="110" y="495" width="246" height="290" fill="url(#cadFloorZD)"/>
+
+        <!-- Franja frontal de cabecera Zona D -->
+        <rect x="110" y="495" width="246" height="26" fill="rgba(244, 63, 94, 0.25)" stroke="#f43f5e" stroke-width="1"/>
+        <text x="233" y="512" fill="#f43f5e" font-size="8.5" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">ZONA D: 30 CALLES A PISO (COTA ±0,00m)</text>
+
+        <!-- 4 Mesas Elevadoras Hidráulicas tipo Tijera (M1 a M4) -->
+        <g font-family="'JetBrains Mono', monospace" font-size="6.5" font-weight="900">
+            <g transform="translate(130, 530)">
+                <rect x="0" y="0" width="45" height="32" rx="3" fill="#3b0816" stroke="#f43f5e" stroke-width="1"/>
+                <line x1="8" y1="6" x2="37" y2="26" stroke="#f43f5e" stroke-width="1.2"/>
+                <line x1="8" y1="26" x2="37" y2="6" stroke="#f43f5e" stroke-width="1.2"/>
+                <text x="22" y="18" fill="#ffffff" text-anchor="middle">MESA 1</text>
+            </g>
+            <g transform="translate(190, 530)">
+                <rect x="0" y="0" width="45" height="32" rx="3" fill="#3b0816" stroke="#f43f5e" stroke-width="1"/>
+                <line x1="8" y1="6" x2="37" y2="26" stroke="#f43f5e" stroke-width="1.2"/>
+                <line x1="8" y1="26" x2="37" y2="6" stroke="#f43f5e" stroke-width="1.2"/>
+                <text x="22" y="18" fill="#ffffff" text-anchor="middle">MESA 2</text>
+            </g>
+            <g transform="translate(130, 575)">
+                <rect x="0" y="0" width="45" height="32" rx="3" fill="#3b0816" stroke="#f43f5e" stroke-width="1"/>
+                <line x1="8" y1="6" x2="37" y2="26" stroke="#f43f5e" stroke-width="1.2"/>
+                <line x1="8" y1="26" x2="37" y2="6" stroke="#f43f5e" stroke-width="1.2"/>
+                <text x="22" y="18" fill="#ffffff" text-anchor="middle">MESA 3</text>
+            </g>
+            <g transform="translate(190, 575)">
+                <rect x="0" y="0" width="45" height="32" rx="3" fill="#3b0816" stroke="#f43f5e" stroke-width="1"/>
+                <line x1="8" y1="6" x2="37" y2="26" stroke="#f43f5e" stroke-width="1.2"/>
+                <line x1="8" y1="26" x2="37" y2="6" stroke="#f43f5e" stroke-width="1.2"/>
+                <text x="22" y="18" fill="#ffffff" text-anchor="middle">MESA 4</text>
+            </g>
+        </g>
+
+        <!-- Tarjeta Flotante HUD Zona D -->
+        <rect x="120" y="625" width="226" height="145" rx="6" fill="#1e0812" stroke="#f43f5e" stroke-width="1.4" opacity="0.95"/>
+        <text x="132" y="645" fill="#fca5a5" font-size="9" font-weight="900" font-family="'JetBrains Mono', monospace">📦 ZONA D-BULKY: PISO EXCLUSIVO</text>
+        <text x="132" y="663" fill="#ffffff" font-size="8" font-weight="800" font-family="'JetBrains Mono', monospace">CALLES: 30 Calles Gran Gálibo</text>
+        <text x="132" y="681" fill="#ffffff" font-size="8" font-weight="800" font-family="'JetBrains Mono', monospace">NIVELES: Cota ±0,00m (Sin Racks Altura)</text>
+        <text x="132" y="699" fill="#fbbf24" font-size="9" font-weight="900" font-family="'JetBrains Mono', monospace">CAPACIDAD: 2.100 POSICIONES A PISO</text>
+        <text x="132" y="717" fill="#34d399" font-size="8" font-weight="800" font-family="'JetBrains Mono', monospace">AndesHome: 2.060 Pallets AH (>25 kg)</text>
+        <text x="132" y="733" fill="#94a3b8" font-size="7.5" font-family="'JetBrains Mono', monospace">78 SKUs Críticos • Holgura: 40 Pos</text>
+        <rect x="132" y="742" width="202" height="20" rx="3" fill="rgba(244, 63, 94, 0.25)" stroke="#f43f5e" stroke-width="0.8"/>
+        <text x="233" y="756" fill="#fca5a5" font-size="7.5" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">100% LEY 20.949 • 0 ACCIDENTES SST</text>
+    </g>
+
+    <!-- ZONA C-LENTA & HUB LOGÍSTICO 3PL (x=356 a 1210, ancho 854 px = 116,40 m, Canales 31 a 134) -->
+    <g id="cadGroupZC" class="cad-zone-group">
+        <!-- Racks físicos en patrón longitudinal -->
+        <rect x="356" y="495" width="854" height="290" fill="#181304" stroke="#f59e0b" stroke-width="1.5"/>
+        <rect x="356" y="495" width="854" height="290" fill="url(#cadRackZC)"/>
+
+        <!-- Franja frontal de cabecera Zona C -->
+        <rect x="356" y="495" width="854" height="26" fill="rgba(245, 158, 11, 0.25)" stroke="#f59e0b" stroke-width="1"/>
+        <text x="783" y="512" fill="#fbbf24" font-size="9" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">ZONA C &amp; HUB 3PL: CANALES 31 AL 134 • FRENTE 116,40 m (N1 A N6) + AÉREO 30 CANALES (N2 A N6 SOBRE ZONA D)</text>
+
+        <!-- Dos Tarjetas HUD en Paralelo para Zona C -->
+        <!-- Tarjeta C-1: Infraestructura de Racks -->
+        <rect x="380" y="555" width="390" height="120" rx="6" fill="#1c1606" stroke="#f59e0b" stroke-width="1.4" opacity="0.95"/>
+        <text x="395" y="575" fill="#fbbf24" font-size="9" font-weight="900" font-family="'JetBrains Mono', monospace">📦 RACKS: 104 Canales (N1-6) + 30 Canales (N2-6)</text>
+        <text x="395" y="593" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'JetBrains Mono', monospace">6 Niveles Útiles a 12,0m de Altura Total Nave</text>
+        <text x="395" y="611" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'JetBrains Mono', monospace">TÚNELES: 774 Túneles Pallet Shuttle (Fondo 70 Pallets)</text>
+        <text x="395" y="629" fill="#34d399" font-size="10" font-weight="900" font-family="'JetBrains Mono', monospace">CAPACIDAD CUADRANTE C: 54.180 POSICIONES</text>
+        <text x="395" y="647" fill="#cbd5e1" font-size="8" font-family="'JetBrains Mono', monospace">Factor de Utilización Cúbica: 84,2% (191.352 m³)</text>
+        <text x="395" y="663" fill="#94a3b8" font-size="7.5" font-family="'JetBrains Mono', monospace">Protección Contra Incendio: NFPA 13 ESFR Cubierta K=25.2</text>
+
+        <!-- Tarjeta C-2: Ocupación AndesHome y Hub 3PL -->
+        <rect x="790" y="555" width="400" height="120" rx="6" fill="#1c1606" stroke="#f59e0b" stroke-width="1.4" opacity="0.95"/>
+        <text x="805" y="575" fill="#fbbf24" font-size="9" font-weight="900" font-family="'JetBrains Mono', monospace">📊 MODELO DE MONETIZACIÓN HUB LOGÍSTICO 3PL</text>
+        <text x="805" y="593" fill="#34d399" font-size="8.5" font-weight="800" font-family="'JetBrains Mono', monospace">AndesHome en C: 4.450 Pallets en Uso (147 SKUs C)</text>
+        <text x="805" y="611" fill="#ffffff" font-size="8.5" font-weight="800" font-family="'JetBrains Mono', monospace">Ocupación AndesHome en Cuadrante C: Solo 8,2%</text>
+        <text x="805" y="629" fill="#fbbf24" font-size="10" font-weight="900" font-family="'JetBrains Mono', monospace">HUB 3PL EN ZONA C: 49.730 POSICIONES LIBRES</text>
+        <text x="805" y="647" fill="#34d399" font-size="8" font-weight="800" font-family="'JetBrains Mono', monospace">Ingresos Comerciales: $600M a $900M CLP/año Facturación</text>
+        <text x="805" y="663" fill="#cbd5e1" font-size="7.5" font-family="'JetBrains Mono', monospace">Posiciones Libres Total Nave Hub 3PL: 99.080 Posiciones</text>
+
+        <!-- Badge de Rentabilidad Inmobiliaria -->
+        <rect x="520" y="705" width="560" height="26" rx="4" fill="rgba(245, 158, 11, 0.25)" stroke="#f59e0b" stroke-width="1"/>
+        <text x="800" y="722" fill="#fbbf24" font-size="8.5" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">💰 49.730 Pos Libres en C • 99.080 Libres en Toda la Nave • Máxima Rentabilidad de Activo 3PL</text>
+    </g>
+
+
+    <!-- ========================================================================= -->
+    <!-- 6. COLUMNAS ESTRUCTURALES DEL EDIFICIO (GRILLA 15m × 15m EN 2D)           -->
+    <!-- ========================================================================= -->
+    <g fill="#38bdf8" stroke="#ffffff" stroke-width="0.8">
+        <!-- Eje 1 (x=110) a Eje 11 (x=1210) cada 110 px (15m reales) -->
+        <!-- Fila Y=170 -->
+        <circle cx="220" cy="170" r="3.5"/><circle cx="330" cy="170" r="3.5"/><circle cx="440" cy="170" r="3.5"/>
+        <circle cx="550" cy="170" r="3.5"/><circle cx="660" cy="170" r="3.5"/><circle cx="770" cy="170" r="3.5"/>
+        <circle cx="880" cy="170" r="3.5"/><circle cx="990" cy="170" r="3.5"/><circle cx="1100" cy="170" r="3.5"/>
+
+        <!-- Fila Y=312 (Mitad Bloque 1) -->
+        <circle cx="220" cy="312" r="3.5"/><circle cx="330" cy="312" r="3.5"/><circle cx="440" cy="312" r="3.5"/>
+        <circle cx="550" cy="312" r="3.5"/><circle cx="660" cy="312" r="3.5"/><circle cx="770" cy="312" r="3.5"/>
+        <circle cx="880" cy="312" r="3.5"/><circle cx="990" cy="312" r="3.5"/><circle cx="1100" cy="312" r="3.5"/>
+
+        <!-- Fila Y=455 (Borde Norte Pasillo Central) -->
+        <circle cx="220" cy="455" r="3.5"/><circle cx="330" cy="455" r="3.5"/><circle cx="440" cy="455" r="3.5"/>
+        <circle cx="550" cy="455" r="3.5"/><circle cx="660" cy="455" r="3.5"/><circle cx="770" cy="455" r="3.5"/>
+        <circle cx="880" cy="455" r="3.5"/><circle cx="990" cy="455" r="3.5"/><circle cx="1100" cy="455" r="3.5"/>
+
+        <!-- Fila Y=495 (Borde Sur Pasillo Central) -->
+        <circle cx="220" cy="495" r="3.5"/><circle cx="330" cy="495" r="3.5"/><circle cx="440" cy="495" r="3.5"/>
+        <circle cx="550" cy="495" r="3.5"/><circle cx="660" cy="495" r="3.5"/><circle cx="770" cy="495" r="3.5"/>
+        <circle cx="880" cy="495" r="3.5"/><circle cx="990" cy="495" r="3.5"/><circle cx="1100" cy="495" r="3.5"/>
+
+        <!-- Fila Y=640 (Mitad Bloque 2) -->
+        <circle cx="220" cy="640" r="3.5"/><circle cx="330" cy="640" r="3.5"/><circle cx="440" cy="640" r="3.5"/>
+        <circle cx="550" cy="640" r="3.5"/><circle cx="660" cy="640" r="3.5"/><circle cx="770" cy="640" r="3.5"/>
+        <circle cx="880" cy="640" r="3.5"/><circle cx="990" cy="640" r="3.5"/><circle cx="1100" cy="640" r="3.5"/>
+
+        <!-- Fila Y=785 (Fondo Nave) -->
+        <circle cx="220" cy="785" r="3.5"/><circle cx="330" cy="785" r="3.5"/><circle cx="440" cy="785" r="3.5"/>
+        <circle cx="550" cy="785" r="3.5"/><circle cx="660" cy="785" r="3.5"/><circle cx="770" cy="785" r="3.5"/>
+        <circle cx="880" cy="785" r="3.5"/><circle cx="990" cy="785" r="3.5"/><circle cx="1100" cy="785" r="3.5"/>
+    </g>
+
+
+    <!-- ========================================================================= -->
+    <!-- 7. PANEL LATERAL DE INGENIERÍA Y ESPECIFICACIONES TÉCNICAS (x=1224 a 1385)-->
+    <!-- ========================================================================= -->
+    <g transform="translate(1224, 60)">
+        <rect x="0" y="0" width="162" height="725" fill="#060c1c" stroke="rgba(56, 189, 248, 0.4)" stroke-width="1.2" rx="6"/>
+
+        <rect x="8" y="10" width="146" height="24" rx="3" fill="rgba(56, 189, 248, 0.2)" stroke="#38bdf8" stroke-width="0.8"/>
+        <text x="81" y="26" fill="#38bdf8" font-size="8" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">ESPECIFICACIONES RACKS</text>
+
+        <!-- Parámetros Estructurales y Civiles -->
+        <g font-family="'JetBrains Mono', monospace" font-size="7.5" fill="#cbd5e1" transform="translate(10, 48)">
+            <text x="0" y="0" fill="#fbbf24" font-weight="900">1. DIMENSIONAMIENTO:</text>
+            <text x="0" y="14">• Nave: 150m × 210m</text>
+            <text x="0" y="27">• Superficie: 31.500 m²</text>
+            <text x="0" y="40">• Altura Libre: 12,00 m</text>
+            <text x="0" y="53">• Estructura: 10,20 m</text>
+            <text x="0" y="66">• Despeje Techo: 1,80 m</text>
+
+            <text x="0" y="90" fill="#34d399" font-weight="900">2. RACKS COMPACTOS:</text>
+            <text x="0" y="104">• Sistema: Pallet Shuttle</text>
+            <text x="0" y="117">• Fondo: 70 Pallets</text>
+            <text x="0" y="130">• Bloque 1: 804 Túneles</text>
+            <text x="0" y="143">• Bloque 2: 804 Slots</text>
+            <text x="0" y="156">• Total: 1.608 Túneles</text>
+            <text x="0" y="169">• Niveles: 6 Útiles</text>
+
+            <text x="0" y="195" fill="#38bdf8" font-weight="900">3. CAPACIDAD FIRME:</text>
+            <text x="0" y="209">• Zona A: 10.500 pos</text>
+            <text x="0" y="222">• Zona B: 45.780 pos</text>
+            <text x="0" y="235">• Zona D: 2.100 pos</text>
+            <text x="0" y="248">• Zona C: 54.180 pos</text>
+            <text x="0" y="263" fill="#ffffff" font-weight="900">TOTAL: 112.560 POS</text>
+
+            <text x="0" y="288" fill="#c084fc" font-weight="900">4. BALANCE STOCK:</text>
+            <text x="0" y="302">• AndesHome: 13.480 pal</text>
+            <text x="0" y="315" fill="#64748b">  (12,0% ocupación)</text>
+            <text x="0" y="328">• Hub 3PL: 99.080 pos</text>
+            <text x="0" y="341" fill="#34d399">  (88,0% monetizable)</text>
+
+            <text x="0" y="366" fill="#f87171" font-weight="900">5. INGENIERÍA CIVIL:</text>
+            <text x="0" y="380">• Pavimento: H30/G30</text>
+            <text x="0" y="393">• Espesor Losa: 25 cm</text>
+            <text x="0" y="406">• Carga: 4,29 ton/m²</text>
+            <text x="0" y="419">• Puntal: 6,2 ton puntual</text>
+            <text x="0" y="432">• Sismo: NCh2369 Of.2003</text>
+
+            <text x="0" y="457" fill="#fbbf24" font-weight="900">6. NFPA 13 INCENDIO:</text>
+            <text x="0" y="471">• Rociadores: ESFR Techo</text>
+            <text x="0" y="484">• K-Factor: K=25.2</text>
+            <text x="0" y="497">• In-Rack: No requerido</text>
+            <text x="0" y="510">• Ahorro: $180M CLP</text>
+
+            <text x="0" y="535" fill="#38bdf8" font-weight="900">7. ROBÓTICA SHUTTLE:</text>
+            <text x="0" y="549">• Carros: 12-16 satélites</text>
+            <text x="0" y="562">• Velocidad: 1,0 m/s</text>
+            <text x="0" y="575">• Ciclo Medio: 105 s</text>
+            <text x="0" y="588">• Rendimiento: 34 pal/h</text>
+            <text x="0" y="601">• Peak: 450-500 pal/h</text>
+            <text x="0" y="614">• Cobots AMR: 32 un.</text>
+        </g>
+    </g>
+
+
+    <!-- ========================================================================= -->
+    <!-- 8. BARRA INFERIOR DE SIMBOLOGÍA, LEYENDA Y CUADRATURA MATEMÁTICA          -->
+    <!-- ========================================================================= -->
+    <!-- y=800 a 960 (alto 160 px, ancho 1276 px) -->
+    <rect x="110" y="800" width="1276" height="160" fill="#081024" stroke="rgba(56, 189, 248, 0.4)" rx="6"/>
+
+    <!-- Fila 1: Título y Leyenda de Simbología CAD -->
+    <text x="130" y="822" fill="#38bdf8" font-size="10" font-weight="900" font-family="'JetBrains Mono', monospace">📋 SIMBOLOGÍA Y LEYENDA TÉCNICA DEL PLANO 2D ARQUITECTÓNICO:</text>
+
+    <!-- Muestras de Color y Textura de Racks -->
+    <g transform="translate(130, 835)" font-family="'JetBrains Mono', monospace" font-size="8" fill="#cbd5e1">
+        <!-- Zona A -->
+        <rect x="0" y="0" width="22" height="14" fill="#041224" stroke="#06b6d4" stroke-width="1.2"/>
+        <line x1="7" y1="0" x2="7" y2="14" stroke="#06b6d4" stroke-width="0.8"/>
+        <line x1="15" y1="0" x2="15" y2="14" stroke="#06b6d4" stroke-width="0.8"/>
+        <text x="30" y="11"><tspan fill="#38bdf8" font-weight="900">Zona A:</tspan> 50 canales / 150 túneles Shuttle (10.500 pos) • 3 niveles útiles • Lifters AS/RS + Cobots AMR</text>
+
+        <!-- Zona B -->
+        <g transform="translate(0, 20)">
+            <rect x="0" y="0" width="22" height="14" fill="#041814" stroke="#10b981" stroke-width="1.2"/>
+            <line x1="7" y1="0" x2="7" y2="14" stroke="#10b981" stroke-width="0.8"/>
+            <line x1="15" y1="0" x2="15" y2="14" stroke="#10b981" stroke-width="0.8"/>
+            <text x="30" y="11"><tspan fill="#34d399" font-weight="900">Zona B:</tspan> 84 canales en N1-6 + 50 en N4-6 (654 túneles Shuttle • 45.780 pos) • Reposición por Olas WMS</text>
+        </g>
+
+        <!-- Pasillo Central -->
+        <g transform="translate(0, 40)">
+            <rect x="0" y="0" width="22" height="14" fill="#141108" stroke="#f59e0b" stroke-width="1.2"/>
+            <rect x="2" y="2" width="18" height="10" fill="url(#hazardStripes)"/>
+            <text x="30" y="11"><tspan fill="#fbbf24" font-weight="900">Pasillo Central:</tspan> 3,50 m ancho × 150 m largo (525 m²) • Desacople cinemático bidireccional para Grúas Reach</text>
+        </g>
+
+        <!-- Zona D -->
+        <g transform="translate(0, 60)">
+            <rect x="0" y="0" width="22" height="14" fill="#1c0710" stroke="#f43f5e" stroke-width="1.2"/>
+            <rect x="3" y="3" width="7" height="8" fill="rgba(244, 63, 94, 0.4)"/>
+            <rect x="12" y="3" width="7" height="8" fill="rgba(244, 63, 94, 0.4)"/>
+            <text x="30" y="11"><tspan fill="#f43f5e" font-weight="900">Zona D-Bulky:</tspan> 30 calles a piso exclusivo Cota ±0,00m (2.100 pos a piso) • 4 mesas hidráulicas • 100% Ley 20.949 SST</text>
+        </g>
+
+        <!-- Zona C & Hub 3PL -->
+        <g transform="translate(0, 80)">
+            <rect x="0" y="0" width="22" height="14" fill="#181304" stroke="#f59e0b" stroke-width="1.2"/>
+            <line x1="7" y1="0" x2="7" y2="14" stroke="#f59e0b" stroke-width="0.8"/>
+            <line x1="15" y1="0" x2="15" y2="14" stroke="#f59e0b" stroke-width="0.8"/>
+            <text x="30" y="11"><tspan fill="#fbbf24" font-weight="900">Zona C &amp; Hub 3PL:</tspan> 104 canales en N1-6 + 30 en N2-6 (774 túneles Shuttle • 54.180 pos) • 49.730 pos libres para arriendo</text>
+        </g>
+    </g>
+
+    <!-- Fila Resumen de Cuadratura Matemática Consolidada -->
+    <rect x="125" y="930" width="1246" height="22" fill="#040a16" rx="3" stroke="rgba(56, 189, 248, 0.3)"/>
+    <text x="748" y="945" fill="#ffffff" font-size="8.5" font-weight="900" font-family="'JetBrains Mono', monospace" text-anchor="middle">
+        <tspan fill="#38bdf8">Zona A (10.500)</tspan> + 
+        <tspan fill="#34d399">Zona B (45.780)</tspan> + 
+        <tspan fill="#f43f5e">Zona D (2.100)</tspan> + 
+        <tspan fill="#fbbf24">Zona C (54.180)</tspan> = 
+        <tspan fill="#34d399" font-size="9.5">112.560 POSICIONES TOTALES</tspan> • 
+        <tspan fill="#38bdf8">1.608 Túneles en Nave</tspan> • 
+        <tspan fill="#cbd5e1">13.480 AH (12,0%)</tspan> + 
+        <tspan fill="#fbbf24">99.080 Libres Hub 3PL (88,0%)</tspan>
+    </text>
+</svg>
+                    </div>
+
+                    <!-- Función interactiva para resaltar cuadrantes en el plano 2D -->
+                    <script>
+                        function filterCadLayout(zone) {
+                            var btnIds = ['btnRackAll', 'btnRackZA', 'btnRackZB', 'btnRackAisle', 'btnRackZD', 'btnRackZC'];
+                            btnIds.forEach(function(id) {
+                                var el = document.getElementById(id);
+                                if (el) el.classList.remove('active');
+                            });
+
+                            var targetBtn = {
+                                'all': 'btnRackAll',
+                                'za': 'btnRackZA',
+                                'zb': 'btnRackZB',
+                                'aisle': 'btnRackAisle',
+                                'zd': 'btnRackZD',
+                                'zc': 'btnRackZC'
+                            }[zone];
+                            if (targetBtn && document.getElementById(targetBtn)) {
+                                document.getElementById(targetBtn).classList.add('active');
+                            }
+
+                            var groups = {
+                                'za': document.getElementById('cadGroupZA'),
+                                'zb': document.getElementById('cadGroupZB'),
+                                'aisle': document.getElementById('cadGroupAisle'),
+                                'zd': document.getElementById('cadGroupZD'),
+                                'zc': document.getElementById('cadGroupZC')
+                            };
+
+                            for (var key in groups) {
+                                if (groups[key]) {
+                                    if (zone === 'all' || zone === key) {
+                                        groups[key].style.opacity = '1';
+                                        groups[key].style.filter = 'drop-shadow(0 0 10px rgba(56, 189, 248, 0.4))';
+                                    } else {
+                                        groups[key].style.opacity = '0.22';
+                                        groups[key].style.filter = 'none';
+                                    }
+                                }
+                            }
+                        }
+                    </script>
+                </div>
+
+
                 <!-- SUBCOMPONENTE 2B: DESGLOSE FÍSICO DE RACKS, CANALES Y TÚNELES POR ZONA -->
                 <div class="exc-schematic-box" style="margin-top: 18px; border-color: rgba(56, 189, 248, 0.45);">
                     <div class="exc-schematic-header">
