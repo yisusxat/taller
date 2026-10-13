@@ -3532,6 +3532,199 @@
                     </div>
                 </div>
 
+                <!-- SUBCOMPONENTE 2B: DESGLOSE FÍSICO DE RACKS, CANALES Y TÚNELES POR ZONA -->
+                <div class="exc-schematic-box" style="margin-top: 18px; border-color: rgba(56, 189, 248, 0.45);">
+                    <div class="exc-schematic-header">
+                        <div class="exc-schematic-title">
+                            <span>🏗️ Desglose Físico de Racks, Canales y Túneles por Zona Operativa</span>
+                        </div>
+                        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                            <span class="exc-tag-delta">134 CANALES FRONTALES</span>
+                            <span class="exc-tag-delta gold">6 NIVELES ÚTILES (12M)</span>
+                            <span class="exc-dept-tag">1.608 TÚNELES • 112.560 POSICIONES</span>
+                        </div>
+                    </div>
+
+                    <p style="font-size: 0.82rem; color: #cbd5e1; margin: 0 0 14px 0; line-height: 1.55;">
+                        La nave se divide longitudinalmente en <strong>dos bloques gemelos de 70 pallets de fondo</strong> (Bloque 1 Frontal y Bloque 2 Posterior), separados por el <strong>Pasillo Central de Desacople de 3,50 m</strong>. En el frente de 150 metros se emplazan <strong>134 canales continuos</strong> en batería a lo largo de <strong>6 niveles de altura útil (10,20 m)</strong>. A continuación se desglosa la infraestructura exacta de estanterías asignada a cada zona:
+                    </p>
+
+                    <div class="table-responsive">
+                        <table class="exc-master-table">
+                            <thead>
+                                <tr>
+                                    <th>Zona / Cuadrante</th>
+                                    <th>Ubicación Física en Nave</th>
+                                    <th>Canales Frontales</th>
+                                    <th>Niveles Útiles</th>
+                                    <th>Túneles Pallet Shuttle</th>
+                                    <th>Fondo de Túnel</th>
+                                    <th>Capacidad Total Posiciones</th>
+                                    <th>Ocupación AndesHome vs. Buffer / 3PL</th>
+                                    <th>Tipo de Racks &amp; Equipamiento</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr style="background: rgba(6, 182, 212, 0.08);">
+                                    <td>
+                                        <strong style="color: #38bdf8;">Zona A-Rápida</strong><br>
+                                        <span style="font-size: 0.7rem; color: #94a3b8;">Picking Express GTP</span>
+                                    </td>
+                                    <td>Bloque 1 Frontal (Canales 1 al 50, sector más cercano a andenes)</td>
+                                    <td><strong>50 canales</strong> (~56 m frente)</td>
+                                    <td><strong>3 niveles</strong> (N1 a N3)</td>
+                                    <td><strong style="color: #38bdf8; font-family: 'JetBrains Mono', monospace;">150 túneles</strong><br><span style="font-size: 0.68rem; color: #94a3b8;">105 SKUs + 45 buffer</span></td>
+                                    <td>70 pallets</td>
+                                    <td><strong style="color: #ffffff; font-family: 'JetBrains Mono', monospace;">10.500 pos</strong></td>
+                                    <td><span style="color: #38bdf8; font-weight: 700;">3.120 pos AndesHome</span><br><span style="color: #64748b; font-size: 0.72rem;">7.380 pos buffer dinámico</span></td>
+                                    <td>Racks Shuttle alta rotación conectados a 2 Lifters y 32 Cobots AMR GTP</td>
+                                </tr>
+                                <tr style="background: rgba(16, 185, 129, 0.08);">
+                                    <td>
+                                        <strong style="color: #34d399;">Zona B-Media</strong><br>
+                                        <span style="font-size: 0.7rem; color: #94a3b8;">Picking Estándar</span>
+                                    </td>
+                                    <td>Bloque 1 Frontal (Canales 51 al 134 en N1-N6 + Canales 1 al 50 en N4-N6)</td>
+                                    <td><strong>84 canales</strong> en N1-N6 + 50 en N4-N6</td>
+                                    <td><strong>6 niveles</strong> útiles</td>
+                                    <td><strong style="color: #34d399; font-family: 'JetBrains Mono', monospace;">654 túneles</strong><br><span style="font-size: 0.68rem; color: #94a3b8;">120 SKUs dedicados</span></td>
+                                    <td>70 pallets</td>
+                                    <td><strong style="color: #ffffff; font-family: 'JetBrains Mono', monospace;">45.780 pos</strong></td>
+                                    <td><span style="color: #34d399; font-weight: 700;">3.850 pos AndesHome</span><br><span style="color: #38bdf8; font-size: 0.72rem;">850 pos holgura reposición</span></td>
+                                    <td>Racks Pallet Shuttle continuo servidos por grúas reach desde pasillo central</td>
+                                </tr>
+                                <tr style="background: rgba(234, 179, 8, 0.08);">
+                                    <td>
+                                        <strong style="color: #fbbf24;">Zona C-Lenta &amp; Hub 3PL</strong><br>
+                                        <span style="font-size: 0.7rem; color: #94a3b8;">Reserva Alta Densidad</span>
+                                    </td>
+                                    <td>Bloque 2 Posterior (Canales 31 al 134 en N1-N6 + Canales 1 al 30 en N2-N6)</td>
+                                    <td><strong>104 canales</strong> continuos + 30 en N2-N6</td>
+                                    <td><strong>6 niveles</strong> útiles</td>
+                                    <td><strong style="color: #fbbf24; font-family: 'JetBrains Mono', monospace;">774 túneles</strong><br><span style="font-size: 0.68rem; color: #94a3b8;">147 SKUs + 627 3PL</span></td>
+                                    <td>70 pallets</td>
+                                    <td><strong style="color: #34d399; font-family: 'JetBrains Mono', monospace;">103.530 pos</strong><br><span style="font-size: 0.68rem; color: #94a3b8;">(4.450 AH + 99.080 3PL)</span></td>
+                                    <td><span style="color: #fbbf24; font-weight: 700;">4.450 pos AndesHome</span><br><strong style="color: #34d399;">+99.080 pos Libres Hub 3PL</strong></td>
+                                    <td>Racks compactos autoportantes Pallet Shuttle continuo en alta densidad a 12m</td>
+                                </tr>
+                                <tr style="background: rgba(244, 63, 94, 0.08);">
+                                    <td>
+                                        <strong style="color: #f43f5e;">Zona D-Bulky</strong><br>
+                                        <span style="font-size: 0.7rem; color: #94a3b8;">SST / Ley 20.949</span>
+                                    </td>
+                                    <td>Bloque 2 Posterior (Canales 1 al 30 en piso exclusivo)</td>
+                                    <td><strong>30 módulos</strong> de piso (~34 m frente)</td>
+                                    <td><strong>1 nivel</strong> (Cota ±0,00m a Nivel 1)</td>
+                                    <td><strong style="color: #f43f5e; font-family: 'JetBrains Mono', monospace;">30 calles a piso</strong><br><span style="font-size: 0.68rem; color: #94a3b8;">78 SKUs pesados &gt;25kg</span></td>
+                                    <td>70 pallets</td>
+                                    <td><strong style="color: #ffffff; font-family: 'JetBrains Mono', monospace;">2.100 pos a piso</strong></td>
+                                    <td><span style="color: #f43f5e; font-weight: 700;">2.060 pos AndesHome</span><br><span style="color: #64748b; font-size: 0.72rem;">40 pos holgura suelo</span></td>
+                                    <td>Calles de almacenamiento a piso sin niveles superiores. 4 mesas hidráulicas tijera y transpaletas</td>
+                                </tr>
+                                <tr style="background: rgba(2, 132, 199, 0.2); font-weight: 900; border-top: 2px solid #38bdf8;">
+                                    <td colspan="2" style="color: #ffffff;">TOTAL CONSOLIDADO INFRAESTRUCTURA</td>
+                                    <td style="color: #38bdf8; font-family: 'JetBrains Mono', monospace;">134 Canales Frontales</td>
+                                    <td style="color: #ffffff;">6 Niveles (12,0m)</td>
+                                    <td style="color: #fbbf24; font-family: 'JetBrains Mono', monospace;">1.608 Túneles en Nave</td>
+                                    <td>70 Pallets Fondo</td>
+                                    <td style="color: #34d399; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem;">112.560 Posiciones</td>
+                                    <td style="color: #ffffff; font-family: 'JetBrains Mono', monospace;">13.480 AH (12,0%) + 99.080 3PL (88,0%)</td>
+                                    <td style="color: #cbd5e1; font-size: 0.72rem;">100% Blindaje Sísmico NCh2369 y NFPA 13 ESFR</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- SUBCOMPONENTE 2C: FLUJO OPERACIONAL END-TO-END Y TIPO DE FLUJO LOGÍSTICO -->
+                <div class="exc-schematic-box" style="margin-top: 18px; border-color: rgba(52, 211, 153, 0.45);">
+                    <div class="exc-schematic-header">
+                        <div class="exc-schematic-title" style="color: #34d399;">
+                            <span>🔄 Flujo Operacional Integral: De la Recepción al Despacho &amp; Tipología de Flujo</span>
+                        </div>
+                        <span class="exc-tag-delta gold">MACRO-FLUJO EN "U" + MICRO-FLUJO PASANTE FIFO</span>
+                    </div>
+
+                    <!-- EXPLICACIÓN DE TIPOLOGÍA DE FLUJO -->
+                    <div style="background: rgba(15, 23, 42, 0.85); border: 1px solid rgba(52, 211, 153, 0.25); border-radius: 10px; padding: 14px; margin-bottom: 16px;">
+                        <div style="font-size: 0.88rem; font-weight: 800; color: #34d399; margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+                            <span>📐 Tipología de Flujo Logístico del CD Pudahuel: Sistema Híbrido</span>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; font-size: 0.8rem; color: #cbd5e1; line-height: 1.55;">
+                            <div>
+                                <strong style="color: #38bdf8;">1. Macro-Flujo a Nivel de Nave: Flujo en "U" (U-Flow)</strong><br>
+                                Todos los andenes (24 puertas) se ubican en la fachada frontal de 150 metros. La mercadería ingresa por el ala izquierda (andenes 1 a 12 de recepción), penetra hacia el fondo de la nave hacia el almacenamiento y gira hacia el ala derecha (andenes 13 a 24 de despacho).<br>
+                                <em style="color: #94a3b8; font-size: 0.75rem;">Ventajas: Patio único exterior de maniobra, flexibilidad total para reasignar andenes según peaks y unificación de áreas de supervisión y carga de baterías.</em>
+                            </div>
+                            <div>
+                                <strong style="color: #34d399;">2. Micro-Flujo a Nivel de Racks: Flujo Pasante FIFO Desacoplado</strong><br>
+                                Dentro de los bloques de almacenamiento, el flujo es <strong>lineal y unidireccional</strong>: la reposición (putaway) ingresa por el Pasillo Central de Maniobras de 3,50m mediante grúas reach, y la extracción (picking) se realiza por las cabeceras frontales hacia los elevadores Lifter y Cobots AMR.<br>
+                                <em style="color: #94a3b8; font-size: 0.75rem;">Ventajas: Desacople cinemático total, cero interferencias entre reposición y preparación, y cumplimiento estricto de First-In, First-Out (FIFO).</em>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- MAPA DE 6 ETAPAS DEL FLUJO OPERACIONAL -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;">
+                        <!-- Etapa 1 -->
+                        <div style="background: rgba(13, 21, 39, 0.75); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 12px; display: flex; flex-direction: column;">
+                            <div style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 800; text-transform: uppercase;">ETAPA 1</div>
+                            <div style="font-size: 0.82rem; font-weight: 800; color: #ffffff; margin: 4px 0 6px 0;">📥 Recepción &amp; Inbound</div>
+                            <p style="margin: 0; font-size: 0.74rem; color: #cbd5e1; line-height: 1.45; flex-grow: 1;">
+                                Citas en Portal ASN &amp; YMS en ventanas de 2h en andenes 1-12. Descarga en 12 min con transpaletas eléctricas y escaneo Zebra RF. Dock-to-Stock de 3,2h y $0 sobreestadía.
+                            </p>
+                        </div>
+
+                        <!-- Etapa 2 -->
+                        <div style="background: rgba(13, 21, 39, 0.75); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 12px; display: flex; flex-direction: column;">
+                            <div style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 800; text-transform: uppercase;">ETAPA 2</div>
+                            <div style="font-size: 0.82rem; font-weight: 800; color: #ffffff; margin: 4px 0 6px 0;">📦 Almacenamiento (Putaway)</div>
+                            <p style="margin: 0; font-size: 0.74rem; color: #cbd5e1; line-height: 1.45; flex-grow: 1;">
+                                WMS 3D asigna coordenada por Matriz Cruzada. Pallet entra por Pasillo Central de 3,5m y el Carro Pallet Shuttle lo aloja a 2,0 m/s en el canal en flujo FIFO. Zona D va a piso a Cota ±0,00m.
+                            </p>
+                        </div>
+
+                        <!-- Etapa 3 -->
+                        <div style="background: rgba(13, 21, 39, 0.75); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 8px; padding: 12px; display: flex; flex-direction: column;">
+                            <div style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-weight: 800; text-transform: uppercase;">ETAPA 3</div>
+                            <div style="font-size: 0.82rem; font-weight: 800; color: #ffffff; margin: 4px 0 6px 0;">⚡ Picking Diferenciado</div>
+                            <p style="margin: 0; font-size: 0.74rem; color: #cbd5e1; line-height: 1.45; flex-grow: 1;">
+                                <strong>Zona A:</strong> Shuttle + Lifter + 32 Cobots AMR a Estaciones GTP (220 lín/h).<br>
+                                <strong>Zona B:</strong> Wave picking.<br>
+                                <strong>Zona C:</strong> Por lote.<br>
+                                <strong>Zona D:</strong> A piso con mesas tijera (Ley 20.949).
+                            </p>
+                        </div>
+
+                        <!-- Etapa 4 -->
+                        <div style="background: rgba(13, 21, 39, 0.75); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 8px; padding: 12px; display: flex; flex-direction: column;">
+                            <div style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #c084fc; font-weight: 800; text-transform: uppercase;">ETAPA 4</div>
+                            <div style="font-size: 0.82rem; font-weight: 800; color: #ffffff; margin: 4px 0 6px 0;">📦 Empaque (Packing)</div>
+                            <p style="margin: 0; font-size: 0.74rem; color: #cbd5e1; line-height: 1.45; flex-grow: 1;">
+                                Right-sizing de embalaje automático con 6 cajas estándar de cartón corrugado certificado. Eliminación de aire transportado e impresión de rótulos GS1-128 con QR de trazabilidad.
+                            </p>
+                        </div>
+
+                        <!-- Etapa 5 -->
+                        <div style="background: rgba(13, 21, 39, 0.75); border: 1px solid rgba(244, 63, 94, 0.25); border-radius: 8px; padding: 12px; display: flex; flex-direction: column;">
+                            <div style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #f87171; font-weight: 800; text-transform: uppercase;">ETAPA 5</div>
+                            <div style="font-size: 0.82rem; font-weight: 800; color: #ffffff; margin: 4px 0 6px 0;">🔍 Revisión &amp; Sorter</div>
+                            <p style="margin: 0; font-size: 0.74rem; color: #cbd5e1; line-height: 1.45; flex-grow: 1;">
+                                Control de peso dinámico en línea (Checkweigher con tolerancia ±15g para auditar faltantes). Arco RFID volumétrico continuo. Sorter clasifica paquetes por ruta y transportista.
+                            </p>
+                        </div>
+
+                        <!-- Etapa 6 -->
+                        <div style="background: rgba(13, 21, 39, 0.75); border: 1px solid rgba(52, 211, 153, 0.25); border-radius: 8px; padding: 12px; display: flex; flex-direction: column;">
+                            <div style="font-size: 0.7rem; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 800; text-transform: uppercase;">ETAPA 6</div>
+                            <div style="font-size: 0.82rem; font-weight: 800; color: #ffffff; margin: 4px 0 6px 0;">🚚 Despacho &amp; TMS</div>
+                            <p style="margin: 0; font-size: 0.74rem; color: #cbd5e1; line-height: 1.45; flex-grow: 1;">
+                                Consolidación en andenes 13 al 24. TMS Ruteo Dinámico con cubicaje 3D (91% llenado de furgones). Hoja de ruta en app móvil del chofer y entrega con POD Digital (OTIF 98,7%).
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- SUBCOMPONENTE 3: ANÁLISIS CINEMÁTICO Y CICLOS DE OPERACIÓN SHUTTLE -->
                 <div class="exc-schematic-box" style="margin-top: 18px; border-color: rgba(52, 211, 153, 0.35);">
                     <div class="exc-schematic-header">
