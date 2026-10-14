@@ -16,6 +16,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <!-- Three.js & OrbitControls for 3D Video Engine -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+
     <link rel="stylesheet" href="landing-2d.css">
     <style>
         :root {
@@ -1099,6 +1103,243 @@
 
         .exc-popup-trigger-btn:active {
             transform: translateY(0);
+        }
+
+        /* Botón de Activación de Video 3D en la barra de filtros */
+        .exc-video3d-trigger-btn {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.22) 0%, rgba(99, 102, 241, 0.22) 100%);
+            border: 1px solid rgba(52, 211, 153, 0.55);
+            color: #34d399;
+            box-shadow: 0 0 14px rgba(16, 185, 129, 0.18);
+        }
+
+        .exc-video3d-trigger-btn:hover {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.45) 0%, rgba(99, 102, 241, 0.45) 100%);
+            border-color: #34d399;
+            color: #ffffff;
+            box-shadow: 0 0 24px rgba(52, 211, 153, 0.4);
+            transform: translateY(-1px);
+        }
+
+        /* Contenedor del Reproductor 3D Minimalista (Inspirado en Remotion Player) */
+        .video3d-player-wrap {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            max-height: 58vh;
+            background: radial-gradient(circle at 50% 30%, #0c1830 0%, #050b18 100%);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), inset 0 0 30px rgba(2, 132, 199, 0.15);
+            margin-bottom: 12px;
+        }
+
+        #video3dCanvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+            outline: none;
+            cursor: grab;
+        }
+
+        #video3dCanvas:active {
+            cursor: grabbing;
+        }
+
+        /* Capa HUD y Motion Graphics sobre el Canvas 3D */
+        .video3d-hud {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 14px;
+            z-index: 10;
+        }
+
+        .video3d-hud-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .video3d-hud-titlebox {
+            background: rgba(10, 18, 38, 0.85);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            backdrop-filter: blur(10px);
+            padding: 8px 14px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            pointer-events: auto;
+        }
+
+        .video3d-hud-kpis {
+            background: rgba(10, 18, 38, 0.85);
+            border: 1px solid rgba(16, 185, 129, 0.35);
+            backdrop-filter: blur(10px);
+            padding: 8px 14px;
+            border-radius: 8px;
+            text-align: right;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            pointer-events: auto;
+        }
+
+        .video3d-hud-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .video3d-hud-caption {
+            background: rgba(8, 14, 28, 0.88);
+            border-left: 4px solid #10b981;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            padding: 10px 16px;
+            border-radius: 6px;
+            max-width: 680px;
+            font-size: 0.80rem;
+            line-height: 1.45;
+            color: #e2e8f0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            pointer-events: auto;
+        }
+
+        /* Barra de Control de Video (Estilo Remotion Player) */
+        .video3d-controls {
+            background: rgba(13, 21, 39, 0.95);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .video3d-timeline-wrap {
+            position: relative;
+            width: 100%;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .video3d-timeline-track {
+            position: relative;
+            width: 100%;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 3px;
+            overflow: visible;
+        }
+
+        .video3d-timeline-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #0284c7 0%, #10b981 100%);
+            border-radius: 3px;
+            width: 0%;
+            transition: width 0.05s linear;
+        }
+
+        .video3d-timeline-handle {
+            position: absolute;
+            top: -5px;
+            width: 16px;
+            height: 16px;
+            background: #ffffff;
+            border: 2px solid #10b981;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
+            pointer-events: none;
+        }
+
+        .video3d-chapter-mark {
+            position: absolute;
+            top: -2px;
+            width: 3px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 1px;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+
+        .video3d-buttons-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .video3d-btn-group {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .video3d-ctrl-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #cbd5e1;
+            font-size: 0.76rem;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .video3d-ctrl-btn:hover {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: #38bdf8;
+            color: #ffffff;
+        }
+
+        .video3d-ctrl-btn.active {
+            background: rgba(16, 185, 129, 0.25);
+            border-color: #10b981;
+            color: #34d399;
+        }
+
+        .video3d-chapter-pill {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: #94a3b8;
+            font-size: 0.70rem;
+            font-weight: 700;
+            padding: 4px 9px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+        }
+
+        .video3d-chapter-pill:hover {
+            border-color: #38bdf8;
+            color: #ffffff;
+        }
+
+        .video3d-chapter-pill.active {
+            background: rgba(2, 132, 199, 0.3);
+            border-color: #38bdf8;
+            color: #38bdf8;
         }
 
         .exc-progress-wrap {
@@ -4891,6 +5132,10 @@
                     <span>📋 Resumen Ejecutivo 360°</span>
                     <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; background: rgba(56, 189, 248, 0.25); color: #38bdf8; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.4); margin-left: 2px; font-weight: 800; letter-spacing: 0.5px;">POPUP</span>
                 </button>
+                <button type="button" class="exc-popup-trigger-btn exc-video3d-trigger-btn" id="btnOpenVideo3dPopup" onclick="openVideo3dPopup()" title="Ver Video 3D: Recorrido y Funcionamiento Integral del Escenario Excelente">
+                    <span>🎬 Video 3D: Funcionamiento Integral</span>
+                    <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; background: rgba(16, 185, 129, 0.25); color: #34d399; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(16, 185, 129, 0.4); margin-left: 2px; font-weight: 800; letter-spacing: 0.5px;">VIDEO 3D</span>
+                </button>
             </div>
 
             <div class="exc-dept-grid">
@@ -5342,6 +5587,182 @@
         </div>
     </div>
 
+    <!-- MINI VENTANA POPUP: REPRODUCTOR DE VIDEO 3D DEL ESCENARIO EXCELENTE (REMOTION STYLE) -->
+    <div id="video3dPopupOverlay" class="exc-modal-overlay" onclick="closeVideo3dPopupOnBg(event)">
+        <div class="exc-modal-dialog" style="max-width: 1060px; width: 95%; max-height: 94vh; padding: 22px; display: flex; flex-direction: column;" onclick="event.stopPropagation()">
+            <button type="button" class="exc-modal-close" onclick="closeVideo3dPopup()" aria-label="Cerrar">&times;</button>
+            
+            <!-- HEADER DEL MODAL -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="font-size: 28px; line-height: 1; background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(56, 189, 248, 0.2)); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">🎬</div>
+                    <div>
+                        <h3 style="margin: 0; color: #34d399; font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                            <span>Video 3D: Recorrido y Funcionamiento Integral</span>
+                            <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; background: rgba(56, 189, 248, 0.2); color: #38bdf8; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.4); font-weight: 700;">60 FPS ENGINE</span>
+                        </h3>
+                        <div style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8; margin-top: 2px;">Simulación Tridimensional Minimalista del CD Pudahuel • Flujo End-to-End P1 a P8</div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="exc-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-size: 0.72rem; padding: 4px 10px; border-radius: 999px; font-weight: 700;">
+                        ● ESCENARIO EXCELENTE WORLD-CLASS
+                    </span>
+                </div>
+            </div>
+
+            <!-- CONTENEDOR PRINCIPAL DEL REPRODUCTOR 3D -->
+            <div class="video3d-player-wrap" id="video3dPlayerWrap">
+                <!-- CANVAS THREE.JS -->
+                <canvas id="video3dCanvas"></canvas>
+
+                <!-- CAPA HUD MOTION GRAPHICS (REMOTION ENGINE) -->
+                <div class="video3d-hud" id="video3dHud">
+                    <!-- HUD SUPERIOR -->
+                    <div class="video3d-hud-top">
+                        <div class="video3d-hud-titlebox">
+                            <div style="font-size: 0.62rem; color: #38bdf8; font-family: 'JetBrains Mono', monospace; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 6px;">
+                                <span style="display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #34d399; box-shadow: 0 0 6px #34d399;"></span>
+                                <span id="v3dCurrentChapterTag">CAPÍTULO 1 DE 7</span>
+                            </div>
+                            <div id="v3dChapterTitle" style="font-size: 0.95rem; font-weight: 800; color: #ffffff; margin-top: 2px;">
+                                Visión General &amp; Arquitectura de Desacople Central
+                            </div>
+                            <div id="v3dChapterTech" style="font-size: 0.70rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; margin-top: 2px;">
+                                P1 + P8: 102.060 Posiciones (1.428 Túneles Racks + 30 Piso)
+                            </div>
+                        </div>
+
+                        <div class="video3d-hud-kpis">
+                            <div style="font-size: 0.62rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; font-weight: 700; text-transform: uppercase;">MÉTRICA CLAVE EN TIEMPO REAL</div>
+                            <div id="v3dLiveKpiPrimary" style="font-size: 1.10rem; font-weight: 800; color: #34d399; font-family: 'JetBrains Mono', monospace; margin-top: 2px;">
+                                102.060 Posiciones
+                            </div>
+                            <div id="v3dLiveKpiSecondary" style="font-size: 0.70rem; color: #cbd5e1; margin-top: 1px;">
+                                88.200 Pallets Libres para Hub 3PL
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- HUD INFERIOR / LOWER THIRD -->
+                    <div class="video3d-hud-bottom">
+                        <div class="video3d-hud-caption">
+                            <div style="font-size: 0.66rem; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 800; text-transform: uppercase; margin-bottom: 2px; display: flex; align-items: center; gap: 6px;">
+                                <span>📌 EXPLICACIÓN DE INGENIERÍA LOGÍSTICA</span>
+                                <span id="v3dTimecodeBadge" style="background: rgba(255,255,255,0.1); padding: 1px 6px; border-radius: 3px; color: #ffffff;">00:00</span>
+                            </div>
+                            <div id="v3dCaptionText">
+                                La nave CD Pudahuel (150m &times; 210m) implementa la Arquitectura de Desacople Central: dos bloques compactos e independientes separados por un pasillo de maniobras de 3,50m, garantizando 102.060 posiciones físicas con flujo continuo y cero riesgo de colisión.
+                            </div>
+                        </div>
+
+                        <!-- Mini Indicador de Cámara Activa -->
+                        <div style="background: rgba(10, 18, 38, 0.85); border: 1px solid rgba(255,255,255,0.1); padding: 5px 10px; border-radius: 6px; font-size: 0.68rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8; pointer-events: auto;">
+                            CAM: <span id="v3dCameraBadge" style="color: #38bdf8; font-weight: 700;">CINEMÁTICA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- BARRA DE CONTROL DEL REPRODUCTOR (CONTROLES Y TIMELINE) -->
+            <div class="video3d-controls">
+                <!-- TIMELINE SCRUBBER INTERACTIVO -->
+                <div class="video3d-timeline-wrap" id="v3dTimelineWrap" onclick="seekVideo3d(event)" onmousedown="startScrubbing(event)">
+                    <div class="video3d-timeline-track" id="v3dTimelineTrack">
+                        <div class="video3d-timeline-progress" id="v3dTimelineProgress"></div>
+                        <div class="video3d-timeline-handle" id="v3dTimelineHandle"></div>
+                        <!-- Marcas de Capítulos (7) -->
+                        <div class="video3d-chapter-mark" style="left: 0%;" title="Capítulo 1: Desacople Central"></div>
+                        <div class="video3d-chapter-mark" style="left: 13.88%;" title="Capítulo 2: Inbound & Andenes"></div>
+                        <div class="video3d-chapter-mark" style="left: 27.77%;" title="Capítulo 3: Pallet Shuttle"></div>
+                        <div class="video3d-chapter-mark" style="left: 43.33%;" title="Capítulo 4: Cobots AMR & GTP"></div>
+                        <div class="video3d-chapter-mark" style="left: 58.33%;" title="Capítulo 5: Sorter Shoe"></div>
+                        <div class="video3d-chapter-mark" style="left: 72.22%;" title="Capítulo 6: Despacho & TMS"></div>
+                        <div class="video3d-chapter-mark" style="left: 86.11%;" title="Capítulo 7: Planta Solar & Finanzas"></div>
+                    </div>
+                </div>
+
+                <!-- FILA DE BOTONES Y SELECTORES -->
+                <div class="video3d-buttons-row">
+                    <!-- GRUPO IZQUIERDO: PLAY/PAUSE, RESTART, TIMECODE -->
+                    <div class="video3d-btn-group">
+                        <button type="button" class="video3d-ctrl-btn active" id="v3dBtnPlayPause" onclick="togglePlayPauseVideo3d()" title="Reproducir / Pausar (Espacio)">
+                            <span id="v3dPlayIcon">⏸</span>
+                            <span id="v3dPlayText">Pausar</span>
+                        </button>
+                        <button type="button" class="video3d-ctrl-btn" onclick="restartVideo3d()" title="Reiniciar desde 00:00">
+                            <span>⏮</span>
+                        </button>
+                        <button type="button" class="video3d-ctrl-btn" onclick="skipVideo3d(-10)" title="Retroceder 10s">
+                            <span>⏪ 10s</span>
+                        </button>
+                        <button type="button" class="video3d-ctrl-btn" onclick="skipVideo3d(10)" title="Avanzar 10s">
+                            <span>10s ⏩</span>
+                        </button>
+                        <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0; font-weight: 700; margin-left: 6px;">
+                            <span id="v3dTimeCurrent">00:00</span> <span style="color: #64748b;">/</span> <span style="color: #94a3b8;">03:00</span>
+                        </div>
+                    </div>
+
+                    <!-- GRUPO CENTRO: CAPÍTULOS RÁPIDOS -->
+                    <div class="video3d-btn-group" style="overflow-x: auto; max-width: 440px; padding-bottom: 2px;">
+                        <button type="button" class="video3d-chapter-pill active" id="v3dCh1" onclick="jumpToChapter(1)">1. General</button>
+                        <button type="button" class="video3d-chapter-pill" id="v3dCh2" onclick="jumpToChapter(2)">2. Inbound</button>
+                        <button type="button" class="video3d-chapter-pill" id="v3dCh3" onclick="jumpToChapter(3)">3. Shuttles</button>
+                        <button type="button" class="video3d-chapter-pill" id="v3dCh4" onclick="jumpToChapter(4)">4. AMR/GTP</button>
+                        <button type="button" class="video3d-chapter-pill" id="v3dCh5" onclick="jumpToChapter(5)">5. Sorter</button>
+                        <button type="button" class="video3d-chapter-pill" id="v3dCh6" onclick="jumpToChapter(6)">6. TMS</button>
+                        <button type="button" class="video3d-chapter-pill" id="v3dCh7" onclick="jumpToChapter(7)">7. Solar/KPIs</button>
+                    </div>
+
+                    <!-- GRUPO DERECHO: VELOCIDAD, CÁMARAS, SONIDO, PANTALLA COMPLETA -->
+                    <div class="video3d-btn-group">
+                        <!-- Selector de Velocidad -->
+                        <button type="button" class="video3d-ctrl-btn" id="v3dBtnSpeed" onclick="cyclePlaybackRate()" title="Cambiar Velocidad de Reproducción">
+                            <span id="v3dSpeedLabel">1.0x</span>
+                        </button>
+
+                        <!-- Selector de Vista de Cámara -->
+                        <div style="display: flex; gap: 3px;">
+                            <button type="button" class="video3d-ctrl-btn active" id="v3dCamCinematic" onclick="setCameraMode('cinematic')" title="Cámara Cinemática Guiada">
+                                🎥 Tour
+                            </button>
+                            <button type="button" class="video3d-ctrl-btn" id="v3dCamIso" onclick="setCameraMode('isometric')" title="Vista Isométrica General">
+                                📐 3D
+                            </button>
+                            <button type="button" class="video3d-ctrl-btn" id="v3dCamTop" onclick="setCameraMode('topdown')" title="Planta 2D Cenital">
+                                🗺️ 2D
+                            </button>
+                            <button type="button" class="video3d-ctrl-btn" id="v3dCamOrbit" onclick="setCameraMode('orbit')" title="Control Libre Orbit con Mouse">
+                                🎮 Orbit
+                            </button>
+                        </div>
+
+                        <!-- Sonido FX Sintetizado -->
+                        <button type="button" class="video3d-ctrl-btn" id="v3dBtnAudio" onclick="toggleAudioFx()" title="Efectos de Sonido Ambientales (Sintetizador Web Audio)">
+                            <span id="v3dAudioIcon">🔇</span>
+                        </button>
+
+                        <!-- Pantalla Completa -->
+                        <button type="button" class="video3d-ctrl-btn" onclick="togglePlayerFullscreen()" title="Pantalla Completa">
+                            ⛶
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PIE DE MODAL -->
+            <div style="margin-top: 14px; text-align: right; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                <span style="font-size: 0.72rem; color: #64748b; font-family: 'JetBrains Mono', monospace;">
+                    AndesHome Chile S.A. &bull; CD Pudahuel (102.060 Posiciones) &bull; Remotion Engine 3D
+                </span>
+                <button type="button" class="exc-sim-btn" onclick="closeVideo3dPopup()" style="padding: 7px 18px;">
+                    Cerrar Video 3D
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- JAVASCRIPT: TODAS LAS INTERACCIONES Y SIMULADORES -->
     <script>
         // 1. CONMUTADOR TO-BE VS EXCELENTE (FEATURE 1)
@@ -5638,6 +6059,876 @@
             }
         }
 
+        // =================================================================
+        // 5.2. MOTOR DE VIDEO 3D DEL ESCENARIO EXCELENTE (REMOTION THREE.JS ENGINE)
+        // =================================================================
+        let isVideo3dActive = false;
+        let v3dInitialized = false;
+        let v3dScene = null, v3dCamera = null, v3dRenderer = null, v3dControls = null;
+        let v3dCurrentTime = 0; // segundos (0 a 180)
+        let v3dIsPlaying = true;
+        let v3dPlaybackRate = 1.0;
+        let v3dCameraMode = 'cinematic'; // 'cinematic', 'isometric', 'topdown', 'orbit'
+        let v3dAudioEnabled = false;
+        let v3dAudioCtx = null, v3dOscillator = null, v3dGainNode = null;
+        let v3dAnimFrameId = null;
+        let v3dLastTimestamp = null;
+        let v3dIsScrubbing = false;
+        let v3dActiveChapterIndex = 0;
+
+        // Elementos dinámicos en la escena 3D
+        let v3dLifters = [];
+        let v3dShuttles = [];
+        let v3dCobots = [];
+        let v3dPackages = [];
+        let v3dSolarPulses = [];
+
+        const V3D_DURATION = 180; // 3:00 minutos de simulación
+
+        const V3D_CHAPTERS = [
+            {
+                id: 1,
+                start: 0,
+                end: 25,
+                tag: "CAPÍTULO 1 DE 7",
+                title: "Visión General & Arquitectura de Desacople Central",
+                tech: "P1 + P8: 102.060 Posiciones (1.428 Túneles Racks + 30 Piso)",
+                kpiPrimary: "102.060 Posiciones",
+                kpiSecondary: "88.200 Pallets Libres para Hub 3PL (13,6% Ocupación)",
+                caption: "La nave CD Pudahuel (150m × 210m) implementa la Arquitectura de Desacople Central: dos bloques compactos e independientes separados por un pasillo de maniobras de 3,50m, garantizando 102.060 posiciones físicas con flujo continuo y cero riesgo de colisión.",
+                camStart: { pos: [0, 160, 240], target: [0, 15, 0] },
+                camEnd: { pos: [35, 110, 180], target: [0, 20, -10] }
+            },
+            {
+                id: 2,
+                start: 25,
+                end: 50,
+                tag: "CAPÍTULO 2 DE 7",
+                title: "Recepción Inbound & Andenes Automatizados",
+                tech: "P3: Portal ASN & YMS con Agendamiento Obligatorio (Andenes 1 al 12)",
+                kpiPrimary: "3,2 Horas Dock-to-Stock",
+                kpiSecondary: "Descarga de Camión en 12-15 min (-85,8% vs 22,6h As-Is)",
+                caption: "El agendamiento digital en ventanas de 2h y el preaviso electrónico (ASN) eliminan las filas en Vespucio. Camiones atracan de inmediato en andenes 1 al 12; transpaletas eléctricas inducen la carga directamente sin congestión en playa.",
+                camStart: { pos: [-75, 45, 125], target: [-75, 10, 65] },
+                camEnd: { pos: [-35, 30, 95], target: [-35, 8, 55] }
+            },
+            {
+                id: 3,
+                start: 50,
+                end: 78,
+                tag: "CAPÍTULO 3 DE 7",
+                title: "Almacenamiento Compacto Pallet Shuttle & Elevadores Lifters",
+                tech: "P1 + P8: Carros Satélite Autónomos a 1,5 m/s en 6 Niveles (12m)",
+                kpiPrimary: "99,8% Precisión IRA",
+                kpiSecondary: "1.428 Túneles de 70 Pallets • Cero Trabajo en Altura",
+                caption: "En los bloques de racks, elevadores verticales Lifters alimentan a los carros Pallet Shuttle. Los carros satélite navegan automáticamente dentro de los canales a 1,5 m/s posicionando cada pallet con guía láser y sensores ultrasónicos.",
+                camStart: { pos: [-25, 40, 10], target: [0, 18, 0] },
+                camEnd: { pos: [30, 28, -25], target: [10, 14, -35] }
+            },
+            {
+                id: 4,
+                start: 78,
+                end: 105,
+                tag: "CAPÍTULO 4 DE 7",
+                title: "Robótica AMR & Picking Ergonómico Goods-to-Person",
+                tech: "P2 + P6: Flota de 32 Cobots AMR + Pick-to-Light a Piso",
+                kpiPrimary: "220 Líneas / Hora",
+                kpiSecondary: "+221,6% vs To-Be • Caminatas caen de 67,6 km a 9,8 km",
+                caption: "Los robots móviles autónomos (AMR con LiDAR 360°) recogen pallets y totes desde los elevadores y los conducen a 8 estaciones Goods-to-Person a piso. El operario ya no camina: prepara pedidos a la cintura con confirmación luminosa y pesaje dinámico.",
+                camStart: { pos: [45, 38, -10], target: [60, 8, 20] },
+                camEnd: { pos: [65, 22, 40], target: [70, 5, 25] }
+            },
+            {
+                id: 5,
+                start: 105,
+                end: 130,
+                tag: "CAPÍTULO 5 DE 7",
+                title: "Empaque Inteligente & Sorter Shoe Automatizado",
+                tech: "P4 + P5: Clasificador de Zapatas Continuo hacia Andenes Outbound",
+                kpiPrimary: "4.500 Bultos / Hora",
+                kpiSecondary: "Cero Roturas • Error de Despacho < 0,1%",
+                caption: "Los pedidos preparados fluyen a la línea de inducción del Sorter Shoe. Escáneres omnidireccionales y cubitaje volumétrico pesan cada bulto al vuelo mientras las zapatas de desvío suave clasifican 4.500 paquetes por hora hacia las rampas de salida.",
+                camStart: { pos: [55, 32, 55], target: [45, 10, 75] },
+                camEnd: { pos: [25, 22, 90], target: [15, 8, 80] }
+            },
+            {
+                id: 6,
+                start: 130,
+                end: 155,
+                tag: "CAPÍTULO 6 DE 7",
+                title: "Despacho Outbound, TMS & Distribución Omnicanal",
+                tech: "P5 + P6: Ruteo Dinámico GPS hacia 27 Tiendas y Clientes Finales",
+                kpiPrimary: "98,7% OTIF",
+                kpiSecondary: "Click & Collect < 2h • Reclamos SERNAC caen 94%",
+                caption: "En los andenes 13 al 24, la flota es cargada y despachada con ruteo dinámico por algoritmos de proximidad. Se sincronizan las 27 tiendas para Click & Collect en menos de 2 horas y entregas domiciliarias el mismo día.",
+                camStart: { pos: [35, 42, 125], target: [35, 10, 65] },
+                camEnd: { pos: [80, 32, 105], target: [80, 8, 55] }
+            },
+            {
+                id: 7,
+                start: 155,
+                end: 180,
+                tag: "CAPÍTULO 7 DE 7",
+                title: "Autosuficiencia Solar 250 kWp & Impacto Financiero Integral",
+                tech: "P7: 550 Paneles Solares Tier-1 • Sostenibilidad y Retorno Económico",
+                kpiPrimary: "CLP $3.850 Costo Pedido",
+                kpiSecondary: "65% Autosuficiencia Eléctrica • EBITDA +$412M • Payback 1,8a",
+                caption: "La cubierta solar fotovoltaica genera 385 MWh/año absorbiendo el 65% del consumo eléctrico de robots y naves (-18,5 ton CO2). El costo unitario por pedido cae a $3.850 CLP y la capacidad libre de 88.200 pallets convierte a AndesHome en el principal Hub 3PL de la RM.",
+                camStart: { pos: [0, 75, 45], target: [0, 22, 0] },
+                camEnd: { pos: [0, 160, 220], target: [0, 15, 0] }
+            }
+        ];
+
+        function v3dLerp(a, b, t) { return a + (b - a) * t; }
+        function v3dClamp(val, min, max) { return Math.max(min, Math.min(max, val)); }
+        function v3dEaseInOut(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+
+        function formatV3dTime(secs) {
+            const m = Math.floor(secs / 60);
+            const s = Math.floor(secs % 60);
+            return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+        }
+
+        function openVideo3dPopup() {
+            const popup = document.getElementById('video3dPopupOverlay');
+            if (popup) popup.classList.add('active');
+            isVideo3dActive = true;
+
+            if (!v3dInitialized) {
+                initVideo3dScene();
+            } else {
+                resizeVideo3d();
+            }
+
+            v3dIsPlaying = true;
+            updatePlayPauseButton();
+            v3dLastTimestamp = performance.now();
+            if (!v3dAnimFrameId) {
+                v3dAnimFrameId = requestAnimationFrame(v3dLoop);
+            }
+        }
+
+        function closeVideo3dPopup() {
+            const popup = document.getElementById('video3dPopupOverlay');
+            if (popup) popup.classList.remove('active');
+            isVideo3dActive = false;
+            v3dIsPlaying = false;
+            updatePlayPauseButton();
+            if (v3dAnimFrameId) {
+                cancelAnimationFrame(v3dAnimFrameId);
+                v3dAnimFrameId = null;
+            }
+            if (v3dGainNode && v3dAudioCtx) {
+                v3dGainNode.gain.setValueAtTime(0, v3dAudioCtx.currentTime);
+            }
+        }
+
+        function closeVideo3dPopupOnBg(e) {
+            if (e.target.id === 'video3dPopupOverlay') {
+                closeVideo3dPopup();
+            }
+        }
+
+        function initVideo3dScene() {
+            const canvas = document.getElementById('video3dCanvas');
+            const wrap = document.getElementById('video3dPlayerWrap');
+            if (!canvas || !wrap || typeof THREE === 'undefined') return;
+
+            const width = wrap.clientWidth;
+            const height = wrap.clientHeight;
+
+            // Scene & Camera
+            v3dScene = new THREE.Scene();
+            v3dScene.background = new THREE.Color(0x060c18);
+            v3dScene.fog = new THREE.FogExp2(0x060c18, 0.0035);
+
+            v3dCamera = new THREE.PerspectiveCamera(45, width / height, 0.5, 1200);
+            v3dCamera.position.set(0, 160, 240);
+            v3dCamera.lookAt(0, 15, 0);
+
+            // Renderer
+            v3dRenderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            v3dRenderer.setSize(width, height);
+            v3dRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+            // Controls
+            if (typeof THREE.OrbitControls !== 'undefined') {
+                v3dControls = new THREE.OrbitControls(v3dCamera, canvas);
+                v3dControls.enableDamping = true;
+                v3dControls.dampingFactor = 0.05;
+                v3dControls.maxPolarAngle = Math.PI / 2 - 0.02;
+                v3dControls.enabled = (v3dCameraMode === 'orbit');
+            }
+
+            // Lights
+            const ambient = new THREE.AmbientLight(0xffffff, 0.65);
+            v3dScene.add(ambient);
+
+            const dirLight1 = new THREE.DirectionalLight(0x38bdf8, 0.9);
+            dirLight1.position.set(100, 140, 120);
+            v3dScene.add(dirLight1);
+
+            const dirLight2 = new THREE.DirectionalLight(0x10b981, 0.6);
+            dirLight2.position.set(-100, 100, -100);
+            v3dScene.add(dirLight2);
+
+            build3dLogisticsWarehouse();
+
+            v3dInitialized = true;
+            window.addEventListener('resize', resizeVideo3d);
+        }
+
+        function resizeVideo3d() {
+            if (!v3dRenderer || !v3dCamera) return;
+            const wrap = document.getElementById('video3dPlayerWrap');
+            if (!wrap) return;
+            const w = wrap.clientWidth;
+            const h = wrap.clientHeight;
+            v3dCamera.aspect = w / h;
+            v3dCamera.updateProjectionMatrix();
+            v3dRenderer.setSize(w, h);
+        }
+
+        function build3dLogisticsWarehouse() {
+            // 1. Piso y Rejilla Arquitectónica
+            const grid = new THREE.GridHelper(300, 60, 0x0284c7, 0x13213d);
+            grid.position.y = 0;
+            v3dScene.add(grid);
+
+            // Perímetro Nave 150m x 210m
+            const naveGeo = new THREE.BoxGeometry(150, 0.5, 210);
+            const naveMat = new THREE.MeshBasicMaterial({ color: 0x0a1428, transparent: true, opacity: 0.85 });
+            const naveFloor = new THREE.Mesh(naveGeo, naveMat);
+            naveFloor.position.set(0, -0.25, 0);
+            v3dScene.add(naveFloor);
+
+            // Borde Perimetral Neón
+            const edgesGeo = new THREE.EdgesGeometry(naveGeo);
+            const edgesMat = new THREE.LineBasicMaterial({ color: 0x38bdf8 });
+            const naveOutline = new THREE.LineSegments(edgesGeo, edgesMat);
+            naveOutline.position.set(0, -0.25, 0);
+            v3dScene.add(naveOutline);
+
+            // 2. Pasillo Central de Desacople (3.50m ancho x 210m largo)
+            const aisleGeo = new THREE.PlaneGeometry(6, 210);
+            const aisleMat = new THREE.MeshBasicMaterial({ color: 0x0284c7, transparent: true, opacity: 0.45 });
+            const aisle = new THREE.Mesh(aisleGeo, aisleMat);
+            aisle.rotation.x = -Math.PI / 2;
+            aisle.position.set(0, 0.05, 0);
+            v3dScene.add(aisle);
+
+            // Líneas de Seguridad del Pasillo Central
+            const lineMat = new THREE.LineBasicMaterial({ color: 0x34d399 });
+            const lineGeo1 = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(-3, 0.1, -105), new THREE.Vector3(-3, 0.1, 105)
+            ]);
+            const lineGeo2 = new THREE.BufferGeometry().setFromPoints([
+                new THREE.Vector3(3, 0.1, -105), new THREE.Vector3(3, 0.1, 105)
+            ]);
+            v3dScene.add(new THREE.Line(lineGeo1, lineMat));
+            v3dScene.add(new THREE.Line(lineGeo2, lineMat));
+
+            // 3. Baterías de Racks de Alta Densidad (Bloque Oeste & Bloque Este)
+            const rackColMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.7, roughness: 0.3 });
+            const palletMats = {
+                A: new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.4 }),
+                B: new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.4 }),
+                C: new THREE.MeshStandardMaterial({ color: 0x8b5cf6, roughness: 0.4 }),
+                D: new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.4 })
+            };
+
+            const palletBoxGeo = new THREE.BoxGeometry(1.6, 1.4, 2.0);
+            const rackLevels = [1.2, 3.2, 5.2, 7.2, 9.2, 11.2];
+            const blocks = [-1, 1]; // Oeste (-), Este (+)
+
+            blocks.forEach(side => {
+                const baseX = side * 36;
+                for (let rz = -85; rz <= 85; rz += 18) {
+                    for (let rx = -26; rx <= 26; rx += 13) {
+                        const colGeo = new THREE.BoxGeometry(0.4, 13, 0.4);
+                        const colMesh = new THREE.Mesh(colGeo, rackColMat);
+                        colMesh.position.set(baseX + rx, 6.5, rz);
+                        v3dScene.add(colMesh);
+                    }
+
+                    let zone = 'B';
+                    if (rz < -35) zone = 'A';
+                    else if (rz > 40) zone = 'C';
+
+                    rackLevels.forEach((lvl, lvlIdx) => {
+                        for (let rx = -20; rx <= 20; rx += 8) {
+                            const pMesh = new THREE.Mesh(palletBoxGeo, palletMats[zone]);
+                            pMesh.position.set(baseX + rx, lvl, rz + ((lvlIdx % 2 === 0) ? 2 : -2));
+                            v3dScene.add(pMesh);
+                        }
+                    });
+                }
+            });
+
+            // Zona D: 30 Calles a Piso en extremo sur (Ámbar)
+            for (let dz = 75; dz <= 98; dz += 6) {
+                for (let dx = -55; dx <= -15; dx += 8) {
+                    const pFloor = new THREE.Mesh(palletBoxGeo, palletMats.D);
+                    pFloor.position.set(dx, 0.7, dz);
+                    v3dScene.add(pFloor);
+                }
+            }
+
+            // 4. Elevadores Verticales Lifters (4 unidades)
+            const lifterPositions = [
+                { x: -5, z: -40 }, { x: -5, z: 20 },
+                { x: 5, z: -20 }, { x: 5, z: 40 }
+            ];
+            lifterPositions.forEach((pos, idx) => {
+                const mastGeo = new THREE.BoxGeometry(0.8, 14, 0.8);
+                const mastMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.8 });
+                const mast = new THREE.Mesh(mastGeo, mastMat);
+                mast.position.set(pos.x, 7, pos.z);
+                v3dScene.add(mast);
+
+                const carriageGeo = new THREE.BoxGeometry(2.4, 0.5, 2.4);
+                const carriageMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x0284c7, emissiveIntensity: 0.4 });
+                const carriage = new THREE.Mesh(carriageGeo, carriageMat);
+                carriage.position.set(pos.x, 1, pos.z);
+                v3dScene.add(carriage);
+
+                v3dLifters.push({ mesh: carriage, baseX: pos.x, baseZ: pos.z, phase: idx * 1.5 });
+            });
+
+            // 5. Carros Pallet Shuttle en Canales de Racks (8 unidades)
+            const shuttleGeo = new THREE.BoxGeometry(1.8, 0.4, 2.2);
+            const shuttleMat = new THREE.MeshStandardMaterial({ color: 0x10b981, emissive: 0x059669, emissiveIntensity: 0.6 });
+            for (let i = 0; i < 8; i++) {
+                const sMesh = new THREE.Mesh(shuttleGeo, shuttleMat);
+                const sSide = i % 2 === 0 ? -36 : 36;
+                const sLvl = rackLevels[i % 5];
+                sMesh.position.set(sSide + (i * 3 - 10), sLvl - 0.5, (i - 4) * 20);
+                v3dScene.add(sMesh);
+                v3dShuttles.push({ mesh: sMesh, side: sSide, lvl: sLvl, baseZ: (i - 4) * 20, speed: 0.8 + (i % 3) * 0.3 });
+            }
+
+            // 6. Cobots AMR (16 unidades con LiDAR)
+            const cobotBodyGeo = new THREE.CylinderGeometry(1.1, 1.1, 0.6, 16);
+            const cobotBodyMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8, roughness: 0.2 });
+            const lidarRingGeo = new THREE.TorusGeometry(1.0, 0.08, 8, 24);
+            const lidarRingMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
+
+            for (let i = 0; i < 16; i++) {
+                const group = new THREE.Group();
+                const body = new THREE.Mesh(cobotBodyGeo, cobotBodyMat);
+                body.position.y = 0.3;
+                group.add(body);
+
+                const ring = new THREE.Mesh(lidarRingGeo, lidarRingMat);
+                ring.rotation.x = Math.PI / 2;
+                ring.position.y = 0.35;
+                group.add(ring);
+
+                const toteGeo = new THREE.BoxGeometry(1.4, 0.8, 1.4);
+                const toteMat = new THREE.MeshStandardMaterial({ color: i % 2 === 0 ? 0x10b981 : 0x38bdf8 });
+                const tote = new THREE.Mesh(toteGeo, toteMat);
+                tote.position.y = 1.0;
+                group.add(tote);
+
+                group.position.set((i % 2 === 0 ? -1.5 : 1.5), 0, (i - 8) * 12);
+                v3dScene.add(group);
+                v3dCobots.push({ group: group, pathOffset: i * 0.4, speed: 1.0 + (i % 2) * 0.4 });
+            }
+
+            // 7. Estaciones Goods-to-Person (GTP) - 8 puestos ergonómicos
+            for (let i = 0; i < 8; i++) {
+                const gtpX = 64;
+                const gtpZ = -60 + i * 16;
+                const tableGeo = new THREE.BoxGeometry(3, 1.1, 4);
+                const tableMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.5 });
+                const table = new THREE.Mesh(tableGeo, tableMat);
+                table.position.set(gtpX, 0.55, gtpZ);
+                v3dScene.add(table);
+
+                const ptlGeo = new THREE.BoxGeometry(0.2, 1.8, 3.6);
+                const ptlMat = new THREE.MeshStandardMaterial({ color: 0x34d399, emissive: 0x10b981, emissiveIntensity: 0.5 });
+                const ptl = new THREE.Mesh(ptlGeo, ptlMat);
+                ptl.position.set(gtpX + 1.4, 1.6, gtpZ);
+                v3dScene.add(ptl);
+
+                const opHeadGeo = new THREE.SphereGeometry(0.4, 12, 12);
+                const opBodyGeo = new THREE.CylinderGeometry(0.4, 0.5, 1.5, 12);
+                const opMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0 });
+                const opBody = new THREE.Mesh(opBodyGeo, opMat);
+                opBody.position.set(gtpX - 1.2, 1.1, gtpZ);
+                const opHead = new THREE.Mesh(opHeadGeo, opMat);
+                opHead.position.set(gtpX - 1.2, 2.1, gtpZ);
+                v3dScene.add(opBody);
+                v3dScene.add(opHead);
+            }
+
+            // 8. Sorter Shoe Automatizado (4.500 bultos/h)
+            const sorterBeltGeo = new THREE.BoxGeometry(3, 0.6, 70);
+            const sorterBeltMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.9, roughness: 0.1 });
+            const sorterBelt = new THREE.Mesh(sorterBeltGeo, sorterBeltMat);
+            sorterBelt.position.set(40, 0.9, 50);
+            v3dScene.add(sorterBelt);
+
+            for (let s = 0; s < 6; s++) {
+                const spurGeo = new THREE.BoxGeometry(6, 0.4, 1.8);
+                const spurMat = new THREE.MeshStandardMaterial({ color: 0x334155 });
+                const spur = new THREE.Mesh(spurGeo, spurMat);
+                spur.position.set(44.5, 0.8, 25 + s * 10);
+                v3dScene.add(spur);
+            }
+
+            const pkgGeo = new THREE.BoxGeometry(0.9, 0.6, 1.0);
+            const pkgMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b });
+            for (let p = 0; p < 12; p++) {
+                const pkg = new THREE.Mesh(pkgGeo, pkgMat);
+                pkg.position.set(40, 1.5, 20 + p * 5);
+                v3dScene.add(pkg);
+                v3dPackages.push({ mesh: pkg, progress: p / 12 });
+            }
+
+            // 9. Andenes Inbound (1 al 12) & Camiones
+            for (let d = 0; d < 12; d++) {
+                const dockZ = -95 + d * 15;
+                const dockFrameGeo = new THREE.BoxGeometry(0.5, 7, 6);
+                const dockFrameMat = new THREE.MeshStandardMaterial({ color: 0x0284c7 });
+                const frame = new THREE.Mesh(dockFrameGeo, dockFrameMat);
+                frame.position.set(-75, 3.5, dockZ);
+                v3dScene.add(frame);
+
+                const lightGeo = new THREE.SphereGeometry(0.3, 8, 8);
+                const lightMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
+                const light = new THREE.Mesh(lightGeo, lightMat);
+                light.position.set(-74.5, 7.3, dockZ);
+                v3dScene.add(light);
+            }
+
+            [-75, -45, 15, 45].forEach(zPos => {
+                buildTruck(-92, zPos, 0, 0x0284c7);
+            });
+
+            // 10. Andenes Outbound (13 al 24) & Camiones
+            for (let d = 0; d < 12; d++) {
+                const dockZ = -95 + d * 15;
+                const dockFrameGeo = new THREE.BoxGeometry(0.5, 7, 6);
+                const dockFrameMat = new THREE.MeshStandardMaterial({ color: 0x10b981 });
+                const frame = new THREE.Mesh(dockFrameGeo, dockFrameMat);
+                frame.position.set(75, 3.5, dockZ);
+                v3dScene.add(frame);
+            }
+
+            [-60, -15, 30, 60].forEach(zPos => {
+                buildTruck(92, zPos, Math.PI, 0x10b981);
+            });
+
+            // 11. Planta Solar Fotovoltaica (250 kWp) en Techumbre
+            const solarRowGeo = new THREE.BoxGeometry(45, 0.2, 75);
+            const solarRowMat = new THREE.MeshStandardMaterial({
+                color: 0x1e3a8a,
+                roughness: 0.1,
+                metalness: 0.9
+            });
+            const roofLeft = new THREE.Mesh(solarRowGeo, solarRowMat);
+            roofLeft.position.set(-36, 15, 0);
+            v3dScene.add(roofLeft);
+
+            const roofRight = new THREE.Mesh(solarRowGeo, solarRowMat);
+            roofRight.position.set(36, 15, 0);
+            v3dScene.add(roofRight);
+
+            for (let p = 0; p < 4; p++) {
+                const pulseGeo = new THREE.CylinderGeometry(0.2, 0.2, 10, 8);
+                const pulseMat = new THREE.MeshBasicMaterial({ color: 0x34d399, transparent: true, opacity: 0.6 });
+                const pulse = new THREE.Mesh(pulseGeo, pulseMat);
+                pulse.position.set((p % 2 === 0 ? -36 : 36), 18 + p * 2, (p - 2) * 25);
+                v3dScene.add(pulse);
+                v3dSolarPulses.push(pulse);
+            }
+        }
+
+        function buildTruck(x, z, rotY, brandColor) {
+            const truckGroup = new THREE.Group();
+
+            const trailerGeo = new THREE.BoxGeometry(16, 5.5, 5);
+            const trailerMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.3 });
+            const trailer = new THREE.Mesh(trailerGeo, trailerMat);
+            trailer.position.set(0, 3.8, 0);
+            truckGroup.add(trailer);
+
+            const cabGeo = new THREE.BoxGeometry(6, 4.8, 4.8);
+            const cabMat = new THREE.MeshStandardMaterial({ color: brandColor, metalness: 0.6, roughness: 0.2 });
+            const cab = new THREE.Mesh(cabGeo, cabMat);
+            cab.position.set(-10, 3.2, 0);
+            truckGroup.add(cab);
+
+            const wheelGeo = new THREE.CylinderGeometry(0.9, 0.9, 0.6, 12);
+            const wheelMat = new THREE.MeshStandardMaterial({ color: 0x0f172a });
+            [-11, -8, 2, 6].forEach(wx => {
+                [-2.5, 2.5].forEach(wz => {
+                    const wheel = new THREE.Mesh(wheelGeo, wheelMat);
+                    wheel.rotation.x = Math.PI / 2;
+                    wheel.position.set(wx, 0.9, wz);
+                    truckGroup.add(wheel);
+                });
+            });
+
+            truckGroup.position.set(x, 0, z);
+            truckGroup.rotation.y = rotY;
+            v3dScene.add(truckGroup);
+        }
+
+        // =================================================================
+        // BUCLE PRINCIPAL DE ANIMACIÓN Y RENDERIZADO (REMOTION STYLE)
+        // =================================================================
+        function v3dLoop(timestamp) {
+            if (!isVideo3dActive) return;
+
+            if (!v3dLastTimestamp) v3dLastTimestamp = timestamp;
+            const delta = Math.min((timestamp - v3dLastTimestamp) / 1000, 0.1);
+            v3dLastTimestamp = timestamp;
+
+            if (v3dIsPlaying && !v3dIsScrubbing) {
+                v3dCurrentTime += delta * v3dPlaybackRate;
+                if (v3dCurrentTime >= V3D_DURATION) {
+                    v3dCurrentTime = 0;
+                }
+            }
+
+            animate3dObjects(v3dCurrentTime);
+            update3dCamera(v3dCurrentTime);
+            update3dUI(v3dCurrentTime);
+
+            if (v3dRenderer && v3dScene && v3dCamera) {
+                v3dRenderer.render(v3dScene, v3dCamera);
+            }
+
+            v3dAnimFrameId = requestAnimationFrame(v3dLoop);
+        }
+
+        function animate3dObjects(time) {
+            v3dLifters.forEach(l => {
+                l.mesh.position.y = 2.0 + Math.abs(Math.sin(time * 0.8 + l.phase)) * 9.5;
+            });
+
+            v3dShuttles.forEach(s => {
+                s.mesh.position.x = s.side + Math.sin(time * s.speed + s.baseZ) * 16;
+            });
+
+            v3dCobots.forEach(c => {
+                const zNorm = ((time * 3.5 + c.pathOffset * 25) % 180) - 90;
+                c.group.position.z = zNorm;
+                c.group.rotation.y = (time * 1.5) % (Math.PI * 2);
+            });
+
+            v3dPackages.forEach(p => {
+                const prog = (p.progress + time * 0.08) % 1.0;
+                p.mesh.position.z = 20 + prog * 55;
+                if (prog > 0.6) {
+                    p.mesh.position.x = 40 + (prog - 0.6) * 10;
+                } else {
+                    p.mesh.position.x = 40;
+                }
+            });
+
+            v3dSolarPulses.forEach((pulse, idx) => {
+                pulse.position.y = 16 + ((time * 2 + idx * 1.2) % 6);
+                pulse.material.opacity = 0.8 - (pulse.position.y - 16) * 0.12;
+            });
+        }
+
+        function update3dCamera(time) {
+            if (!v3dCamera) return;
+
+            if (v3dCameraMode === 'orbit') {
+                if (v3dControls) v3dControls.update();
+                return;
+            }
+
+            if (v3dCameraMode === 'isometric') {
+                v3dCamera.position.set(150, 130, 170);
+                v3dCamera.lookAt(0, 15, 0);
+                return;
+            }
+
+            if (v3dCameraMode === 'topdown') {
+                v3dCamera.position.set(0, 230, 0.1);
+                v3dCamera.lookAt(0, 0, 0);
+                return;
+            }
+
+            // Modo Cinemático
+            const ch = getCurrentChapter(time);
+            const chDuration = ch.end - ch.start;
+            const t = v3dClamp((time - ch.start) / chDuration, 0, 1);
+            const easedT = v3dEaseInOut(t);
+
+            const camX = v3dLerp(ch.camStart.pos[0], ch.camEnd.pos[0], easedT);
+            const camY = v3dLerp(ch.camStart.pos[1], ch.camEnd.pos[1], easedT);
+            const camZ = v3dLerp(ch.camStart.pos[2], ch.camEnd.pos[2], easedT);
+
+            const tgtX = v3dLerp(ch.camStart.target[0], ch.camEnd.target[0], easedT);
+            const tgtY = v3dLerp(ch.camStart.target[1], ch.camEnd.target[1], easedT);
+            const tgtZ = v3dLerp(ch.camStart.target[2], ch.camEnd.target[2], easedT);
+
+            v3dCamera.position.set(camX, camY, camZ);
+            v3dCamera.lookAt(tgtX, tgtY, tgtZ);
+        }
+
+        function getCurrentChapter(time) {
+            for (let i = 0; i < V3D_CHAPTERS.length; i++) {
+                if (time >= V3D_CHAPTERS[i].start && time < V3D_CHAPTERS[i].end) {
+                    return V3D_CHAPTERS[i];
+                }
+            }
+            return V3D_CHAPTERS[V3D_CHAPTERS.length - 1];
+        }
+
+        function update3dUI(time) {
+            const pct = (time / V3D_DURATION) * 100;
+            const prog = document.getElementById('v3dTimelineProgress');
+            const handle = document.getElementById('v3dTimelineHandle');
+            if (prog) prog.style.width = pct + '%';
+            if (handle) handle.style.left = pct + '%';
+
+            const timeEl = document.getElementById('v3dTimeCurrent');
+            if (timeEl) timeEl.innerText = formatV3dTime(time);
+
+            const timeBadge = document.getElementById('v3dTimecodeBadge');
+            if (timeBadge) timeBadge.innerText = formatV3dTime(time);
+
+            const ch = getCurrentChapter(time);
+            if (ch.id !== v3dActiveChapterIndex) {
+                v3dActiveChapterIndex = ch.id;
+
+                const tagEl = document.getElementById('v3dCurrentChapterTag');
+                const titleEl = document.getElementById('v3dChapterTitle');
+                const techEl = document.getElementById('v3dChapterTech');
+                const kpi1El = document.getElementById('v3dLiveKpiPrimary');
+                const kpi2El = document.getElementById('v3dLiveKpiSecondary');
+                const captionEl = document.getElementById('v3dCaptionText');
+
+                if (tagEl) tagEl.innerText = ch.tag;
+                if (titleEl) titleEl.innerText = ch.title;
+                if (techEl) techEl.innerText = ch.tech;
+                if (kpi1El) kpi1El.innerText = ch.kpiPrimary;
+                if (kpi2El) kpi2El.innerText = ch.kpiSecondary;
+                if (captionEl) captionEl.innerHTML = ch.caption;
+
+                for (let i = 1; i <= 7; i++) {
+                    const btn = document.getElementById('v3dCh' + i);
+                    if (btn) {
+                        if (i === ch.id) btn.classList.add('active');
+                        else btn.classList.remove('active');
+                    }
+                }
+
+                playChapterChime();
+            }
+        }
+
+        // =================================================================
+        // CONTROLES INTERACTIVOS DEL REPRODUCTOR 3D
+        // =================================================================
+        function togglePlayPauseVideo3d() {
+            v3dIsPlaying = !v3dIsPlaying;
+            updatePlayPauseButton();
+            if (v3dIsPlaying) {
+                v3dLastTimestamp = performance.now();
+                if (!v3dAnimFrameId) v3dAnimFrameId = requestAnimationFrame(v3dLoop);
+            }
+        }
+
+        function updatePlayPauseButton() {
+            const icon = document.getElementById('v3dPlayIcon');
+            const text = document.getElementById('v3dPlayText');
+            const btn = document.getElementById('v3dBtnPlayPause');
+            if (!icon || !text || !btn) return;
+
+            if (v3dIsPlaying) {
+                icon.innerText = '⏸';
+                text.innerText = 'Pausar';
+                btn.classList.add('active');
+            } else {
+                icon.innerText = '▶';
+                text.innerText = 'Reproducir';
+                btn.classList.remove('active');
+            }
+        }
+
+        function restartVideo3d() {
+            v3dCurrentTime = 0;
+            v3dIsPlaying = true;
+            updatePlayPauseButton();
+        }
+
+        function skipVideo3d(seconds) {
+            v3dCurrentTime = v3dClamp(v3dCurrentTime + seconds, 0, V3D_DURATION - 0.1);
+            update3dUI(v3dCurrentTime);
+        }
+
+        function jumpToChapter(chNum) {
+            const ch = V3D_CHAPTERS.find(c => c.id === chNum);
+            if (ch) {
+                v3dCurrentTime = ch.start;
+                update3dUI(v3dCurrentTime);
+            }
+        }
+
+        function seekVideo3d(e) {
+            const track = document.getElementById('v3dTimelineTrack');
+            if (!track) return;
+            const rect = track.getBoundingClientRect();
+            const clickX = e.clientX - rect.left;
+            const pct = v3dClamp(clickX / rect.width, 0, 1);
+            v3dCurrentTime = pct * V3D_DURATION;
+            update3dUI(v3dCurrentTime);
+        }
+
+        function startScrubbing(e) {
+            v3dIsScrubbing = true;
+            seekVideo3d(e);
+
+            function onMouseMove(moveEvent) {
+                if (v3dIsScrubbing) {
+                    seekVideo3d(moveEvent);
+                }
+            }
+
+            function onMouseUp() {
+                v3dIsScrubbing = false;
+                window.removeEventListener('mousemove', onMouseMove);
+                window.removeEventListener('mouseup', onMouseUp);
+            }
+
+            window.addEventListener('mousemove', onMouseMove);
+            window.addEventListener('mouseup', onMouseUp);
+        }
+
+        function cyclePlaybackRate() {
+            const rates = [0.5, 1.0, 1.5, 2.0];
+            const idx = rates.indexOf(v3dPlaybackRate);
+            const nextIdx = (idx + 1) % rates.length;
+            v3dPlaybackRate = rates[nextIdx];
+            const label = document.getElementById('v3dSpeedLabel');
+            if (label) label.innerText = v3dPlaybackRate.toFixed(1) + 'x';
+        }
+
+        function setCameraMode(mode) {
+            v3dCameraMode = mode;
+            ['Cinematic', 'Iso', 'Top', 'Orbit'].forEach(m => {
+                const el = document.getElementById('v3dCam' + m);
+                if (el) el.classList.remove('active');
+            });
+
+            const badge = document.getElementById('v3dCameraBadge');
+
+            if (mode === 'cinematic') {
+                const el = document.getElementById('v3dCamCinematic');
+                if (el) el.classList.add('active');
+                if (badge) badge.innerText = 'CINEMÁTICA';
+                if (v3dControls) v3dControls.enabled = false;
+            } else if (mode === 'isometric') {
+                const el = document.getElementById('v3dCamIso');
+                if (el) el.classList.add('active');
+                if (badge) badge.innerText = 'ISOMÉTRICA';
+                if (v3dControls) v3dControls.enabled = false;
+            } else if (mode === 'topdown') {
+                const el = document.getElementById('v3dCamTop');
+                if (el) el.classList.add('active');
+                if (badge) badge.innerText = 'PLANTA 2D';
+                if (v3dControls) v3dControls.enabled = false;
+            } else if (mode === 'orbit') {
+                const el = document.getElementById('v3dCamOrbit');
+                if (el) el.classList.add('active');
+                if (badge) badge.innerText = 'ORBIT LIBRE';
+                if (v3dControls) {
+                    v3dControls.enabled = true;
+                    v3dControls.target.set(0, 15, 0);
+                }
+            }
+        }
+
+        function toggleAudioFx() {
+            v3dAudioEnabled = !v3dAudioEnabled;
+            const icon = document.getElementById('v3dAudioIcon');
+            const btn = document.getElementById('v3dBtnAudio');
+
+            if (v3dAudioEnabled) {
+                if (icon) icon.innerText = '🔊';
+                if (btn) btn.classList.add('active');
+                initWebAudio();
+            } else {
+                if (icon) icon.innerText = '🔇';
+                if (btn) btn.classList.remove('active');
+                if (v3dGainNode && v3dAudioCtx) {
+                    v3dGainNode.gain.setValueAtTime(0, v3dAudioCtx.currentTime);
+                }
+            }
+        }
+
+        function initWebAudio() {
+            try {
+                if (!v3dAudioCtx) {
+                    const AudioContext = window.AudioContext || window.webkitAudioContext;
+                    v3dAudioCtx = new AudioContext();
+                }
+                if (v3dAudioCtx.state === 'suspended') {
+                    v3dAudioCtx.resume();
+                }
+
+                if (!v3dOscillator) {
+                    v3dOscillator = v3dAudioCtx.createOscillator();
+                    v3dGainNode = v3dAudioCtx.createGain();
+
+                    v3dOscillator.type = 'sine';
+                    v3dOscillator.frequency.setValueAtTime(75, v3dAudioCtx.currentTime);
+                    v3dGainNode.gain.setValueAtTime(0.04, v3dAudioCtx.currentTime);
+
+                    v3dOscillator.connect(v3dGainNode);
+                    v3dGainNode.connect(v3dAudioCtx.destination);
+                    v3dOscillator.start();
+                } else if (v3dGainNode) {
+                    v3dGainNode.gain.setValueAtTime(0.04, v3dAudioCtx.currentTime);
+                }
+            } catch (err) {
+                console.log('AudioContext initialization note:', err);
+            }
+        }
+
+        function playChapterChime() {
+            if (!v3dAudioEnabled || !v3dAudioCtx) return;
+            try {
+                const now = v3dAudioCtx.currentTime;
+                const osc = v3dAudioCtx.createOscillator();
+                const gain = v3dAudioCtx.createGain();
+
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(587.33, now);
+                osc.frequency.exponentialRampToValueAtTime(880, now + 0.15);
+
+                gain.gain.setValueAtTime(0.08, now);
+                gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.5);
+
+                osc.connect(gain);
+                gain.connect(v3dAudioCtx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.5);
+            } catch (e) {}
+        }
+
+        function togglePlayerFullscreen() {
+            const wrap = document.getElementById('video3dPlayerWrap');
+            if (!wrap) return;
+
+            if (!document.fullscreenElement) {
+                if (wrap.requestFullscreen) wrap.requestFullscreen();
+                else if (wrap.webkitRequestFullscreen) wrap.webkitRequestFullscreen();
+            } else {
+                if (document.exitFullscreen) document.exitFullscreen();
+            }
+            setTimeout(resizeVideo3d, 150);
+        }
+
         // 6. FILTRO INTERACTIVO RADAR 360° (FEATURE 3)
         let currentRadarMode = 'excelente';
 
@@ -5856,11 +7147,15 @@
             }
         }
 
-        // 7. TECLA ESCAPE PARA CERRAR MODALES Y POPUPS
+        // 7. TECLA ESCAPE Y ESPACIO PARA MODALES Y POPUPS
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
                 closeDeptPopup();
+                closeVideo3dPopup();
+            } else if (e.code === 'Space' && isVideo3dActive) {
+                e.preventDefault();
+                togglePlayPauseVideo3d();
             }
         });
 
