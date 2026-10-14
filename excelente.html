@@ -5738,6 +5738,12 @@
                             </button>
                         </div>
 
+                        <!-- Locución de Voz Ejecutiva (Web Speech API) -->
+                        <button type="button" class="video3d-ctrl-btn active" id="v3dBtnVoice" onclick="toggleVoiceNarration()" title="Activar / Desactivar Voz de Locución Ejecutiva (Web Speech API)">
+                            <span id="v3dVoiceIcon">🎙️</span>
+                            <span id="v3dVoiceText" style="font-size: 0.68rem;">Voz ON</span>
+                        </button>
+
                         <!-- Sonido FX Sintetizado -->
                         <button type="button" class="video3d-ctrl-btn" id="v3dBtnAudio" onclick="toggleAudioFx()" title="Efectos de Sonido Ambientales (Sintetizador Web Audio)">
                             <span id="v3dAudioIcon">🔇</span>
@@ -6060,7 +6066,7 @@
         }
 
         // =================================================================
-        // 5.2. MOTOR DE VIDEO 3D DEL ESCENARIO EXCELENTE (REMOTION THREE.JS ENGINE)
+        // 5.2. MOTOR DE VIDEO 3D REALISTA DEL ESCENARIO EXCELENTE (REMOTION ENGINE)
         // =================================================================
         let isVideo3dActive = false;
         let v3dInitialized = false;
@@ -6070,6 +6076,7 @@
         let v3dPlaybackRate = 1.0;
         let v3dCameraMode = 'cinematic'; // 'cinematic', 'isometric', 'topdown', 'orbit'
         let v3dAudioEnabled = false;
+        let v3dVoiceEnabled = true;
         let v3dAudioCtx = null, v3dOscillator = null, v3dGainNode = null;
         let v3dAnimFrameId = null;
         let v3dLastTimestamp = null;
@@ -6082,6 +6089,8 @@
         let v3dCobots = [];
         let v3dPackages = [];
         let v3dSolarPulses = [];
+        let v3dTrucks = [];
+        let v3dPickLights = [];
 
         const V3D_DURATION = 180; // 3:00 minutos de simulación
 
@@ -6096,8 +6105,9 @@
                 kpiPrimary: "102.060 Posiciones",
                 kpiSecondary: "88.200 Pallets Libres para Hub 3PL (13,6% Ocupación)",
                 caption: "La nave CD Pudahuel (150m × 210m) implementa la Arquitectura de Desacople Central: dos bloques compactos e independientes separados por un pasillo de maniobras de 3,50m, garantizando 102.060 posiciones físicas con flujo continuo y cero riesgo de colisión.",
+                voice: "Capítulo 1: Visión General y Arquitectura de Desacople Central. La nave CD Pudahuel estructura dos bloques compactos e independientes de racks separados por un pasillo de tres coma cincuenta metros, alcanzando ciento dos mil sesenta posiciones seguras a piso y erradicando cualquier riesgo de colisión.",
                 camStart: { pos: [0, 160, 240], target: [0, 15, 0] },
-                camEnd: { pos: [35, 110, 180], target: [0, 20, -10] }
+                camEnd: { pos: [40, 100, 175], target: [0, 18, -10] }
             },
             {
                 id: 2,
@@ -6109,8 +6119,9 @@
                 kpiPrimary: "3,2 Horas Dock-to-Stock",
                 kpiSecondary: "Descarga de Camión en 12-15 min (-85,8% vs 22,6h As-Is)",
                 caption: "El agendamiento digital en ventanas de 2h y el preaviso electrónico (ASN) eliminan las filas en Vespucio. Camiones atracan de inmediato en andenes 1 al 12; transpaletas eléctricas inducen la carga directamente sin congestión en playa.",
-                camStart: { pos: [-75, 45, 125], target: [-75, 10, 65] },
-                camEnd: { pos: [-35, 30, 95], target: [-35, 8, 55] }
+                voice: "Capítulo 2: Recepción Inbound y Andenes Automatizados. Con el portal ASN obligatorio y citas de dos horas, los camiones atracan de inmediato en andenes uno al doce. La descarga se completa en doce minutos reduciendo el dock to stock de veintidós a solo tres coma dos horas.",
+                camStart: { pos: [-110, 28, -65], target: [-75, 6, -30] },
+                camEnd: { pos: [-78, 16, 25], target: [-60, 5, 25] }
             },
             {
                 id: 3,
@@ -6122,8 +6133,9 @@
                 kpiPrimary: "99,8% Precisión IRA",
                 kpiSecondary: "1.428 Túneles de 70 Pallets • Cero Trabajo en Altura",
                 caption: "En los bloques de racks, elevadores verticales Lifters alimentan a los carros Pallet Shuttle. Los carros satélite navegan automáticamente dentro de los canales a 1,5 m/s posicionando cada pallet con guía láser y sensores ultrasónicos.",
-                camStart: { pos: [-25, 40, 10], target: [0, 18, 0] },
-                camEnd: { pos: [30, 28, -25], target: [10, 14, -35] }
+                voice: "Capítulo 3: Almacenamiento Compacto con Pallet Shuttle y Elevadores Lifters. Los carros satélite autónomos navegan en canales de setenta pallets a uno coma cinco metros por segundo a lo largo de seis niveles verticales, logrando noventa y nueve coma ocho por ciento de precisión de inventario.",
+                camStart: { pos: [0, 28, -65], target: [0, 12, -20] },
+                camEnd: { pos: [-24, 18, 10], target: [-36, 10, 10] }
             },
             {
                 id: 4,
@@ -6135,8 +6147,9 @@
                 kpiPrimary: "220 Líneas / Hora",
                 kpiSecondary: "+221,6% vs To-Be • Caminatas caen de 67,6 km a 9,8 km",
                 caption: "Los robots móviles autónomos (AMR con LiDAR 360°) recogen pallets y totes desde los elevadores y los conducen a 8 estaciones Goods-to-Person a piso. El operario ya no camina: prepara pedidos a la cintura con confirmación luminosa y pesaje dinámico.",
-                camStart: { pos: [45, 38, -10], target: [60, 8, 20] },
-                camEnd: { pos: [65, 22, 40], target: [70, 5, 25] }
+                voice: "Capítulo 4: Robótica AMR y Picking Goods to Person. Treinta y dos cobots autónomos trasladan totes directamente a los puestos ergonómicos a piso, acelerando el picking a doscientas veinte líneas por hora con confirmación Pick by Light y cero trabajos en altura.",
+                camStart: { pos: [28, 16, -30], target: [64, 5, -20] },
+                camEnd: { pos: [54, 12, 20], target: [64, 4, 25] }
             },
             {
                 id: 5,
@@ -6148,8 +6161,9 @@
                 kpiPrimary: "4.500 Bultos / Hora",
                 kpiSecondary: "Cero Roturas • Error de Despacho < 0,1%",
                 caption: "Los pedidos preparados fluyen a la línea de inducción del Sorter Shoe. Escáneres omnidireccionales y cubitaje volumétrico pesan cada bulto al vuelo mientras las zapatas de desvío suave clasifican 4.500 paquetes por hora hacia las rampas de salida.",
-                camStart: { pos: [55, 32, 55], target: [45, 10, 75] },
-                camEnd: { pos: [25, 22, 90], target: [15, 8, 80] }
+                voice: "Capítulo 5: Empaque Inteligente y Sorter Shoe Automatizado. El clasificador continuo de zapatas procesa cuatro mil quinientos bultos por hora con pesaje dinámico y cubitaje al vuelo, garantizando menos de cero coma uno por ciento de error de despacho.",
+                camStart: { pos: [22, 16, 15], target: [40, 3, 35] },
+                camEnd: { pos: [52, 14, 65], target: [40, 2, 55] }
             },
             {
                 id: 6,
@@ -6161,8 +6175,9 @@
                 kpiPrimary: "98,7% OTIF",
                 kpiSecondary: "Click & Collect < 2h • Reclamos SERNAC caen 94%",
                 caption: "En los andenes 13 al 24, la flota es cargada y despachada con ruteo dinámico por algoritmos de proximidad. Se sincronizan las 27 tiendas para Click & Collect en menos de 2 horas y entregas domiciliarias el mismo día.",
-                camStart: { pos: [35, 42, 125], target: [35, 10, 65] },
-                camEnd: { pos: [80, 32, 105], target: [80, 8, 55] }
+                voice: "Capítulo 6: Despacho Outbound y Gestión de Transporte TMS. La flota se despacha en andenes trece al veinticuatro con ruteo dinámico GPS, abasteciendo a veintisiete tiendas con Click and Collect en menos de dos horas y noventa y ocho coma siete por ciento de OTIF.",
+                camStart: { pos: [60, 22, -30], target: [75, 6, -10] },
+                camEnd: { pos: [110, 26, 45], target: [75, 5, 20] }
             },
             {
                 id: 7,
@@ -6174,7 +6189,8 @@
                 kpiPrimary: "CLP $3.850 Costo Pedido",
                 kpiSecondary: "65% Autosuficiencia Eléctrica • EBITDA +$412M • Payback 1,8a",
                 caption: "La cubierta solar fotovoltaica genera 385 MWh/año absorbiendo el 65% del consumo eléctrico de robots y naves (-18,5 ton CO2). El costo unitario por pedido cae a $3.850 CLP y la capacidad libre de 88.200 pallets convierte a AndesHome en el principal Hub 3PL de la RM.",
-                camStart: { pos: [0, 75, 45], target: [0, 22, 0] },
+                voice: "Capítulo 7: Autosuficiencia Solar Fotovoltaica y Retorno de Inversión. Quinientos cincuenta paneles solares absorben el sesenta y cinco por ciento del consumo eléctrico, generando un EBITDA de cuatrocientos doce millones y reduciendo el costo unitario por pedido a tres mil ochocientos cincuenta pesos.",
+                camStart: { pos: [0, 38, 50], target: [0, 16, 0] },
                 camEnd: { pos: [0, 160, 220], target: [0, 15, 0] }
             }
         ];
@@ -6187,6 +6203,336 @@
             const m = Math.floor(secs / 60);
             const s = Math.floor(secs % 60);
             return (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
+        }
+
+        // =================================================================
+        // GENERADORES DE TEXTURAS PROCEDURALES EN ALTA RESOLUCIÓN (CANVAS)
+        // =================================================================
+        function createRealisticFloorTexture() {
+            const c = document.createElement('canvas');
+            c.width = 1024;
+            c.height = 1024;
+            const ctx = c.getContext('2d');
+
+            // 1. Concreto pulido epóxico oscuro
+            ctx.fillStyle = '#0b1322';
+            ctx.fillRect(0, 0, 1024, 1024);
+
+            // Textura sutil de ruido de concreto
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.02)';
+            for (let i = 0; i < 4000; i++) {
+                ctx.fillRect(Math.random() * 1024, Math.random() * 1024, 2, 2);
+            }
+
+            // Juntas de dilatación estructural cada 128px
+            ctx.strokeStyle = '#14223d';
+            ctx.lineWidth = 2;
+            for (let x = 0; x <= 1024; x += 128) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 1024); ctx.stroke();
+            }
+            for (let y = 0; y <= 1024; y += 128) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(1024, y); ctx.stroke();
+            }
+
+            // 2. Pasillo Central de Desacople (3,50m) en epoxy reflectivo azul/cian
+            ctx.fillStyle = 'rgba(2, 132, 199, 0.28)';
+            ctx.fillRect(490, 0, 44, 1024);
+
+            // Líneas amarillas de seguridad continua
+            ctx.fillStyle = '#f59e0b';
+            ctx.fillRect(486, 0, 4, 1024);
+            ctx.fillRect(534, 0, 4, 1024);
+
+            // Cruces peatonales zebra en blanco
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+            for (let y = 80; y < 1024; y += 180) {
+                for (let b = 0; b < 5; b++) {
+                    ctx.fillRect(492, y + b * 8, 40, 4);
+                }
+            }
+
+            // Franjas de advertencia chevron negro y amarillo (bordes de andenes)
+            function drawChevrons(startX, startY, w, h) {
+                ctx.save();
+                ctx.beginPath();
+                ctx.rect(startX, startY, w, h);
+                ctx.clip();
+                ctx.fillStyle = '#f59e0b';
+                ctx.fillRect(startX, startY, w, h);
+                ctx.fillStyle = '#0f172a';
+                for (let i = -w; i < h + w; i += 24) {
+                    ctx.beginPath();
+                    ctx.moveTo(startX, startY + i);
+                    ctx.lineTo(startX + w, startY + i + w);
+                    ctx.lineTo(startX + w, startY + i + w + 12);
+                    ctx.lineTo(startX, startY + i + 12);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+
+            drawChevrons(10, 0, 16, 1024); // Franja Andenes Inbound (Oeste)
+            drawChevrons(998, 0, 16, 1024); // Franja Andenes Outbound (Este)
+
+            // Letreros industriales estarcidos (Stencils)
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
+            ctx.font = 'bold 18px monospace';
+            ctx.textAlign = 'center';
+            for (let y = 200; y < 1024; y += 320) {
+                ctx.save();
+                ctx.translate(512, y);
+                ctx.rotate(-Math.PI / 2);
+                ctx.fillText('⚡ PASILLO CENTRAL 3.50m • VÍA AMRs • MAX 10 KM/H', 0, 0);
+                ctx.restore();
+            }
+
+            const tex = new THREE.CanvasTexture(c);
+            tex.wrapS = THREE.RepeatWrapping;
+            tex.wrapT = THREE.RepeatWrapping;
+            tex.repeat.set(1, 1);
+            return tex;
+        }
+
+        function createRealisticPalletTexture(type) {
+            const c = document.createElement('canvas');
+            c.width = 256;
+            c.height = 256;
+            const ctx = c.getContext('2d');
+
+            let bg = '#1e293b';
+            let accent = '#10b981';
+            let label = 'ANDESHOME';
+            let sub = 'ZONA A: ALTA ROTACIÓN';
+
+            if (type === 'A') {
+                bg = '#064e3b'; accent = '#34d399'; sub = 'ZONA A: 140 TÚNELES';
+            } else if (type === 'B') {
+                bg = '#0c4a6e'; accent = '#38bdf8'; sub = 'ZONA B: 420 TÚNELES';
+            } else if (type === 'C') {
+                bg = '#3b0764'; accent = '#c084fc'; sub = 'ZONA C: 3PL HUB RM';
+            } else if (type === 'D') {
+                bg = '#78350f'; accent = '#fbbf24'; sub = 'ZONA D: CALLES A PISO';
+            }
+
+            ctx.fillStyle = bg;
+            ctx.fillRect(0, 0, 256, 256);
+
+            // Placas de madera inferiores (Pallet EUR)
+            ctx.fillStyle = '#92400e';
+            ctx.fillRect(0, 230, 256, 26);
+            ctx.fillStyle = '#78350f';
+            ctx.fillRect(20, 210, 35, 20);
+            ctx.fillRect(110, 210, 35, 20);
+            ctx.fillRect(200, 210, 35, 20);
+
+            // Envoltura film transparente (stretch wrap con brillo)
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+            ctx.lineWidth = 3;
+            for (let y = 15; y < 210; y += 28) {
+                ctx.beginPath();
+                ctx.moveTo(0, y);
+                ctx.bezierCurveTo(80, y - 6, 180, y + 8, 256, y);
+                ctx.stroke();
+            }
+
+            // Etiqueta logística GS1 con código de barras
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(35, 45, 186, 125);
+            ctx.strokeStyle = '#cbd5e1';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(35, 45, 186, 125);
+
+            ctx.fillStyle = '#0f172a';
+            ctx.font = 'bold 15px sans-serif';
+            ctx.fillText(label, 45, 68);
+
+            ctx.fillStyle = accent;
+            ctx.font = 'bold 10px monospace';
+            ctx.fillText(sub, 45, 84);
+
+            ctx.fillStyle = '#64748b';
+            ctx.font = '8px monospace';
+            ctx.fillText('SSCC: 07804561020609981', 45, 96);
+
+            // Código de barras realista
+            ctx.fillStyle = '#0f172a';
+            for (let x = 45; x < 210; x += (Math.random() > 0.4 ? 4 : 2)) {
+                ctx.fillRect(x, 102, 2, 45);
+            }
+
+            // Sello EPAL en taco
+            ctx.strokeStyle = '#451a03';
+            ctx.strokeRect(22, 212, 31, 16);
+            ctx.fillStyle = '#451a03';
+            ctx.font = 'bold 9px sans-serif';
+            ctx.fillText('EUR', 26, 224);
+
+            return new THREE.CanvasTexture(c);
+        }
+
+        function createRealisticTruckTexture(brandColorHex, title) {
+            const c = document.createElement('canvas');
+            c.width = 512;
+            c.height = 256;
+            const ctx = c.getContext('2d');
+
+            // Carrocería de semirremolque blanca con panelado térmico
+            ctx.fillStyle = '#f8fafc';
+            ctx.fillRect(0, 0, 512, 256);
+
+            // Remaches y perfiles de aluminio
+            ctx.strokeStyle = '#e2e8f0';
+            ctx.lineWidth = 1;
+            for (let x = 0; x < 512; x += 32) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 256); ctx.stroke();
+            }
+
+            // Curva de diseño corporativo AndesHome
+            ctx.fillStyle = brandColorHex;
+            ctx.beginPath();
+            ctx.moveTo(0, 190);
+            ctx.bezierCurveTo(140, 110, 320, 250, 512, 130);
+            ctx.lineTo(512, 256);
+            ctx.lineTo(0, 256);
+            ctx.fill();
+
+            // Logotipo AndesHome
+            ctx.fillStyle = '#0f172a';
+            ctx.font = '900 40px sans-serif';
+            ctx.fillText('AndesHome', 50, 85);
+
+            ctx.fillStyle = brandColorHex;
+            ctx.font = 'bold 18px monospace';
+            ctx.fillText('CHILE S.A. &bull; LOGÍSTICA OMNICANAL', 50, 115);
+
+            ctx.fillStyle = '#64748b';
+            ctx.font = '12px sans-serif';
+            ctx.fillText('Hub Pudahuel &bull; Flota Conectada TMS 100% Eléctrica', 50, 140);
+
+            // Cinta reflectante de seguridad DOT-C2 (rojo y blanco alternado)
+            for (let x = 0; x < 512; x += 32) {
+                ctx.fillStyle = (Math.floor(x / 32) % 2 === 0) ? '#ef4444' : '#ffffff';
+                ctx.fillRect(x, 240, 32, 16);
+            }
+
+            return new THREE.CanvasTexture(c);
+        }
+
+        function createRealisticSolarTexture() {
+            const c = document.createElement('canvas');
+            c.width = 256;
+            c.height = 256;
+            const ctx = c.getContext('2d');
+
+            ctx.fillStyle = '#08172e';
+            ctx.fillRect(0, 0, 256, 256);
+
+            // Celdas monocristalinas
+            ctx.strokeStyle = '#1e3a8a';
+            ctx.lineWidth = 2;
+            for (let x = 0; x <= 256; x += 32) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 256); ctx.stroke();
+            }
+            for (let y = 0; y <= 256; y += 32) {
+                ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(256, y); ctx.stroke();
+            }
+
+            // Busbars plateados de alta eficiencia
+            ctx.strokeStyle = '#93c5fd';
+            ctx.lineWidth = 1;
+            for (let x = 16; x < 256; x += 32) {
+                ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, 256); ctx.stroke();
+            }
+
+            const tex = new THREE.CanvasTexture(c);
+            tex.wrapS = THREE.RepeatWrapping;
+            tex.wrapT = THREE.RepeatWrapping;
+            tex.repeat.set(5, 8);
+            return tex;
+        }
+
+        function createWmsMonitorTexture() {
+            const c = document.createElement('canvas');
+            c.width = 256;
+            c.height = 160;
+            const ctx = c.getContext('2d');
+
+            ctx.fillStyle = '#020617';
+            ctx.fillRect(0, 0, 256, 160);
+
+            ctx.fillStyle = '#38bdf8';
+            ctx.font = 'bold 13px sans-serif';
+            ctx.fillText('WMS NEXTGEN &bull; ESTACIÓN GTP 04', 12, 22);
+
+            ctx.fillStyle = '#10b981';
+            ctx.font = 'bold 24px monospace';
+            ctx.fillText('PICK: 3 UNIDADES', 12, 58);
+
+            ctx.fillStyle = '#94a3b8';
+            ctx.font = '11px monospace';
+            ctx.fillText('SKU: AH-55428-M &bull; CONFIRMADO', 12, 82);
+            ctx.fillText('VELOCIDAD: 220 LÍN/H (OK)', 12, 102);
+
+            // Barra de progreso de la orden
+            ctx.fillStyle = '#1e293b';
+            ctx.fillRect(12, 120, 232, 16);
+            ctx.fillStyle = '#34d399';
+            ctx.fillRect(12, 120, 185, 16);
+
+            return new THREE.CanvasTexture(c);
+        }
+
+        // =================================================================
+        // CONTROL DE VOZ DE LOCUCIÓN EJECUTIVA (WEB SPEECH API)
+        // =================================================================
+        function speakChapterNarration(text) {
+            if (!v3dVoiceEnabled || !('speechSynthesis' in window)) return;
+            try {
+                window.speechSynthesis.cancel();
+                if (!text) return;
+                setTimeout(() => {
+                    if (!v3dVoiceEnabled || !isVideo3dActive) return;
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'es-CL';
+                    utterance.rate = 1.02;
+                    utterance.pitch = 1.0;
+
+                    const voices = window.speechSynthesis.getVoices();
+                    if (voices && voices.length > 0) {
+                        const esVoice = voices.find(v => v.lang.startsWith('es-CL') || v.lang.startsWith('es-') || v.lang.includes('es'));
+                        if (esVoice) utterance.voice = esVoice;
+                    }
+
+                    window.speechSynthesis.speak(utterance);
+                }, 40);
+            } catch (e) {
+                console.log('Speech synthesis note:', e);
+            }
+        }
+
+        if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+            window.speechSynthesis.onvoiceschanged = () => {
+                try { window.speechSynthesis.getVoices(); } catch (e) {}
+            };
+        }
+
+        function toggleVoiceNarration() {
+            v3dVoiceEnabled = !v3dVoiceEnabled;
+            const btn = document.getElementById('v3dBtnVoice');
+            const icon = document.getElementById('v3dVoiceIcon');
+            const text = document.getElementById('v3dVoiceText');
+            if (v3dVoiceEnabled) {
+                if (btn) btn.classList.add('active');
+                if (icon) icon.innerText = '🎙️';
+                if (text) text.innerText = 'Voz ON';
+                const ch = getCurrentChapter(v3dCurrentTime);
+                if (ch) speakChapterNarration(ch.voice);
+            } else {
+                if (btn) btn.classList.remove('active');
+                if (icon) icon.innerText = '🔇';
+                if (text) text.innerText = 'Voz OFF';
+                if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            }
         }
 
         function openVideo3dPopup() {
@@ -6206,6 +6552,9 @@
             if (!v3dAnimFrameId) {
                 v3dAnimFrameId = requestAnimationFrame(v3dLoop);
             }
+
+            const ch = getCurrentChapter(v3dCurrentTime);
+            if (ch) speakChapterNarration(ch.voice);
         }
 
         function closeVideo3dPopup() {
@@ -6220,6 +6569,9 @@
             }
             if (v3dGainNode && v3dAudioCtx) {
                 v3dGainNode.gain.setValueAtTime(0, v3dAudioCtx.currentTime);
+            }
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
             }
         }
 
@@ -6237,21 +6589,21 @@
             const width = wrap.clientWidth;
             const height = wrap.clientHeight;
 
-            // Scene & Camera
+            // Escena y Cámara con profundidad atmosférica
             v3dScene = new THREE.Scene();
-            v3dScene.background = new THREE.Color(0x060c18);
-            v3dScene.fog = new THREE.FogExp2(0x060c18, 0.0035);
+            v3dScene.background = new THREE.Color(0x070e1c);
+            v3dScene.fog = new THREE.FogExp2(0x070e1c, 0.0032);
 
             v3dCamera = new THREE.PerspectiveCamera(45, width / height, 0.5, 1200);
             v3dCamera.position.set(0, 160, 240);
             v3dCamera.lookAt(0, 15, 0);
 
-            // Renderer
+            // Renderer WebGL con antialiasing
             v3dRenderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
             v3dRenderer.setSize(width, height);
             v3dRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-            // Controls
+            // Controls Orbit
             if (typeof THREE.OrbitControls !== 'undefined') {
                 v3dControls = new THREE.OrbitControls(v3dCamera, canvas);
                 v3dControls.enableDamping = true;
@@ -6260,17 +6612,30 @@
                 v3dControls.enabled = (v3dCameraMode === 'orbit');
             }
 
-            // Lights
-            const ambient = new THREE.AmbientLight(0xffffff, 0.65);
-            v3dScene.add(ambient);
+            // Iluminación Física e Industrial
+            const hemiLight = new THREE.HemisphereLight(0xdbeafe, 0x0f172a, 0.65);
+            v3dScene.add(hemiLight);
 
-            const dirLight1 = new THREE.DirectionalLight(0x38bdf8, 0.9);
-            dirLight1.position.set(100, 140, 120);
-            v3dScene.add(dirLight1);
+            const mainSun = new THREE.DirectionalLight(0xffffff, 1.05);
+            mainSun.position.set(120, 160, 100);
+            v3dScene.add(mainSun);
 
-            const dirLight2 = new THREE.DirectionalLight(0x10b981, 0.6);
-            dirLight2.position.set(-100, 100, -100);
-            v3dScene.add(dirLight2);
+            const blueFill = new THREE.DirectionalLight(0x38bdf8, 0.45);
+            blueFill.position.set(-120, 90, -100);
+            v3dScene.add(blueFill);
+
+            // Luminarias High-Bay suspendidas (iluminación puntual cálida/fría para brillos epóxicos)
+            const hl1 = new THREE.PointLight(0xf8fafc, 0.7, 110, 1.2);
+            hl1.position.set(0, 13.5, -45);
+            v3dScene.add(hl1);
+
+            const hl2 = new THREE.PointLight(0xf8fafc, 0.7, 110, 1.2);
+            hl2.position.set(0, 13.5, 45);
+            v3dScene.add(hl2);
+
+            const hlGtp = new THREE.PointLight(0x38bdf8, 0.8, 95, 1.3);
+            hlGtp.position.set(60, 10, 0);
+            v3dScene.add(hlGtp);
 
             build3dLogisticsWarehouse();
 
@@ -6290,254 +6655,392 @@
         }
 
         function build3dLogisticsWarehouse() {
-            // 1. Piso y Rejilla Arquitectónica
-            const grid = new THREE.GridHelper(300, 60, 0x0284c7, 0x13213d);
-            grid.position.y = 0;
+            // Texturas procedurales
+            const floorTex = createRealisticFloorTexture();
+            const palletTexA = createRealisticPalletTexture('A');
+            const palletTexB = createRealisticPalletTexture('B');
+            const palletTexC = createRealisticPalletTexture('C');
+            const palletTexD = createRealisticPalletTexture('D');
+            const solarTex = createRealisticSolarTexture();
+            const wmsTex = createWmsMonitorTexture();
+
+            // 1. Piso Epóxico de Concreto Pulido con Reflejos y Señalética
+            const floorGeo = new THREE.PlaneGeometry(150, 210);
+            const floorMat = new THREE.MeshStandardMaterial({
+                map: floorTex,
+                roughness: 0.22,
+                metalness: 0.15
+            });
+            const floorMesh = new THREE.Mesh(floorGeo, floorMat);
+            floorMesh.rotation.x = -Math.PI / 2;
+            floorMesh.position.y = 0;
+            v3dScene.add(floorMesh);
+
+            // Rejilla arquitectónica exterior
+            const grid = new THREE.GridHelper(320, 64, 0x0284c7, 0x111e38);
+            grid.position.y = -0.05;
             v3dScene.add(grid);
 
-            // Perímetro Nave 150m x 210m
-            const naveGeo = new THREE.BoxGeometry(150, 0.5, 210);
-            const naveMat = new THREE.MeshBasicMaterial({ color: 0x0a1428, transparent: true, opacity: 0.85 });
-            const naveFloor = new THREE.Mesh(naveGeo, naveMat);
-            naveFloor.position.set(0, -0.25, 0);
-            v3dScene.add(naveFloor);
+            // 2. Estructura de Techumbre: 8 Armaduras Metálicas (Celosías / Trusses)
+            const trussMat = new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.8, roughness: 0.3 });
+            const lampMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            for (let tz = -90; tz <= 90; tz += 26) {
+                const trussGroup = new THREE.Group();
 
-            // Borde Perimetral Neón
-            const edgesGeo = new THREE.EdgesGeometry(naveGeo);
-            const edgesMat = new THREE.LineBasicMaterial({ color: 0x38bdf8 });
-            const naveOutline = new THREE.LineSegments(edgesGeo, edgesMat);
-            naveOutline.position.set(0, -0.25, 0);
-            v3dScene.add(naveOutline);
+                // Cuerda superior e inferior
+                const cordGeo = new THREE.BoxGeometry(150, 0.4, 0.4);
+                const topCord = new THREE.Mesh(cordGeo, trussMat);
+                topCord.position.set(0, 14.5, 0);
+                const botCord = new THREE.Mesh(cordGeo, trussMat);
+                botCord.position.set(0, 13.0, 0);
+                trussGroup.add(topCord);
+                trussGroup.add(botCord);
 
-            // 2. Pasillo Central de Desacople (3.50m ancho x 210m largo)
-            const aisleGeo = new THREE.PlaneGeometry(6, 210);
-            const aisleMat = new THREE.MeshBasicMaterial({ color: 0x0284c7, transparent: true, opacity: 0.45 });
-            const aisle = new THREE.Mesh(aisleGeo, aisleMat);
-            aisle.rotation.x = -Math.PI / 2;
-            aisle.position.set(0, 0.05, 0);
-            v3dScene.add(aisle);
+                // Montantes y diagonales
+                for (let tx = -70; tx <= 70; tx += 10) {
+                    const postGeo = new THREE.CylinderGeometry(0.12, 0.12, 1.5, 6);
+                    const post = new THREE.Mesh(postGeo, trussMat);
+                    post.position.set(tx, 13.75, 0);
+                    trussGroup.add(post);
 
-            // Líneas de Seguridad del Pasillo Central
-            const lineMat = new THREE.LineBasicMaterial({ color: 0x34d399 });
-            const lineGeo1 = new THREE.BufferGeometry().setFromPoints([
-                new THREE.Vector3(-3, 0.1, -105), new THREE.Vector3(-3, 0.1, 105)
-            ]);
-            const lineGeo2 = new THREE.BufferGeometry().setFromPoints([
-                new THREE.Vector3(3, 0.1, -105), new THREE.Vector3(3, 0.1, 105)
-            ]);
-            v3dScene.add(new THREE.Line(lineGeo1, lineMat));
-            v3dScene.add(new THREE.Line(lineGeo2, lineMat));
+                    const diagGeo = new THREE.CylinderGeometry(0.1, 0.1, 1.8, 6);
+                    const diag = new THREE.Mesh(diagGeo, trussMat);
+                    diag.position.set(tx + 5, 13.75, 0);
+                    diag.rotation.z = Math.PI / 4;
+                    trussGroup.add(diag);
+                }
 
-            // 3. Baterías de Racks de Alta Densidad (Bloque Oeste & Bloque Este)
-            const rackColMat = new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.7, roughness: 0.3 });
-            const palletMats = {
-                A: new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.4 }),
-                B: new THREE.MeshStandardMaterial({ color: 0x38bdf8, roughness: 0.4 }),
-                C: new THREE.MeshStandardMaterial({ color: 0x8b5cf6, roughness: 0.4 }),
-                D: new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.4 })
+                // Luminarias industriales LED suspendidas (High-Bay)
+                [-36, 0, 36].forEach(lx => {
+                    const lampGeo = new THREE.BoxGeometry(1.6, 0.2, 0.8);
+                    const lamp = new THREE.Mesh(lampGeo, lampMat);
+                    lamp.position.set(lx, 12.8, 0);
+                    trussGroup.add(lamp);
+                });
+
+                trussGroup.position.z = tz;
+                v3dScene.add(trussGroup);
+            }
+
+            // 3. Columnas de Hormigón Perimetrales con Bolardos Amarillos de Protección
+            const colGeo = new THREE.BoxGeometry(1.2, 14.5, 1.2);
+            const colMat = new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.7 });
+            const bollardGeo = new THREE.CylinderGeometry(0.3, 0.3, 1.2, 12);
+            const bollardMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.3 });
+
+            [-74, 74].forEach(cx => {
+                for (let cz = -90; cz <= 90; cz += 30) {
+                    const col = new THREE.Mesh(colGeo, colMat);
+                    col.position.set(cx, 7.25, cz);
+                    v3dScene.add(col);
+
+                    [-1.2, 1.2].forEach(bx => {
+                        const bollard = new THREE.Mesh(bollardGeo, bollardMat);
+                        bollard.position.set(cx + (cx < 0 ? 1.2 : -1.2), 0.6, cz);
+                        v3dScene.add(bollard);
+                    });
+                }
+            });
+
+            // 4. Baterías de Racks Industriales (102.060 Posiciones)
+            const rackPostMat = new THREE.MeshStandardMaterial({ color: 0x1d4ed8, metalness: 0.6, roughness: 0.4 }); // Azul
+            const rackBeamMat = new THREE.MeshStandardMaterial({ color: 0xea580c, metalness: 0.5, roughness: 0.4 }); // Naranja
+
+            const palletBoxGeo = new THREE.BoxGeometry(1.8, 1.5, 2.0);
+            const palletMaterials = {
+                A: new THREE.MeshStandardMaterial({ map: palletTexA, roughness: 0.3 }),
+                B: new THREE.MeshStandardMaterial({ map: palletTexB, roughness: 0.3 }),
+                C: new THREE.MeshStandardMaterial({ map: palletTexC, roughness: 0.3 }),
+                D: new THREE.MeshStandardMaterial({ map: palletTexD, roughness: 0.3 })
             };
 
-            const palletBoxGeo = new THREE.BoxGeometry(1.6, 1.4, 2.0);
-            const rackLevels = [1.2, 3.2, 5.2, 7.2, 9.2, 11.2];
-            const blocks = [-1, 1]; // Oeste (-), Este (+)
+            const rackLevels = [1.2, 3.2, 5.2, 7.2, 9.2, 11.2]; // 6 niveles hasta 12m
+            const blocks = [-1, 1]; // Bloque Oeste y Bloque Este
 
             blocks.forEach(side => {
                 const baseX = side * 36;
-                for (let rz = -85; rz <= 85; rz += 18) {
-                    for (let rx = -26; rx <= 26; rx += 13) {
-                        const colGeo = new THREE.BoxGeometry(0.4, 13, 0.4);
-                        const colMesh = new THREE.Mesh(colGeo, rackColMat);
-                        colMesh.position.set(baseX + rx, 6.5, rz);
+
+                // Estructura de racks
+                for (let rz = -85; rz <= 85; rz += 17) {
+                    // Vigas horizontales de carga
+                    rackLevels.forEach(lvl => {
+                        const beamGeo = new THREE.BoxGeometry(54, 0.25, 0.25);
+                        const beam1 = new THREE.Mesh(beamGeo, rackBeamMat);
+                        beam1.position.set(baseX, lvl - 0.7, rz - 1.0);
+                        const beam2 = new THREE.Mesh(beamGeo, rackBeamMat);
+                        beam2.position.set(baseX, lvl - 0.7, rz + 1.0);
+                        v3dScene.add(beam1);
+                        v3dScene.add(beam2);
+                    });
+
+                    // Puntales verticales azules
+                    for (let rx = -27; rx <= 27; rx += 9) {
+                        const colMesh = new THREE.Mesh(new THREE.BoxGeometry(0.3, 12.5, 0.3), rackPostMat);
+                        colMesh.position.set(baseX + rx, 6.25, rz);
                         v3dScene.add(colMesh);
                     }
 
+                    // Pallets reales con código de barras según zona
                     let zone = 'B';
                     if (rz < -35) zone = 'A';
                     else if (rz > 40) zone = 'C';
 
-                    rackLevels.forEach((lvl, lvlIdx) => {
-                        for (let rx = -20; rx <= 20; rx += 8) {
-                            const pMesh = new THREE.Mesh(palletBoxGeo, palletMats[zone]);
-                            pMesh.position.set(baseX + rx, lvl, rz + ((lvlIdx % 2 === 0) ? 2 : -2));
+                    rackLevels.forEach(lvl => {
+                        for (let rx = -24; rx <= 24; rx += 7.5) {
+                            const pMesh = new THREE.Mesh(palletBoxGeo, palletMaterials[zone]);
+                            pMesh.position.set(baseX + rx, lvl, rz);
                             v3dScene.add(pMesh);
                         }
                     });
                 }
             });
 
-            // Zona D: 30 Calles a Piso en extremo sur (Ámbar)
+            // Zona D: 30 Calles a Piso Independientes (Extremo Sur, Ámbar)
             for (let dz = 75; dz <= 98; dz += 6) {
                 for (let dx = -55; dx <= -15; dx += 8) {
-                    const pFloor = new THREE.Mesh(palletBoxGeo, palletMats.D);
-                    pFloor.position.set(dx, 0.7, dz);
+                    const pFloor = new THREE.Mesh(palletBoxGeo, palletMaterials.D);
+                    pFloor.position.set(dx, 0.75, dz);
                     v3dScene.add(pFloor);
                 }
             }
 
-            // 4. Elevadores Verticales Lifters (4 unidades)
+            // 5. Elevadores Verticales Lifters (4 torres con cableado y cabina)
             const lifterPositions = [
-                { x: -5, z: -40 }, { x: -5, z: 20 },
-                { x: 5, z: -20 }, { x: 5, z: 40 }
+                { x: -5.5, z: -40 }, { x: -5.5, z: 20 },
+                { x: 5.5, z: -20 }, { x: 5.5, z: 40 }
             ];
             lifterPositions.forEach((pos, idx) => {
-                const mastGeo = new THREE.BoxGeometry(0.8, 14, 0.8);
-                const mastMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.8 });
-                const mast = new THREE.Mesh(mastGeo, mastMat);
-                mast.position.set(pos.x, 7, pos.z);
-                v3dScene.add(mast);
+                const towerGeo = new THREE.BoxGeometry(1.2, 14, 1.2);
+                const towerMat = new THREE.MeshStandardMaterial({ color: 0x64748b, metalness: 0.85, roughness: 0.2 });
+                const tower = new THREE.Mesh(towerGeo, towerMat);
+                tower.position.set(pos.x, 7, pos.z);
+                v3dScene.add(tower);
 
-                const carriageGeo = new THREE.BoxGeometry(2.4, 0.5, 2.4);
-                const carriageMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x0284c7, emissiveIntensity: 0.4 });
+                const carriageGeo = new THREE.BoxGeometry(2.6, 0.4, 2.4);
+                const carriageMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, metalness: 0.6, roughness: 0.3 });
                 const carriage = new THREE.Mesh(carriageGeo, carriageMat);
-                carriage.position.set(pos.x, 1, pos.z);
+                carriage.position.set(pos.x, 1.2, pos.z);
                 v3dScene.add(carriage);
+
+                // Luz indicadora de elevador
+                const led = new THREE.Mesh(new THREE.SphereGeometry(0.2, 8, 8), new THREE.MeshBasicMaterial({ color: 0x38bdf8 }));
+                led.position.set(pos.x, 14.2, pos.z);
+                v3dScene.add(led);
 
                 v3dLifters.push({ mesh: carriage, baseX: pos.x, baseZ: pos.z, phase: idx * 1.5 });
             });
 
-            // 5. Carros Pallet Shuttle en Canales de Racks (8 unidades)
-            const shuttleGeo = new THREE.BoxGeometry(1.8, 0.4, 2.2);
-            const shuttleMat = new THREE.MeshStandardMaterial({ color: 0x10b981, emissive: 0x059669, emissiveIntensity: 0.6 });
+            // 6. Carros Pallet Shuttle en Canales de Racks (8 unidades con faro LED)
+            const shuttleGeo = new THREE.BoxGeometry(1.7, 0.3, 2.2);
+            const shuttleMat = new THREE.MeshStandardMaterial({ color: 0x059669, metalness: 0.8, roughness: 0.2 });
             for (let i = 0; i < 8; i++) {
-                const sMesh = new THREE.Mesh(shuttleGeo, shuttleMat);
+                const group = new THREE.Group();
+                const body = new THREE.Mesh(shuttleGeo, shuttleMat);
+                group.add(body);
+
+                // Faro LED delantero
+                const led = new THREE.Mesh(new THREE.BoxGeometry(1.2, 0.1, 0.1), new THREE.MeshBasicMaterial({ color: 0x34d399 }));
+                led.position.set(0, 0.1, 1.15);
+                group.add(led);
+
                 const sSide = i % 2 === 0 ? -36 : 36;
                 const sLvl = rackLevels[i % 5];
-                sMesh.position.set(sSide + (i * 3 - 10), sLvl - 0.5, (i - 4) * 20);
-                v3dScene.add(sMesh);
-                v3dShuttles.push({ mesh: sMesh, side: sSide, lvl: sLvl, baseZ: (i - 4) * 20, speed: 0.8 + (i % 3) * 0.3 });
+                group.position.set(sSide + (i * 3 - 10), sLvl - 0.5, (i - 4) * 20);
+                v3dScene.add(group);
+                v3dShuttles.push({ group: group, mesh: group, side: sSide, lvl: sLvl, baseZ: (i - 4) * 20, speed: 0.8 + (i % 3) * 0.3 });
             }
 
-            // 6. Cobots AMR (16 unidades con LiDAR)
-            const cobotBodyGeo = new THREE.CylinderGeometry(1.1, 1.1, 0.6, 16);
-            const cobotBodyMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.8, roughness: 0.2 });
-            const lidarRingGeo = new THREE.TorusGeometry(1.0, 0.08, 8, 24);
+            // 7. Cobots AMR (16 unidades con chasis industrial y haz LiDAR)
+            const cobotBodyGeo = new THREE.CylinderGeometry(1.15, 1.2, 0.5, 24);
+            const cobotBodyMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.85, roughness: 0.2 });
+            const bumperMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.4 });
+            const lidarRingGeo = new THREE.TorusGeometry(1.1, 0.06, 8, 32);
             const lidarRingMat = new THREE.MeshBasicMaterial({ color: 0x38bdf8 });
 
             for (let i = 0; i < 16; i++) {
                 const group = new THREE.Group();
                 const body = new THREE.Mesh(cobotBodyGeo, cobotBodyMat);
-                body.position.y = 0.3;
+                body.position.y = 0.25;
                 group.add(body);
 
+                // Parachoques de seguridad naranja
+                const bumper = new THREE.Mesh(new THREE.TorusGeometry(1.2, 0.08, 6, 24), bumperMat);
+                bumper.rotation.x = Math.PI / 2;
+                bumper.position.y = 0.15;
+                group.add(bumper);
+
+                // Escáner LiDAR
                 const ring = new THREE.Mesh(lidarRingGeo, lidarRingMat);
                 ring.rotation.x = Math.PI / 2;
-                ring.position.y = 0.35;
+                ring.position.y = 0.45;
                 group.add(ring);
 
-                const toteGeo = new THREE.BoxGeometry(1.4, 0.8, 1.4);
-                const toteMat = new THREE.MeshStandardMaterial({ color: i % 2 === 0 ? 0x10b981 : 0x38bdf8 });
-                const tote = new THREE.Mesh(toteGeo, toteMat);
+                // Carga transportada (tote / bulto)
+                const tote = new THREE.Mesh(new THREE.BoxGeometry(1.5, 0.9, 1.5), new THREE.MeshStandardMaterial({
+                    map: (i % 2 === 0 ? palletTexA : palletTexB)
+                }));
                 tote.position.y = 1.0;
                 group.add(tote);
 
-                group.position.set((i % 2 === 0 ? -1.5 : 1.5), 0, (i - 8) * 12);
+                group.position.set((i % 2 === 0 ? -1.6 : 1.6), 0, (i - 8) * 12);
                 v3dScene.add(group);
                 v3dCobots.push({ group: group, pathOffset: i * 0.4, speed: 1.0 + (i % 2) * 0.4 });
             }
 
-            // 7. Estaciones Goods-to-Person (GTP) - 8 puestos ergonómicos
+            // 8. Estaciones Goods-to-Person (GTP) - 8 puestos ergonómicos con pantalla WMS
             for (let i = 0; i < 8; i++) {
                 const gtpX = 64;
                 const gtpZ = -60 + i * 16;
-                const tableGeo = new THREE.BoxGeometry(3, 1.1, 4);
-                const tableMat = new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.5 });
-                const table = new THREE.Mesh(tableGeo, tableMat);
-                table.position.set(gtpX, 0.55, gtpZ);
-                v3dScene.add(table);
+                const gtpGroup = new THREE.Group();
 
-                const ptlGeo = new THREE.BoxGeometry(0.2, 1.8, 3.6);
-                const ptlMat = new THREE.MeshStandardMaterial({ color: 0x34d399, emissive: 0x10b981, emissiveIntensity: 0.5 });
-                const ptl = new THREE.Mesh(ptlGeo, ptlMat);
-                ptl.position.set(gtpX + 1.4, 1.6, gtpZ);
-                v3dScene.add(ptl);
+                // Mesa ergonómica
+                const table = new THREE.Mesh(new THREE.BoxGeometry(3.2, 1.0, 4.2), new THREE.MeshStandardMaterial({ color: 0x1e293b, metalness: 0.6 }));
+                table.position.set(0, 0.5, 0);
+                gtpGroup.add(table);
 
-                const opHeadGeo = new THREE.SphereGeometry(0.4, 12, 12);
-                const opBodyGeo = new THREE.CylinderGeometry(0.4, 0.5, 1.5, 12);
-                const opMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0 });
-                const opBody = new THREE.Mesh(opBodyGeo, opMat);
-                opBody.position.set(gtpX - 1.2, 1.1, gtpZ);
-                const opHead = new THREE.Mesh(opHeadGeo, opMat);
-                opHead.position.set(gtpX - 1.2, 2.1, gtpZ);
-                v3dScene.add(opBody);
-                v3dScene.add(opHead);
+                // Tapete antifatiga a piso
+                const mat = new THREE.Mesh(new THREE.PlaneGeometry(2, 3), new THREE.MeshStandardMaterial({ color: 0x020617, roughness: 0.9 }));
+                mat.rotation.x = -Math.PI / 2;
+                mat.position.set(-1.8, 0.02, 0);
+                gtpGroup.add(mat);
+
+                // Monitor táctil WMS
+                const monitor = new THREE.Mesh(new THREE.BoxGeometry(0.1, 1.2, 1.8), new THREE.MeshStandardMaterial({ map: wmsTex }));
+                monitor.position.set(1.4, 1.8, 0.6);
+                gtpGroup.add(monitor);
+
+                // Pick-by-Light Display
+                const ptl = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.5, 3.8), new THREE.MeshStandardMaterial({
+                    color: 0x10b981, emissive: 0x059669, emissiveIntensity: 0.7
+                }));
+                ptl.position.set(1.4, 1.2, 0);
+                gtpGroup.add(ptl);
+                v3dPickLights.push(ptl);
+
+                // Operario humano ergonómico
+                const opBody = new THREE.Mesh(new THREE.CylinderGeometry(0.4, 0.45, 1.5, 12), new THREE.MeshStandardMaterial({ color: 0x38bdf8 }));
+                opBody.position.set(-1.6, 1.05, 0);
+                gtpGroup.add(opBody);
+                const opHead = new THREE.Mesh(new THREE.SphereGeometry(0.38, 12, 12), new THREE.MeshStandardMaterial({ color: 0xfde047 }));
+                opHead.position.set(-1.6, 2.05, 0);
+                gtpGroup.add(opHead);
+
+                gtpGroup.position.set(gtpX, 0, gtpZ);
+                v3dScene.add(gtpGroup);
             }
 
-            // 8. Sorter Shoe Automatizado (4.500 bultos/h)
-            const sorterBeltGeo = new THREE.BoxGeometry(3, 0.6, 70);
-            const sorterBeltMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.9, roughness: 0.1 });
-            const sorterBelt = new THREE.Mesh(sorterBeltGeo, sorterBeltMat);
+            // Barandas de Protección Industrial (Amarillo Seguridad RAL 1023)
+            const railMat = new THREE.MeshStandardMaterial({ color: 0xfacc15, metalness: 0.7, roughness: 0.3 });
+            const railPostGeo = new THREE.CylinderGeometry(0.08, 0.08, 1.1, 8);
+            const railTubeGeo = new THREE.CylinderGeometry(0.05, 0.05, 130, 8);
+
+            for (let rz = -65; rz <= 65; rz += 10) {
+                const rPost = new THREE.Mesh(railPostGeo, railMat);
+                rPost.position.set(55, 0.55, rz);
+                v3dScene.add(rPost);
+            }
+            [0.45, 0.95].forEach(ry => {
+                const tube = new THREE.Mesh(railTubeGeo, railMat);
+                tube.position.set(55, ry, 0);
+                tube.rotation.x = Math.PI / 2;
+                v3dScene.add(tube);
+            });
+
+            // 9. Sorter Shoe Automatizado (4.500 Bultos/h con túnel de cubitaje)
+            const sorterBelt = new THREE.Mesh(new THREE.BoxGeometry(3, 0.6, 72), new THREE.MeshStandardMaterial({ color: 0x0f172a, metalness: 0.9, roughness: 0.1 }));
             sorterBelt.position.set(40, 0.9, 50);
             v3dScene.add(sorterBelt);
 
+            // Túnel de escáner volumétrico y pesaje dinámico
+            const tunnel = new THREE.Mesh(new THREE.BoxGeometry(3.6, 2.2, 4), new THREE.MeshStandardMaterial({ color: 0x38bdf8, transparent: true, opacity: 0.4 }));
+            tunnel.position.set(40, 1.8, 22);
+            v3dScene.add(tunnel);
+
+            // 12 Ramales de salida con zapatas de desvío
             for (let s = 0; s < 6; s++) {
-                const spurGeo = new THREE.BoxGeometry(6, 0.4, 1.8);
-                const spurMat = new THREE.MeshStandardMaterial({ color: 0x334155 });
-                const spur = new THREE.Mesh(spurGeo, spurMat);
-                spur.position.set(44.5, 0.8, 25 + s * 10);
+                const spur = new THREE.Mesh(new THREE.BoxGeometry(6.5, 0.4, 2.0), new THREE.MeshStandardMaterial({ color: 0x334155, metalness: 0.7 }));
+                spur.position.set(44.8, 0.8, 26 + s * 9);
                 v3dScene.add(spur);
+
+                // Carrito rodante de despacho al final del ramal
+                const cart = new THREE.Mesh(new THREE.BoxGeometry(2, 1.6, 1.8), new THREE.MeshStandardMaterial({ color: 0x0284c7, wireframe: true }));
+                cart.position.set(49.5, 0.9, 26 + s * 9);
+                v3dScene.add(cart);
             }
 
-            const pkgGeo = new THREE.BoxGeometry(0.9, 0.6, 1.0);
-            const pkgMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b });
-            for (let p = 0; p < 12; p++) {
+            // Bultos animados en el Sorter
+            const pkgGeo = new THREE.BoxGeometry(1.0, 0.6, 1.2);
+            const pkgMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, roughness: 0.3 });
+            for (let p = 0; p < 14; p++) {
                 const pkg = new THREE.Mesh(pkgGeo, pkgMat);
-                pkg.position.set(40, 1.5, 20 + p * 5);
+                pkg.position.set(40, 1.5, 18 + p * 4.5);
                 v3dScene.add(pkg);
-                v3dPackages.push({ mesh: pkg, progress: p / 12 });
+                v3dPackages.push({ mesh: pkg, progress: p / 14 });
             }
 
-            // 9. Andenes Inbound (1 al 12) & Camiones
+            // 10. Andenes Inbound (1 al 12) & Camiones Reales
             for (let d = 0; d < 12; d++) {
                 const dockZ = -95 + d * 15;
-                const dockFrameGeo = new THREE.BoxGeometry(0.5, 7, 6);
-                const dockFrameMat = new THREE.MeshStandardMaterial({ color: 0x0284c7 });
-                const frame = new THREE.Mesh(dockFrameGeo, dockFrameMat);
-                frame.position.set(-75, 3.5, dockZ);
-                v3dScene.add(frame);
+                // Abrigo de andén inflable
+                const shelter = new THREE.Mesh(new THREE.BoxGeometry(1.2, 7.5, 6.5), new THREE.MeshStandardMaterial({ color: 0x020617, roughness: 0.9 }));
+                shelter.position.set(-75, 3.75, dockZ);
+                v3dScene.add(shelter);
 
-                const lightGeo = new THREE.SphereGeometry(0.3, 8, 8);
-                const lightMat = new THREE.MeshBasicMaterial({ color: 0x10b981 });
-                const light = new THREE.Mesh(lightGeo, lightMat);
-                light.position.set(-74.5, 7.3, dockZ);
-                v3dScene.add(light);
+                // Nivelador hidráulico en piso
+                const leveler = new THREE.Mesh(new THREE.BoxGeometry(4.5, 0.1, 3.5), new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.8 }));
+                leveler.position.set(-74, 0.05, dockZ);
+                v3dScene.add(leveler);
+
+                // Semáforo de andén (verde/rojo)
+                const semaforo = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.8, 0.3), new THREE.MeshBasicMaterial({ color: 0x10b981 }));
+                semaforo.position.set(-73.5, 4.5, dockZ - 3.8);
+                v3dScene.add(semaforo);
             }
 
+            // 4 Camiones Scania/Volvo Inbound con textura AndesHome
             [-75, -45, 15, 45].forEach(zPos => {
-                buildTruck(-92, zPos, 0, 0x0284c7);
+                buildRealisticTruck(-93, zPos, 0, '#0284c7');
             });
 
-            // 10. Andenes Outbound (13 al 24) & Camiones
+            // 11. Andenes Outbound (13 al 24) & Camiones de Despacho
             for (let d = 0; d < 12; d++) {
                 const dockZ = -95 + d * 15;
-                const dockFrameGeo = new THREE.BoxGeometry(0.5, 7, 6);
-                const dockFrameMat = new THREE.MeshStandardMaterial({ color: 0x10b981 });
-                const frame = new THREE.Mesh(dockFrameGeo, dockFrameMat);
-                frame.position.set(75, 3.5, dockZ);
-                v3dScene.add(frame);
+                const shelter = new THREE.Mesh(new THREE.BoxGeometry(1.2, 7.5, 6.5), new THREE.MeshStandardMaterial({ color: 0x020617, roughness: 0.9 }));
+                shelter.position.set(75, 3.75, dockZ);
+                v3dScene.add(shelter);
+
+                const leveler = new THREE.Mesh(new THREE.BoxGeometry(4.5, 0.1, 3.5), new THREE.MeshStandardMaterial({ color: 0x475569, metalness: 0.8 }));
+                leveler.position.set(74, 0.05, dockZ);
+                v3dScene.add(leveler);
+
+                const semaforo = new THREE.Mesh(new THREE.BoxGeometry(0.3, 0.8, 0.3), new THREE.MeshBasicMaterial({ color: 0x10b981 }));
+                semaforo.position.set(73.5, 4.5, dockZ - 3.8);
+                v3dScene.add(semaforo);
             }
 
+            // 4 Camiones Outbound
             [-60, -15, 30, 60].forEach(zPos => {
-                buildTruck(92, zPos, Math.PI, 0x10b981);
+                buildRealisticTruck(93, zPos, Math.PI, '#10b981');
             });
 
-            // 11. Planta Solar Fotovoltaica (250 kWp) en Techumbre
-            const solarRowGeo = new THREE.BoxGeometry(45, 0.2, 75);
-            const solarRowMat = new THREE.MeshStandardMaterial({
-                color: 0x1e3a8a,
-                roughness: 0.1,
+            // 12. Planta Solar Fotovoltaica (250 kWp) en Techumbre (550 Paneles)
+            const solarMat = new THREE.MeshStandardMaterial({
+                map: solarTex,
+                roughness: 0.15,
                 metalness: 0.9
             });
-            const roofLeft = new THREE.Mesh(solarRowGeo, solarRowMat);
-            roofLeft.position.set(-36, 15, 0);
-            v3dScene.add(roofLeft);
 
-            const roofRight = new THREE.Mesh(solarRowGeo, solarRowMat);
-            roofRight.position.set(36, 15, 0);
-            v3dScene.add(roofRight);
+            [-36, 36].forEach(sx => {
+                const solarPlane = new THREE.Mesh(new THREE.PlaneGeometry(45, 80), solarMat);
+                solarPlane.rotation.x = -Math.PI / 2 + 0.12; // Inclinación óptima 15 grados
+                solarPlane.position.set(sx, 15.2, 0);
+                v3dScene.add(solarPlane);
+            });
 
+            // Ondas de energía solar verde esmeralda
             for (let p = 0; p < 4; p++) {
-                const pulseGeo = new THREE.CylinderGeometry(0.2, 0.2, 10, 8);
-                const pulseMat = new THREE.MeshBasicMaterial({ color: 0x34d399, transparent: true, opacity: 0.6 });
+                const pulseGeo = new THREE.CylinderGeometry(0.3, 0.3, 12, 12);
+                const pulseMat = new THREE.MeshBasicMaterial({ color: 0x34d399, transparent: true, opacity: 0.7 });
                 const pulse = new THREE.Mesh(pulseGeo, pulseMat);
                 pulse.position.set((p % 2 === 0 ? -36 : 36), 18 + p * 2, (p - 2) * 25);
                 v3dScene.add(pulse);
@@ -6545,35 +7048,87 @@
             }
         }
 
-        function buildTruck(x, z, rotY, brandColor) {
+        function buildRealisticTruck(x, z, rotY, brandHex) {
             const truckGroup = new THREE.Group();
+            const trailerTex = createRealisticTruckTexture(brandHex, 'ANDESHOME');
 
-            const trailerGeo = new THREE.BoxGeometry(16, 5.5, 5);
-            const trailerMat = new THREE.MeshStandardMaterial({ color: 0xe2e8f0, roughness: 0.3 });
+            // 1. Semirremolque (Trailer 53ft)
+            const trailerGeo = new THREE.BoxGeometry(16.5, 5.8, 5.2);
+            const trailerMat = new THREE.MeshStandardMaterial({
+                map: trailerTex,
+                roughness: 0.25,
+                metalness: 0.1
+            });
             const trailer = new THREE.Mesh(trailerGeo, trailerMat);
-            trailer.position.set(0, 3.8, 0);
+            trailer.position.set(0, 4.0, 0);
             truckGroup.add(trailer);
 
-            const cabGeo = new THREE.BoxGeometry(6, 4.8, 4.8);
-            const cabMat = new THREE.MeshStandardMaterial({ color: brandColor, metalness: 0.6, roughness: 0.2 });
-            const cab = new THREE.Mesh(cabGeo, cabMat);
-            cab.position.set(-10, 3.2, 0);
-            truckGroup.add(cab);
+            // Puertas traseras con barras de bloqueo cromadas
+            const rodMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, metalness: 0.95, roughness: 0.1 });
+            [-1.2, 1.2].forEach(rx => {
+                const rod = new THREE.Mesh(new THREE.CylinderGeometry(0.08, 0.08, 5.6, 8), rodMat);
+                rod.position.set(8.26, 4.0, rx);
+                truckGroup.add(rod);
+            });
 
-            const wheelGeo = new THREE.CylinderGeometry(0.9, 0.9, 0.6, 12);
-            const wheelMat = new THREE.MeshStandardMaterial({ color: 0x0f172a });
-            [-11, -8, 2, 6].forEach(wx => {
+            // 2. Cabina Scania / Volvo Cab-Over
+            const cabGroup = new THREE.Group();
+            const cabMat = new THREE.MeshStandardMaterial({ color: brandHex, metalness: 0.65, roughness: 0.25 });
+            const cabBody = new THREE.Mesh(new THREE.BoxGeometry(6.2, 5.0, 5.0), cabMat);
+            cabBody.position.set(-10.5, 3.4, 0);
+            cabGroup.add(cabBody);
+
+            // Deflector aerodinámico superior
+            const spoiler = new THREE.Mesh(new THREE.BoxGeometry(4.0, 1.0, 4.8), cabMat);
+            spoiler.position.set(-10.5, 6.2, 0);
+            cabGroup.add(spoiler);
+
+            // Parabrisas oscurecido reflectivo
+            const glassMat = new THREE.MeshStandardMaterial({ color: 0x090d16, roughness: 0.05, metalness: 0.9 });
+            const windshield = new THREE.Mesh(new THREE.BoxGeometry(1.6, 2.2, 4.6), glassMat);
+            windshield.position.set(-13.4, 4.4, 0);
+            cabGroup.add(windshield);
+
+            // Parrilla frontal cromada
+            const grilleMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.8 });
+            const grille = new THREE.Mesh(new THREE.BoxGeometry(0.2, 2.0, 4.2), grilleMat);
+            grille.position.set(-13.6, 2.4, 0);
+            cabGroup.add(grille);
+
+            // Faros delanteros LED
+            const lightMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+            [-1.8, 1.8].forEach(lz => {
+                const headLight = new THREE.Mesh(new THREE.BoxGeometry(0.1, 0.4, 0.8), lightMat);
+                headLight.position.set(-13.62, 1.6, lz);
+                cabGroup.add(headLight);
+            });
+
+            truckGroup.add(cabGroup);
+
+            // 3. Ruedas con Neumáticos y Llantas
+            const tireMat = new THREE.MeshStandardMaterial({ color: 0x0f172a, roughness: 0.8 });
+            const rimMat = new THREE.MeshStandardMaterial({ color: 0xd1d5db, metalness: 0.9, roughness: 0.1 });
+            const wheelGeo = new THREE.CylinderGeometry(0.95, 0.95, 0.65, 16);
+            const rimGeo = new THREE.CylinderGeometry(0.5, 0.5, 0.66, 12);
+
+            [-12, -9, 3, 6].forEach(wx => {
                 [-2.5, 2.5].forEach(wz => {
-                    const wheel = new THREE.Mesh(wheelGeo, wheelMat);
-                    wheel.rotation.x = Math.PI / 2;
-                    wheel.position.set(wx, 0.9, wz);
-                    truckGroup.add(wheel);
+                    const wheelGroup = new THREE.Group();
+                    const tire = new THREE.Mesh(wheelGeo, tireMat);
+                    tire.rotation.x = Math.PI / 2;
+                    wheelGroup.add(tire);
+                    const rim = new THREE.Mesh(rimGeo, rimMat);
+                    rim.rotation.x = Math.PI / 2;
+                    wheelGroup.add(rim);
+                    wheelGroup.position.set(wx, 0.95, wz);
+                    truckGroup.add(wheelGroup);
                 });
             });
 
             truckGroup.position.set(x, 0, z);
             truckGroup.rotation.y = rotY;
             v3dScene.add(truckGroup);
+            v3dTrucks.push(truckGroup);
         }
 
         // =================================================================
@@ -6610,7 +7165,10 @@
             });
 
             v3dShuttles.forEach(s => {
-                s.mesh.position.x = s.side + Math.sin(time * s.speed + s.baseZ) * 16;
+                const targetObj = s.group || s.mesh;
+                if (targetObj) {
+                    targetObj.position.x = s.side + Math.sin(time * s.speed + s.baseZ) * 16;
+                }
             });
 
             v3dCobots.forEach(c => {
@@ -6633,6 +7191,20 @@
                 pulse.position.y = 16 + ((time * 2 + idx * 1.2) % 6);
                 pulse.material.opacity = 0.8 - (pulse.position.y - 16) * 0.12;
             });
+
+            // Pulsos de luz en display Pick-by-Light
+            v3dPickLights.forEach((pl, idx) => {
+                const pulse = 0.4 + 0.6 * Math.abs(Math.sin(time * 3 + idx * 0.7));
+                pl.material.emissiveIntensity = pulse;
+            });
+
+            // Animación de camión en andén Outbound
+            if (v3dTrucks.length >= 8) {
+                const outTruck = v3dTrucks[5];
+                const outProg = (time * 0.04) % 1.0;
+                outTruck.position.x = 93 + outProg * 45;
+                outTruck.visible = (outProg < 0.95);
+            }
         }
 
         function update3dCamera(time) {
@@ -6722,6 +7294,7 @@
                 }
 
                 playChapterChime();
+                speakChapterNarration(ch.voice);
             }
         }
 
@@ -6734,6 +7307,13 @@
             if (v3dIsPlaying) {
                 v3dLastTimestamp = performance.now();
                 if (!v3dAnimFrameId) v3dAnimFrameId = requestAnimationFrame(v3dLoop);
+                if ('speechSynthesis' in window && window.speechSynthesis.paused) {
+                    window.speechSynthesis.resume();
+                }
+            } else {
+                if ('speechSynthesis' in window && window.speechSynthesis.speaking) {
+                    window.speechSynthesis.pause();
+                }
             }
         }
 
@@ -6757,7 +7337,9 @@
         function restartVideo3d() {
             v3dCurrentTime = 0;
             v3dIsPlaying = true;
+            v3dActiveChapterIndex = -1;
             updatePlayPauseButton();
+            update3dUI(0);
         }
 
         function skipVideo3d(seconds) {
@@ -6769,6 +7351,7 @@
             const ch = V3D_CHAPTERS.find(c => c.id === chNum);
             if (ch) {
                 v3dCurrentTime = ch.start;
+                v3dActiveChapterIndex = -1;
                 update3dUI(v3dCurrentTime);
             }
         }
