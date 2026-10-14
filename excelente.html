@@ -5480,106 +5480,376 @@
 
     <!-- MINI VENTANA POPUP: RESUMEN EJECUTIVO DEPARTAMENTAL 360° -->
     <div id="deptPopupOverlay" class="exc-modal-overlay" onclick="closeDeptPopupOnBg(event)">
-        <div class="exc-modal-dialog" style="max-width: 860px; width: 94%;" onclick="event.stopPropagation()">
+        <div class="exc-modal-dialog" style="max-width: 980px; width: 95%; max-height: 92vh; display: flex; flex-direction: column;" onclick="event.stopPropagation()">
             <button type="button" class="exc-modal-close" onclick="closeDeptPopup()" aria-label="Cerrar">&times;</button>
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            
+            <!-- HEADER DEL MODAL -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; flex-wrap: wrap; gap: 8px;">
                 <div style="display: flex; align-items: center; gap: 12px;">
-                    <div style="font-size: 28px; line-height: 1; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">📋</div>
+                    <div style="font-size: 28px; line-height: 1; background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(244, 63, 94, 0.2)); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">📋</div>
                     <div>
-                        <h3 style="margin: 0; color: #38bdf8; font-size: 1.15rem; font-weight: 800;">Resumen Ejecutivo Departamental 360°</h3>
-                        <div style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8; margin-top: 2px;">Matriz de Sincronización Operacional &bull; Escenario de Excelente CD Pudahuel</div>
+                        <h3 style="margin: 0; color: #38bdf8; font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                            <span>Resumen Ejecutivo Departamental 360° &amp; Auditoría Financiera</span>
+                        </h3>
+                        <div style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8; margin-top: 2px;">
+                            Cuantificación de Sobrecostos As-Is Erradicados Área por Área &bull; CD Pudahuel
+                        </div>
                     </div>
                 </div>
-                <span class="exc-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-size: 0.72rem; padding: 4px 10px; border-radius: 999px; font-weight: 700;">
-                    ● SLA CONSOLIDADO 99,8%
+                <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                    <span class="exc-badge" style="background: rgba(244, 63, 94, 0.15); color: #f43f5e; border: 1px solid rgba(244, 63, 94, 0.35); font-size: 0.68rem; padding: 3px 8px; border-radius: 999px; font-weight: 700;">
+                        DESPILFARRO AS-IS: +$929M ANUALES
+                    </span>
+                    <span class="exc-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); font-size: 0.68rem; padding: 3px 8px; border-radius: 999px; font-weight: 700;">
+                        ● EXCELENTE: 100% BLINDADO
+                    </span>
+                </div>
+            </div>
+
+            <!-- SELECTOR DE PESTAÑAS (TABS EJECUTIVAS) -->
+            <div style="display: flex; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; flex-wrap: wrap;">
+                <button type="button" class="exc-filter-btn active" id="btnDeptTab1" onclick="switchDeptModalTab(1)" style="font-size: 0.74rem; padding: 6px 12px; border-radius: 6px;">
+                    💸 Sobrecostos &amp; Despilfarros Área por Área
+                </button>
+                <button type="button" class="exc-filter-btn" id="btnDeptTab2" onclick="switchDeptModalTab(2)" style="font-size: 0.74rem; padding: 6px 12px; border-radius: 6px;">
+                    📋 Matriz Operacional 360° &amp; SLAs
+                </button>
+                <button type="button" class="exc-filter-btn" id="btnDeptTab3" onclick="switchDeptModalTab(3)" style="font-size: 0.74rem; padding: 6px 12px; border-radius: 6px;">
+                    📈 Balance de Ahorros &amp; Retorno ROI
+                </button>
+            </div>
+
+            <!-- CUERPO PRINCIPAL CON SCROLL -->
+            <div style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5; max-height: 68vh; overflow-y: auto; padding-right: 6px;">
+                
+                <!-- ========================================================= -->
+                <!-- PANE 1: AUDITORÍA FINANCIERA DE SOBRECOSTOS (ÁREA POR ÁREA) -->
+                <!-- ========================================================= -->
+                <div id="deptTabPane1" style="display: block;">
+                    
+                    <!-- 4 TARJETAS CONSOLIDADAS DE SOBRECOSTO EMBLEMÁTICO -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin-bottom: 14px;">
+                        <!-- Horas Extras -->
+                        <div style="background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.3); border-radius: 8px; padding: 10px 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.68rem; color: #f43f5e; font-weight: 800; text-transform: uppercase;">⏱️ Horas Extras Críticas</span>
+                                <span style="font-size: 0.62rem; background: rgba(244, 63, 94, 0.2); color: #fca5a5; padding: 1px 6px; border-radius: 4px; font-weight: 700;">+29,6% PEAK</span>
+                            </div>
+                            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; font-family: 'JetBrains Mono', monospace; margin-top: 2px;">
+                                CLP $613.817.389
+                            </div>
+                            <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 2px;">
+                                <strong>$67,2M/mes</strong> en CyberDay. Rendimiento negativo por fatiga extrema y recorridos de 67,6 km.
+                            </div>
+                        </div>
+
+                        <!-- Personal Externo Temporal -->
+                        <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 8px; padding: 10px 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.68rem; color: #fbbf24; font-weight: 800; text-transform: uppercase;">👥 Personal Externo (EST)</span>
+                                <span style="font-size: 0.62rem; background: rgba(245, 158, 11, 0.2); color: #fde68a; padding: 1px 6px; border-radius: 4px; font-weight: 700;">+18,2% SOBRECOSTO</span>
+                            </div>
+                            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; font-family: 'JetBrains Mono', monospace; margin-top: 2px;">
+                                CLP $338.240.264
+                            </div>
+                            <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 2px;">
+                                <strong>$33,2M en Junio</strong> por contratación urgente de cuadrillas no capacitadas; elevó error al 2,44%.
+                            </div>
+                        </div>
+
+                        <!-- Redespachos y Envíos Fallidos -->
+                        <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 10px 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.68rem; color: #38bdf8; font-weight: 800; text-transform: uppercase;">🔄 Redespachos &amp; Fallidos</span>
+                                <span style="font-size: 0.62rem; background: rgba(56, 189, 248, 0.2); color: #bae6fd; padding: 1px 6px; border-radius: 4px; font-weight: 700;">+247% SOBRECOSTO</span>
+                            </div>
+                            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; font-family: 'JetBrains Mono', monospace; margin-top: 2px;">
+                                CLP $753.764.029
+                            </div>
+                            <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 2px;">
+                                <strong>$29.628 c/u</strong> en pedidos fallidos (vs $8.532 cumplido) + <strong>$287,6M</strong> en sobrecosto de fletes urgentes.
+                            </div>
+                        </div>
+
+                        <!-- Demurrage y Multas SERNAC -->
+                        <div style="background: rgba(168, 85, 247, 0.08); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 8px; padding: 10px 12px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 0.68rem; color: #c084fc; font-weight: 800; text-transform: uppercase;">⚠️ Multas &amp; Demurrage</span>
+                                <span style="font-size: 0.62rem; background: rgba(168, 85, 247, 0.2); color: #e9d5ff; padding: 1px 6px; border-radius: 4px; font-weight: 700;">842 CASOS</span>
+                            </div>
+                            <div style="font-size: 1.25rem; font-weight: 800; color: #ffffff; font-family: 'JetBrains Mono', monospace; margin-top: 2px;">
+                                CLP $330.819.000
+                            </div>
+                            <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 2px;">
+                                <strong>$146,3M</strong> demurrage naviero en Vespucio + <strong>$184,5M</strong> en compensaciones SERNAC a clientes.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TABLA DETALLADA DE SOBRECOSTOS ÁREA POR ÁREA -->
+                    <div style="border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; overflow: hidden; margin-bottom: 12px;">
+                        <table class="exc-master-table" style="margin: 0; width: 100%;">
+                            <thead>
+                                <tr style="background: rgba(15, 23, 42, 0.95);">
+                                    <th style="padding: 8px 10px; text-align: left; font-size: 0.70rem; color: #94a3b8; text-transform: uppercase; width: 22%;">Área / Departamento</th>
+                                    <th style="padding: 8px 10px; text-align: right; font-size: 0.70rem; color: #f43f5e; text-transform: uppercase; width: 17%;">Sobrecosto As-Is (CLP)</th>
+                                    <th style="padding: 8px 10px; text-align: left; font-size: 0.70rem; color: #e2e8f0; text-transform: uppercase; width: 34%;">Concepto del Despilfarro (Causa Raíz)</th>
+                                    <th style="padding: 8px 10px; text-align: left; font-size: 0.70rem; color: #38bdf8; text-transform: uppercase; width: 15%;">Solución P1 a P8</th>
+                                    <th style="padding: 8px 10px; text-align: right; font-size: 0.70rem; color: #34d399; text-transform: uppercase; width: 12%;">Ahorro Capturado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: 700; color: #e2e8f0; font-size: 0.76rem;">📥 1. Recepción &amp; Inbound (Andenes 1 al 12)</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #f43f5e; font-weight: 800; font-size: 0.74rem;">
+                                        $167.505.000<br><span style="font-size: 0.65rem; color: #94a3b8;">($16,3M en junio)</span>
+                                    </td>
+                                    <td style="color: #cbd5e1; font-size: 0.73rem;">
+                                        &bull; <strong>Demurrage y sobreestadías:</strong> $146,3M cobrados por navieras a 19 recepciones de importados por esperas &gt;6h en Av. Vespucio.<br>
+                                        &bull; <strong>Cuadrillas de descarga manual:</strong> 4h por camión ($21,2M en HH improductivas por solo 65% adopción ASN).
+                                    </td>
+                                    <td style="color: #38bdf8; font-size: 0.72rem; font-weight: 600;">P3: Portal ASN &amp; YMS + Citas 2h obligatorias</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 800; font-size: 0.74rem;">+$157.192.000/año</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #e2e8f0; font-size: 0.76rem;">📦 2. Almacenamiento &amp; Inventarios (Racks y Piso)</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #f43f5e; font-weight: 800; font-size: 0.74rem;">
+                                        $989.100.000<br><span style="font-size: 0.65rem; color: #94a3b8;">(Mermas + Caminata)</span>
+                                    </td>
+                                    <td style="color: #cbd5e1; font-size: 0.73rem;">
+                                        &bull; <strong>Discrepancias de stock y mermas:</strong> $388,9M en descalces físicos valorizados (104 SKU explican el 80% de pérdidas; IRA 93,8%).<br>
+                                        &bull; <strong>Caminatas improductivas:</strong> 61.598 HH perdidas ($585,2M) recorriendo 67,6 km/día por 114 SKU descalzados.<br>
+                                        &bull; <strong>Arriendo de bodegas externas:</strong> $15,0M en bodegas de apoyo provisionales por colapso de 16.900 pos.
+                                    </td>
+                                    <td style="color: #38bdf8; font-size: 0.72rem; font-weight: 600;">P1+P8: Desacople Central 102.060 pos + WMS 3D</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 800; font-size: 0.74rem;">+$410.000.000/año</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #e2e8f0; font-size: 0.76rem;">⚡ 3. Picking &amp; Preparación (Goods-to-Person)</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #f43f5e; font-weight: 800; font-size: 0.74rem;">
+                                        $1.881.657.000<br><span style="font-size: 0.65rem; color: #94a3b8;">(Extras + Externos + Errores)</span>
+                                    </td>
+                                    <td style="color: #cbd5e1; font-size: 0.73rem;">
+                                        &bull; <strong>Horas Extras Desbordadas:</strong> $613,8M anuales ($67,2M en mes de crisis, +29,6% sobrecosto) con rendimiento negativo por fatiga extrema.<br>
+                                        &bull; <strong>Personal Externo Temporal (EST):</strong> $338,2M anuales ($33,2M en Junio, +18,2% sobrecosto) para contener backlog de 15.387 órdenes.<br>
+                                        &bull; <strong>Errores de picking:</strong> 50.251 errores en 4 meses por planillas de papel ($929,6M a $18.500/error).
+                                    </td>
+                                    <td style="color: #38bdf8; font-size: 0.72rem; font-weight: 600;">P2+P6: GTP a piso + Pick-to-Light + 32 AMRs</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 800; font-size: 0.74rem;">+$520.000.000/año</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #e2e8f0; font-size: 0.76rem;">📦 4. Empaque &amp; Acondicionamiento (Sorter Shoe)</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #f43f5e; font-weight: 800; font-size: 0.74rem;">
+                                        $120.600.000<br><span style="font-size: 0.65rem; color: #94a3b8;">(Sobreembalaje + Daños)</span>
+                                    </td>
+                                    <td style="color: #cbd5e1; font-size: 0.73rem;">
+                                        &bull; <strong>Sobreembalaje y roturas:</strong> $655,9M en insumos (sobrecosto neto de +$31,7M; en junio subió a $66,8M, +21,4%) por reempaque de cajas dañadas.<br>
+                                        &bull; <strong>Mantenimiento correctivo MHE:</strong> +$21,0M en reparaciones de transpaletas averiadas y mesas hidráulicas fuera de servicio (29% inactivas).
+                                    </td>
+                                    <td style="color: #38bdf8; font-size: 0.72rem; font-weight: 600;">P4+P5: Sorter Shoe 4.500 bultos/h + Right-Sizing</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 800; font-size: 0.74rem;">+$85.000.000/año</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #e2e8f0; font-size: 0.76rem;">🚚 5. Despacho &amp; Transporte (TMS Dinámico)</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #f43f5e; font-weight: 800; font-size: 0.74rem;">
+                                        $406.400.000<br><span style="font-size: 0.65rem; color: #94a3b8;">(Fletes spot + Redespachos)</span>
+                                    </td>
+                                    <td style="color: #cbd5e1; font-size: 0.73rem;">
+                                        &bull; <strong>Redespachos y entregas fallidas:</strong> 11,5% de tasa de fallas (984 pedidos rebotados en muestra). Cada pedido fallido cuesta <strong>CLP $29.628</strong> vs $8.532 cumplido (+247% por doble flete y custodia).<br>
+                                        &bull; <strong>Fletes spot de emergencia:</strong> Sobrecosto de +$287,6M en última milla ($569M en junio, +33,4%) por contratar camiones a tarifa premium.<br>
+                                        &bull; <strong>Reprocesos y devoluciones:</strong> $753,8M anuales (+$43,8M sobrecosto) por reingreso manual sin escaneo.
+                                    </td>
+                                    <td style="color: #38bdf8; font-size: 0.72rem; font-weight: 600;">P4+P5: TMS Dinámico + App Chofer POD</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 800; font-size: 0.74rem;">+$260.000.000/año</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #e2e8f0; font-size: 0.76rem;">🛍️ 6. Omnicanalidad, Tiendas &amp; Experiencia Cliente</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #f43f5e; font-weight: 800; font-size: 0.74rem;">
+                                        $354.500.000<br><span style="font-size: 0.65rem; color: #94a3b8;">(SERNAC + Fuga Clientes)</span>
+                                    </td>
+                                    <td style="color: #cbd5e1; font-size: 0.73rem;">
+                                        &bull; <strong>Multas y compensaciones SERNAC:</strong> $184,5M pagados en cupones de compensación, devoluciones obligatorias y costas legales por 842 reclamos por atrasos de hasta 14 días.<br>
+                                        &bull; <strong>Cancelaciones y quiebres:</strong> $124,0M en margen comercial perdido por quiebre de stock y 7 días de espera en Click &amp; Collect (OTIF C&amp;C cayó a 11,5%).<br>
+                                        &bull; <strong>Call center externo de contingencia:</strong> $46,0M en personal externo contratado para atender clientes insatisfechos.
+                                    </td>
+                                    <td style="color: #38bdf8; font-size: 0.72rem; font-weight: 600;">P5+P6: C&amp;C &lt;2h en 27 tiendas + OMS en vivo</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 800; font-size: 0.74rem;">+$180.000.000/año</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- BANNER RESUMEN CONSOLIDADO DE IMPACTO -->
+                    <div style="background: linear-gradient(135deg, rgba(244, 63, 94, 0.12) 0%, rgba(16, 185, 129, 0.12) 100%); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div>
+                            <div style="font-size: 0.70rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; text-transform: uppercase;">IMPACTO FINANCIERO INTEGRAL DE LA TRANSFORMACIÓN</div>
+                            <div style="font-size: 0.88rem; color: #ffffff; font-weight: 800; margin-top: 2px;">
+                                Total Despilfarro Operativo As-Is Erradicado: <span style="color: #f43f5e; font-family: 'JetBrains Mono', monospace;">CLP $3.919.205.000 / año</span>
+                            </div>
+                        </div>
+                        <div style="text-align: right;">
+                            <div style="font-size: 0.70rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; text-transform: uppercase;">AHORRO NETO CAPTURADO (EBITDA ANUAL)</div>
+                            <div style="font-size: 1.25rem; color: #34d399; font-weight: 800; font-family: 'JetBrains Mono', monospace;">
+                                +CLP $1.612.000.000 / año
+                            </div>
+                            <div style="font-size: 0.68rem; color: #38bdf8;">Payback Total: 1,8 años &bull; TIR 98,4%</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- PANE 2: MATRIZ OPERACIONAL 360° & SLAS (ORIGINAL MEJORADA) -->
+                <!-- ========================================================= -->
+                <div id="deptTabPane2" style="display: none;">
+                    <!-- 4 KPI CARDS RESUMEN -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 14px;">
+                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 10px 12px;">
+                            <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">OTIF Global</div>
+                            <div style="font-size: 1.35rem; font-weight: 800; color: #38bdf8; font-family: 'JetBrains Mono', monospace;">98,7%</div>
+                            <div style="font-size: 0.68rem; color: #64748b;">(43,5% crisis &bull; 96,2% To-Be)</div>
+                        </div>
+                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 10px 12px;">
+                            <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">Dock-to-Stock</div>
+                            <div style="font-size: 1.35rem; font-weight: 800; color: #34d399; font-family: 'JetBrains Mono', monospace;">3,2 h</div>
+                            <div style="font-size: 0.68rem; color: #64748b;">(48-72h crisis &bull; 14h To-Be)</div>
+                        </div>
+                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 8px; padding: 10px 12px;">
+                            <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">Costo Pedido B2C</div>
+                            <div style="font-size: 1.35rem; font-weight: 800; color: #fbbf24; font-family: 'JetBrains Mono', monospace;">CLP $3.850</div>
+                            <div style="font-size: 0.68rem; color: #64748b;">(-51,4% vs $7.920 As-Is)</div>
+                        </div>
+                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 8px; padding: 10px 12px;">
+                            <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">Seguridad y SST</div>
+                            <div style="font-size: 1.35rem; font-weight: 800; color: #c084fc; font-family: 'JetBrains Mono', monospace;">0 Accidentes</div>
+                            <div style="font-size: 0.68rem; color: #64748b;">(100% Ley 20.949 a piso)</div>
+                        </div>
+                    </div>
+
+                    <!-- TABLA COMPARATIVA DE DEPARTAMENTOS -->
+                    <div style="border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; overflow: hidden; margin-bottom: 12px;">
+                        <table class="exc-master-table" style="margin: 0; width: 100%;">
+                            <thead>
+                                <tr style="background: rgba(15, 23, 42, 0.9);">
+                                    <th style="padding: 8px 12px; text-align: left; font-size: 0.72rem; color: #94a3b8; text-transform: uppercase;">Departamento</th>
+                                    <th style="padding: 8px 12px; text-align: left; font-size: 0.72rem; color: #f43f5e; text-transform: uppercase;">Línea Base (Crisis As-Is)</th>
+                                    <th style="padding: 8px 12px; text-align: left; font-size: 0.72rem; color: #34d399; text-transform: uppercase;">Escenario Excelente (World-Class)</th>
+                                    <th style="padding: 8px 12px; text-align: center; font-size: 0.72rem; color: #38bdf8; text-transform: uppercase;">SLA Target</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: 700; color: #e2e8f0; font-size: 0.78rem;">📥 1. Inbound &amp; Andenes</td>
+                                    <td style="color: #cbd5e1; font-size: 0.76rem;">Colas de 6h en Vespucio, sobreestadías $146,3M, descarga manual en 4h.</td>
+                                    <td style="color: #a7f3d0; font-size: 0.76rem;">Portal ASN y citas de 2h. Descarga de pallet en 12 min. Cero congestión.</td>
+                                    <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.76rem;">&lt; 3,5 h</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #e2e8f0; font-size: 0.78rem;">📦 2. Racks &amp; Inventario</td>
+                                    <td style="color: #cbd5e1; font-size: 0.76rem;">16.900 pos saturadas, 93,8% IRA, 114 SKU descalzados, pasillos invadidos.</td>
+                                    <td style="color: #a7f3d0; font-size: 0.76rem;">102.060 pos compactas e independientes. Desacople Central. 99,8% IRA.</td>
+                                    <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.76rem;">99,8% IRA</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #e2e8f0; font-size: 0.78rem;">⚡ 3. Picking &amp; GTP</td>
+                                    <td style="color: #cbd5e1; font-size: 0.76rem;">Planillas de papel, 46,8 lín/HH, 67,6 km de caminatas, cuellos de botella.</td>
+                                    <td style="color: #a7f3d0; font-size: 0.76rem;">Goods-to-Person a piso + Pick-to-Light + AMRs: 220 lín/h (4,7x velocidad).</td>
+                                    <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.76rem;">220 lín/h</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #e2e8f0; font-size: 0.78rem;">📦 4. Empaque &amp; Sorter</td>
+                                    <td style="color: #cbd5e1; font-size: 0.76rem;">12 mesas improvisadas, empaque ciego, 4,2% errores y quiebres en tránsito.</td>
+                                    <td style="color: #a7f3d0; font-size: 0.76rem;">Sorter Shoe 4.500 bultos/h, pesaje dinámico y cubitaje automatizado. Cero roturas.</td>
+                                    <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.76rem;">&lt; 0,1% error</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #e2e8f0; font-size: 0.78rem;">🚚 5. Despacho &amp; TMS</td>
+                                    <td style="color: #cbd5e1; font-size: 0.76rem;">Asignación telefónica, sin tracking GPS, 32% pedidos fallidos rebotando.</td>
+                                    <td style="color: #a7f3d0; font-size: 0.76rem;">TMS con ruteo dinámico, precintos digitales, trazabilidad satelital en vivo.</td>
+                                    <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.76rem;">98,7% OTIF</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #e2e8f0; font-size: 0.78rem;">🛍️ 6. Omnicanal &amp; Tiendas</td>
+                                    <td style="color: #cbd5e1; font-size: 0.76rem;">Quiebre omnicanal, reclamos masivos SERNAC, 7 días de espera en tiendas.</td>
+                                    <td style="color: #a7f3d0; font-size: 0.76rem;">Click &amp; Collect en &lt; 2h en 27 sucursales. Integración WMS-OMS en tiempo real.</td>
+                                    <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.76rem;">&lt; 2h C&amp;C</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- NOTA DE SINCRONIZACIÓN Y ARQUITECTURA -->
+                    <div style="background: rgba(14, 165, 233, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; padding: 10px 14px; font-size: 0.75rem; color: #94a3b8; line-height: 1.5;">
+                        <strong style="color: #38bdf8;">Principio de Sincronización Interdepartamental:</strong> Cada una de las 6 secciones opera acoplada mediante eventos en tiempo real (WMS NextGen + OMS + TMS). El Desacople Central de 102.060 posiciones absorbe cualquier pico imprevisto de proveedores o transporte sin transmitir fricción al picking robotizado ni al empaque.
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- PANE 3: BALANCE DE AHORROS & RETORNO ROI -->
+                <!-- ========================================================= -->
+                <div id="deptTabPane3" style="display: none;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 14px;">
+                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 10px 12px;">
+                            <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">CAPEX Requerido</div>
+                            <div style="font-size: 1.25rem; font-weight: 800; color: #38bdf8; font-family: 'JetBrains Mono', monospace;">CLP $766,8M</div>
+                            <div style="font-size: 0.68rem; color: #64748b;">(Portafolio P1 a P5) &bull; Máx $850M</div>
+                        </div>
+                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 10px 12px;">
+                            <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">EBITDA Anual Neto</div>
+                            <div style="font-size: 1.25rem; font-weight: 800; color: #34d399; font-family: 'JetBrains Mono', monospace;">+CLP $856,1M</div>
+                            <div style="font-size: 0.68rem; color: #64748b;">Ahorro Bruto $1.033M - OPEX $177M</div>
+                        </div>
+                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 8px; padding: 10px 12px;">
+                            <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">VAN a 3 Años (r=12%)</div>
+                            <div style="font-size: 1.25rem; font-weight: 800; color: #fbbf24; font-family: 'JetBrains Mono', monospace;">$1.289.400.543</div>
+                            <div style="font-size: 0.68rem; color: #64748b;">TIR 98,4% &bull; Payback 10,7 meses</div>
+                        </div>
+                    </div>
+
+                    <div style="border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; overflow: hidden; margin-bottom: 12px;">
+                        <table class="exc-master-table" style="margin: 0; width: 100%;">
+                            <thead>
+                                <tr style="background: rgba(15, 23, 42, 0.9);">
+                                    <th style="padding: 8px 10px; text-align: left; font-size: 0.70rem; color: #94a3b8; text-transform: uppercase;">Escenario de Evaluación</th>
+                                    <th style="padding: 8px 10px; text-align: left; font-size: 0.70rem; color: #e2e8f0; text-transform: uppercase;">Hipótesis Operativa</th>
+                                    <th style="padding: 8px 10px; text-align: right; font-size: 0.70rem; color: #34d399; text-transform: uppercase;">EBITDA Anual</th>
+                                    <th style="padding: 8px 10px; text-align: right; font-size: 0.70rem; color: #fbbf24; text-transform: uppercase;">VAN 3 Años</th>
+                                    <th style="padding: 8px 10px; text-align: center; font-size: 0.70rem; color: #38bdf8; text-transform: uppercase;">Payback</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="font-weight: 700; color: #fca5a5; font-size: 0.74rem;">Caso Pesimista (-25%)</td>
+                                    <td style="color: #cbd5e1; font-size: 0.72rem;">Captura del 75% por retardo en adopción de RF en turno noche.</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 700; font-size: 0.72rem;">$597.822.750</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-weight: 700; font-size: 0.72rem;">$619.345.118</td>
+                                    <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #e2e8f0; font-size: 0.72rem;">16,4 meses</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #93c5fd; font-size: 0.74rem;">Caso Base (100% Target)</td>
+                                    <td style="color: #cbd5e1; font-size: 0.72rem;">Cumplimiento total de ahorros proyectados en P1 a P5.</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 700; font-size: 0.72rem;">$856.097.000</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-weight: 700; font-size: 0.72rem;">$1.289.400.543</td>
+                                    <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.72rem;">10,7 meses</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: 700; color: #86efac; font-size: 0.74rem;">Caso Optimista (+15%)</td>
+                                    <td style="color: #cbd5e1; font-size: 0.72rem;">Sinergias con carriers y monetización parcial de 88,2k pallets como Hub 3PL.</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 700; font-size: 0.72rem;">$1.011.061.550</td>
+                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-weight: 700; font-size: 0.72rem;">$1.661.642.420</td>
+                                    <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 700; font-size: 0.72rem;">9,1 meses</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PIE DE MODAL -->
+            <div style="margin-top: 14px; text-align: right; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                <span style="font-size: 0.72rem; color: #64748b; font-family: 'JetBrains Mono', monospace;">
+                    AndesHome Chile S.A. &bull; Comité Ejecutivo &bull; Auditoría Oficial GLA1104
                 </span>
-            </div>
-
-            <div style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.6; max-height: 68vh; overflow-y: auto; padding-right: 4px;">
-                <!-- 4 KPI CARDS RESUMEN -->
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-bottom: 16px;">
-                    <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.25); border-radius: 8px; padding: 10px 12px;">
-                        <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">OTIF Global</div>
-                        <div style="font-size: 1.35rem; font-weight: 800; color: #38bdf8; font-family: 'JetBrains Mono', monospace;">98,7%</div>
-                        <div style="font-size: 0.68rem; color: #64748b;">(43,5% crisis &bull; 96,2% To-Be)</div>
-                    </div>
-                    <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 10px 12px;">
-                        <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">Dock-to-Stock</div>
-                        <div style="font-size: 1.35rem; font-weight: 800; color: #34d399; font-family: 'JetBrains Mono', monospace;">3,2 h</div>
-                        <div style="font-size: 0.68rem; color: #64748b;">(48-72h crisis &bull; 14h To-Be)</div>
-                    </div>
-                    <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(245, 158, 11, 0.25); border-radius: 8px; padding: 10px 12px;">
-                        <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">Costo Pedido B2C</div>
-                        <div style="font-size: 1.35rem; font-weight: 800; color: #fbbf24; font-family: 'JetBrains Mono', monospace;">CLP $3.850</div>
-                        <div style="font-size: 0.68rem; color: #64748b;">(-51,4% vs $7.920 As-Is)</div>
-                    </div>
-                    <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(168, 85, 247, 0.25); border-radius: 8px; padding: 10px 12px;">
-                        <div style="font-size: 0.7rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">Seguridad y SST</div>
-                        <div style="font-size: 1.35rem; font-weight: 800; color: #c084fc; font-family: 'JetBrains Mono', monospace;">0 Accidentes</div>
-                        <div style="font-size: 0.68rem; color: #64748b;">(100% Ley 20.949 a piso)</div>
-                    </div>
-                </div>
-
-                <!-- TABLA COMPARATIVA DE DEPARTAMENTOS -->
-                <div style="border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; overflow: hidden; margin-bottom: 14px;">
-                    <table class="exc-master-table" style="margin: 0; width: 100%;">
-                        <thead>
-                            <tr style="background: rgba(15, 23, 42, 0.9);">
-                                <th style="padding: 9px 12px; text-align: left; font-size: 0.72rem; color: #94a3b8; text-transform: uppercase;">Departamento</th>
-                                <th style="padding: 9px 12px; text-align: left; font-size: 0.72rem; color: #f43f5e; text-transform: uppercase;">Línea Base (Crisis As-Is)</th>
-                                <th style="padding: 9px 12px; text-align: left; font-size: 0.72rem; color: #34d399; text-transform: uppercase;">Escenario Excelente (World-Class)</th>
-                                <th style="padding: 9px 12px; text-align: center; font-size: 0.72rem; color: #38bdf8; text-transform: uppercase;">SLA Target</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="font-weight: 700; color: #e2e8f0; font-size: 0.78rem;">📥 1. Inbound &amp; Andenes</td>
-                                <td style="color: #cbd5e1; font-size: 0.76rem;">Colas de 6h en Vespucio, sobreestadías USD $32k, descarga manual en 4h.</td>
-                                <td style="color: #a7f3d0; font-size: 0.76rem;">Portal ASN y citas de 2h. Descarga de pallet en 12 min. Cero congestión.</td>
-                                <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.76rem;">&lt; 3,5 h</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: 700; color: #e2e8f0; font-size: 0.78rem;">📦 2. Racks &amp; Inventario</td>
-                                <td style="color: #cbd5e1; font-size: 0.76rem;">16.900 pos saturadas, 93,8% IRA, 114 SKU descalzados, pasillos invadidos.</td>
-                                <td style="color: #a7f3d0; font-size: 0.76rem;">102.060 pos compactas e independientes. Desacople Central. 99,8% IRA.</td>
-                                <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.76rem;">99,8% IRA</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: 700; color: #e2e8f0; font-size: 0.78rem;">⚡ 3. Picking &amp; GTP</td>
-                                <td style="color: #cbd5e1; font-size: 0.76rem;">Planillas de papel, 46,8 lín/HH, 67,6 km de caminatas, cuellos de botella.</td>
-                                <td style="color: #a7f3d0; font-size: 0.76rem;">Goods-to-Person a piso + Pick-to-Light + AMRs: 220 lín/h (4,7x velocidad).</td>
-                                <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.76rem;">220 lín/h</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: 700; color: #e2e8f0; font-size: 0.78rem;">📦 4. Empaque &amp; Sorter</td>
-                                <td style="color: #cbd5e1; font-size: 0.76rem;">12 mesas improvisadas, empaque ciego, 4,2% errores y quiebres en tránsito.</td>
-                                <td style="color: #a7f3d0; font-size: 0.76rem;">Sorter Shoe 4.500 bultos/h, pesaje dinámico y cubitaje automatizado. Cero roturas.</td>
-                                <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.76rem;">&lt; 0,1% error</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: 700; color: #e2e8f0; font-size: 0.78rem;">🚚 5. Despacho &amp; TMS</td>
-                                <td style="color: #cbd5e1; font-size: 0.76rem;">Asignación telefónica, sin tracking GPS, 32% pedidos fallidos rebotando.</td>
-                                <td style="color: #a7f3d0; font-size: 0.76rem;">TMS con ruteo dinámico, precintos digitales, trazabilidad satelital en vivo.</td>
-                                <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.76rem;">98,7% OTIF</td>
-                            </tr>
-                            <tr>
-                                <td style="font-weight: 700; color: #e2e8f0; font-size: 0.78rem;">🛍️ 6. Omnicanal &amp; Tiendas</td>
-                                <td style="color: #cbd5e1; font-size: 0.76rem;">Quiebre omnicanal, reclamos masivos SERNAC, 7 días de espera en tiendas.</td>
-                                <td style="color: #a7f3d0; font-size: 0.76rem;">Click &amp; Collect en &lt; 2h en 27 sucursales. Integración WMS-OMS en tiempo real.</td>
-                                <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.76rem;">&lt; 2h C&amp;C</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <!-- NOTA DE SINCRONIZACIÓN Y ARQUITECTURA -->
-                <div style="background: rgba(14, 165, 233, 0.08); border-left: 3px solid #38bdf8; border-radius: 4px; padding: 10px 14px; font-size: 0.75rem; color: #94a3b8; line-height: 1.5;">
-                    <strong style="color: #38bdf8;">Principio de Sincronización Interdepartamental:</strong> Cada una de las 6 secciones opera acoplada mediante eventos en tiempo real (WMS NextGen + OMS + TMS). El Desacople Central de 102.060 posiciones absorbe cualquier pico imprevisto de proveedores o transporte sin transmitir fricción al picking robotizado ni al empaque.
-                </div>
-            </div>
-
-            <div style="margin-top: 18px; text-align: right; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px; display: flex; justify-content: space-between; align-items: center;">
-                <span style="font-size: 0.72rem; color: #64748b; font-family: 'JetBrains Mono', monospace;">AndesHome &bull; CD Pudahuel</span>
                 <button type="button" class="exc-sim-btn" onclick="closeDeptPopup()" style="padding: 7px 18px;">
                     Cerrar Resumen
                 </button>
@@ -6052,6 +6322,7 @@
         function openDeptPopup() {
             const popup = document.getElementById('deptPopupOverlay');
             if (popup) popup.classList.add('active');
+            switchDeptModalTab(1);
         }
 
         function closeDeptPopup() {
@@ -6062,6 +6333,21 @@
         function closeDeptPopupOnBg(e) {
             if (e.target.id === 'deptPopupOverlay') {
                 closeDeptPopup();
+            }
+        }
+
+        function switchDeptModalTab(tabIndex) {
+            for (let i = 1; i <= 3; i++) {
+                const btn = document.getElementById('btnDeptTab' + i);
+                const pane = document.getElementById('deptTabPane' + i);
+                if (btn) {
+                    if (i === tabIndex) btn.classList.add('active');
+                    else btn.classList.remove('active');
+                }
+                if (pane) {
+                    if (i === tabIndex) pane.style.display = 'block';
+                    else pane.style.display = 'none';
+                }
             }
         }
 
