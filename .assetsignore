@@ -1,0 +1,36 @@
+# Dependencias y binarios de desarrollo (CRÍTICO: previene el error 'Asset too large' de workerd 129MB)
+node_modules/
+.wrangler/
+.git/
+.github/
+
+# Archivos de entorno y configuración
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+
+# Archivos de código y scripts de backend/automatización
+*.py
+*.pyc
+__pycache__/
+
+# Documentos fuente de oficina y datos brutos
+*.docx
+*.xlsx
+
+# Documentación interna
+*.md
+!README.md
+
+# Configuración de empaquetado y despliegue
+package.json
+package-lock.json
+bun.lockb
+bun.lock
+wrangler.jsonc
+wrangler.json
+.assetsignore
+.gitignore
