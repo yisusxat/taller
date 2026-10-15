@@ -869,6 +869,202 @@
             transform: translateY(-1px);
         }
 
+        /* ================================================================= */
+        /* BANNER MINIMALISTA DE ETIQUETAS DE CERTIFICACIÓN ISO (SIG)       */
+        /* ================================================================= */
+        .exc-iso-cert-banner {
+            margin-top: 24px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.88) 0%, rgba(10, 17, 32, 0.96) 100%);
+            border: 1px solid rgba(251, 191, 36, 0.35);
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(251, 191, 36, 0.04);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .exc-iso-cert-banner:hover {
+            border-color: rgba(251, 191, 36, 0.65);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 25px rgba(251, 191, 36, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .exc-iso-banner-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 10px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .exc-iso-banner-title {
+            font-size: 0.92rem;
+            font-weight: 800;
+            color: #fbbf24;
+            letter-spacing: 0.3px;
+        }
+
+        .exc-iso-banner-sub {
+            font-size: 0.68rem;
+            font-family: 'JetBrains Mono', monospace;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        .exc-iso-banner-badge {
+            font-size: 0.68rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(245, 158, 11, 0.2);
+            color: #fbbf24;
+            border: 1px solid rgba(245, 158, 11, 0.4);
+            padding: 3px 9px;
+            border-radius: 999px;
+        }
+
+        .exc-iso-banner-btn-hint {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: #38bdf8;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid rgba(56, 189, 248, 0.35);
+            padding: 4px 10px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .exc-iso-cert-banner:hover .exc-iso-banner-btn-hint {
+            background: rgba(56, 189, 248, 0.3);
+            color: #ffffff;
+            border-color: #38bdf8;
+        }
+
+        .exc-iso-badges-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 12px;
+        }
+
+        .exc-iso-card {
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.25s ease;
+        }
+
+        .exc-iso-card.iso-9001:hover {
+            border-color: rgba(56, 189, 248, 0.6);
+            background: rgba(56, 189, 248, 0.08);
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.2);
+        }
+
+        .exc-iso-card.iso-14001:hover {
+            border-color: rgba(52, 211, 153, 0.6);
+            background: rgba(52, 211, 153, 0.08);
+            box-shadow: 0 4px 20px rgba(52, 211, 153, 0.2);
+        }
+
+        .exc-iso-card.iso-45001:hover {
+            border-color: rgba(251, 191, 36, 0.6);
+            background: rgba(251, 191, 36, 0.08);
+            box-shadow: 0 4px 20px rgba(251, 191, 36, 0.2);
+        }
+
+        .exc-iso-card.iso-sig:hover {
+            border-color: rgba(192, 132, 252, 0.6);
+            background: rgba(168, 85, 247, 0.08);
+            box-shadow: 0 4px 20px rgba(168, 85, 247, 0.2);
+        }
+
+        .exc-iso-card-svg {
+            flex-shrink: 0;
+            width: 72px;
+            height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .exc-iso-card-svg svg {
+            width: 100%;
+            height: 100%;
+            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.5));
+        }
+
+        .exc-iso-card-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .exc-iso-card-code {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: #ffffff;
+            font-family: 'JetBrains Mono', monospace;
+            letter-spacing: 0.3px;
+        }
+
+        .exc-iso-card-name {
+            font-size: 0.72rem;
+            color: #94a3b8;
+            font-weight: 600;
+            margin-top: 1px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .exc-iso-card-metrics {
+            font-size: 0.66rem;
+            color: #cbd5e1;
+            margin-top: 3px;
+            line-height: 1.25;
+        }
+
+        .exc-iso-card-status {
+            display: inline-block;
+            font-size: 0.60rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-top: 5px;
+            letter-spacing: 0.4px;
+        }
+
+        .status-9001 {
+            background: rgba(56, 189, 248, 0.18);
+            color: #38bdf8;
+            border: 1px solid rgba(56, 189, 248, 0.4);
+        }
+
+        .status-14001 {
+            background: rgba(52, 211, 153, 0.18);
+            color: #34d399;
+            border: 1px solid rgba(52, 211, 153, 0.4);
+        }
+
+        .status-45001 {
+            background: rgba(251, 191, 36, 0.18);
+            color: #fbbf24;
+            border: 1px solid rgba(251, 191, 36, 0.4);
+        }
+
+        .status-sig {
+            background: rgba(168, 85, 247, 0.18);
+            color: #c084fc;
+            border: 1px solid rgba(168, 85, 247, 0.4);
+        }
+
+
         .exc-radar-pill-btn.active.crisis {
             background: rgba(244, 63, 94, 0.25);
             color: #fca5a5;
@@ -5631,6 +5827,223 @@
                 </div>
 
             </div>
+
+            <!-- BANNER MINIMALISTA DE ETIQUETAS DE CERTIFICACIÓN ISO (ZONA DEMARCADA) -->
+            <div class="exc-iso-cert-banner" onclick="openIsoPopup()" title="Haga clic para ver el Diagnóstico y Auditoría Tri-Norma Detallada">
+                <div class="exc-iso-banner-header">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 1.2rem;">🏅</span>
+                        <div>
+                            <span class="exc-iso-banner-title">Etiquetas de Certificación Oficiales &bull; Sistema Integrado de Gestión (SIG)</span>
+                            <div class="exc-iso-banner-sub">Conformidad Internacional Auditada para el CD Pudahuel &bull; AndesHome Chile S.A.</div>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                        <span class="exc-iso-banner-badge">★ ÍNDICE GLOBAL: 91,3% CONFORME</span>
+                        <span class="exc-iso-banner-btn-hint">Ver Auditoría Completa ↗</span>
+                    </div>
+                </div>
+
+                <div class="exc-iso-badges-row">
+                    <!-- Badge 1: ISO 9001:2015 -->
+                    <div class="exc-iso-card iso-9001">
+                        <div class="exc-iso-card-svg">
+                            <svg width="84" height="84" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g9001" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0284c7"/>
+      <stop offset="100%" stop-color="#0369a1"/>
+    </linearGradient>
+    <linearGradient id="goldRing" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="50%" stop-color="#7dd3fc"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+    <filter id="glow9001" x="-10" y="-10" width="120" height="120" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#0284c7" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Base Outer Ring -->
+  <circle cx="50" cy="50" r="46" fill="#0b1329" stroke="url(#goldRing)" stroke-width="1.8" filter="url(#glow9001)"/>
+  <circle cx="50" cy="50" r="42" stroke="rgba(56, 189, 248, 0.4)" stroke-width="0.75" stroke-dasharray="2 2"/>
+  <!-- Middle Ring -->
+  <circle cx="50" cy="50" r="38" fill="url(#g9001)" fill-opacity="0.18" stroke="#38bdf8" stroke-width="1.2"/>
+  <!-- Top Arc Text / Label -->
+  <path id="arc9001" d="M 22 50 A 28 28 0 0 1 78 50" fill="none"/>
+  <text font-family="'Inter', system-ui, sans-serif" font-size="6.8" font-weight="800" fill="#bae6fd" letter-spacing="1.2">
+    <textPath href="#arc9001" startOffset="50%" text-anchor="middle">CALIDAD TOTAL</textPath>
+  </text>
+  <!-- Central Badge Geometry -->
+  <circle cx="50" cy="50" r="26" fill="#0f172a" stroke="#38bdf8" stroke-width="1.2"/>
+  <!-- Checkmark & Ribbon Icon -->
+  <path d="M42 50 L47 55 L58 43" stroke="#38bdf8" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Stars -->
+  <polygon points="50,28 51.5,31 55,31.5 52.5,33.5 53,37 50,35 47,37 47.5,33.5 45,31.5 48.5,31" fill="#facc15"/>
+  <!-- Bottom ISO Text -->
+  <text x="50" y="67" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="900" fill="#ffffff" letter-spacing="0.5">ISO 9001</text>
+  <text x="50" y="73.5" text-anchor="middle" font-family="'Inter', sans-serif" font-size="5" font-weight="700" fill="#38bdf8" letter-spacing="0.8">2015 CERTIFIED</text>
+  <!-- Bottom Ribbon / Ticks -->
+  <circle cx="50" cy="50" r="47" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+</svg>
+                        </div>
+                        <div class="exc-iso-card-info">
+                            <div class="exc-iso-card-code">ISO 9001:2015</div>
+                            <div class="exc-iso-card-name">Gestión de la Calidad (SGC)</div>
+                            <div class="exc-iso-card-metrics">OTIF 98,7% &bull; WMS 3D &bull; Error &lt;0,05%</div>
+                            <div class="exc-iso-card-status status-9001">94% CUMPLIMIENTO &bull; APTO</div>
+                        </div>
+                    </div>
+
+                    <!-- Badge 2: ISO 14001:2015 -->
+                    <div class="exc-iso-card iso-14001">
+                        <div class="exc-iso-card-svg">
+                            <svg width="84" height="84" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g14001" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#059669"/>
+      <stop offset="100%" stop-color="#047857"/>
+    </linearGradient>
+    <linearGradient id="emeraldRing" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="50%" stop-color="#6ee7b7"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+    <filter id="glow14001" x="-10" y="-10" width="120" height="120" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#059669" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Base Outer Ring -->
+  <circle cx="50" cy="50" r="46" fill="#091a18" stroke="url(#emeraldRing)" stroke-width="1.8" filter="url(#glow14001)"/>
+  <circle cx="50" cy="50" r="42" stroke="rgba(52, 211, 153, 0.4)" stroke-width="0.75" stroke-dasharray="2 2"/>
+  <!-- Middle Ring -->
+  <circle cx="50" cy="50" r="38" fill="url(#g14001)" fill-opacity="0.18" stroke="#34d399" stroke-width="1.2"/>
+  <!-- Top Arc Text / Label -->
+  <path id="arc14001" d="M 22 50 A 28 28 0 0 1 78 50" fill="none"/>
+  <text font-family="'Inter', system-ui, sans-serif" font-size="6.5" font-weight="800" fill="#a7f3d0" letter-spacing="1.2">
+    <textPath href="#arc14001" startOffset="50%" text-anchor="middle">MEDIO AMBIENTE</textPath>
+  </text>
+  <!-- Central Badge Geometry -->
+  <circle cx="50" cy="50" r="26" fill="#0f172a" stroke="#34d399" stroke-width="1.2"/>
+  <!-- Eco Leaf Icon -->
+  <path d="M48 43 C56 41, 60 48, 56 55 C52 60, 44 57, 43 52 C42 47, 45 44, 48 43 Z" fill="none" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
+  <path d="M43 52 C49 51, 54 48, 56 44" stroke="#6ee7b7" stroke-width="1.5" stroke-linecap="round"/>
+  <!-- Sun / Clean Energy accent -->
+  <circle cx="50" cy="30" r="2.5" fill="#facc15"/>
+  <!-- Bottom ISO Text -->
+  <text x="50" y="67" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="900" fill="#ffffff" letter-spacing="0.5">ISO 14001</text>
+  <text x="50" y="73.5" text-anchor="middle" font-family="'Inter', sans-serif" font-size="5" font-weight="700" fill="#34d399" letter-spacing="0.8">2015 CERTIFIED</text>
+  <circle cx="50" cy="50" r="47" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+</svg>
+                        </div>
+                        <div class="exc-iso-card-info">
+                            <div class="exc-iso-card-code">ISO 14001:2015</div>
+                            <div class="exc-iso-card-name">Gestión Ambiental (SGA)</div>
+                            <div class="exc-iso-card-metrics">Solar 250 kWp &bull; -412 t CO₂e &bull; Ley REP</div>
+                            <div class="exc-iso-card-status status-14001">88% CUMPLIMIENTO &bull; APTO</div>
+                        </div>
+                    </div>
+
+                    <!-- Badge 3: ISO 45001:2018 -->
+                    <div class="exc-iso-card iso-45001">
+                        <div class="exc-iso-card-svg">
+                            <svg width="84" height="84" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g45001" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    <linearGradient id="amberRing" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="50%" stop-color="#fde68a"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    <filter id="glow45001" x="-10" y="-10" width="120" height="120" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#d97706" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Base Outer Ring -->
+  <circle cx="50" cy="50" r="46" fill="#1b1406" stroke="url(#amberRing)" stroke-width="1.8" filter="url(#glow45001)"/>
+  <circle cx="50" cy="50" r="42" stroke="rgba(251, 191, 36, 0.4)" stroke-width="0.75" stroke-dasharray="2 2"/>
+  <!-- Middle Ring -->
+  <circle cx="50" cy="50" r="38" fill="url(#g45001)" fill-opacity="0.18" stroke="#fbbf24" stroke-width="1.2"/>
+  <!-- Top Arc Text / Label -->
+  <path id="arc45001" d="M 22 50 A 28 28 0 0 1 78 50" fill="none"/>
+  <text font-family="'Inter', system-ui, sans-serif" font-size="6.3" font-weight="800" fill="#fde68a" letter-spacing="1.2">
+    <textPath href="#arc45001" startOffset="50%" text-anchor="middle">SEGURIDAD &amp; SALUD</textPath>
+  </text>
+  <!-- Central Badge Geometry -->
+  <circle cx="50" cy="50" r="26" fill="#0f172a" stroke="#fbbf24" stroke-width="1.2"/>
+  <!-- Security Shield / Person Protection Icon -->
+  <path d="M50 40 L58 43 C58 50 54 55 50 57 C46 55 42 50 42 43 Z" fill="none" stroke="#fbbf24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="50" cy="46" r="2" fill="#fbbf24"/>
+  <!-- Star -->
+  <polygon points="50,28 51.5,31 55,31.5 52.5,33.5 53,37 50,35 47,37 47.5,33.5 45,31.5 48.5,31" fill="#facc15"/>
+  <!-- Bottom ISO Text -->
+  <text x="50" y="67" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="900" fill="#ffffff" letter-spacing="0.5">ISO 45001</text>
+  <text x="50" y="73.5" text-anchor="middle" font-family="'Inter', sans-serif" font-size="5" font-weight="700" fill="#fbbf24" letter-spacing="0.8">2018 CERTIFIED</text>
+  <circle cx="50" cy="50" r="47" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+</svg>
+                        </div>
+                        <div class="exc-iso-card-info">
+                            <div class="exc-iso-card-code">ISO 45001:2018</div>
+                            <div class="exc-iso-card-name">Seguridad &amp; Salud (SST)</div>
+                            <div class="exc-iso-card-metrics">Ley 20.949 &bull; GTP a Piso &bull; AMRs 360°</div>
+                            <div class="exc-iso-card-status status-45001">92% CUMPLIMIENTO &bull; APTO</div>
+                        </div>
+                    </div>
+
+                    <!-- Badge 4: SIG TRI-NORMA -->
+                    <div class="exc-iso-card iso-sig">
+                        <div class="exc-iso-card-svg">
+                            <svg width="84" height="84" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gSig" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#7c3aed"/>
+      <stop offset="100%" stop-color="#6d28d9"/>
+    </linearGradient>
+    <linearGradient id="purpleRing" x1="0" y1="0" x2="100" y2="100" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#c084fc"/>
+      <stop offset="50%" stop-color="#e9d5ff"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <filter id="glowSig" x="-10" y="-10" width="120" height="120" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#7c3aed" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  <!-- Base Outer Ring -->
+  <circle cx="50" cy="50" r="46" fill="#150a29" stroke="url(#purpleRing)" stroke-width="1.8" filter="url(#glowSig)"/>
+  <circle cx="50" cy="50" r="42" stroke="rgba(192, 132, 252, 0.4)" stroke-width="0.75" stroke-dasharray="2 2"/>
+  <!-- Middle Ring -->
+  <circle cx="50" cy="50" r="38" fill="url(#gSig)" fill-opacity="0.18" stroke="#c084fc" stroke-width="1.2"/>
+  <!-- Top Arc Text / Label -->
+  <path id="arcSig" d="M 22 50 A 28 28 0 0 1 78 50" fill="none"/>
+  <text font-family="'Inter', system-ui, sans-serif" font-size="6.5" font-weight="800" fill="#e9d5ff" letter-spacing="1.2">
+    <textPath href="#arcSig" startOffset="50%" text-anchor="middle">SISTEMA INTEGRADO</textPath>
+  </text>
+  <!-- Central Badge Geometry -->
+  <circle cx="50" cy="50" r="26" fill="#0f172a" stroke="#c084fc" stroke-width="1.2"/>
+  <!-- Triad of Rings / Certified Synergy -->
+  <circle cx="45" cy="46" r="6" stroke="#38bdf8" stroke-width="1.6" fill="none"/>
+  <circle cx="55" cy="46" r="6" stroke="#34d399" stroke-width="1.6" fill="none"/>
+  <circle cx="50" cy="53" r="6" stroke="#fbbf24" stroke-width="1.6" fill="none"/>
+  <!-- Star -->
+  <polygon points="50,28 51.5,31 55,31.5 52.5,33.5 53,37 50,35 47,37 47.5,33.5 45,31.5 48.5,31" fill="#facc15"/>
+  <!-- Bottom ISO Text -->
+  <text x="50" y="67" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="900" fill="#ffffff" letter-spacing="0.5">SIG 360°</text>
+  <text x="50" y="73.5" text-anchor="middle" font-family="'Inter', sans-serif" font-size="5" font-weight="700" fill="#c084fc" letter-spacing="0.8">TRI-NORMA HLS</text>
+  <circle cx="50" cy="50" r="47" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+</svg>
+                        </div>
+                        <div class="exc-iso-card-info">
+                            <div class="exc-iso-card-code">SIG TRI-NORMA</div>
+                            <div class="exc-iso-card-name">Sistema Integrado HLS</div>
+                            <div class="exc-iso-card-metrics">Auditoría Cruzada &bull; Política Única</div>
+                            <div class="exc-iso-card-status status-sig">91,3% GLOBAL &bull; CERTIFICABLE</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </section>
 
         <!-- FOOTER ACTIONS -->
