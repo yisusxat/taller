@@ -1177,6 +1177,22 @@
             transform: translateY(-1px);
         }
 
+        /* Botón de Activación de Normas ISO y Certificaciones en la barra de filtros */
+        .exc-iso-trigger-btn {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.22) 0%, rgba(14, 165, 233, 0.22) 100%);
+            border: 1px solid rgba(251, 191, 36, 0.6);
+            color: #fbbf24;
+            box-shadow: 0 0 14px rgba(245, 158, 11, 0.2);
+        }
+
+        .exc-iso-trigger-btn:hover {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.45) 0%, rgba(14, 165, 233, 0.45) 100%);
+            border-color: #f59e0b;
+            color: #ffffff;
+            box-shadow: 0 0 24px rgba(245, 158, 11, 0.45);
+            transform: translateY(-1px);
+        }
+
         /* Contenedor del Reproductor 3D Minimalista (Inspirado en Remotion Player) */
         .video3d-player-wrap {
             position: relative;
@@ -5312,6 +5328,10 @@
                     <span>🎬 Recorrido 3D Interactivo</span>
                     <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; background: rgba(16, 185, 129, 0.25); color: #34d399; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(16, 185, 129, 0.4); margin-left: 2px; font-weight: 800; letter-spacing: 0.5px;">VIDEO 3D</span>
                 </button>
+                <button type="button" class="exc-popup-trigger-btn exc-iso-trigger-btn" id="btnOpenIsoPopup" onclick="openIsoPopup()" title="Auditoría Exhaustiva de Cumplimiento de Normas ISO 9001, 14001 y 45001">
+                    <span>🏅 Normas ISO &amp; Certificación</span>
+                    <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; background: rgba(245, 158, 11, 0.25); color: #fbbf24; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(245, 158, 11, 0.4); margin-left: 2px; font-weight: 800; letter-spacing: 0.5px;">SIG 360°</span>
+                </button>
             </div>
 
             <div class="exc-dept-grid">
@@ -6240,6 +6260,404 @@
         </div>
     </div>
 
+        
+    <!-- MINI VENTANA POPUP: AUDITORÍA DE NORMAS ISO Y CERTIFICACIONES -->
+    <div id="isoPopupOverlay" class="exc-modal-overlay" onclick="closeIsoPopupOnBg(event)">
+        <div class="exc-modal-dialog" style="max-width: 1040px; width: 95%; max-height: 94vh; display: flex; flex-direction: column;" onclick="event.stopPropagation()">
+            <button type="button" class="exc-modal-close" onclick="closeIsoPopup()" aria-label="Cerrar">&times;</button>
+            
+            <!-- HEADER DEL MODAL -->
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <div style="font-size: 28px; line-height: 1; background: linear-gradient(135deg, rgba(245, 158, 11, 0.25), rgba(56, 189, 248, 0.25)); border: 1px solid rgba(251, 191, 36, 0.5); border-radius: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">🏅</div>
+                    <div>
+                        <h3 style="margin: 0; color: #fbbf24; font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">
+                            <span>Auditoría de Cumplimiento &amp; Certificación Tri-Norma (ISO 9001 • ISO 14001 • ISO 45001)</span>
+                        </h3>
+                        <div style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8; margin-top: 2px;">
+                            Sistema Integrado de Gestión (SIG) &bull; CD Pudahuel (102.060 Posiciones) &bull; AndesHome Chile S.A.
+                        </div>
+                    </div>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                    <span class="exc-badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.45); font-size: 0.68rem; padding: 3px 9px; border-radius: 999px; font-weight: 700;">
+                        ★ ÍNDICE SIG: 91,3% GLOBAL
+                    </span>
+                    <span class="exc-badge" style="background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.45); font-size: 0.68rem; padding: 3px 9px; border-radius: 999px; font-weight: 700;">
+                        ● CERTIFICABLE SIN NO-CONFORMIDADES MAYORES
+                    </span>
+                </div>
+            </div>
+
+            <!-- ETIQUETAS DE CERTIFICACIÓN OFICIALES (BADGES GRID) -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-bottom: 12px;">
+                
+                <!-- BADGE 1: ISO 9001:2015 -->
+                <div style="background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.15) 0%, rgba(15, 23, 42, 0.6) 100%); border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 8px; padding: 10px 12px; position: relative; overflow: hidden;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <div style="font-size: 0.62rem; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">SGC &bull; CALIDAD TOTAL</div>
+                            <div style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-top: 1px;">ISO 9001:2015</div>
+                        </div>
+                        <span style="font-size: 0.65rem; background: rgba(56, 189, 248, 0.25); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.5); padding: 2px 6px; border-radius: 4px; font-weight: 800;">
+                            94% APTO
+                        </span>
+                    </div>
+                    <div style="font-size: 0.70rem; color: #cbd5e1; margin-top: 6px; line-height: 1.35;">
+                        OTIF 98,7% &bull; WMS 3D + RFID &bull; Error picking &lt;0,05% &bull; -94% Reclamos SERNAC.
+                    </div>
+                    <div style="margin-top: 8px; background: rgba(255,255,255,0.06); height: 5px; border-radius: 3px; overflow: hidden;">
+                        <div style="background: linear-gradient(90deg, #0284c7, #38bdf8); width: 94%; height: 100%;"></div>
+                    </div>
+                </div>
+
+                <!-- BADGE 2: ISO 14001:2015 -->
+                <div style="background: radial-gradient(circle at top left, rgba(52, 211, 153, 0.15) 0%, rgba(15, 23, 42, 0.6) 100%); border: 1px solid rgba(52, 211, 153, 0.4); border-radius: 8px; padding: 10px 12px; position: relative; overflow: hidden;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <div style="font-size: 0.62rem; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">SGA &bull; MEDIO AMBIENTE</div>
+                            <div style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-top: 1px;">ISO 14001:2015</div>
+                        </div>
+                        <span style="font-size: 0.65rem; background: rgba(52, 211, 153, 0.25); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.5); padding: 2px 6px; border-radius: 4px; font-weight: 800;">
+                            88% APTO
+                        </span>
+                    </div>
+                    <div style="font-size: 0.70rem; color: #cbd5e1; margin-top: 6px; line-height: 1.35;">
+                        Solar 250 kWp (380 MWh/a) &bull; -412 t CO₂e &bull; Right-Sizing (-30% aire) &bull; Ley REP 92%.
+                    </div>
+                    <div style="margin-top: 8px; background: rgba(255,255,255,0.06); height: 5px; border-radius: 3px; overflow: hidden;">
+                        <div style="background: linear-gradient(90deg, #059669, #34d399); width: 88%; height: 100%;"></div>
+                    </div>
+                </div>
+
+                <!-- BADGE 3: ISO 45001:2018 -->
+                <div style="background: radial-gradient(circle at top left, rgba(251, 191, 36, 0.15) 0%, rgba(15, 23, 42, 0.6) 100%); border: 1px solid rgba(251, 191, 36, 0.4); border-radius: 8px; padding: 10px 12px; position: relative; overflow: hidden;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <div style="font-size: 0.62rem; font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">SST &bull; SEGURIDAD &amp; SALUD</div>
+                            <div style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-top: 1px;">ISO 45001:2018</div>
+                        </div>
+                        <span style="font-size: 0.65rem; background: rgba(251, 191, 36, 0.25); color: #fbbf24; border: 1px solid rgba(251, 191, 36, 0.5); padding: 2px 6px; border-radius: 4px; font-weight: 800;">
+                            92% APTO
+                        </span>
+                    </div>
+                    <div style="font-size: 0.70rem; color: #cbd5e1; margin-top: 6px; line-height: 1.35;">
+                        Ley 20.949 &bull; 8 Puestos GTP Ergonómicos &bull; AMRs LiDAR 360° &bull; Cero caminatas 67 km.
+                    </div>
+                    <div style="margin-top: 8px; background: rgba(255,255,255,0.06); height: 5px; border-radius: 3px; overflow: hidden;">
+                        <div style="background: linear-gradient(90deg, #d97706, #fbbf24); width: 92%; height: 100%;"></div>
+                    </div>
+                </div>
+
+                <!-- BADGE 4: SISTEMA INTEGRADO SIG -->
+                <div style="background: radial-gradient(circle at top left, rgba(168, 85, 247, 0.15) 0%, rgba(15, 23, 42, 0.6) 100%); border: 1px solid rgba(168, 85, 247, 0.4); border-radius: 8px; padding: 10px 12px; position: relative; overflow: hidden;">
+                    <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+                        <div>
+                            <div style="font-size: 0.62rem; font-family: 'JetBrains Mono', monospace; color: #c084fc; font-weight: 800; text-transform: uppercase; letter-spacing: 0.5px;">ESTRUCTURA HLS TRI-NORMA</div>
+                            <div style="font-size: 1.05rem; font-weight: 800; color: #ffffff; margin-top: 1px;">SIG INTEGRADO</div>
+                        </div>
+                        <span style="font-size: 0.65rem; background: rgba(168, 85, 247, 0.25); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.5); padding: 2px 6px; border-radius: 4px; font-weight: 800;">
+                            91,3% GLOBAL
+                        </span>
+                    </div>
+                    <div style="font-size: 0.70rem; color: #cbd5e1; margin-top: 6px; line-height: 1.35;">
+                        Política Única &bull; Auditoría Cruzada &bull; CPHS + Comité Calidad &bull; Certificación 24 Semanas.
+                    </div>
+                    <div style="margin-top: 8px; background: rgba(255,255,255,0.06); height: 5px; border-radius: 3px; overflow: hidden;">
+                        <div style="background: linear-gradient(90deg, #7c3aed, #c084fc); width: 91%; height: 100%;"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- SELECTOR DE PESTAÑAS (TABS DEL MODAL ISO) -->
+            <div style="display: flex; gap: 8px; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; flex-wrap: wrap;">
+                <button type="button" class="exc-filter-btn active" id="btnIsoTab1" onclick="switchIsoModalTab(1)" style="font-size: 0.74rem; padding: 6px 12px; border-radius: 6px;">
+                    📊 Diagnóstico Global &amp; Comparativo As-Is
+                </button>
+                <button type="button" class="exc-filter-btn" id="btnIsoTab2" onclick="switchIsoModalTab(2)" style="font-size: 0.74rem; padding: 6px 12px; border-radius: 6px;">
+                    💎 ISO 9001 (Calidad &amp; OTIF 98,7%)
+                </button>
+                <button type="button" class="exc-filter-btn" id="btnIsoTab3" onclick="switchIsoModalTab(3)" style="font-size: 0.74rem; padding: 6px 12px; border-radius: 6px;">
+                    🌱 ISO 14001 (Ambiente &amp; Solar 250 kWp)
+                </button>
+                <button type="button" class="exc-filter-btn" id="btnIsoTab4" onclick="switchIsoModalTab(4)" style="font-size: 0.74rem; padding: 6px 12px; border-radius: 6px;">
+                    🛡️ ISO 45001 (SST, Ergonomía &amp; Ley 20.949)
+                </button>
+            </div>
+
+            <!-- CUERPO PRINCIPAL CON SCROLL -->
+            <div style="font-size: 0.82rem; color: #cbd5e1; line-height: 1.5; max-height: 65vh; overflow-y: auto; padding-right: 6px;">
+                
+                <!-- ========================================================= -->
+                <!-- PANE 1: DIAGNÓSTICO GLOBAL Y COMPARATIVO AS-IS -->
+                <!-- ========================================================= -->
+                <div id="isoTabPane1" style="display: block;">
+                    
+                    <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 12px 14px; margin-bottom: 14px;">
+                        <h4 style="margin: 0 0 8px 0; color: #fbbf24; font-size: 0.88rem; font-weight: 800; display: flex; align-items: center; gap: 6px;">
+                            <span>🎯 Veredicto de Certificación del Auditor Líder</span>
+                        </h4>
+                        <p style="margin: 0; font-size: 0.78rem; color: #cbd5e1; line-height: 1.5;">
+                            El diseño del <strong>Escenario de Excelente</strong> para el CD Pudahuel resuelve de raíz las no-conformidades críticas que aquejaban a AndesHome durante el CyberDay 2026. La incorporación de automatización satelital (Pallet Shuttle), estaciones de picking ergonómicas Goods-to-Person a piso, arcos RFID y la autogeneración solar no solo blindan la rentabilidad del negocio ($1.612M EBITDA anual), sino que <strong>cumplen con el 91,3% de los requisitos auditables</strong> de las normas ISO 9001, ISO 14001 e ISO 45001 bajo la Estructura de Alto Nivel (HLS).
+                        </p>
+                    </div>
+
+                    <!-- TABLA COMPARATIVA AS-IS VS EXCELENTE EN LAS 3 NORMAS -->
+                    <div style="overflow-x: auto; margin-bottom: 14px;">
+                        <table style="width: 100%; border-collapse: collapse; font-size: 0.75rem; text-align: left;">
+                            <thead>
+                                <tr style="background: rgba(2, 132, 199, 0.2); color: #38bdf8; border-bottom: 2px solid rgba(56, 189, 248, 0.4);">
+                                    <th style="padding: 8px 10px;">DIMENSIÓN / NORMA</th>
+                                    <th style="padding: 8px 10px; color: #f43f5e;">CRISIS AS-IS (CYBER 2026)</th>
+                                    <th style="padding: 8px 10px; color: #34d399;">ESCENARIO EXCELENTE (TO-BE)</th>
+                                    <th style="padding: 8px 10px; color: #fbbf24;">ESTATUS AUDITORÍA ISO</th>
+                                </tr>
+                            </thead>
+                            <tbody style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 8px 10px; font-weight: 700; color: #38bdf8;">
+                                        💎 Calidad del Servicio (ISO 9001)
+                                    </td>
+                                    <td style="padding: 8px 10px; color: #fca5a5;">
+                                        OTIF 68,4% &bull; 50.251 errores/año &bull; 842 reclamos SERNAC
+                                    </td>
+                                    <td style="padding: 8px 10px; color: #86efac; font-weight: 700;">
+                                        OTIF 98,7% &bull; Error &lt;0,05% &bull; -94% Reclamos SERNAC
+                                    </td>
+                                    <td style="padding: 8px 10px;">
+                                        <span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; padding: 2px 6px; border-radius: 4px; font-weight: 700;">Conforme (94%)</span>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 8px 10px; font-weight: 700; color: #34d399;">
+                                        🌱 Desempeño Ambiental (ISO 14001)
+                                    </td>
+                                    <td style="padding: 8px 10px; color: #fca5a5;">
+                                        100% energía de red &bull; 65% aire en cajas &bull; 11,5% redespachos fallidos
+                                    </td>
+                                    <td style="padding: 8px 10px; color: #86efac; font-weight: 700;">
+                                        250 kWp Solar (380 MWh/a) &bull; Right-Sizing (-30%) &bull; -412 t CO₂e
+                                    </td>
+                                    <td style="padding: 8px 10px;">
+                                        <span style="background: rgba(52, 211, 153, 0.2); color: #34d399; padding: 2px 6px; border-radius: 4px; font-weight: 700;">Conforme (88%)</span>
+                                    </td>
+                                </tr>
+                                <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+                                    <td style="padding: 8px 10px; font-weight: 700; color: #fbbf24;">
+                                        🛡️ Seguridad &amp; Salud (ISO 45001)
+                                    </td>
+                                    <td style="padding: 8px 10px; color: #fca5a5;">
+                                        67,6 km/día caminando &bull; Cargas pesadas a 10m &bull; $613M en Horas Extras
+                                    </td>
+                                    <td style="padding: 8px 10px; color: #86efac; font-weight: 700;">
+                                        Ley 20.949 cumplida &bull; Puestos GTP a piso &bull; AMRs LiDAR 360°
+                                    </td>
+                                    <td style="padding: 8px 10px;">
+                                        <span style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; padding: 2px 6px; border-radius: 4px; font-weight: 700;">Conforme (92%)</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- ROADMAP DE CERTIFICACIÓN EN 24 SEMANAS -->
+                    <div style="background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.06); border-radius: 8px; padding: 12px 14px;">
+                        <h4 style="margin: 0 0 10px 0; color: #38bdf8; font-size: 0.84rem; font-weight: 800;">
+                            🗓️ Cronograma Integrado de Certificación Tri-Norma (24 Semanas)
+                        </h4>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 8px;">
+                            <div style="background: rgba(15, 23, 42, 0.6); padding: 8px 10px; border-radius: 6px; border-left: 3px solid #38bdf8;">
+                                <strong style="color: #38bdf8; font-size: 0.72rem;">Semanas 01 a 08</strong>
+                                <div style="font-size: 0.70rem; color: #94a3b8; margin-top: 2px;">Estructura Documental SIG, Política Integrada y Matriz IPER/Ambiental.</div>
+                            </div>
+                            <div style="background: rgba(15, 23, 42, 0.6); padding: 8px 10px; border-radius: 6px; border-left: 3px solid #34d399;">
+                                <strong style="color: #34d399; font-size: 0.72rem;">Semanas 09 a 16</strong>
+                                <div style="font-size: 0.70rem; color: #94a3b8; margin-top: 2px;">Despliegue de Protocolos TMERT, Ley REP, y Capacitación de Auditores.</div>
+                            </div>
+                            <div style="background: rgba(15, 23, 42, 0.6); padding: 8px 10px; border-radius: 6px; border-left: 3px solid #fbbf24;">
+                                <strong style="color: #fbbf24; font-size: 0.72rem;">Semanas 17 a 20</strong>
+                                <div style="font-size: 0.70rem; color: #94a3b8; margin-top: 2px;">Auditoría Interna Cruzada Tri-Norma y Revisión por la Dirección (Cap. 9.3).</div>
+                            </div>
+                            <div style="background: rgba(15, 23, 42, 0.6); padding: 8px 10px; border-radius: 6px; border-left: 3px solid #a855f7;">
+                                <strong style="color: #c084fc; font-size: 0.72rem;">Semanas 21 a 24</strong>
+                                <div style="font-size: 0.70rem; color: #94a3b8; margin-top: 2px;">Auditoría Externa Fase 1 y Fase 2 en Terreno; Emisión de Sellos ISO.</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- PANE 2: ISO 9001:2015 (CALIDAD TOTAL) -->
+                <!-- ========================================================= -->
+                <div id="isoTabPane2" style="display: none;">
+                    <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px;">
+                        <span style="font-size: 0.68rem; color: #38bdf8; font-weight: 800; text-transform: uppercase;">ISO 9001:2015 &bull; ENFOQUE AL CLIENTE Y PROCESOS ROBUSTOS</span>
+                        <div style="font-size: 0.78rem; color: #e2e8f0; margin-top: 3px;">
+                            Cumplimiento global del <strong>94%</strong>. La arquitectura de desacople central, el control WMS 3D y la verificación dinámica erradican las causas de falla en despacho.
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 10px 12px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong style="color: #38bdf8; font-size: 0.78rem;">Cláusula 6.1: Acciones para abordar riesgos operacionales</strong>
+                                <span style="font-size: 0.65rem; color: #34d399; font-weight: 700;">100% CUMPLIDO</span>
+                            </div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">
+                                La arquitectura con <strong>1.428 túneles Pallet Shuttle</strong> y <strong>30 calles a piso en Zona D</strong> (102.060 posiciones) elimina el riesgo de colisión entre grúas. El pasillo central de 3,50 m actúa como pulmón de desacople bidireccional.
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 10px 12px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong style="color: #38bdf8; font-size: 0.78rem;">Cláusula 8.5.2: Identificación inequívoca y trazabilidad RFID</strong>
+                                <span style="font-size: 0.65rem; color: #34d399; font-weight: 700;">100% CUMPLIDO</span>
+                            </div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">
+                                Arcos RFID en los andenes 13 al 24 validan instantáneamente el contenido de cada bulto al cargarlo al camión, asegurando trazabilidad punta a punta sin chequeos manuales con papel.
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 10px 12px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong style="color: #38bdf8; font-size: 0.78rem;">Cláusula 8.7: Control riguroso de salidas no conformes</strong>
+                                <span style="font-size: 0.65rem; color: #34d399; font-weight: 700;">95% CUMPLIDO</span>
+                            </div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">
+                                Balanzas dinámicas con control de tolerancia gravimétrica y lectores omnidireccionales en el Sorter Shoe (4.500 bultos/h) desvían automáticamente a una bahía de auditoría cualquier caja con peso o SKU anómalo. La tasa de error cae de 2,44% a <strong>menos del 0,05%</strong>.
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; padding: 10px 12px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong style="color: #38bdf8; font-size: 0.78rem;">Cláusula 9.1.2: Percepción y satisfacción del cliente omnicanal</strong>
+                                <span style="font-size: 0.65rem; color: #34d399; font-weight: 700;">95% CUMPLIDO</span>
+                            </div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">
+                                Al garantizar un <strong>OTIF de 98,7%</strong> y entregas en tiendas para Click &amp; Collect en &lt;2 horas, los reclamos ante SERNAC se desploman un <strong>94%</strong>, restaurando la reputación de la marca.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- PANE 3: ISO 14001:2015 (MEDIO AMBIENTE & SOSTENIBILIDAD) -->
+                <!-- ========================================================= -->
+                <div id="isoTabPane3" style="display: none;">
+                    <div style="background: rgba(52, 211, 153, 0.08); border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px;">
+                        <span style="font-size: 0.68rem; color: #34d399; font-weight: 800; text-transform: uppercase;">ISO 14001:2015 &bull; DESCARBONIZACIÓN, EFICIENCIA ENERGÉTICA Y LEY REP</span>
+                        <div style="font-size: 0.78rem; color: #e2e8f0; margin-top: 3px;">
+                            Cumplimiento global del <strong>88%</strong>. El centro de distribución pasa de ser un consumidor pasivo a un modelo logístico circular y energéticamente eficiente.
+                        </div>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px;">
+                        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 6px; padding: 10px 12px;">
+                            <div style="color: #34d399; font-weight: 700; font-size: 0.78rem;">☀️ Autogeneración Solar Fotovoltaica (P7)</div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 4px;">
+                                Instalación de <strong>250 kWp en techumbre</strong> produciendo 380 MWh/año. Abastece el 42% del consumo de la nave y alimenta la flota de 32 AMRs y transpaletas con baterías de Litio de cero emisión.
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 6px; padding: 10px 12px;">
+                            <div style="color: #34d399; font-weight: 700; font-size: 0.78rem;">📦 Embalaje a Medida Right-Sizing (P4)</div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 4px;">
+                                Eliminación del 30% del volumen de aire en cajas. Se ahorran <strong>142 toneladas de cartón corrugado al año</strong> y se sustituye el 100% del plástico de burbujas por material de relleno reciclado y biodegradable.
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 6px; padding: 10px 12px;">
+                            <div style="color: #34d399; font-weight: 700; font-size: 0.78rem;">🚚 Optimización TMS &amp; -412 t CO₂e</div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 4px;">
+                                El algoritmo de ruteo dinámico con cubicaje 3D reduce las entregas fallidas de 11,5% a &lt;1,8%, ahorrando <strong>85.000 litros de diésel anuales</strong> y mitigando 412 toneladas de gases de efecto invernadero.
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(52, 211, 153, 0.2); border-radius: 6px; padding: 10px 12px;">
+                            <div style="color: #34d399; font-weight: 700; font-size: 0.78rem;">♻️ Logística Inversa &amp; Ley REP N° 20.920</div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 4px;">
+                                Zona segregada de clasificación de devoluciones para reacondicionamiento o reciclaje certificado, alcanzando una tasa de <strong>desvío de vertedero del 92%</strong> con trazabilidad auditada.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ========================================================= -->
+                <!-- PANE 4: ISO 45001:2018 (SEGURIDAD & SALUD OCUPACIONAL) -->
+                <!-- ========================================================= -->
+                <div id="isoTabPane4" style="display: none;">
+                    <div style="background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.3); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px;">
+                        <span style="font-size: 0.68rem; color: #fbbf24; font-weight: 800; text-transform: uppercase;">ISO 45001:2018 &bull; SALUD OCUPACIONAL, ERGONOMÍA Y LEY N° 20.949</span>
+                        <div style="font-size: 0.78rem; color: #e2e8f0; margin-top: 3px;">
+                            Cumplimiento global del <strong>92%</strong>. Transición desde el sobreesfuerzo físico y la fatiga hacia un ambiente seguro con jerarquía de controles de ingeniería de vanguardia.
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 6px; padding: 10px 12px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong style="color: #fbbf24; font-size: 0.78rem;">Jerarquía de Controles: Eliminación del Riesgo de Caída en Altura</strong>
+                                <span style="font-size: 0.65rem; color: #34d399; font-weight: 700;">100% CONFORME</span>
+                            </div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">
+                                Se eliminó toda manipulación manual a más de 1,80 m de altura. Los productos pesados se gestionan en las <strong>30 calles a piso en Zona D</strong> o dentro de los canales satelitales Pallet Shuttle completamente protegidos.
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 6px; padding: 10px 12px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong style="color: #fbbf24; font-size: 0.78rem;">Cumplimiento Estricto de la Ley N° 20.949 ("Ley del Saco") &amp; Protocolo TMERT</strong>
+                                <span style="font-size: 0.65rem; color: #34d399; font-weight: 700;">95% CONFORME</span>
+                            </div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">
+                                Las <strong>8 estaciones Goods-to-Person</strong> cuentan con mesas tijera hidráulicas regulables en altura y plano de trabajo óptimo (75 a 110 cm), evitando torsiones lumbares y sobrecargas mayores a 25 kg mediante brazos de elevación por vacío.
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 6px; padding: 10px 12px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong style="color: #fbbf24; font-size: 0.78rem;">Seguridad Robótica: 32 AMRs con LiDAR 360° bajo Norma ISO 3691-4</strong>
+                                <span style="font-size: 0.65rem; color: #34d399; font-weight: 700;">90% CONFORME</span>
+                            </div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">
+                                Los robots móviles autónomos operan en carriles delimitados con escáneres láser de seguridad perimetral y frenado de emergencia redundante, segregando el flujo de cobots respecto a los pasillos de tránsito peatonal.
+                            </div>
+                        </div>
+
+                        <div style="background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(251, 191, 36, 0.25); border-radius: 6px; padding: 10px 12px;">
+                            <div style="display: flex; justify-content: space-between;">
+                                <strong style="color: #fbbf24; font-size: 0.78rem;">Salud Psicosocial &amp; Erradicación de la Fatiga Extrema</strong>
+                                <span style="font-size: 0.65rem; color: #34d399; font-weight: 700;">95% CONFORME</span>
+                            </div>
+                            <div style="font-size: 0.72rem; color: #cbd5e1; margin-top: 3px;">
+                                Se redujeron las caminatas diarias de <strong>67,6 km a menos de 4 km/día</strong> por operario y se eliminaron las <strong>61.598 horas extras anuales</strong> forzadas ($613,8M de sobrecosto), recuperando un clima laboral digno, seguro y motivante.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- PIE DE MODAL -->
+            <div style="margin-top: 14px; text-align: right; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <a href="Informe_Proyecto_Escenario_Excelente_AndesHome.pdf" target="_blank" class="exc-sim-btn" style="text-decoration: none; padding: 7px 15px; background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.5); display: inline-flex; align-items: center; gap: 6px;" title="Ver o Descargar Informe Ejecutivo Oficial en PDF">
+                        <span>📄 Descargar Informe Ejecutivo PDF</span>
+                    </a>
+                    <span style="font-size: 0.72rem; color: #64748b; font-family: 'JetBrains Mono', monospace;">
+                        AndesHome Chile S.A. &bull; Sistema Integrado de Gestión (SIG)
+                    </span>
+                </div>
+                <button type="button" class="exc-sim-btn" onclick="closeIsoPopup()" style="padding: 7px 18px;">
+                    Cerrar Auditoría ISO
+                </button>
+            </div>
+        </div>
+    </div>
+
+
         <!-- Datos comparativos centralizados y reutilizados por la vista simultánea -->
         <script src="excellent-scenarios.js"></script>
 
@@ -6529,6 +6947,40 @@
                 }
             }
         }
+
+        // 5.1.B. MINI VENTANA POPUP AUDITORÍA NORMAS ISO (ISO 9001, 14001, 45001)
+        function openIsoPopup() {
+            const popup = document.getElementById('isoPopupOverlay');
+            if (popup) popup.classList.add('active');
+            switchIsoModalTab(1);
+        }
+
+        function closeIsoPopup() {
+            const popup = document.getElementById('isoPopupOverlay');
+            if (popup) popup.classList.remove('active');
+        }
+
+        function closeIsoPopupOnBg(e) {
+            if (e.target.id === 'isoPopupOverlay') {
+                closeIsoPopup();
+            }
+        }
+
+        function switchIsoModalTab(tabIndex) {
+            for (let i = 1; i <= 4; i++) {
+                const btn = document.getElementById('btnIsoTab' + i);
+                const pane = document.getElementById('isoTabPane' + i);
+                if (btn) {
+                    if (i === tabIndex) btn.classList.add('active');
+                    else btn.classList.remove('active');
+                }
+                if (pane) {
+                    if (i === tabIndex) pane.style.display = 'block';
+                    else pane.style.display = 'none';
+                }
+            }
+        }
+
 
         // =================================================================
         // 5.2. MOTOR DE VIDEO 3D REALISTA DEL ESCENARIO EXCELENTE (REMOTION ENGINE)
@@ -8454,6 +8906,7 @@
                 closeModal();
                 closeDeptPopup();
                 closeVideo3dPopup();
+                closeIsoPopup();
             } else if (e.code === 'Space' && isVideo3dActive) {
                 e.preventDefault();
                 togglePlayPauseVideo3d();
