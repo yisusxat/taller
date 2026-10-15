@@ -21,6 +21,21 @@ function initTabNavigation() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
+    const tabList = document.querySelector('.main-tabs');
+    if (tabList) tabList.setAttribute('role', 'tablist');
+    tabButtons.forEach((btn) => {
+        const target = btn.getAttribute('data-tab');
+        btn.setAttribute('role', 'tab');
+        btn.setAttribute('aria-controls', target || '');
+        btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+        btn.setAttribute('tabindex', btn.classList.contains('active') ? '0' : '-1');
+    });
+    tabContents.forEach((content) => {
+        content.setAttribute('role', 'tabpanel');
+        content.setAttribute('tabindex', '-1');
+        content.setAttribute('aria-hidden', content.classList.contains('active') ? 'false' : 'true');
+    });
+
     tabButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             const target = btn.getAttribute('data-tab');
@@ -29,8 +44,16 @@ function initTabNavigation() {
             tabContents.forEach(c => c.classList.remove('active'));
 
             btn.classList.add('active');
+            tabButtons.forEach((b) => {
+                const selected = b === btn;
+                b.setAttribute('aria-selected', selected ? 'true' : 'false');
+                b.setAttribute('tabindex', selected ? '0' : '-1');
+            });
             const targetElem = document.getElementById(target);
-            if (targetElem) targetElem.classList.add('active');
+            if (targetElem) {
+                targetElem.classList.add('active');
+                tabContents.forEach((content) => content.setAttribute('aria-hidden', content === targetElem ? 'false' : 'true'));
+            }
 
             syncIndexPhasePill(target);
 
@@ -41,6 +64,17 @@ function initTabNavigation() {
                     initChartFinancialProposal();
                 }
             }
+        });
+
+        btn.addEventListener('keydown', (event) => {
+            if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            const index = Array.from(tabButtons).indexOf(btn);
+            const nextIndex = event.key === 'Home' ? 0
+                : event.key === 'End' ? tabButtons.length - 1
+                    : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabButtons.length) % tabButtons.length;
+            tabButtons[nextIndex]?.focus();
+            tabButtons[nextIndex]?.click();
         });
     });
 
@@ -245,9 +279,10 @@ function initChartCyberDay() {
     });
 }
 
-function filterCyberView(type) {
+function filterCyberView(type, sourceEvent) {
     document.querySelectorAll('.button-group .filter-btn').forEach(b => b.classList.remove('active'));
-    event.target.classList.add('active');
+    const trigger = sourceEvent?.currentTarget || sourceEvent?.target || sourceEvent;
+    if (trigger) trigger.classList.add('active');
 
     if (type === 'ecom') {
         cyberChart.data.datasets[0].data = [430, 1465, 2569, 3773, 5303, 6200, 6800, 10553, 13323, 14217, 13100, 12200, 11500, 10800, 10100, 9500, 9100];

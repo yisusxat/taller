@@ -137,6 +137,21 @@ function initDiagnosticTabs() {
     const tabBtns = document.querySelectorAll('.diag-tab-btn');
     const views = document.querySelectorAll('.diag-view-content');
 
+    const tabList = document.querySelector('.diag-tabs-bar');
+    if (tabList) tabList.setAttribute('role', 'tablist');
+    tabBtns.forEach((btn) => {
+        const target = btn.getAttribute('data-view');
+        btn.setAttribute('role', 'tab');
+        btn.setAttribute('aria-controls', target || '');
+        btn.setAttribute('aria-selected', btn.classList.contains('active') ? 'true' : 'false');
+        btn.setAttribute('tabindex', btn.classList.contains('active') ? '0' : '-1');
+    });
+    views.forEach((view) => {
+        view.setAttribute('role', 'tabpanel');
+        view.setAttribute('tabindex', '-1');
+        view.setAttribute('aria-hidden', view.classList.contains('active') ? 'false' : 'true');
+    });
+
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             const targetId = btn.getAttribute('data-view');
@@ -146,8 +161,16 @@ function initDiagnosticTabs() {
             views.forEach(v => v.classList.remove('active'));
 
             btn.classList.add('active');
+            tabBtns.forEach((b) => {
+                const selected = b === btn;
+                b.setAttribute('aria-selected', selected ? 'true' : 'false');
+                b.setAttribute('tabindex', selected ? '0' : '-1');
+            });
             const targetView = document.getElementById(targetId);
-            if (targetView) targetView.classList.add('active');
+            if (targetView) {
+                targetView.classList.add('active');
+                views.forEach((view) => view.setAttribute('aria-hidden', view === targetView ? 'false' : 'true'));
+            }
 
             // Sincronizar Fase Maestra si el botón la declara
             if (phaseStr) {
@@ -168,6 +191,17 @@ function initDiagnosticTabs() {
                     }
                 }
             }
+        });
+
+        btn.addEventListener('keydown', (event) => {
+            if (!['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
+            event.preventDefault();
+            const index = Array.from(tabBtns).indexOf(btn);
+            const nextIndex = event.key === 'Home' ? 0
+                : event.key === 'End' ? tabBtns.length - 1
+                    : (index + (event.key === 'ArrowRight' ? 1 : -1) + tabBtns.length) % tabBtns.length;
+            tabBtns[nextIndex]?.focus();
+            tabBtns[nextIndex]?.click();
         });
     });
 
@@ -816,16 +850,9 @@ function initSvgHoverCards() {
 /* ==========================================================================
    10. SIMULADOR DIDÁCTICO DEL PORTAFOLIO EN VIVO (SANDBOX 2D)
    ========================================================================== */
-const projectData2D = {
-    'p1': { name: 'P1: Re-slotting ABC + 5S', capex: 85000000, opex: 12000000, savings: 215000000, otifGain: 12.0 },
-    'p2': { name: 'P2: WMS NextGen + Voice RF', capex: 310000000, opex: 75000000, savings: 385000000, otifGain: 18.5 },
-    'p3': { name: 'P3: Portal ASN & YMS Citas', capex: 95000000, opex: 24000000, savings: 170000000, otifGain: 8.0 },
-    'p4': { name: 'P4: TMS Ruteo Dinámico', capex: 150000000, opex: 48000000, savings: 280000000, otifGain: 11.2 },
-    'p5': { name: 'P5: Ergonomía D-Bulky', capex: 70000000, opex: 18000000, savings: 63097000, otifGain: 3.0 },
-    'p6': { name: 'P6: Flota Robots AMR', capex: 420000000, opex: 65000000, savings: 180000000, otifGain: 4.0 },
-    'p7': { name: 'P7: Planta Solar CD', capex: 180000000, opex: 8000000, savings: 55000000, otifGain: 0.5 },
-    'p8': { name: 'P8: Mejora Almacenamiento & Racks Dinámicos', capex: 110000000, opex: 14000000, savings: 135000000, otifGain: 5.5 }
-};
+const projectData2D = typeof AndesHomeStore !== 'undefined'
+    ? AndesHomeStore.PROJECTS
+    : {};
 
 function initSandboxSimulator() {
     const checkboxes = document.querySelectorAll('.p-item-checkbox');
@@ -872,7 +899,7 @@ function recalculate2DSandbox() {
         if (proj) {
             totalCapex += proj.capex;
             totalOpex += proj.opex;
-            totalSavings += proj.savings;
+            totalSavings += proj.annualGrossSavings || 0;
             otifAccum += proj.otifGain;
         }
     });

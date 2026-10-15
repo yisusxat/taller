@@ -1,0 +1,11 @@
+{
+  "name": "andeshome-cd-pudahuel",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Suite interactiva de diagnóstico y transformación logística AndesHome",
+  "scripts": {
+    "test": "node --test",
+    "check": "node --check app.js && node --check andeshome-store.js && node --check landing-2d.js && node --check excellent-scenarios.js && node --check auth-gate.js && node --check scripts/quality-check.js",
+    "quality": "npm run check && npm run test && node scripts/quality-check.js"
+  }
+}

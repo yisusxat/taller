@@ -711,6 +711,62 @@
             margin-top: 4px;
         }
 
+        /* Comparativa simultánea: mantiene ambos modelos visibles */
+        .exc-side-by-side {
+            margin: 20px 0 24px;
+            padding: 18px;
+            border: 1px solid rgba(251, 191, 36, 0.35);
+            border-radius: 14px;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(7, 13, 30, 0.98));
+        }
+
+        .exc-side-by-side-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1.1fr;
+            gap: 12px;
+            margin-top: 14px;
+        }
+
+        .exc-side-by-side-card {
+            border-radius: 10px;
+            padding: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(15, 23, 42, 0.72);
+        }
+
+        .exc-side-by-side-card.tobe { border-color: rgba(56, 189, 248, 0.4); }
+        .exc-side-by-side-card.excelente { border-color: rgba(52, 211, 153, 0.4); }
+        .exc-side-by-side-card.delta { border-color: rgba(251, 191, 36, 0.45); background: rgba(120, 79, 8, 0.12); }
+
+        .exc-side-by-side-card h4 {
+            margin: 0 0 10px;
+            font-size: 0.78rem;
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+        }
+
+        .exc-side-by-side-card.tobe h4 { color: #38bdf8; }
+        .exc-side-by-side-card.excelente h4 { color: #34d399; }
+        .exc-side-by-side-card.delta h4 { color: #fbbf24; }
+
+        .exc-side-by-side-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 7px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.78rem;
+        }
+
+        .exc-side-by-side-row:last-child { border-bottom: 0; }
+        .exc-side-by-side-row span:first-child { color: #94a3b8; }
+        .exc-side-by-side-row strong { color: #f8fafc; font-family: 'JetBrains Mono', monospace; text-align: right; }
+        .exc-side-by-side-card.delta strong { color: #fbbf24; }
+
+        @media (max-width: 900px) {
+            .exc-side-by-side-grid { grid-template-columns: 1fr; }
+        }
+
         /* -----------------------------------------------------------------
            2. SIMULADOR SLIDER ROI Y ABSORCIÓN DEL EXCESO (FEATURE 2)
            ----------------------------------------------------------------- */
@@ -1340,6 +1396,84 @@
             background: rgba(2, 132, 199, 0.3);
             border-color: #38bdf8;
             color: #38bdf8;
+        }
+
+        .video3d-legend {
+            position: absolute;
+            left: 14px;
+            bottom: 12px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 7px;
+            padding: 6px 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 7px;
+            background: rgba(8, 14, 28, 0.82);
+            color: #cbd5e1;
+            font: 600 0.64rem 'JetBrains Mono', monospace;
+            pointer-events: auto;
+        }
+
+        .video3d-legend span { display: inline-flex; align-items: center; gap: 4px; }
+        .legend-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; box-shadow: 0 0 7px currentColor; }
+        .legend-dot.inbound { color: #f59e0b; background: #f59e0b; }
+        .legend-dot.storage { color: #38bdf8; background: #38bdf8; }
+        .legend-dot.picking { color: #a78bfa; background: #a78bfa; }
+        .legend-dot.outbound { color: #34d399; background: #34d399; }
+
+        .video3d-compare-strip {
+            position: absolute;
+            right: 14px;
+            bottom: 12px;
+            display: grid;
+            grid-template-columns: repeat(3, auto);
+            gap: 5px;
+            pointer-events: auto;
+        }
+
+        .video3d-compare-strip > div {
+            min-width: 112px;
+            padding: 6px 8px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 6px;
+            background: rgba(8, 14, 28, 0.84);
+            color: #94a3b8;
+            font: 600 0.58rem 'JetBrains Mono', monospace;
+        }
+
+        .video3d-compare-strip > div.active { border-color: rgba(52, 211, 153, 0.65); color: #a7f3d0; }
+        .video3d-compare-strip span, .video3d-compare-strip strong, .video3d-compare-strip small { display: block; }
+        .video3d-compare-strip strong { margin-top: 2px; color: #ffffff; font-size: 0.68rem; }
+        .video3d-compare-strip small { margin-top: 2px; color: #94a3b8; }
+
+        .video3d-player-wrap.executive-mode .video3d-hud-caption,
+        .video3d-player-wrap.executive-mode .video3d-camera-badge,
+        .video3d-player-wrap.executive-mode .video3d-legend,
+        .video3d-player-wrap.executive-mode .video3d-compare-strip { display: none; }
+
+        .video3d-player-wrap.executive-mode .video3d-hud-kpis { margin-left: auto; }
+
+        @media (max-width: 900px) {
+            .video3d-buttons-row { align-items: flex-start; flex-direction: column; }
+            .video3d-btn-group { max-width: 100% !important; width: 100%; overflow-x: auto; }
+            .video3d-chapter-scroller { order: 3; }
+            .video3d-player-wrap { height: 420px; }
+        }
+
+        @media (max-width: 620px) {
+            .video3d-player-wrap { height: 360px; }
+            .video3d-hud-titlebox { max-width: 68%; }
+            .video3d-hud-titlebox #v3dChapterTitle { font-size: 0.78rem !important; }
+            .video3d-hud-kpis { max-width: 30%; }
+            .video3d-hud-kpis > div { font-size: 0.58rem !important; }
+            .video3d-legend { left: 8px; bottom: 8px; max-width: 38%; }
+            .video3d-compare-strip { right: 8px; bottom: 8px; grid-template-columns: 1fr; }
+            .video3d-compare-strip > div { min-width: 100px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .video3d-timeline-progress { transition: none; }
+            #video3dCanvas { cursor: default; }
         }
 
         .exc-progress-wrap {
@@ -2047,6 +2181,8 @@
 </head>
 <body>
 
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
     <!-- TOP NAVIGATION -->
     <header class="exc-navbar">
         <div class="exc-brand">
@@ -2076,7 +2212,7 @@
         </div>
     </header>
 
-    <main class="exc-container">
+    <main id="main-content" class="exc-container" tabindex="-1">
         
         <!-- HERO BANNER -->
         <section class="exc-hero">
@@ -2213,6 +2349,46 @@
                 💡 <strong>Visión de Dirección de Operaciones:</strong> Este escenario no busca acumular tecnología por moda, sino resolver los cuellos de botella reales que frenaban la operación. Al dotar a cada zona de racks 100% dedicados y seguros —sin mezclas complejas ni niveles compartidos— garantizamos que una grúa reponiendo en Zona B jamás bloquee un carro shuttle en Zona A. Con 1.428 túneles en racks a 12 m y 30 calles a piso para cargas pesadas (102.060 posiciones totales), AndesHome protege su stock actual (13.860 pallets, 13,6% de ocupación) y abre una nueva línea de negocio como Hub 3PL multicliente (88.200 posiciones monetizables), reduciendo el costo por pedido a $3.850 CLP y cuidando la integridad física de las personas.
             </div>
         </div>
+
+        <!-- COMPARATIVA SIMULTÁNEA: TO-BE Y EXCELENTE SIEMPRE VISIBLES -->
+        <section id="comparativa-simultanea" class="exc-side-by-side" aria-labelledby="comparativa-simultanea-title">
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap;">
+                <div>
+                    <h3 id="comparativa-simultanea-title" style="margin: 0; color: #ffffff; font-size: 1rem;">🔎 Comparativa simultánea: To-Be vs. Excelente</h3>
+                    <p style="margin: 4px 0 0; color: #94a3b8; font-size: 0.76rem;">Ambos modelos permanecen visibles para identificar qué mejora aporta la automatización y cuál es su costo adicional.</p>
+                </div>
+                <a href="#comparativa-detallada" class="exc-nav-pill" style="text-decoration: none;">Ver matriz detallada ↓</a>
+            </div>
+
+            <div class="exc-side-by-side-grid">
+                <div class="exc-side-by-side-card tobe">
+                    <h4>✨ To-Be convencional · P1–P5</h4>
+                    <div class="exc-side-by-side-row"><span>CAPEX</span><strong id="compareTobeCapex">$766,8M</strong></div>
+                    <div class="exc-side-by-side-row"><span>Capacidad</span><strong id="compareTobeCapacity">30.420 pos.</strong></div>
+                    <div class="exc-side-by-side-row"><span>OTIF</span><strong id="compareTobeOtif">96,2%</strong></div>
+                    <div class="exc-side-by-side-row"><span>EBITDA anual</span><strong id="compareTobeEbitda">$856,1M</strong></div>
+                    <div class="exc-side-by-side-row"><span>Payback</span><strong id="compareTobePayback">10,7 meses</strong></div>
+                </div>
+
+                <div class="exc-side-by-side-card excelente">
+                    <h4>💎 Excelente · automatizado</h4>
+                    <div class="exc-side-by-side-row"><span>CAPEX</span><strong id="compareExcellentCapex">$1.420M</strong></div>
+                    <div class="exc-side-by-side-row"><span>Capacidad</span><strong id="compareExcellentCapacity">102.060 pos.</strong></div>
+                    <div class="exc-side-by-side-row"><span>OTIF</span><strong id="compareExcellentOtif">98,7%</strong></div>
+                    <div class="exc-side-by-side-row"><span>EBITDA anual</span><strong id="compareExcellentEbitda">$1.226,1M</strong></div>
+                    <div class="exc-side-by-side-row"><span>Payback</span><strong id="compareExcellentPayback">13,9 meses</strong></div>
+                </div>
+
+                <div class="exc-side-by-side-card delta">
+                    <h4>📈 Mejora obtenida</h4>
+                    <div class="exc-side-by-side-row"><span>Inversión adicional</span><strong id="compareDeltaCapex">+$653,2M</strong></div>
+                    <div class="exc-side-by-side-row"><span>Capacidad adicional</span><strong id="compareDeltaCapacity">+71.640 pos.</strong></div>
+                    <div class="exc-side-by-side-row"><span>OTIF adicional</span><strong id="compareDeltaOtif">+2,5 pp</strong></div>
+                    <div class="exc-side-by-side-row"><span>EBITDA adicional</span><strong id="compareDeltaEbitda">+$370M/año</strong></div>
+                    <div class="exc-side-by-side-row"><span>VAN adicional</span><strong id="compareDeltaNpv">+$552,9M</strong></div>
+                </div>
+            </div>
+        </section>
 
         <!-- SECCIÓN 1: DETALLE DE IMPLEMENTACIÓN PROYECTOS DEL 1 AL 8 -->
         <section>
@@ -2662,7 +2838,7 @@
         </section>
 
         <!-- SECCIÓN 3.1: ANÁLISIS COMPARATIVO EXHAUSTIVO: ESCENARIO TO-BE (P1-P5) VS. ESCENARIO DE EXCELENTE (P1-P8) -->
-        <section class="exc-comparison-section">
+        <section id="comparativa-detallada" class="exc-comparison-section">
             <div class="exc-section-header">
                 <div class="exc-section-title">
                     <span>⚔️ Análisis Comparativo Estratégico: To-Be (P1-P5) vs. Escenario de Excelente (P1-P8)</span>
@@ -5132,8 +5308,8 @@
                     <span>📋 Resumen Ejecutivo 360°</span>
                     <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; background: rgba(56, 189, 248, 0.25); color: #38bdf8; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.4); margin-left: 2px; font-weight: 800; letter-spacing: 0.5px;">POPUP</span>
                 </button>
-                <button type="button" class="exc-popup-trigger-btn exc-video3d-trigger-btn" id="btnOpenVideo3dPopup" onclick="openVideo3dPopup()" title="Ver Video 3D: Recorrido y Funcionamiento Integral del Escenario Excelente">
-                    <span>🎬 Video 3D: Funcionamiento Integral</span>
+                <button type="button" class="exc-popup-trigger-btn exc-video3d-trigger-btn" id="btnOpenVideo3dPopup" onclick="openVideo3dPopup()" title="Abrir recorrido 3D interactivo del Escenario Excelente">
+                    <span>🎬 Recorrido 3D Interactivo</span>
                     <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; background: rgba(16, 185, 129, 0.25); color: #34d399; padding: 2px 7px; border-radius: 4px; border: 1px solid rgba(16, 185, 129, 0.4); margin-left: 2px; font-weight: 800; letter-spacing: 0.5px;">VIDEO 3D</span>
                 </button>
             </div>
@@ -5787,59 +5963,68 @@
                 <!-- PANE 3: BALANCE DE AHORROS & RETORNO ROI -->
                 <!-- ========================================================= -->
                 <div id="deptTabPane3" style="display: none;">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin-bottom: 14px;">
-                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 10px 12px;">
-                            <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">CAPEX Requerido</div>
-                            <div style="font-size: 1.25rem; font-weight: 800; color: #38bdf8; font-family: 'JetBrains Mono', monospace;">CLP $766,8M</div>
-                            <div style="font-size: 0.68rem; color: #64748b;">(Portafolio P1 a P5) &bull; Máx $850M</div>
+                    <div style="background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 8px; padding: 10px 12px; margin-bottom: 12px;">
+                        <strong style="color: #38bdf8;">Lectura ejecutiva:</strong>
+                        <span style="color: #cbd5e1;">el To-Be P1–P5 es la línea base aprobada; el Escenario de Excelente P1–P8 muestra el retorno incremental de automatización, capacidad 3PL y energía solar.</span>
+                    </div>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 10px; margin-bottom: 14px;">
+                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(56, 189, 248, 0.45); border-radius: 8px; padding: 12px;">
+                            <div style="font-size: 0.68rem; color: #38bdf8; text-transform: uppercase; font-weight: 800;">To-Be convencional · P1–P5</div>
+                            <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 8px;">CAPEX / EBITDA / VAN / Payback</div>
+                            <div style="font-size: 1.05rem; color: #ffffff; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-top: 3px;">$766,8M · $856,1M · $1.289,4M</div>
+                            <div style="font-size: 0.78rem; color: #38bdf8; font-family: 'JetBrains Mono', monospace; margin-top: 3px;">10,7 meses</div>
                         </div>
-                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 8px; padding: 10px 12px;">
-                            <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">EBITDA Anual Neto</div>
-                            <div style="font-size: 1.25rem; font-weight: 800; color: #34d399; font-family: 'JetBrains Mono', monospace;">+CLP $856,1M</div>
-                            <div style="font-size: 0.68rem; color: #64748b;">Ahorro Bruto $1.033M - OPEX $177M</div>
+                        <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(52, 211, 153, 0.55); border-radius: 8px; padding: 12px;">
+                            <div style="font-size: 0.68rem; color: #34d399; text-transform: uppercase; font-weight: 800;">Excelente automatizado · P1–P8</div>
+                            <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 8px;">CAPEX / EBITDA / VAN / Payback</div>
+                            <div style="font-size: 1.05rem; color: #ffffff; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-top: 3px;">$1.420M · $1.226,1M · $1.842,3M</div>
+                            <div style="font-size: 0.78rem; color: #34d399; font-family: 'JetBrains Mono', monospace; margin-top: 3px;">13,9 meses</div>
                         </div>
-                        <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 8px; padding: 10px 12px;">
-                            <div style="font-size: 0.68rem; color: #94a3b8; text-transform: uppercase; font-weight: 700;">VAN a 3 Años (r=12%)</div>
-                            <div style="font-size: 1.25rem; font-weight: 800; color: #fbbf24; font-family: 'JetBrains Mono', monospace;">$1.289.400.543</div>
-                            <div style="font-size: 0.68rem; color: #64748b;">TIR 98,4% &bull; Payback 10,7 meses</div>
+                        <div style="background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.45); border-radius: 8px; padding: 12px;">
+                            <div style="font-size: 0.68rem; color: #fbbf24; text-transform: uppercase; font-weight: 800;">Incremento Excelente vs To-Be</div>
+                            <div style="font-size: 0.68rem; color: #94a3b8; margin-top: 8px;">CAPEX adicional / EBITDA adicional / VAN adicional</div>
+                            <div style="font-size: 1.05rem; color: #ffffff; font-weight: 800; font-family: 'JetBrains Mono', monospace; margin-top: 3px;">+$653,2M · +$370M/a · +$552,9M</div>
+                            <div style="font-size: 0.78rem; color: #fbbf24; font-family: 'JetBrains Mono', monospace; margin-top: 3px;">+71.640 posiciones</div>
                         </div>
                     </div>
 
                     <div style="border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 8px; overflow: hidden; margin-bottom: 12px;">
                         <table class="exc-master-table" style="margin: 0; width: 100%;">
+                            <caption style="caption-side: top; text-align: left; padding: 10px; color: #e2e8f0; background: rgba(15, 23, 42, 0.95); font-weight: 800;">Sensibilidad ROI: comparación directa To-Be vs. Excelente</caption>
                             <thead>
                                 <tr style="background: rgba(15, 23, 42, 0.9);">
-                                    <th style="padding: 8px 10px; text-align: left; font-size: 0.70rem; color: #94a3b8; text-transform: uppercase;">Escenario de Evaluación</th>
-                                    <th style="padding: 8px 10px; text-align: left; font-size: 0.70rem; color: #e2e8f0; text-transform: uppercase;">Hipótesis Operativa</th>
-                                    <th style="padding: 8px 10px; text-align: right; font-size: 0.70rem; color: #34d399; text-transform: uppercase;">EBITDA Anual</th>
-                                    <th style="padding: 8px 10px; text-align: right; font-size: 0.70rem; color: #fbbf24; text-transform: uppercase;">VAN 3 Años</th>
-                                    <th style="padding: 8px 10px; text-align: center; font-size: 0.70rem; color: #38bdf8; text-transform: uppercase;">Payback</th>
+                                    <th style="padding: 8px 10px; text-align: left; font-size: 0.70rem; color: #94a3b8; text-transform: uppercase;">Escenario</th>
+                                    <th style="padding: 8px 10px; text-align: right; font-size: 0.70rem; color: #38bdf8; text-transform: uppercase;">To-Be EBITDA / VAN / Payback</th>
+                                    <th style="padding: 8px 10px; text-align: right; font-size: 0.70rem; color: #34d399; text-transform: uppercase;">Excelente EBITDA / VAN / Payback</th>
+                                    <th style="padding: 8px 10px; text-align: left; font-size: 0.70rem; color: #e2e8f0; text-transform: uppercase;">Hipótesis</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td style="font-weight: 700; color: #fca5a5; font-size: 0.74rem;">Caso Pesimista (-25%)</td>
-                                    <td style="color: #cbd5e1; font-size: 0.72rem;">Captura del 75% por retardo en adopción de RF en turno noche.</td>
-                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 700; font-size: 0.72rem;">$597.822.750</td>
-                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-weight: 700; font-size: 0.72rem;">$619.345.118</td>
-                                    <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #e2e8f0; font-size: 0.72rem;">16,4 meses</td>
+                                    <td style="font-weight: 700; color: #fca5a5; font-size: 0.74rem;">Pesimista (-25%)</td>
+                                    <td style="text-align: right; color: #bae6fd; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;">$597,8M · $619,3M · 16,4m</td>
+                                    <td style="text-align: right; color: #a7f3d0; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;">$919,6M · $1.006,7M · 18,5m</td>
+                                    <td style="color: #cbd5e1; font-size: 0.72rem;">Captura parcial y adopción gradual.</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: 700; color: #93c5fd; font-size: 0.74rem;">Caso Base (100% Target)</td>
-                                    <td style="color: #cbd5e1; font-size: 0.72rem;">Cumplimiento total de ahorros proyectados en P1 a P5.</td>
-                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 700; font-size: 0.72rem;">$856.097.000</td>
-                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-weight: 700; font-size: 0.72rem;">$1.289.400.543</td>
-                                    <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #38bdf8; font-weight: 700; font-size: 0.72rem;">10,7 meses</td>
+                                    <td style="font-weight: 700; color: #93c5fd; font-size: 0.74rem;">Base (100% Target)</td>
+                                    <td style="text-align: right; color: #bae6fd; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;">$856,1M · $1.289,4M · 10,7m</td>
+                                    <td style="text-align: right; color: #a7f3d0; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;">$1.226,1M · $1.842,3M · 13,9m</td>
+                                    <td style="color: #cbd5e1; font-size: 0.72rem;">P1–P5 contra P1–P8 integral.</td>
                                 </tr>
                                 <tr>
-                                    <td style="font-weight: 700; color: #86efac; font-size: 0.74rem;">Caso Optimista (+15%)</td>
-                                    <td style="color: #cbd5e1; font-size: 0.72rem;">Sinergias con carriers y monetización parcial de 88,2k pallets como Hub 3PL.</td>
-                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 700; font-size: 0.72rem;">$1.011.061.550</td>
-                                    <td style="text-align: right; font-family: 'JetBrains Mono', monospace; color: #fbbf24; font-weight: 700; font-size: 0.72rem;">$1.661.642.420</td>
-                                    <td style="text-align: center; font-family: 'JetBrains Mono', monospace; color: #34d399; font-weight: 700; font-size: 0.72rem;">9,1 meses</td>
+                                    <td style="font-weight: 700; color: #86efac; font-size: 0.74rem;">Optimista (+15%)</td>
+                                    <td style="text-align: right; color: #bae6fd; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;">$1.011,1M · $1.661,6M · 9,1m</td>
+                                    <td style="text-align: right; color: #a7f3d0; font-family: 'JetBrains Mono', monospace; font-size: 0.72rem;">$1.410,0M · $2.227,6M · 11,9m</td>
+                                    <td style="color: #cbd5e1; font-size: 0.72rem;">Sinergias + monetización acelerada 3PL.</td>
                                 </tr>
                             </tbody>
                         </table>
+                    </div>
+
+                    <div style="background: rgba(245, 158, 11, 0.08); border-left: 3px solid #fbbf24; border-radius: 4px; padding: 10px 14px; font-size: 0.75rem; color: #cbd5e1; line-height: 1.5;">
+                        <strong style="color: #fbbf24;">Dictamen:</strong> el Excelente requiere +$653,2M de CAPEX respecto del To-Be, pero agrega +$370M de EBITDA anual, +$552,9M de VAN y +71.640 posiciones. El payback total es 3,2 meses más largo porque incorpora la inversión robotizada completa; la comparación permite separar claramente el retorno base del retorno incremental.
                     </div>
                 </div>
 
@@ -5868,10 +6053,10 @@
                     <div style="font-size: 28px; line-height: 1; background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(56, 189, 248, 0.2)); border: 1px solid rgba(16, 185, 129, 0.4); border-radius: 10px; width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;">🎬</div>
                     <div>
                         <h3 style="margin: 0; color: #34d399; font-size: 1.15rem; font-weight: 800; display: flex; align-items: center; gap: 8px;">
-                            <span>Video 3D: Recorrido y Funcionamiento Integral</span>
-                            <span style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; background: rgba(56, 189, 248, 0.2); color: #38bdf8; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.4); font-weight: 700;">60 FPS ENGINE</span>
+                            <span>Recorrido 3D Interactivo: Operación Integral del CD</span>
+                            <span id="v3dFpsBadge" style="font-size: 0.65rem; font-family: 'JetBrains Mono', monospace; background: rgba(56, 189, 248, 0.2); color: #38bdf8; padding: 2px 8px; border-radius: 4px; border: 1px solid rgba(56, 189, 248, 0.4); font-weight: 700;">FPS --</span>
                         </h3>
-                        <div style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8; margin-top: 2px;">Simulación Tridimensional Minimalista del CD Pudahuel • Flujo End-to-End P1 a P8</div>
+                        <div style="font-size: 0.72rem; font-family: 'JetBrains Mono', monospace; color: #94a3b8; margin-top: 2px;">Simulación 3D interactiva del CD Pudahuel • Flujo End-to-End P1 a P8</div>
                     </div>
                 </div>
                 <div style="display: flex; align-items: center; gap: 8px;">
@@ -5882,7 +6067,7 @@
             </div>
 
             <!-- CONTENEDOR PRINCIPAL DEL REPRODUCTOR 3D -->
-            <div class="video3d-player-wrap" id="video3dPlayerWrap">
+            <div class="video3d-player-wrap" id="video3dPlayerWrap" role="application" aria-label="Recorrido 3D interactivo del centro de distribución">
                 <!-- CANVAS THREE.JS -->
                 <canvas id="video3dCanvas"></canvas>
 
@@ -5899,7 +6084,7 @@
                                 Visión General &amp; Arquitectura de Desacople Central
                             </div>
                             <div id="v3dChapterTech" style="font-size: 0.70rem; color: #94a3b8; font-family: 'JetBrains Mono', monospace; margin-top: 2px;">
-                                P1 + P8: 102.060 Posiciones (1.428 Túneles Racks + 30 Piso)
+                                P1–P8: 102.060 Posiciones (1.428 Túneles Racks + 30 Piso)
                             </div>
                         </div>
 
@@ -5921,8 +6106,8 @@
                                 <span>📌 EXPLICACIÓN DE INGENIERÍA LOGÍSTICA</span>
                                 <span id="v3dTimecodeBadge" style="background: rgba(255,255,255,0.1); padding: 1px 6px; border-radius: 3px; color: #ffffff;">00:00</span>
                             </div>
-                            <div id="v3dCaptionText">
-                                La nave CD Pudahuel (150m &times; 210m) implementa la Arquitectura de Desacople Central: dos bloques compactos e independientes separados por un pasillo de maniobras de 3,50m, garantizando 102.060 posiciones físicas con flujo continuo y cero riesgo de colisión.
+                            <div id="v3dCaptionText" aria-live="polite" aria-atomic="true">
+                                La nave CD Pudahuel (150m &times; 210m) implementa la Arquitectura de Desacople Central: dos bloques compactos e independientes separados por un pasillo de maniobras de 3,50m, garantizando 102.060 posiciones físicas y reduciendo el riesgo de interferencias entre flujos.
                             </div>
                         </div>
 
@@ -5931,13 +6116,26 @@
                             CAM: <span id="v3dCameraBadge" style="color: #38bdf8; font-weight: 700;">CINEMÁTICA</span>
                         </div>
                     </div>
+
+                    <div class="video3d-legend" aria-label="Leyenda operacional">
+                        <span><i class="legend-dot inbound"></i>Inbound</span>
+                        <span><i class="legend-dot storage"></i>Racks / Shuttle</span>
+                        <span><i class="legend-dot picking"></i>AMR / GTP</span>
+                        <span><i class="legend-dot outbound"></i>Outbound</span>
+                    </div>
+
+                    <div class="video3d-compare-strip" aria-label="Comparación de escenarios">
+                        <div><span>AS-IS</span><strong>43,5% OTIF</strong><small>67,6 km/día</small></div>
+                        <div><span>TO-BE P1–P5</span><strong>96,2% OTIF</strong><small>30.420 posiciones</small></div>
+                        <div class="active"><span>EXCELENTE P1–P8</span><strong>98,7% OTIF</strong><small>102.060 posiciones</small></div>
+                    </div>
                 </div>
             </div>
 
             <!-- BARRA DE CONTROL DEL REPRODUCTOR (CONTROLES Y TIMELINE) -->
             <div class="video3d-controls">
                 <!-- TIMELINE SCRUBBER INTERACTIVO -->
-                <div class="video3d-timeline-wrap" id="v3dTimelineWrap" onclick="seekVideo3d(event)" onmousedown="startScrubbing(event)">
+                <div class="video3d-timeline-wrap" id="v3dTimelineWrap" role="slider" aria-label="Progreso del recorrido 3D" aria-valuemin="0" aria-valuemax="180" aria-valuenow="0" tabindex="0" onclick="seekVideo3d(event)" onmousedown="startScrubbing(event)" onkeydown="handleVideoTimelineKey(event)">
                     <div class="video3d-timeline-track" id="v3dTimelineTrack">
                         <div class="video3d-timeline-progress" id="v3dTimelineProgress"></div>
                         <div class="video3d-timeline-handle" id="v3dTimelineHandle"></div>
@@ -5956,17 +6154,17 @@
                 <div class="video3d-buttons-row">
                     <!-- GRUPO IZQUIERDO: PLAY/PAUSE, RESTART, TIMECODE -->
                     <div class="video3d-btn-group">
-                        <button type="button" class="video3d-ctrl-btn active" id="v3dBtnPlayPause" onclick="togglePlayPauseVideo3d()" title="Reproducir / Pausar (Espacio)">
+                        <button type="button" class="video3d-ctrl-btn active" id="v3dBtnPlayPause" onclick="togglePlayPauseVideo3d()" title="Reproducir / Pausar (Espacio)" aria-label="Reproducir o pausar recorrido">
                             <span id="v3dPlayIcon">⏸</span>
                             <span id="v3dPlayText">Pausar</span>
                         </button>
-                        <button type="button" class="video3d-ctrl-btn" onclick="restartVideo3d()" title="Reiniciar desde 00:00">
+                        <button type="button" class="video3d-ctrl-btn" onclick="restartVideo3d()" title="Reiniciar desde 00:00" aria-label="Reiniciar recorrido">
                             <span>⏮</span>
                         </button>
-                        <button type="button" class="video3d-ctrl-btn" onclick="skipVideo3d(-10)" title="Retroceder 10s">
+                        <button type="button" class="video3d-ctrl-btn" onclick="skipVideo3d(-10)" title="Retroceder 10s" aria-label="Retroceder diez segundos">
                             <span>⏪ 10s</span>
                         </button>
-                        <button type="button" class="video3d-ctrl-btn" onclick="skipVideo3d(10)" title="Avanzar 10s">
+                        <button type="button" class="video3d-ctrl-btn" onclick="skipVideo3d(10)" title="Avanzar 10s" aria-label="Avanzar diez segundos">
                             <span>10s ⏩</span>
                         </button>
                         <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.76rem; color: #e2e8f0; font-weight: 700; margin-left: 6px;">
@@ -5975,7 +6173,7 @@
                     </div>
 
                     <!-- GRUPO CENTRO: CAPÍTULOS RÁPIDOS -->
-                    <div class="video3d-btn-group" style="overflow-x: auto; max-width: 440px; padding-bottom: 2px;">
+                    <div class="video3d-btn-group video3d-chapter-scroller" role="navigation" aria-label="Capítulos del recorrido" style="overflow-x: auto; max-width: 440px; padding-bottom: 2px;">
                         <button type="button" class="video3d-chapter-pill active" id="v3dCh1" onclick="jumpToChapter(1)">1. General</button>
                         <button type="button" class="video3d-chapter-pill" id="v3dCh2" onclick="jumpToChapter(2)">2. Inbound</button>
                         <button type="button" class="video3d-chapter-pill" id="v3dCh3" onclick="jumpToChapter(3)">3. Shuttles</button>
@@ -6009,9 +6207,9 @@
                         </div>
 
                         <!-- Locución de Voz Ejecutiva (Web Speech API) -->
-                        <button type="button" class="video3d-ctrl-btn active" id="v3dBtnVoice" onclick="toggleVoiceNarration()" title="Activar / Desactivar Voz de Locución Ejecutiva (Web Speech API)">
-                            <span id="v3dVoiceIcon">🎙️</span>
-                            <span id="v3dVoiceText" style="font-size: 0.68rem;">Voz ON</span>
+                        <button type="button" class="video3d-ctrl-btn" id="v3dBtnVoice" onclick="toggleVoiceNarration()" title="Activar / Desactivar Voz de Locución Ejecutiva (Web Speech API)" aria-pressed="false">
+                            <span id="v3dVoiceIcon">🔇</span>
+                            <span id="v3dVoiceText" style="font-size: 0.68rem;">Voz OFF</span>
                         </button>
 
                         <!-- Sonido FX Sintetizado -->
@@ -6020,8 +6218,11 @@
                         </button>
 
                         <!-- Pantalla Completa -->
-                        <button type="button" class="video3d-ctrl-btn" onclick="togglePlayerFullscreen()" title="Pantalla Completa">
+                        <button type="button" class="video3d-ctrl-btn" onclick="togglePlayerFullscreen()" title="Pantalla Completa" aria-label="Activar pantalla completa">
                             ⛶
+                        </button>
+                        <button type="button" class="video3d-ctrl-btn" id="v3dBtnExecutive" onclick="toggleExecutiveMode()" title="Modo ejecutivo: oculta overlays técnicos" aria-label="Activar modo ejecutivo">
+                            🎯 Ejecutivo
                         </button>
                     </div>
                 </div>
@@ -6030,127 +6231,105 @@
             <!-- PIE DE MODAL -->
             <div style="margin-top: 14px; text-align: right; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 10px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
                 <span style="font-size: 0.72rem; color: #64748b; font-family: 'JetBrains Mono', monospace;">
-                    AndesHome Chile S.A. &bull; CD Pudahuel (102.060 Posiciones) &bull; Remotion Engine 3D
+                    AndesHome Chile S.A. &bull; CD Pudahuel (102.060 Posiciones) &bull; Motor WebGL 3D interactivo
                 </span>
                 <button type="button" class="exc-sim-btn" onclick="closeVideo3dPopup()" style="padding: 7px 18px;">
-                    Cerrar Video 3D
+                    Cerrar Recorrido 3D
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- JAVASCRIPT: TODAS LAS INTERACCIONES Y SIMULADORES -->
+        <!-- Datos comparativos centralizados y reutilizados por la vista simultánea -->
+        <script src="excellent-scenarios.js"></script>
+
+        <!-- JAVASCRIPT: TODAS LAS INTERACCIONES Y SIMULADORES -->
     <script>
+        function renderScenarioComparison() {
+            const scenarios = window.AndesHomeScenarios;
+            if (!scenarios) return;
+
+            const bindings = {
+                tobe: {
+                    capex: 'compareTobeCapex',
+                    capacity: 'compareTobeCapacity',
+                    otif: 'compareTobeOtif',
+                    ebitda: 'compareTobeEbitda',
+                    payback: 'compareTobePayback'
+                },
+                excelente: {
+                    capex: 'compareExcellentCapex',
+                    capacity: 'compareExcellentCapacity',
+                    otif: 'compareExcellentOtif',
+                    ebitda: 'compareExcellentEbitda',
+                    payback: 'compareExcellentPayback'
+                },
+                delta: {
+                    capex: 'compareDeltaCapex',
+                    capacity: 'compareDeltaCapacity',
+                    otif: 'compareDeltaOtif',
+                    ebitda: 'compareDeltaEbitda',
+                    npv: 'compareDeltaNpv'
+                }
+            };
+
+            Object.entries(bindings).forEach(([scenarioKey, fields]) => {
+                Object.entries(fields).forEach(([field, elementId]) => {
+                    const element = document.getElementById(elementId);
+                    const value = scenarios[scenarioKey]?.[field];
+                    if (element && value !== undefined) element.textContent = value;
+                });
+            });
+        }
+
         // 1. CONMUTADOR TO-BE VS EXCELENTE (FEATURE 1)
         function switchScenario(mode) {
+            const scenarios = window.AndesHomeScenarios;
+            const profile = scenarios?.[mode]?.morph;
+            if (!profile) return;
+
             const btnToBe = document.getElementById('btnSwitchToBe');
             const btnExc = document.getElementById('btnSwitchExc');
-            const badgeScen = document.getElementById('morphBadgeScenario');
-            const badgeDet = document.getElementById('morphBadgeDetail');
-            const capex = document.getElementById('morphCapex');
-            const capexSub = document.getElementById('morphCapexSub');
-            const cap = document.getElementById('morphCapacity');
-            const capSub = document.getElementById('morphCapacitySub');
-            const spd = document.getElementById('morphSpeed');
-            const spdSub = document.getElementById('morphSpeedSub');
-            const cost = document.getElementById('morphCostOrder');
-            const costSub = document.getElementById('morphCostOrderSub');
-            const otif = document.getElementById('morphOtif');
-            const otifSub = document.getElementById('morphOtifSub');
-            const ebitda = document.getElementById('morphEbitda');
-            const ebitdaSub = document.getElementById('morphEbitdaSub');
-            const payback = document.getElementById('morphPayback');
-            const paybackSub = document.getElementById('morphPaybackSub');
-            const esg = document.getElementById('morphEsg');
-            const esgSub = document.getElementById('morphEsgSub');
+            const activeToBe = mode === 'tobe';
+            btnToBe.classList.toggle('active', activeToBe);
+            btnToBe.classList.toggle('tobe', activeToBe);
+            btnExc.classList.toggle('active', !activeToBe);
+            btnExc.classList.toggle('exc', !activeToBe);
+
+            const setText = (id, value) => {
+                const element = document.getElementById(id);
+                if (element) element.textContent = value;
+            };
+            const setMetric = (key, id, subId) => {
+                const metric = profile[key];
+                if (!metric) return;
+                const element = document.getElementById(id);
+                const subElement = document.getElementById(subId);
+                if (element) {
+                    element.textContent = metric[0];
+                    element.style.color = metric[1];
+                }
+                if (subElement) subElement.textContent = metric[2];
+            };
+
+            setText('morphBadgeScenario', profile.badge);
+            setText('morphBadgeDetail', profile.detail);
+            const badge = document.getElementById('morphBadgeScenario');
+            if (badge) badge.style.color = activeToBe ? '#38bdf8' : '#34d399';
+            setMetric('capex', 'morphCapex', 'morphCapexSub');
+            setMetric('capacity', 'morphCapacity', 'morphCapacitySub');
+            setMetric('speed', 'morphSpeed', 'morphSpeedSub');
+            setMetric('cost', 'morphCostOrder', 'morphCostOrderSub');
+            setMetric('otif', 'morphOtif', 'morphOtifSub');
+            setMetric('ebitda', 'morphEbitda', 'morphEbitdaSub');
+            setMetric('payback', 'morphPayback', 'morphPaybackSub');
+            setMetric('esg', 'morphEsg', 'morphEsgSub');
+
             const alertNote = document.getElementById('morphAlertNote');
-
-            if (mode === 'tobe') {
-                btnToBe.classList.add('active', 'tobe');
-                btnExc.classList.remove('active', 'exc');
-
-                badgeScen.innerText = '● MODO ACTIVO: TO-BE CONVENCIONAL (P1 A P5 ESTÁNDAR)';
-                badgeScen.style.color = '#38bdf8';
-                badgeDet.innerText = 'Límite 24 Semanas con IT Freeze • 5 Iniciativas • Grúas Reach';
-
-                capex.innerText = '$766.800.000';
-                capex.style.color = '#38bdf8';
-                capexSub.innerText = 'Bajo presupuesto techo ($850M) • Aprobado Directorio';
-
-                cap.innerText = '30.420 Pos';
-                cap.style.color = '#94a3b8';
-                capSub.innerText = '1.690 racks con 27 pasillos de 3m • 44,3% ocupación actual';
-
-                spd.innerText = '68,4 lín/HH';
-                spd.style.color = '#94a3b8';
-                spdSub.innerText = 'Voice Picking manual por pasillos • 14,2 km/día caminata';
-
-                cost.innerText = 'CLP $5.420';
-                cost.style.color = '#cbd5e1';
-                costSub.innerText = 'Fallido: CLP $8.532 • Margen regular';
-
-                otif.innerText = '96,2%';
-                otif.style.color = '#38bdf8';
-                otifSub.innerText = 'Cyber 95,4% • Cumplimiento de estándar base';
-
-                ebitda.innerText = '$856.097.000/a';
-                ebitda.style.color = '#94a3b8';
-                ebitdaSub.innerText = 'Base ahorro consolidado 5 proyectos';
-
-                payback.innerText = '10,7 Meses';
-                payback.style.color = '#94a3b8';
-                paybackSub.innerText = 'VAN 3a: $1.289M CLP';
-
-                esg.innerText = '0% Solar (Red Fósil)';
-                esg.style.color = '#f87171';
-                esgSub.innerText = 'Gasto $130M/año eléctrico • Trabajo en altura persiste';
-
-                alertNote.innerHTML = '⚠️ <strong>Diagnóstico Modo To-Be:</strong> Cumple con el presupuesto techo de $850M y resuelve la crisis operativa inmediata en 24 semanas. Sin embargo, no captura el +50% de posiciones adicionales, mantiene pasillos de 3m para grúas reach y pierde $370M CLP/año en ahorros que la robotización Shuttle y la planta solar sí ofrecen.';
-                alertNote.style.borderColor = 'rgba(56, 189, 248, 0.4)';
-                alertNote.style.background = 'rgba(2, 132, 199, 0.12)';
-            } else {
-                btnExc.classList.add('active', 'exc');
-                btnToBe.classList.remove('active', 'tobe');
-
-                badgeScen.innerText = '● MODO ACTIVO: ESCENARIO DE EXCELENCIA (P1 A P8 ROBOTIZADO)';
-                badgeScen.style.color = '#34d399';
-                badgeDet.innerText = 'Sin Límite de Tiempo • 8 Iniciativas Integradas • Shuttle AS/RS';
-
-                capex.innerText = '$1.420.000.000';
-                capex.style.color = '#f43f5e';
-                capexSub.innerText = '+$570M sobre techo ($850M) • Amortizado en 5,6m';
-
-                cap.innerText = '102.060 Pos';
-                cap.style.color = '#38bdf8';
-                capSub.innerText = '1.428 túneles racks + 30 calles piso • 13,6% ocupación AndesHome';
-
-                spd.innerText = '220 lín/h';
-                spd.style.color = '#34d399';
-                spdSub.innerText = '+221,6% vs To-Be • Shuttle + Cobots AMR GTP';
-
-                cost.innerText = 'CLP $3.850';
-                cost.style.color = '#fbbf24';
-                costSub.innerText = '-29,0% vs To-Be ($5.420) • Fallido baja a $4.820';
-
-                otif.innerText = '98,7%';
-                otif.style.color = '#34d399';
-                otifSub.innerText = 'World-Class Superior • Click & Collect 99,2%';
-
-                ebitda.innerText = '$1.226.097.000/a';
-                ebitda.style.color = '#38bdf8';
-                ebitdaSub.innerText = '+$370M/año extra sobre To-Be ($856M/a)';
-
-                payback.innerText = '13,9 Meses';
-                payback.style.color = '#a78bfa';
-                paybackSub.innerText = 'Recuperación total • VAN 3a: $1.842M CLP';
-
-                esg.innerText = '65% Solar (ESG)';
-                esg.style.color = '#34d399';
-                esgSub.innerText = 'Cero trabajo en altura • -85,5% caminatas operarios';
-
-                alertNote.innerHTML = '💡 <strong>Visión de Dirección de Operaciones:</strong> Este escenario consolida un sistema logístico predecible y seguro. Al dotar a cada zona de racks 100% dedicados e independientes (1.428 túneles en racks a 6 niveles más 30 calles a piso exclusivo), se alcanzan 102.060 posiciones físicas reales. AndesHome opera con total serenidad al 13,6% de ocupación (13.860 pallets), liberando 88.200 posiciones directas para operar como Hub 3PL multicliente ($600M-$900M CLP/año extras) y reduciendo el costo por pedido a solo $3.850 CLP.';
-                alertNote.style.borderColor = 'rgba(52, 211, 153, 0.4)';
-                alertNote.style.background = 'rgba(16, 185, 129, 0.12)';
+            if (alertNote) {
+                alertNote.innerHTML = profile.note;
+                alertNote.style.borderColor = profile.noteBorder;
+                alertNote.style.background = profile.noteBackground;
             }
         }
 
@@ -6362,7 +6541,11 @@
         let v3dPlaybackRate = 1.0;
         let v3dCameraMode = 'cinematic'; // 'cinematic', 'isometric', 'topdown', 'orbit'
         let v3dAudioEnabled = false;
-        let v3dVoiceEnabled = true;
+        let v3dVoiceEnabled = false;
+        let v3dExecutiveMode = false;
+        let v3dFpsFrames = 0;
+        let v3dFpsLastUpdate = 0;
+        let v3dLastTrigger = null;
         let v3dAudioCtx = null, v3dOscillator = null, v3dGainNode = null;
         let v3dAnimFrameId = null;
         let v3dLastTimestamp = null;
@@ -6377,6 +6560,8 @@
         let v3dSolarPulses = [];
         let v3dTrucks = [];
         let v3dPickLights = [];
+        let v3dFlowArrows = [];
+        let v3dZoneLabels = [];
 
         const V3D_DURATION = 180; // 3:00 minutos de simulación
 
@@ -6387,10 +6572,10 @@
                 end: 25,
                 tag: "CAPÍTULO 1 DE 7",
                 title: "Visión General & Arquitectura de Desacople Central",
-                tech: "P1 + P8: 102.060 Posiciones (1.428 Túneles Racks + 30 Piso)",
+                tech: "P1–P8: 102.060 Posiciones (1.428 Túneles Racks + 30 Piso)",
                 kpiPrimary: "102.060 Posiciones",
                 kpiSecondary: "88.200 Pallets Libres para Hub 3PL (13,6% Ocupación)",
-                caption: "La nave CD Pudahuel (150m × 210m) implementa la Arquitectura de Desacople Central: dos bloques compactos e independientes separados por un pasillo de maniobras de 3,50m, garantizando 102.060 posiciones físicas con flujo continuo y cero riesgo de colisión.",
+                caption: "La nave CD Pudahuel (150m × 210m) implementa la Arquitectura de Desacople Central: dos bloques compactos e independientes separados por un pasillo de maniobras de 3,50m, garantizando 102.060 posiciones físicas y reduciendo el riesgo de interferencias entre flujos.",
                 voice: "Capítulo 1: Visión General y Arquitectura de Desacople Central. La nave CD Pudahuel estructura dos bloques compactos e independientes de racks separados por un pasillo de tres coma cincuenta metros, alcanzando ciento dos mil sesenta posiciones seguras a piso y erradicando cualquier riesgo de colisión.",
                 camStart: { pos: [0, 160, 240], target: [0, 15, 0] },
                 camEnd: { pos: [40, 100, 175], target: [0, 18, -10] }
@@ -6415,7 +6600,7 @@
                 end: 78,
                 tag: "CAPÍTULO 3 DE 7",
                 title: "Almacenamiento Compacto Pallet Shuttle & Elevadores Lifters",
-                tech: "P1 + P8: Carros Satélite Autónomos a 1,5 m/s en 6 Niveles (12m)",
+                tech: "P1 + P6 + P8: Shuttle AS/RS a 1,5 m/s en 6 Niveles (12m)",
                 kpiPrimary: "99,8% Precisión IRA",
                 kpiSecondary: "1.428 Túneles de 70 Pallets • Cero Trabajo en Altura",
                 caption: "En los bloques de racks, elevadores verticales Lifters alimentan a los carros Pallet Shuttle. Los carros satélite navegan automáticamente dentro de los canales a 1,5 m/s posicionando cada pallet con guía láser y sensores ultrasónicos.",
@@ -6457,7 +6642,7 @@
                 end: 155,
                 tag: "CAPÍTULO 6 DE 7",
                 title: "Despacho Outbound, TMS & Distribución Omnicanal",
-                tech: "P5 + P6: Ruteo Dinámico GPS hacia 27 Tiendas y Clientes Finales",
+                tech: "P4: TMS de Ruteo Dinámico GPS hacia 27 Tiendas y Clientes Finales",
                 kpiPrimary: "98,7% OTIF",
                 kpiSecondary: "Click & Collect < 2h • Reclamos SERNAC caen 94%",
                 caption: "En los andenes 13 al 24, la flota es cargada y despachada con ruteo dinámico por algoritmos de proximidad. Se sincronizan las 27 tiendas para Click & Collect en menos de 2 horas y entregas domiciliarias el mismo día.",
@@ -6473,9 +6658,9 @@
                 title: "Autosuficiencia Solar 250 kWp & Impacto Financiero Integral",
                 tech: "P7: 550 Paneles Solares Tier-1 • Sostenibilidad y Retorno Económico",
                 kpiPrimary: "CLP $3.850 Costo Pedido",
-                kpiSecondary: "65% Autosuficiencia Eléctrica • EBITDA +$412M • Payback 1,8a",
-                caption: "La cubierta solar fotovoltaica genera 385 MWh/año absorbiendo el 65% del consumo eléctrico de robots y naves (-18,5 ton CO2). El costo unitario por pedido cae a $3.850 CLP y la capacidad libre de 88.200 pallets convierte a AndesHome en el principal Hub 3PL de la RM.",
-                voice: "Capítulo 7: Autosuficiencia Solar Fotovoltaica y Retorno de Inversión. Quinientos cincuenta paneles solares absorben el sesenta y cinco por ciento del consumo eléctrico, generando un EBITDA de cuatrocientos doce millones y reduciendo el costo unitario por pedido a tres mil ochocientos cincuenta pesos.",
+                kpiSecondary: "65% Autosuficiencia Eléctrica • +$370M EBITDA incremental • Payback 13,9m",
+                caption: "La cubierta solar fotovoltaica genera 385 MWh/año absorbiendo el 65% del consumo eléctrico de robots y naves (-18,5 ton CO2). El costo unitario por pedido cae a $3.850 CLP y la capacidad libre de 88.200 pallets convierte a AndesHome en un Hub 3PL multicliente. El paquete Excelente agrega $370M de EBITDA anual frente al To-Be.",
+                voice: "Capítulo 7: Autosuficiencia Solar Fotovoltaica y Retorno de Inversión. Quinientos cincuenta paneles solares absorben el sesenta y cinco por ciento del consumo eléctrico. El escenario Excelente agrega trescientos setenta millones de pesos de EBITDA anual frente al To-Be y alcanza un payback total de trece coma nueve meses.",
                 camStart: { pos: [0, 38, 50], target: [0, 16, 0] },
                 camEnd: { pos: [0, 160, 220], target: [0, 15, 0] }
             }
@@ -6809,12 +6994,14 @@
             const text = document.getElementById('v3dVoiceText');
             if (v3dVoiceEnabled) {
                 if (btn) btn.classList.add('active');
+                if (btn) btn.setAttribute('aria-pressed', 'true');
                 if (icon) icon.innerText = '🎙️';
                 if (text) text.innerText = 'Voz ON';
                 const ch = getCurrentChapter(v3dCurrentTime);
                 if (ch) speakChapterNarration(ch.voice);
             } else {
                 if (btn) btn.classList.remove('active');
+                if (btn) btn.setAttribute('aria-pressed', 'false');
                 if (icon) icon.innerText = '🔇';
                 if (text) text.innerText = 'Voz OFF';
                 if ('speechSynthesis' in window) window.speechSynthesis.cancel();
@@ -6823,6 +7010,7 @@
 
         function openVideo3dPopup() {
             const popup = document.getElementById('video3dPopupOverlay');
+            v3dLastTrigger = document.activeElement;
             if (popup) popup.classList.add('active');
             isVideo3dActive = true;
 
@@ -6841,6 +7029,8 @@
 
             const ch = getCurrentChapter(v3dCurrentTime);
             if (ch) speakChapterNarration(ch.voice);
+
+            document.getElementById('v3dBtnPlayPause')?.focus();
         }
 
         function closeVideo3dPopup() {
@@ -6859,6 +7049,7 @@
             if ('speechSynthesis' in window) {
                 window.speechSynthesis.cancel();
             }
+            if (v3dLastTrigger && typeof v3dLastTrigger.focus === 'function') v3dLastTrigger.focus();
         }
 
         function closeVideo3dPopupOnBg(e) {
@@ -6885,9 +7076,14 @@
             v3dCamera.lookAt(0, 15, 0);
 
             // Renderer WebGL con antialiasing
-            v3dRenderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true });
+            v3dRenderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
             v3dRenderer.setSize(width, height);
-            v3dRenderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            v3dRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1 : 1.5));
+            v3dRenderer.outputEncoding = THREE.sRGBEncoding;
+            v3dRenderer.toneMapping = THREE.ACESFilmicToneMapping;
+            v3dRenderer.toneMappingExposure = 1.05;
+            v3dRenderer.shadowMap.enabled = true;
+            v3dRenderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
             // Controls Orbit
             if (typeof THREE.OrbitControls !== 'undefined') {
@@ -6904,6 +7100,8 @@
 
             const mainSun = new THREE.DirectionalLight(0xffffff, 1.05);
             mainSun.position.set(120, 160, 100);
+            mainSun.castShadow = true;
+            mainSun.shadow.mapSize.set(1024, 1024);
             v3dScene.add(mainSun);
 
             const blueFill = new THREE.DirectionalLight(0x38bdf8, 0.45);
@@ -6938,6 +7136,169 @@
             v3dCamera.aspect = w / h;
             v3dCamera.updateProjectionMatrix();
             v3dRenderer.setSize(w, h);
+            v3dRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, window.innerWidth < 700 ? 1 : 1.5));
+        }
+
+        function disposeVideo3dResources() {
+            if (!v3dScene) return;
+            v3dScene.traverse((object) => {
+                if (object.geometry && typeof object.geometry.dispose === 'function') object.geometry.dispose();
+                if (object.material) {
+                    const materials = Array.isArray(object.material) ? object.material : [object.material];
+                    materials.forEach((material) => {
+                        if (material.map && typeof material.map.dispose === 'function') material.map.dispose();
+                        if (typeof material.dispose === 'function') material.dispose();
+                    });
+                }
+            });
+            if (v3dRenderer) {
+                v3dRenderer.dispose();
+                if (typeof v3dRenderer.forceContextLoss === 'function') v3dRenderer.forceContextLoss();
+            }
+            window.removeEventListener('resize', resizeVideo3d);
+            v3dScene = null;
+            v3dCamera = null;
+            v3dRenderer = null;
+            v3dControls = null;
+            v3dInitialized = false;
+            v3dLifters = [];
+            v3dShuttles = [];
+            v3dCobots = [];
+            v3dPackages = [];
+            v3dSolarPulses = [];
+            v3dTrucks = [];
+            v3dPickLights = [];
+            v3dFlowArrows = [];
+            v3dZoneLabels = [];
+        }
+
+        window.addEventListener('pagehide', disposeVideo3dResources);
+
+        function createWarehouseLabel(title, subtitle, color) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 512;
+            canvas.height = 150;
+            const ctx = canvas.getContext('2d');
+
+            ctx.fillStyle = 'rgba(6, 14, 30, 0.90)';
+            ctx.strokeStyle = color;
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.roundRect(8, 8, 496, 134, 18);
+            ctx.fill();
+            ctx.stroke();
+
+            ctx.fillStyle = color;
+            ctx.font = '700 28px sans-serif';
+            ctx.fillText(title, 28, 58);
+            ctx.fillStyle = '#dbeafe';
+            ctx.font = '500 19px sans-serif';
+            ctx.fillText(subtitle, 28, 98);
+
+            const texture = new THREE.CanvasTexture(canvas);
+            texture.encoding = THREE.sRGBEncoding;
+            const material = new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false });
+            const label = new THREE.Sprite(material);
+            label.scale.set(22, 6.45, 1);
+            return label;
+        }
+
+        function addWarehouseEnvelope() {
+            const asphalt = new THREE.Mesh(
+                new THREE.PlaneGeometry(270, 300),
+                new THREE.MeshStandardMaterial({ color: 0x101827, roughness: 0.78, metalness: 0.05 })
+            );
+            asphalt.rotation.x = -Math.PI / 2;
+            asphalt.position.y = -0.12;
+            asphalt.receiveShadow = true;
+            v3dScene.add(asphalt);
+
+            const roadMarkMat = new THREE.MeshBasicMaterial({ color: 0xe2e8f0, transparent: true, opacity: 0.8 });
+            for (let z = -118; z <= 118; z += 18) {
+                const mark = new THREE.Mesh(new THREE.PlaneGeometry(2, 8), roadMarkMat);
+                mark.rotation.x = -Math.PI / 2;
+                mark.position.set(-112, -0.1, z);
+                v3dScene.add(mark);
+            }
+
+            const glassMat = new THREE.MeshPhysicalMaterial({
+                color: 0x38bdf8,
+                transparent: true,
+                opacity: 0.08,
+                roughness: 0.1,
+                metalness: 0.1,
+                side: THREE.DoubleSide,
+                depthWrite: false
+            });
+            const wallBack = new THREE.Mesh(new THREE.PlaneGeometry(150, 15), glassMat);
+            wallBack.position.set(0, 7.5, 105);
+            v3dScene.add(wallBack);
+
+            const frameMat = new THREE.MeshStandardMaterial({ color: 0x38bdf8, metalness: 0.85, roughness: 0.25 });
+            [-75, 75].forEach((x) => {
+                const sideFrame = new THREE.Mesh(new THREE.BoxGeometry(0.24, 15, 210), frameMat);
+                sideFrame.position.set(x, 7.5, 0);
+                v3dScene.add(sideFrame);
+            });
+            [-105, 105].forEach((z) => {
+                const endFrame = new THREE.Mesh(new THREE.BoxGeometry(150, 0.24, 0.24), frameMat);
+                endFrame.position.set(0, 14.7, z);
+                v3dScene.add(endFrame);
+            });
+        }
+
+        function addOperationalWayfinding() {
+            const zoneOverlays = [
+                { chapter: 2, x: -67, z: -70, w: 12, d: 55, color: 0xf59e0b, title: 'INBOUND & ASN', subtitle: 'Andenes 1–12 · Dock-to-Stock 3,2 h' },
+                { chapter: 3, x: -36, z: 0, w: 55, d: 185, color: 0x38bdf8, title: 'AS/RS SHUTTLE', subtitle: '1.428 túneles · 6 niveles · 99,8% IRA' },
+                { chapter: 1, x: 36, z: 0, w: 55, d: 185, color: 0x38bdf8, title: 'RACKS & HUB 3PL', subtitle: '88.200 posiciones disponibles para terceros' },
+                { chapter: 4, x: 61, z: -38, w: 17, d: 72, color: 0xa78bfa, title: 'AMR & GTP', subtitle: '32 cobots · 220 líneas/hora' },
+                { chapter: 5, x: 41, z: 50, w: 14, d: 78, color: 0xf59e0b, title: 'SORTER', subtitle: '4.500 bultos/hora · error <0,1%' },
+                { chapter: 6, x: 67, z: 72, w: 12, d: 55, color: 0x34d399, title: 'OUTBOUND & TMS', subtitle: 'Andenes 13–24 · OTIF 98,7%' }
+            ];
+
+            zoneOverlays.forEach((zone) => {
+                const overlay = new THREE.Mesh(
+                    new THREE.PlaneGeometry(zone.w, zone.d),
+                    new THREE.MeshBasicMaterial({ color: zone.color, transparent: true, opacity: 0.055, side: THREE.DoubleSide, depthWrite: false })
+                );
+                overlay.rotation.x = -Math.PI / 2;
+                overlay.position.set(zone.x, 0.018, zone.z);
+                v3dScene.add(overlay);
+
+                const label = createWarehouseLabel(zone.title, zone.subtitle, `#${zone.color.toString(16).padStart(6, '0')}`);
+                label.position.set(zone.x, 15.8, zone.z);
+                label.userData.chapter = zone.chapter;
+                v3dScene.add(label);
+                v3dZoneLabels.push(label);
+            });
+
+            const solarLabel = createWarehouseLabel('ENERGÍA SOLAR · P7', '250 kWp · 65% autoconsumo · 385 MWh/año', '#fbbf24');
+            solarLabel.position.set(0, 22, 0);
+            solarLabel.userData.chapter = 7;
+            v3dScene.add(solarLabel);
+            v3dZoneLabels.push(solarLabel);
+        }
+
+        function addProcessFlowArrows() {
+            const flowPoints = [
+                { x: -61, z: -62, rot: 0, color: 0xf59e0b },
+                { x: -50, z: -44, rot: 0, color: 0xf59e0b },
+                { x: -12, z: -25, rot: 0, color: 0x38bdf8 },
+                { x: 0, z: -5, rot: 0, color: 0xa78bfa },
+                { x: 18, z: 15, rot: 0, color: 0xa78bfa },
+                { x: 39, z: 36, rot: 0, color: 0xf59e0b },
+                { x: 58, z: 58, rot: 0, color: 0x34d399 }
+            ];
+            flowPoints.forEach((point, index) => {
+                const material = new THREE.MeshBasicMaterial({ color: point.color, transparent: true, opacity: 0.75, depthWrite: false });
+                const arrow = new THREE.Mesh(new THREE.ConeGeometry(1.15, 2.6, 3), material);
+                arrow.rotation.x = Math.PI / 2;
+                arrow.rotation.z = point.rot;
+                arrow.position.set(point.x, 0.2, point.z);
+                v3dScene.add(arrow);
+                v3dFlowArrows.push({ mesh: arrow, baseY: 0.2, phase: index * 0.65 });
+            });
         }
 
         function build3dLogisticsWarehouse() {
@@ -6949,6 +7310,9 @@
             const palletTexD = createRealisticPalletTexture('D');
             const solarTex = createRealisticSolarTexture();
             const wmsTex = createWmsMonitorTexture();
+
+            // Envolvente abierta: contexto exterior, nave transparente y lectura isométrica completa.
+            addWarehouseEnvelope();
 
             // 1. Piso Epóxico de Concreto Pulido con Reflejos y Señalética
             const floorGeo = new THREE.PlaneGeometry(150, 210);
@@ -7332,6 +7696,10 @@
                 v3dScene.add(pulse);
                 v3dSolarPulses.push(pulse);
             }
+
+            // Señalética y flujo end-to-end visibles durante el recorrido ejecutivo.
+            addOperationalWayfinding();
+            addProcessFlowArrows();
         }
 
         function buildRealisticTruck(x, z, rotY, brandHex) {
@@ -7423,6 +7791,20 @@
         function v3dLoop(timestamp) {
             if (!isVideo3dActive) return;
 
+            v3dFpsFrames += 1;
+            if (!v3dFpsLastUpdate) v3dFpsLastUpdate = timestamp;
+            if (timestamp - v3dFpsLastUpdate >= 1000) {
+                const fpsBadge = document.getElementById('v3dFpsBadge');
+                const elapsed = timestamp - v3dFpsLastUpdate;
+                const fps = Math.round((v3dFpsFrames * 1000) / elapsed);
+                if (fpsBadge) {
+                    fpsBadge.innerText = `FPS ${fps}`;
+                    fpsBadge.style.color = fps >= 45 ? '#34d399' : fps >= 30 ? '#fbbf24' : '#f87171';
+                }
+                v3dFpsFrames = 0;
+                v3dFpsLastUpdate = timestamp;
+            }
+
             if (!v3dLastTimestamp) v3dLastTimestamp = timestamp;
             const delta = Math.min((timestamp - v3dLastTimestamp) / 1000, 0.1);
             v3dLastTimestamp = timestamp;
@@ -7482,6 +7864,18 @@
             v3dPickLights.forEach((pl, idx) => {
                 const pulse = 0.4 + 0.6 * Math.abs(Math.sin(time * 3 + idx * 0.7));
                 pl.material.emissiveIntensity = pulse;
+            });
+
+            // Flujo operativo: pulsos sutiles que conectan recepción, almacenaje, GTP, sorter y despacho.
+            v3dFlowArrows.forEach((arrow) => {
+                const pulse = (Math.sin(time * 2.3 + arrow.phase) + 1) / 2;
+                arrow.mesh.position.y = arrow.baseY + pulse * 0.18;
+                arrow.mesh.scale.setScalar(0.82 + pulse * 0.28);
+                arrow.mesh.material.opacity = 0.32 + pulse * 0.58;
+            });
+
+            v3dZoneLabels.forEach((label, idx) => {
+                label.material.opacity = 0.86 + Math.sin(time * 0.8 + idx) * 0.08;
             });
 
             // Animación de camión en andén Outbound
@@ -7547,6 +7941,12 @@
             if (prog) prog.style.width = pct + '%';
             if (handle) handle.style.left = pct + '%';
 
+            const timeline = document.getElementById('v3dTimelineWrap');
+            if (timeline) {
+                timeline.setAttribute('aria-valuenow', String(Math.round(time)));
+                timeline.setAttribute('aria-valuetext', `${formatV3dTime(time)} de ${formatV3dTime(V3D_DURATION)}`);
+            }
+
             const timeEl = document.getElementById('v3dTimeCurrent');
             if (timeEl) timeEl.innerText = formatV3dTime(time);
 
@@ -7571,11 +7971,17 @@
                 if (kpi2El) kpi2El.innerText = ch.kpiSecondary;
                 if (captionEl) captionEl.innerHTML = ch.caption;
 
+                v3dZoneLabels.forEach((label) => {
+                    label.visible = ch.id === 1 || label.userData.chapter === ch.id;
+                });
+
                 for (let i = 1; i <= 7; i++) {
                     const btn = document.getElementById('v3dCh' + i);
                     if (btn) {
                         if (i === ch.id) btn.classList.add('active');
                         else btn.classList.remove('active');
+                        if (i === ch.id) btn.setAttribute('aria-current', 'step');
+                        else btn.removeAttribute('aria-current');
                     }
                 }
 
@@ -7650,6 +8056,32 @@
             const pct = v3dClamp(clickX / rect.width, 0, 1);
             v3dCurrentTime = pct * V3D_DURATION;
             update3dUI(v3dCurrentTime);
+        }
+
+        function handleVideoTimelineKey(e) {
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                e.preventDefault();
+                skipVideo3d(e.key === 'ArrowRight' ? 5 : -5);
+            } else if (e.key === 'Home' || e.key === 'End') {
+                e.preventDefault();
+                v3dCurrentTime = e.key === 'Home' ? 0 : V3D_DURATION - 0.1;
+                v3dActiveChapterIndex = -1;
+                update3dUI(v3dCurrentTime);
+            }
+        }
+
+        function toggleExecutiveMode() {
+            v3dExecutiveMode = !v3dExecutiveMode;
+            const player = document.getElementById('video3dPlayerWrap');
+            const controls = document.querySelector('.video3d-controls');
+            const btn = document.getElementById('v3dBtnExecutive');
+            player?.classList.toggle('executive-mode', v3dExecutiveMode);
+            controls?.classList.toggle('executive-mode', v3dExecutiveMode);
+            if (btn) {
+                btn.classList.toggle('active', v3dExecutiveMode);
+                btn.innerHTML = v3dExecutiveMode ? '🎯 Salir ejecutivo' : '🎯 Ejecutivo';
+                btn.setAttribute('aria-pressed', String(v3dExecutiveMode));
+            }
         }
 
         function startScrubbing(e) {
@@ -8030,6 +8462,7 @@
 
         // Inicialización
         window.addEventListener('DOMContentLoaded', function() {
+            renderScenarioComparison();
             filterRadar('excelente');
         });
     </script>

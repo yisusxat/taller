@@ -366,6 +366,7 @@ const AndesHomeStore = (() => {
             wbsWeeks: 6,
             paybackMonths: 3.2,
             type: 'selected',
+            annualGrossSavings: 285000000,
             desc: 'Reubica 114 SKU desalineados. Elimina 67,6 km/día de caminata y ahorra $585M en traslados inútiles.',
             humanBenefit: 'Devuelve las piernas al operario: camina 64% menos en bodega.'
         },
@@ -380,6 +381,7 @@ const AndesHomeStore = (() => {
             wbsWeeks: 18,
             paybackMonths: 11.4,
             type: 'selected',
+            annualGrossSavings: 348000000,
             desc: 'Elimina papel y lápiz. Voice picking con manos libres eleva productividad +18% y baja errores a ≤0,3%.',
             humanBenefit: 'Ojos y manos libres: trabajo sereno sin papeles ni estrés de equivocarse.'
         },
@@ -394,6 +396,7 @@ const AndesHomeStore = (() => {
             wbsWeeks: 12,
             paybackMonths: 4.8,
             type: 'selected',
+            annualGrossSavings: 146300000,
             desc: 'Agendamiento digital en ventanas de 2h. Reduce Dock-to-Stock de 22,6h a 4,5h y erradica $146M en demurrage.',
             humanBenefit: 'Dignidad para el chofer: descarga en 45 minutos sin esperas humillantes en la berma.'
         },
@@ -408,6 +411,7 @@ const AndesHomeStore = (() => {
             wbsWeeks: 14,
             paybackMonths: 8.6,
             type: 'selected',
+            annualGrossSavings: 184500000,
             desc: 'Algoritmo de cubicaje dinámico y app chofer con firma y foto digital. Reduce fallas de 11,5% a ≤2,8%.',
             humanBenefit: 'Certeza para el cliente y el repartidor: rutas seguras y entregas a la primera.'
         },
@@ -422,6 +426,7 @@ const AndesHomeStore = (() => {
             wbsWeeks: 8,
             paybackMonths: 6.1,
             type: 'selected',
+            annualGrossSavings: 69297000,
             desc: '4 mesas elevadoras hidráulicas en D-Bulky + 6 cajas homologadas. Cero levantamiento >25 kg a pulso.',
             humanBenefit: 'Protección a la columna y la vida del trabajador: 100% de cumplimiento ley laboral.'
         },
@@ -464,6 +469,7 @@ const AndesHomeStore = (() => {
             wbsWeeks: 12,
             paybackMonths: 9.8,
             type: 'alternative',
+            annualGrossSavings: 135000000,
             desc: 'Reconfiguración a 6 pisos × 3 pallets (viga 3,30m). Expande a 30.420 posiciones (+13.520 ganadas), reduce saturación al 44,3% (941 racks libres), huella de 749 estanterías en uso.',
             humanBenefit: 'Alivia la saturación del CD: pasillos despejados, holgura de 941 racks y cero grúas bloqueadas.',
             pisos: 6,
@@ -508,13 +514,10 @@ const AndesHomeStore = (() => {
         const totalCapex = rawCapex + contingencyBuffer;
 
         // Ahorros brutos anuales estimados según sinergias
-        let grossAnnualSavings = 0;
-        if (activeProjectKeys.includes('p1')) grossAnnualSavings += 285000000; // Viajes y horas hombre
-        if (activeProjectKeys.includes('p2')) grossAnnualSavings += 348000000; // Errores y papel
-        if (activeProjectKeys.includes('p3')) grossAnnualSavings += 146300000; // Demurrage
-        if (activeProjectKeys.includes('p4')) grossAnnualSavings += 184500000; // Entregas fallidas y fletes
-        if (activeProjectKeys.includes('p5')) grossAnnualSavings += 69297000;  // Daños y licencias SST
-        if (activeProjectKeys.includes('p8')) grossAnnualSavings += 135000000; // Capacidad ganada y cero cuellos de botella por saturación
+        const grossAnnualSavings = activeProjectKeys.reduce((total, key) => {
+            const project = PROJECTS[key];
+            return total + (project?.annualGrossSavings || 0);
+        }, 0);
 
         const netAnnualEbitda = Math.max(0, grossAnnualSavings - annualOpex);
 

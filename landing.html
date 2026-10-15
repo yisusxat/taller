@@ -17,9 +17,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="landing-2d.css">
-    <script src="andeshome-store.js"></script>
 </head>
 <body>
+
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
 
     <!-- ==========================================================================
          TOP NAVIGATION BAR
@@ -170,7 +171,7 @@
     <!-- ==========================================================================
          BARRA DE NAVEGACIÓN DIDÁCTICA POR FASES (EA1 -> EA2 -> EA3)
          ========================================================================== -->
-    <nav class="diag-tabs-bar">
+    <nav class="diag-tabs-bar" aria-label="Vistas del centro de distribución">
         <div class="diag-phase-tag">Fase 1 (EA1):</div>
         <button class="diag-tab-btn active" data-view="view-layout" data-phase="1">
             <span>📐 1. Layout 2D &amp; Slotting</span>
@@ -206,6 +207,7 @@
     <!-- ==========================================================================
          VISTA 1: PLANO VECTORIAL 2D + INSPECTOR EN VIVO
          ========================================================================== -->
+    <main id="main-content" tabindex="-1">
     <section id="view-layout" class="diag-view-content active">
         <div class="blueprint-layout-section">
             <!-- Tarjeta del Plano 2D SVG -->
@@ -3219,6 +3221,8 @@
             </div>
         </div>
     </div>
+
+    </main>
 
     <!-- Scripts -->
     <script src="andeshome-store.js"></script>

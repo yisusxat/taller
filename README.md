@@ -80,6 +80,10 @@ Esta matriz conecta explícitamente los criterios de evaluación pedagógicos de
 ├── app.js                               # Controlador principal de index.html y sincronización de fases
 ├── landing-2d.js                        # Lógica interactiva del plano 2D, sliders, WBS y 9 vistas
 ├── andeshome-store.js                   # Store reactivo centralizado con persistencia y finanzas
+├── excellent-scenarios.js                # Fuente única de comparación To-Be vs Excelente
+├── tests/core.test.js                    # Pruebas financieras y estructurales
+├── docs/                                 # Arquitectura, modelo financiero y guía de desarrollo
+│   └── produccion-y-calidad.md           # Seguridad demo, CI y checklist E2E visual
 ├── Informe_Diagnostico_AndesHome.md     # Documento ejecutivo Fase 1 (EA1)
 ├── Propuesta_Solucion_AndesHome.md      # Documento ejecutivo Fase 2 & Fase 3 (EA2 / EA3)
 ├── Base_Datos_GLA1104_AndesHome_v2.xlsx # Dataset operativo y registros del CyberDay
@@ -117,6 +121,18 @@ npx serve -l 8080 .
 ### Opción 3: Extensión Live Server (Visual Studio Code)
 - Abrir la carpeta del proyecto en VS Code.
 - Clic derecho sobre `landing.html` o `index.html` y seleccionar **"Open with Live Server"**.
+
+### Validaciones automatizadas
+
+```bash
+npm test
+npm run check
+npm run quality
+```
+
+Las pruebas protegen la reconciliación financiera P1-P5, la detección de sobrepresupuesto, la carga única del store y la comparación simultánea To-Be vs Excelente. `npm run quality` agrega la auditoría estructural de las tres páginas y de la política de almacenamiento.
+
+> **Nota de seguridad:** `auth-gate.js` implementa un bloqueo visual de demostración. El PIN está en el cliente y no reemplaza autenticación de producción.
 
 ---
 

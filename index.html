@@ -19,6 +19,8 @@
 </head>
 <body class="dark-theme">
 
+    <a class="skip-link" href="#main-content">Saltar al contenido principal</a>
+
     <!-- Top Navigation Header -->
     <header class="app-header">
         <div class="brand-container">
@@ -170,7 +172,7 @@
     </nav>
 
     <!-- Tab Contents Container -->
-    <main class="content-area">
+    <main id="main-content" class="content-area" tabindex="-1">
 
         <!-- TAB 1: EXECUTIVE DASHBOARD & KPIS -->
         <section id="tab-ejecutivo" class="tab-content active">
@@ -210,9 +212,9 @@
                 <div class="card-header">
                     <h3>Análisis Especial CyberDay (1-3 Junio 2026): Dinámica Diario de Backlog vs OTIF</h3>
                     <div class="button-group">
-                        <button class="filter-btn active" onclick="filterCyberView('all')">Todos los Canales</button>
-                        <button class="filter-btn" onclick="filterCyberView('ecom')">E-commerce</button>
-                        <button class="filter-btn" onclick="filterCyberView('cc')">Click & Collect</button>
+                        <button class="filter-btn active" onclick="filterCyberView('all', this)">Todos los Canales</button>
+                        <button class="filter-btn" onclick="filterCyberView('ecom', this)">E-commerce</button>
+                        <button class="filter-btn" onclick="filterCyberView('cc', this)">Click & Collect</button>
                     </div>
                 </div>
                 <div class="grid-chart-details">

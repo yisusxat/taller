@@ -2,7 +2,7 @@
  * ANDESHOME CHILE S.A. - AUTH SECURITY GATE
  * - Bloqueo de acceso por PIN de 4 dígitos (4444).
  * - Detección de inactividad: 10 minutos (600.000 ms).
- * - Borrado total de caché local y almacenamiento al expirar la inactividad.
+ * - Limpieza únicamente de las claves propias de la demo al expirar la sesión.
  * - Sincronización multi-pestaña, soporte bfcache, visibilidad móvil y protección Anti-FOUC.
  */
 
@@ -11,20 +11,23 @@
 
     const CORRECT_PIN = '4444';
     const INACTIVITY_LIMIT_MS = 10 * 60 * 1000; // 10 minutos (600 segundos)
+    // Este bloqueo es una protección visual para la demo, no autenticación de producción.
     const STORAGE_KEY_AUTH = 'ah_pin_auth_token';
     const STORAGE_KEY_ACTIVITY = 'ah_last_activity_ts';
+    const STORAGE_KEYS_OWNED_BY_GATE = [STORAGE_KEY_AUTH, STORAGE_KEY_ACTIVITY];
+    const SESSION_TOKEN = 'authorized_4444';
 
     // 1. EVALUAR ESTADO INICIAL INMEDIATAMENTE (ANTES DEL RENDER)
     function isSessionValid() {
         try {
-            const isAuth = localStorage.getItem(STORAGE_KEY_AUTH) === 'authorized_4444';
+            const isAuth = localStorage.getItem(STORAGE_KEY_AUTH) === SESSION_TOKEN;
             const lastActive = parseInt(localStorage.getItem(STORAGE_KEY_ACTIVITY) || '0', 10);
             const now = Date.now();
 
             if (!isAuth) return false;
             if (lastActive === 0 || (now - lastActive) >= INACTIVITY_LIMIT_MS) {
-                // Expiró por inactividad de 10 minutos: borrar caché y almacenamiento
-                wipeAllCacheAndStorage();
+                // Expiró por inactividad de 10 minutos: limpiar solo la sesión de esta demo.
+                clearDemoSessionData();
                 return false;
             }
             return true;
@@ -33,62 +36,17 @@
         }
     }
 
-    // 2. BORRADO EXHAUSTIVO DE CACHÉ Y ALMACENAMIENTO LOCAL
-    function wipeAllCacheAndStorage() {
-        // A. Limpiar Web Storage
+    // 2. LIMPIEZA ACOTADA DE LA SESIÓN DE ESTA DEMO
+    function clearDemoSessionData() {
         try {
-            localStorage.clear();
+            STORAGE_KEYS_OWNED_BY_GATE.forEach(function (key) {
+                localStorage.removeItem(key);
+            });
         } catch (e) {}
         try {
-            sessionStorage.clear();
-        } catch (e) {}
-
-        // B. Limpiar Cache Storage API
-        if (typeof window !== 'undefined' && 'caches' in window) {
-            try {
-                caches.keys().then(function (names) {
-                    names.forEach(function (name) {
-                        caches.delete(name);
-                    });
-                }).catch(function () {});
-            } catch (e) {}
-        }
-
-        // C. Limpiar Service Workers
-        if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
-            try {
-                navigator.serviceWorker.getRegistrations().then(function (registrations) {
-                    registrations.forEach(function (reg) {
-                        reg.unregister();
-                    });
-                }).catch(function () {});
-            } catch (e) {}
-        }
-
-        // D. Limpiar IndexedDB si existe
-        if (typeof window !== 'undefined' && window.indexedDB && window.indexedDB.databases) {
-            try {
-                window.indexedDB.databases().then(function (dbs) {
-                    dbs.forEach(function (db) {
-                        if (db.name) {
-                            try {
-                                window.indexedDB.deleteDatabase(db.name);
-                            } catch (err) {}
-                        }
-                    });
-                }).catch(function () {});
-            } catch (e) {}
-        }
-
-        // E. Limpiar Cookies accesibles
-        try {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i];
-                const eqPos = cookie.indexOf('=');
-                const name = eqPos > -1 ? cookie.substr(0, eqPos).trim() : cookie.trim();
-                document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/';
-            }
+            STORAGE_KEYS_OWNED_BY_GATE.forEach(function (key) {
+                sessionStorage.removeItem(key);
+            });
         } catch (e) {}
     }
 
@@ -422,7 +380,7 @@
                     </div>
 
                     <div class="ah-gate-policy-box">
-                        <strong>🛡️ Política de Seguridad:</strong> Sesión con <strong>tiempo de inactividad de 10 minutos</strong>. Al transcurrir dicho tiempo sin interacción, el sistema bloqueará la pantalla y <strong>borrará la caché local y almacenamiento</strong> automáticamente.
+                        <strong>🛡️ Política de Seguridad:</strong> Sesión con <strong>tiempo de inactividad de 10 minutos</strong>. Al transcurrir dicho tiempo sin interacción, el sistema bloqueará la pantalla y <strong>eliminará únicamente las claves propias de esta demo</strong>.
                     </div>
                 </div>
             `;
@@ -514,7 +472,7 @@
 
             // Guardar autorización y marca temporal actual
             try {
-                localStorage.setItem(STORAGE_KEY_AUTH, 'authorized_4444');
+                localStorage.setItem(STORAGE_KEY_AUTH, SESSION_TOKEN);
                 localStorage.setItem(STORAGE_KEY_ACTIVITY, Date.now().toString());
             } catch (e) {}
 
@@ -570,12 +528,12 @@
 
     // 8. BLOQUEO DEL SITIO POR EXPIRACIÓN O CIERRE MANUAL
     function lockGate(reasonMessage) {
-        wipeAllCacheAndStorage();
+        clearDemoSessionData();
         document.documentElement.classList.add('ah-gate-locked');
         stopInactivityWatcher();
         removeFloatingSessionPill();
         currentInput = '';
-        renderGateOverlay(reasonMessage || '⏱️ Sesión expirada por 10 minutos de inactividad. Caché local eliminada.');
+        renderGateOverlay(reasonMessage || '⏱️ Sesión expirada por 10 minutos de inactividad. Sesión demo limpiada.');
     }
 
     // 9. MONITOR DE INACTIVIDAD (10 MINUTOS)
@@ -593,7 +551,7 @@
             // Verificar si ya pasaron los 10 minutos antes de refrescar
             const lastStored = parseInt(localStorage.getItem(STORAGE_KEY_ACTIVITY) || '0', 10);
             if (lastStored > 0 && (now - lastStored) >= INACTIVITY_LIMIT_MS) {
-                lockGate('⏱️ Sesión expirada por inactividad de 10 minutos. Caché local eliminada.');
+                lockGate('⏱️ Sesión expirada por inactividad de 10 minutos. Sesión demo limpiada.');
                 return;
             }
 
@@ -632,7 +590,7 @@
             const elapsed = currentNow - lastStored;
 
             if (elapsed >= INACTIVITY_LIMIT_MS) {
-                lockGate('⏱️ Sesión expirada por inactividad de 10 minutos. Caché local eliminada.');
+                lockGate('⏱️ Sesión expirada por inactividad de 10 minutos. Sesión demo limpiada.');
             } else {
                 updateFloatingTimer();
             }
@@ -659,15 +617,15 @@
             pill.innerHTML = `
                 <span style="color: #34d399;">●</span>
                 <span id="ahSessionTimeLeft">Inactividad: 10:00</span>
-                <button type="button" id="ahBtnLockNow" title="Cerrar sesión y borrar caché">Bloquear</button>
+                <button type="button" id="ahBtnLockNow" title="Cerrar sesión demo">Bloquear</button>
             `;
             document.body.appendChild(pill);
 
             const lockBtn = document.getElementById('ahBtnLockNow');
             if (lockBtn) {
                 lockBtn.addEventListener('click', function () {
-                    if (confirm('¿Desea bloquear el acceso y borrar la caché local de la sesión?')) {
-                        lockGate('🔒 Sesión cerrada manualmente por el usuario. Caché eliminada.');
+                    if (confirm('¿Desea bloquear el acceso y eliminar solo las claves locales de esta sesión?')) {
+                        lockGate('🔒 Sesión cerrada manualmente por el usuario. Claves propias eliminadas.');
                         window.location.reload();
                     }
                 });
@@ -724,7 +682,7 @@
     document.addEventListener('visibilitychange', function () {
         if (document.visibilityState === 'visible') {
             if (!isSessionValid()) {
-                lockGate('⏱️ Sesión expirada por inactividad de 10 minutos. Caché local eliminada.');
+                lockGate('⏱️ Sesión expirada por inactividad de 10 minutos. Sesión demo limpiada.');
             } else {
                 updateFloatingTimer();
             }
