@@ -3012,24 +3012,30 @@ body {
     .nav-center-controls {
         width: 100%;
         justify-content: center;
+        flex-wrap: wrap;
+        gap: 6px;
     }
     .view-mode-pill {
-        flex: 1;
+        flex: 1 1 calc(33.333% - 6px);
+        min-width: 110px;
         justify-content: center;
-        font-size: 0.74rem;
-        padding: 8px 10px;
+        text-align: center;
+        font-size: 0.72rem;
+        padding: 7px 8px;
     }
     .nav-btn-group {
         width: 100%;
         justify-content: center;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 6px;
     }
     .nav-btn-group .btn-action {
-        flex: 1;
+        flex: 1 1 calc(33.333% - 6px);
+        min-width: 120px;
         justify-content: center;
-        font-size: 0.78rem;
-        padding: 8px 12px;
+        text-align: center;
+        font-size: 0.74rem;
+        padding: 8px 10px;
     }
     
     .master-phases-banner {
@@ -3093,6 +3099,34 @@ body {
 
 /* Breakpoint 3: Smartphones y pantallas estrechas (<= 640px) */
 @media (max-width: 640px) {
+    .nav-center-controls {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        border-radius: 12px;
+    }
+    .view-mode-pill {
+        flex: 1 1 calc(50% - 6px);
+        justify-content: center;
+        text-align: center;
+        font-size: 0.70rem;
+        padding: 6px 6px;
+    }
+    .nav-btn-group {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .nav-btn-group .btn-action {
+        flex: 1 1 100%;
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.74rem;
+        padding: 8px 10px;
+    }
     .kpi-quick-strip {
         grid-template-columns: 1fr;
         padding: 10px 14px 0;

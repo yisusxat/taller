@@ -306,9 +306,11 @@
             color: #fca5a5 !important;
             text-decoration: underline !important;
         }
-        @media (max-width: 380px) {
+        @media (max-width: 480px) {
             .ah-gate-card {
                 padding: 20px 14px !important;
+                max-width: 340px !important;
+                margin: 0 auto !important;
             }
             .ah-gate-pin-digit {
                 width: 44px !important;
